@@ -9,9 +9,9 @@ function Header() {
             <Container fluid className="m-4">
                 <Navbar.Brand href="#home">Developer CV Builder</Navbar.Brand>
                 <Nav className="ms-auto">
-                    <Nav.Link><NavLink to="/">Home</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to="#features">Create your CV</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to="#pricing">About us</NavLink></Nav.Link>
+                    <NavLink to="/" className="px-2">Home</NavLink>
+                    <NavLink to="#features" className="px-2">Create your CV</NavLink>
+                    <NavLink to="#pricing" className="px-2">About us</NavLink>
                 </Nav>
             </Container>
         </Navbar>

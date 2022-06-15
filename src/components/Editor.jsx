@@ -1,14 +1,9 @@
-import React from 'react'
-import Card from "react-bootstrap/esm/Card"
+import React from "react";
 
-function Editor() {
-  return (
-    <div>
-      <Card className='cv-height'>
-
-      </Card>
-    </div>
-  )
+export class Editor extends React.PureComponent {
+  render() {
+    return <div>Print this content for me please!</div>;
+  }
 }
 
-export default Editor
+export default Editor;
