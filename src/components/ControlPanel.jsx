@@ -5,7 +5,6 @@ import Button from "react-bootstrap/esm/Button";
 
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import Editor from "./Editor";
 import CVPreview from "./CVPreview";
 
 function ControlPanel() {

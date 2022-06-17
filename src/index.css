@@ -24,17 +24,16 @@ code {
   color: #7E7E7E;
 }
 
+.nav-style .NavLink {
+  text-decoration: none;
+}
+
 .control-panel {
   /* background-color: #f2f2f2; */
   font-family: 'Inter', sans-serif;
   font-weight: 700;
 }
 
-.close {
-  text-align: right;
+.cv-preview {
+  min-height: 50vh;
 }
-/* 
-.cv-height {
-  height: 140vh;
-  width: 120vh;
-} */

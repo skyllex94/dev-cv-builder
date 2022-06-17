@@ -1,24 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Card from "react-bootstrap/esm/Card";
 import Button from "react-bootstrap/esm/Button";
 
-// import InfoContent from "./InfoContent";
 import CVPreview from "./CVPreview";
 import ModalInfoContent from "./ModalInfoContent";
+
+import { ContextProvider } from "../context/Context";
+import Context from "../context/Context";
 
 function Editor() {
   const [modalShow, setModalShow] = useState(false);
 
   return (
     <>
-      <Card>
-        <CVPreview />
-      </Card>
-      <Button variant="outline-dark" onClick={() => setModalShow(true)}>
-        Edit MainContent
-      </Button>
+      <ContextProvider>
+        <Card className="cv-preview">
+          <CVPreview />
+          console.log(click)
+        </Card>
+        <Button variant="outline-dark mt-2" onClick={() => setModalShow(true)}>
+          Edit MainContent
+        </Button>
 
-      <ModalInfoContent show={modalShow} onHide={() => setModalShow(false)} />
+        <ModalInfoContent show={modalShow} onHide={() => setModalShow(false)} />
+      </ContextProvider>
     </>
   );
 }

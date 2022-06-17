@@ -1,8 +1,8 @@
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Landing from './components/Landing';
-import Builder from './components/Builder';
+import Landing from "./components/Landing";
+import Builder from "./components/Builder";
 
 function App() {
   return (

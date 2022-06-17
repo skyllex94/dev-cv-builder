@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -6,7 +6,12 @@ import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 
+import Context from "../context/Context";
+
 function ModalInfoContent(props) {
+  const { handleName } = useContext(Context);
+  const { handleClick } = useContext(Context);
+
   return (
     <Modal
       {...props}
@@ -28,9 +33,16 @@ function ModalInfoContent(props) {
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
                 >
-                  <Form.Label>Name:</Form.Label>
-                  <Form.Control type="text" placeholder="John Doe" autoFocus />
-                  <Form.Label>Email:</Form.Label>
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    // onChange={handleName}
+                    placeholder="John Doe"
+                    className="textName"
+                    value="sdfsd"
+                    autoFocus
+                  />
+                  <Form.Label>Email</Form.Label>
                   <Form.Control type="email" placeholder="name@gmail.com" />
                 </Form.Group>
               </Form>
@@ -41,9 +53,9 @@ function ModalInfoContent(props) {
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
                 >
-                  <Form.Label>Position:</Form.Label>
+                  <Form.Label>Position</Form.Label>
                   <Form.Control type="text" placeholder="Front-end Developer" />
-                  <Form.Label>Address:</Form.Label>
+                  <Form.Label>Address</Form.Label>
                   <Form.Control type="text" placeholder="Boston, MA" />
                 </Form.Group>
               </Form>
@@ -64,6 +76,7 @@ function ModalInfoContent(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
+        <Button onClick={handleClick}>Commit</Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
