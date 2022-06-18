@@ -34,8 +34,8 @@ function ControlPanel() {
         </Accordion.Item>
       </Accordion>
       <Card className="mb-2">
-        <CVPreview ref={componentRef} />
-        <button onClick={handlePrint}>Print this out!</button>
+        {/*<CVPreview ref={componentRef} /> 
+        <button onClick={handlePrint}>Print this out!</button>*/}
         <p className="lead pt-3">Download PDF</p>
       </Card>
 

@@ -1,26 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 
 const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
-  const [change, setChange] = useState("Kamen Kanchev from Context");
-  const [name, setName] = useState();
-
-  const [click, setClick] = useState();
-
-  const handleName = (e) => {
-    console.log(e.target.value);
-    setName(e.target.value);
-  };
-
   const handleClick = () => {
     const textfield = document.querySelector(".textName").value;
     console.log(textfield);
-    setClick(textfield);
+    let label = document.querySelector(".nameField");
+    label.textContent = textfield;
   };
 
   return (
-    <Context.Provider value={{ change, handleName, handleClick, setClick }}>
+    <Context.Provider
+      value={{
+        handleClick,
+      }}
+    >
       {children}
     </Context.Provider>
   );

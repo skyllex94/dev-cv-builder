@@ -9,7 +9,6 @@ import Form from "react-bootstrap/Form";
 import Context from "../context/Context";
 
 function ModalInfoContent(props) {
-  const { handleName } = useContext(Context);
   const { handleClick } = useContext(Context);
 
   return (
@@ -39,7 +38,6 @@ function ModalInfoContent(props) {
                     // onChange={handleName}
                     placeholder="John Doe"
                     className="textName"
-                    value="sdfsd"
                     autoFocus
                   />
                   <Form.Label>Email</Form.Label>
