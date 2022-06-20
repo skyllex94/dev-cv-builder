@@ -11,6 +11,8 @@ import Context from "../context/Context";
 function ModalInfoContent(props) {
   const { handleClick } = useContext(Context);
 
+  // const defaultNameValue = document.querySelector(".previewName");
+
   return (
     <Modal
       {...props}
@@ -35,10 +37,17 @@ function ModalInfoContent(props) {
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
-                    // onChange={handleName}
                     placeholder="John Doe"
-                    className="textName"
+                    className="modalName mb-2"
                     autoFocus
+                    defaultValue="Kamen Kanchev"
+                  />
+                  <Form.Label>Position</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Front-end Developer"
+                    className="modalPosition mb-2"
+                    defaultValue="Frontend Developer"
                   />
                   <Form.Label>Email</Form.Label>
                   <Form.Control type="email" placeholder="name@gmail.com" />

@@ -37,3 +37,15 @@ code {
 .cv-preview {
   min-height: 50vh;
 }
+
+.previewName {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+}
+
+.previewPosition {
+  font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+}
