@@ -6,6 +6,8 @@ import Context from "../context/Context";
 import Form from "react-bootstrap/Form";
 import { GrLocation } from "react-icons/gr";
 import { BiMailSend } from "react-icons/bi";
+import { FiPhone } from "react-icons/fi";
+import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   return (
@@ -22,16 +24,40 @@ export const CVPreview = React.forwardRef((props, ref) => {
           </Form>
         </Col>
         <Row>
-          <Col className="col-12 d-flex">
+          <Col className="col-5 d-flex">
             <Form>
-              <GrLocation className="addressIcon" />
+              <GrLocation className="addressIcon d-none" />
               <Form.Label className="ms-1 mb-0 previewAddress"></Form.Label>
             </Form>
           </Col>
-          <Col className="col-12 d-flex">
+          <Col className="col-7 d-flex">
+            <Form>
+              <AiOutlineLink className="websiteIcon d-none" />
+              <Form.Label className="ms-1 mb-0 previewWebsite"></Form.Label>
+            </Form>
+          </Col>
+          <Col className="col-5 d-flex">
             <Form>
               <BiMailSend className="emailIcon d-none" />
               <Form.Label className="ms-1 mb-0 previewEmail"></Form.Label>
+            </Form>
+          </Col>
+          <Col className="col-7 d-flex">
+            <Form>
+              <AiFillGithub className="githubIcon d-none" />
+              <Form.Label className="ms-1 mb-0 previewGithub"></Form.Label>
+            </Form>
+          </Col>
+          <Col className="col-5 d-flex">
+            <Form>
+              <FiPhone className="phoneIcon d-none" />
+              <Form.Label className="ms-1 mb-0 previewPhone"></Form.Label>
+            </Form>
+          </Col>
+          <Col className="col-7 d-flex">
+            <Form>
+              <AiFillLinkedin className="linkedinIcon d-none" />
+              <Form.Label className="ms-1 mb-0 previewLinkedin"></Form.Label>
             </Form>
           </Col>
         </Row>

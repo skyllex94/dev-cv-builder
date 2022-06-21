@@ -14,6 +14,7 @@ function Editor() {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
+    documentTitle: "Current_CV",
   });
 
   return (

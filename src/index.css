@@ -52,12 +52,8 @@ font-family: 'Inter', sans-serif;
     font-size: 17px;
 }
 
-.previewAddress, .previewEmail {
+.previewAddress, .previewEmail, .previewPhone, .previewWebsite, .previewGithub, .previewLinkedin {
   font-weight: 300;
-  font-size: 15px;
-  color: #696969;
-}
-
-.addressIcon {
+  font-size: 13px;
   color: #696969;
 }

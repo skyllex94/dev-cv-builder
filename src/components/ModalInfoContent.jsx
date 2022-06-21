@@ -83,6 +83,13 @@ function ModalInfoContent(props) {
                     className="modalEmail mb-2"
                     defaultValue="kkanchev94@gmail.com"
                   />
+                  <Form.Label>Phone</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="(700)-800-9000"
+                    className="modalPhone mb-2"
+                    defaultValue="(619)-817-5266"
+                  />
                 </Form.Group>
               </Form>
             </Col>
@@ -92,10 +99,27 @@ function ModalInfoContent(props) {
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
                 >
-                  <Form.Label>Position</Form.Label>
-                  <Form.Control type="text" placeholder="Front-end Developer" />
-                  <Form.Label>Address</Form.Label>
-                  <Form.Control type="text" placeholder="Boston, MA" />
+                  <Form.Label>Website</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="http://myportfolio.com"
+                    className="modalWebsite mb-2"
+                    defaultValue="http://kkanchev.netlify.app"
+                  />
+                  <Form.Label>Github</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="http://github.com/username"
+                    className="modalGithub mb-2"
+                    defaultValue="http://github.com/skyllex94"
+                  />
+                  <Form.Label>LinkedIn</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="http://linkedin.com/username"
+                    className="modalLinkedin mb-2"
+                    defaultValue="https://linkedin.com/in/kamen-kanchev-73a282175"
+                  />
                 </Form.Group>
               </Form>
             </Col>

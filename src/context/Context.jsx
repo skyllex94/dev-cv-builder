@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 
 const Context = createContext();
 
@@ -13,23 +13,64 @@ export const ContextProvider = ({ children }) => {
 
     const modalAddress = document.querySelectorAll(".modalAddress");
     let previewAddress = document.querySelector(".previewAddress");
-    let addressIcon = document.querySelector(".addressIcon");
 
     const modalEmail = document.querySelector(".modalEmail");
     const previewEmail = document.querySelector(".previewEmail");
 
+    const modalPhone = document.querySelector(".modalPhone");
+    const previewPhone = document.querySelector(".previewPhone");
+
+    const modalWebsite = document.querySelector(".modalWebsite");
+    const previewWebsite = document.querySelector(".previewWebsite");
+
+    const modalGithub = document.querySelector(".modalGithub");
+    const previewGithub = document.querySelector(".previewGithub");
+
     previewName.textContent = modalName.value;
     previewPosition.textContent = modalPosition.value;
     previewEmail.textContent = modalEmail.value;
+    previewPhone.textContent = modalPhone.value;
+    previewWebsite.textContent = modalWebsite.value;
+    previewGithub.textContent = modalGithub.value;
+    document.querySelector(".previewLinkedin").textContent =
+      document.querySelector(".modalLinkedin").value;
 
-    console.log(addressIcon.classList);
+    // Icon displaying with text
+    const emailIcon = document.querySelector(".emailIcon");
+    const addressIcon = document.querySelector(".addressIcon");
+    const phoneIcon = document.querySelector(".phoneIcon");
+    const websiteIcon = document.querySelector(".websiteIcon");
+    const githubIcon = document.querySelector(".githubIcon");
+    const linkedinIcon = document.querySelector(".linkedinIcon");
 
-    addressIcon.classList.remove("d-none");
+    if (modalEmail.value === "") {
+      emailIcon.classList.add("d-none");
+    } else emailIcon.classList.remove("d-none");
 
+    if (phoneIcon.value === "") {
+      phoneIcon.classList.add("d-none");
+    } else phoneIcon.classList.remove("d-none");
+
+    if (websiteIcon.value === "") {
+      websiteIcon.classList.add("d-none");
+    } else websiteIcon.classList.remove("d-none");
+
+    if (githubIcon.value === "") {
+      githubIcon.classList.add("d-none");
+    } else githubIcon.classList.remove("d-none");
+
+    if (linkedinIcon.value === "") {
+      linkedinIcon.classList.add("d-none");
+    } else linkedinIcon.classList.remove("d-none");
+
+    // Display all the info with a comma after each one
     if (previewAddress.textContent === "") {
+      addressIcon.classList.remove("d-none");
+      console.log(addressIcon);
       displayAddress(modalAddress, previewAddress);
     } else {
       previewAddress.textContent = "";
+      addressIcon.classList.remove("d-none");
       displayAddress(modalAddress, previewAddress);
     }
   };
