@@ -6,6 +6,8 @@ import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 
+import { BiMailSend } from "react-icons/bi";
+
 import Context from "../context/Context";
 
 function ModalInfoContent(props) {
@@ -49,8 +51,38 @@ function ModalInfoContent(props) {
                     className="modalPosition mb-2"
                     defaultValue="Frontend Developer"
                   />
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="City"
+                    className="modalAddress mb-2"
+                    defaultValue="Boston"
+                  />
+                  <Row>
+                    <Col className="col-6">
+                      <Form.Control
+                        type="text"
+                        placeholder="State"
+                        className="modalAddress mb-2"
+                        defaultValue="MA"
+                      />
+                    </Col>
+                    <Col className="col-6">
+                      <Form.Control
+                        type="text"
+                        placeholder="ZIP Code"
+                        className="modalAddress mb-2"
+                        defaultValue="02657"
+                      />
+                    </Col>
+                  </Row>
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" placeholder="name@gmail.com" />
+                  <Form.Control
+                    type="email"
+                    placeholder="name@email.com"
+                    className="modalEmail mb-2"
+                    defaultValue="kkanchev94@gmail.com"
+                  />
                 </Form.Group>
               </Form>
             </Col>

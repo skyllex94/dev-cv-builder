@@ -38,14 +38,26 @@ code {
   min-height: 50vh;
 }
 
+.preview {
+font-family: 'Inter', sans-serif;
+}
+
 .previewName {
-  font-family: 'Inter', sans-serif;
   font-weight: 800;
   font-size: 30px;
 }
 
 .previewPosition {
-  font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 17px;
+}
+
+.previewAddress, .previewEmail {
+  font-weight: 300;
+  font-size: 15px;
+  color: #696969;
+}
+
+.addressIcon {
+  color: #696969;
 }
