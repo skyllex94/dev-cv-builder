@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 
-import Context from "../context/Context";
 import Form from "react-bootstrap/Form";
 import { GrLocation } from "react-icons/gr";
 import { BiMailSend } from "react-icons/bi";
 import { FiPhone } from "react-icons/fi";
 import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+
+import { Linkedin } from "./ModalInfoContent";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   return (
@@ -48,16 +49,11 @@ export const CVPreview = React.forwardRef((props, ref) => {
               <Form.Label className="ms-1 mb-0 previewGithub"></Form.Label>
             </Form>
           </Col>
+          <Linkedin />
           <Col className="col-5 d-flex">
             <Form>
               <FiPhone className="phoneIcon d-none" />
               <Form.Label className="ms-1 mb-0 previewPhone"></Form.Label>
-            </Form>
-          </Col>
-          <Col className="col-7 d-flex">
-            <Form>
-              <AiFillLinkedin className="linkedinIcon d-none" />
-              <Form.Label className="ms-1 mb-0 previewLinkedin"></Form.Label>
             </Form>
           </Col>
         </Row>

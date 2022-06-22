@@ -1,5 +1,9 @@
 import { createContext } from "react";
 
+import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/esm/Col";
+
 const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
@@ -26,14 +30,16 @@ export const ContextProvider = ({ children }) => {
     const modalGithub = document.querySelector(".modalGithub");
     const previewGithub = document.querySelector(".previewGithub");
 
+    const modalLinkedin = document.querySelector(".modalLinkedin");
+    const previewLinkedin = document.querySelector(".previewLinkedin");
+
     previewName.textContent = modalName.value;
     previewPosition.textContent = modalPosition.value;
     previewEmail.textContent = modalEmail.value;
     previewPhone.textContent = modalPhone.value;
     previewWebsite.textContent = modalWebsite.value;
     previewGithub.textContent = modalGithub.value;
-    document.querySelector(".previewLinkedin").textContent =
-      document.querySelector(".modalLinkedin").value;
+    previewLinkedin.textContent = modalLinkedin.value;
 
     // Icon displaying with text
     const emailIcon = document.querySelector(".emailIcon");
@@ -47,26 +53,25 @@ export const ContextProvider = ({ children }) => {
       emailIcon.classList.add("d-none");
     } else emailIcon.classList.remove("d-none");
 
-    if (phoneIcon.value === "") {
+    if (modalPhone.value === "") {
       phoneIcon.classList.add("d-none");
     } else phoneIcon.classList.remove("d-none");
 
-    if (websiteIcon.value === "") {
+    if (modalWebsite.value === "") {
       websiteIcon.classList.add("d-none");
     } else websiteIcon.classList.remove("d-none");
 
-    if (githubIcon.value === "") {
+    if (modalGithub.value === "") {
       githubIcon.classList.add("d-none");
     } else githubIcon.classList.remove("d-none");
 
-    if (linkedinIcon.value === "") {
-      linkedinIcon.classList.add("d-none");
-    } else linkedinIcon.classList.remove("d-none");
+    // if (modalLinkedin.value === "") {
+    //   linkedinIcon.classList.add("d-none");
+    // } else linkedinIcon.classList.remove("d-none");
 
     // Display all the info with a comma after each one
     if (previewAddress.textContent === "") {
       addressIcon.classList.remove("d-none");
-      console.log(addressIcon);
       displayAddress(modalAddress, previewAddress);
     } else {
       previewAddress.textContent = "";

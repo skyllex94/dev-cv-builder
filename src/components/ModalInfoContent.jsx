@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 import { BiMailSend } from "react-icons/bi";
 
 import Context from "../context/Context";
+import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
 function ModalInfoContent(props) {
   const { handleClick } = useContext(Context);
@@ -139,11 +140,35 @@ function ModalInfoContent(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleClick}>Commit</Button>
+        <Button onClick={handleClick}>Submit</Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
 }
+
+export const Linkedin = () => {
+  const [linkedin, setLinkedin] = useState(true);
+
+  const modalLinkedin = document.querySelector(".modalLinkedin");
+  console.log(modalLinkedin);
+
+  return (
+    <>
+      {linkedin ? (
+        <>
+          <Col className="col-7 d-flex">
+            <Form>
+              <AiFillLinkedin className="linkedinIcon" />
+              <Form.Label className="ms-1 mb-0 previewLinkedin"></Form.Label>
+            </Form>
+          </Col>
+        </>
+      ) : (
+        <></>
+      )}
+    </>
+  );
+};
 
 export default ModalInfoContent;
