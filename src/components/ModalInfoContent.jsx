@@ -147,12 +147,14 @@ function ModalInfoContent(props) {
   );
 }
 
-export const Linkedin = () => {
-  const [linkedin, setLinkedin] = useState(true);
+export const Linkedin = ({ isDisplayed }) => {
+  const [linkedin, setLinkedin] = useState(false);
+  console.log(isDisplayed);
 
-  const modalLinkedin = document.querySelector(".modalLinkedin");
-  console.log(modalLinkedin);
-
+  if (isDisplayed) {
+    console.log("Are you really in?");
+    setLinkedin(true);
+  }
   return (
     <>
       {linkedin ? (
@@ -164,9 +166,32 @@ export const Linkedin = () => {
             </Form>
           </Col>
         </>
-      ) : (
-        <></>
-      )}
+      ) : null}
+    </>
+  );
+};
+
+export const Linkedinn = ({ isDisplayed }) => {
+  const [linkedin, setLinkedin] = useState({
+    display: false,
+  });
+
+  function settingStatePlease() {
+    setLinkedin({ ...linkedin, display: true });
+  }
+
+  return (
+    <>
+      {linkedin.display ? (
+        <>
+          <Col className="col-7 d-flex">
+            <Form>
+              <AiFillLinkedin className="linkedinIcon" />
+              <Form.Label className="ms-1 mb-0 previewLinkedin"></Form.Label>
+            </Form>
+          </Col>
+        </>
+      ) : null}
     </>
   );
 };

@@ -8,7 +8,7 @@ import { BiMailSend } from "react-icons/bi";
 import { FiPhone } from "react-icons/fi";
 import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
-import { Linkedin } from "./ModalInfoContent";
+import { Linkedin, Linkedinn } from "./ModalInfoContent";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   return (
@@ -49,7 +49,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
               <Form.Label className="ms-1 mb-0 previewGithub"></Form.Label>
             </Form>
           </Col>
-          <Linkedin />
+          <Linkedinn isDisplayed={true} />
           <Col className="col-5 d-flex">
             <Form>
               <FiPhone className="phoneIcon d-none" />

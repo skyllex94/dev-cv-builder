@@ -3,6 +3,7 @@ import { createContext } from "react";
 import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/esm/Col";
+import { Linkedin, Linkedinn } from "../components/ModalInfoContent";
 
 const Context = createContext();
 
@@ -31,7 +32,6 @@ export const ContextProvider = ({ children }) => {
     const previewGithub = document.querySelector(".previewGithub");
 
     const modalLinkedin = document.querySelector(".modalLinkedin");
-    const previewLinkedin = document.querySelector(".previewLinkedin");
 
     previewName.textContent = modalName.value;
     previewPosition.textContent = modalPosition.value;
@@ -39,6 +39,13 @@ export const ContextProvider = ({ children }) => {
     previewPhone.textContent = modalPhone.value;
     previewWebsite.textContent = modalWebsite.value;
     previewGithub.textContent = modalGithub.value;
+    console.log(modalLinkedin.value);
+
+    if (modalLinkedin.value !== "") {
+      console.log("you in context if statement?");
+    }
+
+    const previewLinkedin = document.querySelector(".previewLinkedin");
     previewLinkedin.textContent = modalLinkedin.value;
 
     // Icon displaying with text
