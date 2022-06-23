@@ -36,33 +36,42 @@ export const ContextProvider = ({ children }) => {
     previewName.textContent = modalName.value;
     previewPosition.textContent = modalPosition.value;
     previewEmail.textContent = modalEmail.value;
-    previewPhone.textContent = modalPhone.value;
-    previewWebsite.textContent = modalWebsite.value;
-    previewGithub.textContent = modalGithub.value;
-    console.log(modalLinkedin.value);
 
-    if (modalLinkedin.value !== "") {
-      console.log("you in context if statement?");
+    if (modalPhone.value !== "") {
+      const textPhone = document.querySelector(".textPhone");
+      document.querySelector(".phone").classList.remove("d-none");
+      textPhone.textContent = modalPhone.value;
+    } else {
+      document.querySelector(".phone").classList.add("d-none");
     }
 
-    const previewLinkedin = document.querySelector(".previewLinkedin");
-    previewLinkedin.textContent = modalLinkedin.value;
+    previewWebsite.textContent = modalWebsite.value;
+
+    if (modalGithub.value !== "") {
+      const textGithub = document.querySelector(".textGithub");
+      document.querySelector(".github").classList.remove("d-none");
+      textGithub.textContent = modalGithub.value;
+    } else {
+      document.querySelector(".github").classList.add("d-none");
+    }
+
+    if (modalLinkedin.value !== "") {
+      const textLinkedin = document.querySelector(".textLinkedin");
+      document.querySelector(".linkedin").classList.remove("d-none");
+      textLinkedin.textContent = modalLinkedin.value;
+    } else {
+      document.querySelector(".linkedin").classList.add("d-none");
+    }
 
     // Icon displaying with text
     const emailIcon = document.querySelector(".emailIcon");
     const addressIcon = document.querySelector(".addressIcon");
-    const phoneIcon = document.querySelector(".phoneIcon");
     const websiteIcon = document.querySelector(".websiteIcon");
     const githubIcon = document.querySelector(".githubIcon");
-    const linkedinIcon = document.querySelector(".linkedinIcon");
 
     if (modalEmail.value === "") {
       emailIcon.classList.add("d-none");
     } else emailIcon.classList.remove("d-none");
-
-    if (modalPhone.value === "") {
-      phoneIcon.classList.add("d-none");
-    } else phoneIcon.classList.remove("d-none");
 
     if (modalWebsite.value === "") {
       websiteIcon.classList.add("d-none");
@@ -72,11 +81,7 @@ export const ContextProvider = ({ children }) => {
       githubIcon.classList.add("d-none");
     } else githubIcon.classList.remove("d-none");
 
-    // if (modalLinkedin.value === "") {
-    //   linkedinIcon.classList.add("d-none");
-    // } else linkedinIcon.classList.remove("d-none");
-
-    // Display all the info with a comma after each one
+    // Display all the address info with a comma after each one
     if (previewAddress.textContent === "") {
       addressIcon.classList.remove("d-none");
       displayAddress(modalAddress, previewAddress);

@@ -25,35 +25,41 @@ export const CVPreview = React.forwardRef((props, ref) => {
           </Form>
         </Col>
         <Row>
-          <Col className="col-5 d-flex">
+          <Col className="col-6 d-flex">
             <Form>
               <GrLocation className="addressIcon d-none" />
               <Form.Label className="ms-1 mb-0 previewAddress"></Form.Label>
             </Form>
           </Col>
-          <Col className="col-7 d-flex">
+          <Col className="col-6 d-flex">
             <Form>
               <AiOutlineLink className="websiteIcon d-none" />
               <Form.Label className="ms-1 mb-0 previewWebsite"></Form.Label>
             </Form>
           </Col>
-          <Col className="col-5 d-flex">
+          <Col className="col-6 d-flex">
             <Form>
               <BiMailSend className="emailIcon d-none" />
               <Form.Label className="ms-1 mb-0 previewEmail"></Form.Label>
             </Form>
           </Col>
-          <Col className="col-7 d-flex">
+          <Col className="github col-6 d-flex d-none">
             <Form>
-              <AiFillGithub className="githubIcon d-none" />
-              <Form.Label className="ms-1 mb-0 previewGithub"></Form.Label>
+              <AiFillGithub />
+              <Form.Label className="ms-1 mb-0 textGithub"></Form.Label>
             </Form>
           </Col>
-          <Linkedinn isDisplayed={true} />
-          <Col className="col-5 d-flex">
+
+          <Col className="phone col-6 d-flex d-none">
             <Form>
-              <FiPhone className="phoneIcon d-none" />
-              <Form.Label className="ms-1 mb-0 previewPhone"></Form.Label>
+              <FiPhone />
+              <Form.Label className="ms-1 mb-0 textPhone"></Form.Label>
+            </Form>
+          </Col>
+          <Col className="linkedin col-6 d-flex d-none">
+            <Form>
+              <AiFillLinkedin />
+              <Form.Label className="ms-1 mb-0 textLinkedin"></Form.Label>
             </Form>
           </Col>
         </Row>

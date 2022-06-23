@@ -52,7 +52,7 @@ font-family: 'Inter', sans-serif;
     font-size: 17px;
 }
 
-.previewAddress, .previewEmail, .previewPhone, .previewWebsite, .previewGithub, .previewLinkedin {
+.previewAddress, .previewEmail, .textPhone, .previewWebsite, .textGithub, .textLinkedin {
   font-weight: 300;
   font-size: 13px;
   color: #696969;

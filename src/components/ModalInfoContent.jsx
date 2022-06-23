@@ -147,30 +147,6 @@ function ModalInfoContent(props) {
   );
 }
 
-export const Linkedin = ({ isDisplayed }) => {
-  const [linkedin, setLinkedin] = useState(false);
-  console.log(isDisplayed);
-
-  if (isDisplayed) {
-    console.log("Are you really in?");
-    setLinkedin(true);
-  }
-  return (
-    <>
-      {linkedin ? (
-        <>
-          <Col className="col-7 d-flex">
-            <Form>
-              <AiFillLinkedin className="linkedinIcon" />
-              <Form.Label className="ms-1 mb-0 previewLinkedin"></Form.Label>
-            </Form>
-          </Col>
-        </>
-      ) : null}
-    </>
-  );
-};
-
 export const Linkedinn = ({ isDisplayed }) => {
   const [linkedin, setLinkedin] = useState({
     display: false,
