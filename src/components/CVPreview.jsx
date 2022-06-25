@@ -8,61 +8,64 @@ import { BiMailSend } from "react-icons/bi";
 import { FiPhone } from "react-icons/fi";
 import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
-import { Linkedin, Linkedinn } from "./ModalInfoContent";
-
 export const CVPreview = React.forwardRef((props, ref) => {
   return (
     <div ref={ref}>
-      <Row className="preview ps-5">
-        <Col className="col-12 d-flex pt-2">
+      <Row className="general-info-section ps-5">
+        <Col className="name col-12 d-flex pt-2 d-none">
           <Form className="pt-4 ">
-            <Form.Label className="previewName"></Form.Label>
+            <Form.Label className="textName"></Form.Label>
           </Form>
         </Col>
-        <Col className="col-12 d-flex ">
+        <Col className="position col-12 d-flex d-none">
           <Form>
-            <Form.Label className="previewPosition"></Form.Label>
+            <Form.Label className="textPosition"></Form.Label>
           </Form>
         </Col>
-        <Row>
-          <Col className="col-6 d-flex">
-            <Form>
-              <GrLocation className="addressIcon d-none" />
-              <Form.Label className="ms-1 mb-0 previewAddress"></Form.Label>
-            </Form>
-          </Col>
-          <Col className="col-6 d-flex">
-            <Form>
-              <AiOutlineLink className="websiteIcon d-none" />
-              <Form.Label className="ms-1 mb-0 previewWebsite"></Form.Label>
-            </Form>
-          </Col>
-          <Col className="col-6 d-flex">
-            <Form>
-              <BiMailSend className="emailIcon d-none" />
-              <Form.Label className="ms-1 mb-0 previewEmail"></Form.Label>
-            </Form>
-          </Col>
-          <Col className="github col-6 d-flex d-none">
-            <Form>
-              <AiFillGithub />
-              <Form.Label className="ms-1 mb-0 textGithub"></Form.Label>
-            </Form>
-          </Col>
-
-          <Col className="phone col-6 d-flex d-none">
-            <Form>
-              <FiPhone />
-              <Form.Label className="ms-1 mb-0 textPhone"></Form.Label>
-            </Form>
-          </Col>
-          <Col className="linkedin col-6 d-flex d-none">
-            <Form>
-              <AiFillLinkedin />
-              <Form.Label className="ms-1 mb-0 textLinkedin"></Form.Label>
-            </Form>
-          </Col>
-        </Row>
+        <Col className="col-5">
+          <Row>
+            <Col className="address col-12 d-flex d-none">
+              <Form>
+                <GrLocation />
+                <Form.Label className="ms-1 mb-0 textAddress"></Form.Label>
+              </Form>
+            </Col>
+            <Col className="email col-12 d-flex d-none">
+              <Form>
+                <BiMailSend />
+                <Form.Label className="ms-1 mb-0 textEmail"></Form.Label>
+              </Form>
+            </Col>
+            <Col className="phone col-12 d-flex d-none">
+              <Form>
+                <FiPhone />
+                <Form.Label className="ms-1 mb-0 textPhone"></Form.Label>
+              </Form>
+            </Col>
+          </Row>
+        </Col>
+        <Col className="col-7">
+          <Row>
+            <Col className="website col-12 d-flex d-none">
+              <Form>
+                <AiOutlineLink />
+                <Form.Label className="ms-1 mb-0 textWebsite"></Form.Label>
+              </Form>
+            </Col>
+            <Col className="github col-12 d-flex d-none">
+              <Form>
+                <AiFillGithub />
+                <Form.Label className="ms-1 mb-0 textGithub"></Form.Label>
+              </Form>
+            </Col>
+            <Col className="linkedin col-12 d-flex d-none">
+              <Form>
+                <AiFillLinkedin />
+                <Form.Label className="ms-1 mb-0 textLinkedin"></Form.Label>
+              </Form>
+            </Col>
+          </Row>
+        </Col>
       </Row>
     </div>
   );

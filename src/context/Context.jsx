@@ -11,31 +11,39 @@ export const ContextProvider = ({ children }) => {
   const handleClick = () => {
     const modalName = document.querySelector(".modalName");
     console.log(modalName.value);
-    let previewName = document.querySelector(".previewName");
-
     const modalPosition = document.querySelector(".modalPosition");
-    let previewPosition = document.querySelector(".previewPosition");
-
     const modalAddress = document.querySelectorAll(".modalAddress");
-    let previewAddress = document.querySelector(".previewAddress");
+    let textAddress = document.querySelector(".textAddress");
 
     const modalEmail = document.querySelector(".modalEmail");
-    const previewEmail = document.querySelector(".previewEmail");
-
     const modalPhone = document.querySelector(".modalPhone");
-    const previewPhone = document.querySelector(".previewPhone");
-
     const modalWebsite = document.querySelector(".modalWebsite");
-    const previewWebsite = document.querySelector(".previewWebsite");
-
     const modalGithub = document.querySelector(".modalGithub");
-    const previewGithub = document.querySelector(".previewGithub");
-
     const modalLinkedin = document.querySelector(".modalLinkedin");
 
-    previewName.textContent = modalName.value;
-    previewPosition.textContent = modalPosition.value;
-    previewEmail.textContent = modalEmail.value;
+    if (modalName.value !== "") {
+      const textName = document.querySelector(".textName");
+      document.querySelector(".name").classList.remove("d-none");
+      textName.textContent = modalName.value;
+    } else {
+      document.querySelector(".name").classList.add("d-none");
+    }
+
+    if (modalPosition.value !== "") {
+      const textPosition = document.querySelector(".textPosition");
+      document.querySelector(".position").classList.remove("d-none");
+      textPosition.textContent = modalPosition.value;
+    } else {
+      document.querySelector(".position").classList.add("d-none");
+    }
+
+    if (modalEmail.value !== "") {
+      const textEmail = document.querySelector(".textEmail");
+      document.querySelector(".email").classList.remove("d-none");
+      textEmail.textContent = modalEmail.value;
+    } else {
+      document.querySelector(".email").classList.add("d-none");
+    }
 
     if (modalPhone.value !== "") {
       const textPhone = document.querySelector(".textPhone");
@@ -45,7 +53,13 @@ export const ContextProvider = ({ children }) => {
       document.querySelector(".phone").classList.add("d-none");
     }
 
-    previewWebsite.textContent = modalWebsite.value;
+    if (modalWebsite.value !== "") {
+      const textWebsite = document.querySelector(".textWebsite");
+      document.querySelector(".website").classList.remove("d-none");
+      textWebsite.textContent = modalWebsite.value;
+    } else {
+      document.querySelector(".website").classList.add("d-none");
+    }
 
     if (modalGithub.value !== "") {
       const textGithub = document.querySelector(".textGithub");
@@ -63,35 +77,28 @@ export const ContextProvider = ({ children }) => {
       document.querySelector(".linkedin").classList.add("d-none");
     }
 
-    // Icon displaying with text
-    const emailIcon = document.querySelector(".emailIcon");
-    const addressIcon = document.querySelector(".addressIcon");
-    const websiteIcon = document.querySelector(".websiteIcon");
-    const githubIcon = document.querySelector(".githubIcon");
+    // Check if values of the address fields is empty or not
+    let isAddressFieldsEmpty = true;
+    modalAddress.forEach((current) => {
+      if (current.value !== "") {
+        isAddressFieldsEmpty = false;
+      }
+    });
 
-    if (modalEmail.value === "") {
-      emailIcon.classList.add("d-none");
-    } else emailIcon.classList.remove("d-none");
-
-    if (modalWebsite.value === "") {
-      websiteIcon.classList.add("d-none");
-    } else websiteIcon.classList.remove("d-none");
-
-    if (modalGithub.value === "") {
-      githubIcon.classList.add("d-none");
-    } else githubIcon.classList.remove("d-none");
+    console.log(isAddressFieldsEmpty);
 
     // Display all the address info with a comma after each one
-    if (previewAddress.textContent === "") {
-      addressIcon.classList.remove("d-none");
-      displayAddress(modalAddress, previewAddress);
+    if (!isAddressFieldsEmpty) {
+      textAddress.textContent = "";
+      document.querySelector(".address").classList.remove("d-none");
+      displayAddress(modalAddress, textAddress);
     } else {
-      previewAddress.textContent = "";
-      addressIcon.classList.remove("d-none");
-      displayAddress(modalAddress, previewAddress);
+      textAddress.textContent = "";
+      document.querySelector(".address").classList.add("d-none");
     }
   };
 
+  // display each piece of data
   function displayAddress(readFrom, writeTo) {
     readFrom.forEach((current, key, arr) => {
       if (Object.is(arr.length - 1, key)) {

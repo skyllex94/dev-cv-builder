@@ -38,21 +38,21 @@ code {
   min-height: 50vh;
 }
 
-.preview {
+.general-info-section {
 font-family: 'Inter', sans-serif;
 }
 
-.previewName {
+.textName {
   font-weight: 800;
   font-size: 30px;
 }
 
-.previewPosition {
+.textPosition {
     font-weight: 600;
     font-size: 17px;
 }
 
-.previewAddress, .previewEmail, .textPhone, .previewWebsite, .textGithub, .textLinkedin {
+.textAddress, .textEmail, .textPhone, .textWebsite, .textGithub, .textLinkedin {
   font-weight: 300;
   font-size: 13px;
   color: #696969;
