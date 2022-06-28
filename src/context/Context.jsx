@@ -103,13 +103,13 @@ export const ContextProvider = ({ children }) => {
   }
 
   const displaySummary = (textvalue) => {
-    const modalSummary = document.querySelector(".modalSummary");
     const textSummary = document.querySelector(".textSummary");
 
-    console.log(textSummary.value);
-    console.log(textvalue);
-
-    textSummary.textContent = modalSummary;
+    if (textvalue === "") {
+      return 1;
+    } else {
+      textSummary.textContent = textvalue;
+    }
   };
 
   return (

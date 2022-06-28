@@ -14,7 +14,6 @@ function ModalSummary(props) {
 
   const handleChange = (event) => {
     setMessage(event.target.value);
-    console.log(event.target.value);
   };
 
   return (
@@ -49,7 +48,9 @@ function ModalSummary(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={displaySummary(message)}>Submit</Button>
+        <Button hidden onClick={displaySummary(message)}>
+          Submit
+        </Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>

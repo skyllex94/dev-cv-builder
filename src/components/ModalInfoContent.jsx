@@ -12,6 +12,8 @@ import { AiFillLinkedin } from "react-icons/ai";
 function ModalInfoContent(props) {
   const { handleClick } = useContext(Context);
 
+  const [name, setName] = useState("");
+
   // const defaultNameValue = document.querySelector(".previewName");
 
   return (
@@ -41,6 +43,7 @@ function ModalInfoContent(props) {
                     placeholder="John Doe"
                     className="modalName mb-2"
                     autoFocus
+                    value={name}
                     defaultValue="Kamen Kanchev"
                   />
                   <Form.Label>Position</Form.Label>

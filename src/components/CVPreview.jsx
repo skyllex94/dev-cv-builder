@@ -67,8 +67,8 @@ export const CVPreview = React.forwardRef((props, ref) => {
           </Row>
         </Col>
       </Row>
-      <Row className="summary">
-        <Col md={12} className="summaryField d-flex d-none">
+      <Row className="summary ps-5 pt-4">
+        <Col md={12} className="summaryField d-flex">
           <Form.Label className="textSummary"></Form.Label>
         </Col>
       </Row>
