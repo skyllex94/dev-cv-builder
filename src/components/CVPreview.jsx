@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 
@@ -65,6 +65,11 @@ export const CVPreview = React.forwardRef((props, ref) => {
               </Form>
             </Col>
           </Row>
+        </Col>
+      </Row>
+      <Row className="summary">
+        <Col md={12} className="summaryField d-flex d-none">
+          <Form.Label className="textSummary"></Form.Label>
         </Col>
       </Row>
     </div>

@@ -6,10 +6,8 @@ import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 
-import { BiMailSend } from "react-icons/bi";
-
 import Context from "../context/Context";
-import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+import { AiFillLinkedin } from "react-icons/ai";
 
 function ModalInfoContent(props) {
   const { handleClick } = useContext(Context);

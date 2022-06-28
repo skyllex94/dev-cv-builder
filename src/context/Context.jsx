@@ -1,10 +1,5 @@
 import { createContext } from "react";
 
-import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/esm/Col";
-import { Linkedin, Linkedinn } from "../components/ModalInfoContent";
-
 const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
@@ -107,10 +102,21 @@ export const ContextProvider = ({ children }) => {
     });
   }
 
+  const displaySummary = (textvalue) => {
+    const modalSummary = document.querySelector(".modalSummary");
+    const textSummary = document.querySelector(".textSummary");
+
+    console.log(textSummary.value);
+    console.log(textvalue);
+
+    textSummary.textContent = modalSummary;
+  };
+
   return (
     <Context.Provider
       value={{
         handleClick,
+        displaySummary,
       }}
     >
       {children}
