@@ -3,9 +3,8 @@ import { createContext } from "react";
 const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
-  const handleClick = () => {
+  const displayGeneralInfo = () => {
     const modalName = document.querySelector(".modalName");
-    console.log(modalName.value);
     const modalPosition = document.querySelector(".modalPosition");
     const modalAddress = document.querySelectorAll(".modalAddress");
     let textAddress = document.querySelector(".textAddress");
@@ -80,8 +79,6 @@ export const ContextProvider = ({ children }) => {
       }
     });
 
-    console.log(isAddressFieldsEmpty);
-
     // Display all the address info with a comma after each one
     if (!isAddressFieldsEmpty) {
       textAddress.textContent = "";
@@ -102,20 +99,21 @@ export const ContextProvider = ({ children }) => {
     });
   }
 
-  const displaySummary = (textvalue) => {
+  const displaySummary = () => {
     const textSummary = document.querySelector(".textSummary");
+    const modalSummary = document.querySelector(".modalSummary");
 
-    if (textvalue === "") {
+    if (modalSummary === "") {
       return 1;
     } else {
-      textSummary.textContent = textvalue;
+      textSummary.textContent = modalSummary.value;
     }
   };
 
   return (
     <Context.Provider
       value={{
-        handleClick,
+        displayGeneralInfo,
         displaySummary,
       }}
     >

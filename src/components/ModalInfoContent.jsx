@@ -10,11 +10,53 @@ import Context from "../context/Context";
 import { AiFillLinkedin } from "react-icons/ai";
 
 function ModalInfoContent(props) {
-  const { handleClick } = useContext(Context);
+  const { displayGeneralInfo } = useContext(Context);
 
   const [name, setName] = useState("");
+  const [position, setPosition] = useState("");
 
-  // const defaultNameValue = document.querySelector(".previewName");
+  const [addressCity, setAddressCity] = useState("");
+  const [addressState, setAddressState] = useState("");
+  const [addressZIP, setAddressZIP] = useState("");
+
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [website, setWebsite] = useState("");
+  const [github, setGithub] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+
+  const persistName = (event) => {
+    setName(event.target.value);
+  };
+  const persistPosition = (event) => {
+    setPosition(event.target.value);
+  };
+
+  const persistAddressCity = (event) => {
+    setAddressCity(event.target.value);
+  };
+  const persistAddressState = (event) => {
+    setAddressState(event.target.value);
+  };
+  const persistAddressZIP = (event) => {
+    setAddressZIP(event.target.value);
+  };
+
+  const persistEmail = (event) => {
+    setEmail(event.target.value);
+  };
+  const persistPhone = (event) => {
+    setPhone(event.target.value);
+  };
+  const persistWebsite = (event) => {
+    setWebsite(event.target.value);
+  };
+  const persistGithub = (event) => {
+    setGithub(event.target.value);
+  };
+  const persistLinkedin = (event) => {
+    setLinkedin(event.target.value);
+  };
 
   return (
     <Modal
@@ -44,21 +86,26 @@ function ModalInfoContent(props) {
                     className="modalName mb-2"
                     autoFocus
                     value={name}
-                    defaultValue="Kamen Kanchev"
+                    onChange={persistName}
+                    // defaultValue="Kamen Kanchev"
                   />
                   <Form.Label>Position</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Front-end Developer"
                     className="modalPosition mb-2"
-                    defaultValue="Frontend Developer"
+                    value={position}
+                    onChange={persistPosition}
+                    // defaultValue="Frontend Developer"
                   />
                   <Form.Label>Address</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="City"
                     className="modalAddress mb-2"
-                    defaultValue="Boston"
+                    value={addressCity}
+                    onChange={persistAddressCity}
+                    // defaultValue="Boston"
                   />
                   <Row>
                     <Col className="col-6">
@@ -66,15 +113,19 @@ function ModalInfoContent(props) {
                         type="text"
                         placeholder="State"
                         className="modalAddress mb-2"
-                        defaultValue="MA"
+                        value={addressState}
+                        onChange={persistAddressState}
+                        // defaultValue="MA"
                       />
                     </Col>
                     <Col className="col-6">
                       <Form.Control
-                        type="text"
+                        type="number"
                         placeholder="ZIP Code"
                         className="modalAddress mb-2"
-                        defaultValue="02657"
+                        value={addressZIP}
+                        onChange={persistAddressZIP}
+                        // defaultValue="02657"
                       />
                     </Col>
                   </Row>
@@ -83,14 +134,18 @@ function ModalInfoContent(props) {
                     type="email"
                     placeholder="name@email.com"
                     className="modalEmail mb-2"
-                    defaultValue="kkanchev94@gmail.com"
+                    value={email}
+                    onChange={persistEmail}
+                    // defaultValue="kkanchev94@gmail.com"
                   />
                   <Form.Label>Phone</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="(700)-800-9000"
                     className="modalPhone mb-2"
-                    defaultValue="(619)-817-5266"
+                    value={phone}
+                    onChange={persistPhone}
+                    // defaultValue="(619)-817-5266"
                   />
                 </Form.Group>
               </Form>
@@ -106,21 +161,27 @@ function ModalInfoContent(props) {
                     type="text"
                     placeholder="http://myportfolio.com"
                     className="modalWebsite mb-2"
-                    defaultValue="http://kkanchev.netlify.app"
+                    value={website}
+                    onChange={persistWebsite}
+                    // defaultValue="http://kkanchev.netlify.app"
                   />
                   <Form.Label>Github</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="http://github.com/username"
                     className="modalGithub mb-2"
-                    defaultValue="http://github.com/skyllex94"
+                    value={github}
+                    onChange={persistGithub}
+                    // defaultValue="http://github.com/skyllex94"
                   />
                   <Form.Label>LinkedIn</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="http://linkedin.com/username"
+                    value={linkedin}
+                    onChange={persistLinkedin}
                     className="modalLinkedin mb-2"
-                    defaultValue="https://linkedin.com/in/kamen-kanchev-73a282175"
+                    // defaultValue="https://linkedin.com/in/kamen-kanchev-73a282175"
                   />
                 </Form.Group>
               </Form>
@@ -141,7 +202,7 @@ function ModalInfoContent(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleClick}>Submit</Button>
+        <Button onClick={displayGeneralInfo}>Submit</Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>

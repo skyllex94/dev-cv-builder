@@ -48,9 +48,7 @@ function ModalSummary(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button hidden onClick={displaySummary(message)}>
-          Submit
-        </Button>
+        <Button onClick={displaySummary}>Submit</Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
