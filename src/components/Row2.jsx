@@ -7,7 +7,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 function Row2(id, index) {
   return (
-    <Draggable key={id} draggableId={id} index={index}>
+    <Draggable draggableId="2" key="2" index={2}>
       {(provided) => (
         <Row
           className="summary ps-5 pt-4"

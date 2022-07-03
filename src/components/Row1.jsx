@@ -11,7 +11,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 function Row1(id, index) {
   return (
-    <Draggable key={id} draggableId={id} index={index}>
+    <Draggable draggableId="1" key="1" index={1}>
       {(provided) => (
         <Row
           className="general-info-section ps-5"
