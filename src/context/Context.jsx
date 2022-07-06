@@ -3,12 +3,11 @@ import { createContext } from "react";
 const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
-  const displayGeneralInfo = () => {
+  const displayGeneralInfo = (hideModal) => {
     const modalName = document.querySelector(".modalName");
     const modalPosition = document.querySelector(".modalPosition");
     const modalAddress = document.querySelectorAll(".modalAddress");
     let textAddress = document.querySelector(".textAddress");
-
     const modalEmail = document.querySelector(".modalEmail");
     const modalPhone = document.querySelector(".modalPhone");
     const modalWebsite = document.querySelector(".modalWebsite");
@@ -79,6 +78,8 @@ export const ContextProvider = ({ children }) => {
       }
     });
 
+    hideModal();
+
     // Display all the address info with a comma after each one
     if (!isAddressFieldsEmpty) {
       textAddress.textContent = "";
@@ -99,7 +100,7 @@ export const ContextProvider = ({ children }) => {
     });
   }
 
-  const displaySummary = () => {
+  const displaySummary = (hideModal) => {
     const textSummary = document.querySelector(".textSummary");
     const modalSummary = document.querySelector(".modalSummary");
 
@@ -108,6 +109,7 @@ export const ContextProvider = ({ children }) => {
     } else {
       textSummary.textContent = modalSummary.value;
     }
+    hideModal();
   };
 
   return (

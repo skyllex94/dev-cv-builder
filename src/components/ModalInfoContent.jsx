@@ -58,6 +58,20 @@ function ModalInfoContent(props) {
     setLinkedin(event.target.value);
   };
 
+  function cancelGeneralInfo(hideModal) {
+    setName("");
+    setPosition("");
+    setAddressCity("");
+    setAddressState("");
+    setAddressZIP("");
+    setEmail("");
+    setPhone("");
+    setWebsite("");
+    setGithub("");
+    setLinkedin("");
+    hideModal();
+  }
+
   return (
     <Modal
       {...props}
@@ -202,8 +216,8 @@ function ModalInfoContent(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={displayGeneralInfo}>Submit</Button>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={() => displayGeneralInfo(props.onHide)}>Submit</Button>
+        <Button onClick={() => cancelGeneralInfo(props.onHide)}>Close</Button>
       </Modal.Footer>
     </Modal>
   );

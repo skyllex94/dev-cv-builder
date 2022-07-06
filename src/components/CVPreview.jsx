@@ -46,7 +46,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
           <div ref={ref}>
             <Row {...provided.droppableProps} ref={provided.innerRef}>
               {onDrop.map((Component, id, index) => (
-                <Component key={id} id="1" index={1} />
+                <Component key={id} />
               ))}
 
               {provided.placeholder}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -6,16 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 
-import Context from "../context/Context";
-
-function ModalSummary(props) {
-  const { displaySummary } = useContext(Context);
-  const [message, setMessage] = useState("");
-
-  const handleChange = (event) => {
-    setMessage(event.target.value);
-  };
-
+function ModalWork(props) {
   return (
     <Modal
       {...props}
@@ -37,8 +28,6 @@ function ModalSummary(props) {
                     as="textarea"
                     className="modalSummary"
                     name="message"
-                    value={message}
-                    onChange={handleChange}
                     rows={3}
                   />
                 </Form.Group>
@@ -48,11 +37,11 @@ function ModalSummary(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => displaySummary(props.onHide)}>Submit</Button>
+        <Button>Submit</Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-export default ModalSummary;
+export default ModalWork;
