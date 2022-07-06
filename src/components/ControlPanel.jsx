@@ -3,15 +3,16 @@ import Card from "react-bootstrap/esm/Card";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/esm/Button";
 
-import React, { useRef } from "react";
-import { useReactToPrint } from "react-to-print";
-import CVPreview from "./CVPreview";
+import ModalInfoContent from "./ModalInfoContent";
 
-function ControlPanel() {
-  const componentRef = useRef();
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
+import React, { useState } from "react";
+import ModalSummary from "./ModalSummary";
+import ModalWork from "./ModalWork";
+
+function ControlPanel({ handlePrint }) {
+  const [modalGenInfo, setModalGenInfo] = useState(false);
+  const [modalSummary, setModalSummary] = useState(false);
+  const [modalWork, setModalWork] = useState(false);
 
   return (
     <div className="control-panel">
@@ -21,42 +22,45 @@ function ControlPanel() {
             Sections
           </Accordion.Header>
           <Accordion.Body>
-            <Card className="mb-2">
-              <p className=" pt-3">Summary</p>
-            </Card>
-            <Card className="mb-2">
-              <p className=" pt-3">Experience</p>
-            </Card>
-            <Card className="mb-2">
-              <p className=" pt-3">Skills</p>
-            </Card>
+            <div className="d-grid gap-2">
+              <Button
+                variant="light py-3 mt-1"
+                onClick={() => setModalGenInfo(true)}
+              >
+                General Information
+              </Button>
+              <Button
+                variant="light py-3 mt-1"
+                onClick={() => setModalSummary(true)}
+              >
+                Summary
+              </Button>
+              <Button
+                variant="light py-3 mt-1"
+                onClick={() => setModalWork(true)}
+              >
+                Work Experience
+              </Button>
+            </div>
+
+            <ModalInfoContent
+              show={modalGenInfo}
+              onHide={() => setModalGenInfo(false)}
+            />
+            <ModalSummary
+              show={modalSummary}
+              onHide={() => setModalSummary(false)}
+            />
+            <ModalWork show={modalWork} onHide={() => setModalWork(false)} />
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-      <Card className="mb-2">
-        {/*<CVPreview ref={componentRef} /> 
-        <button onClick={handlePrint}>Print this out!</button>*/}
-        <p className="lead pt-3">Download PDF</p>
-      </Card>
 
-      <Card className="mb-2">
-        <p className="lead pt-3 text-start mx-3 mt-2">
-          Sections{" "}
-          <Button variant="outline-dark" className="float-end mx-2">
-            X
-          </Button>
-        </p>
-
-        <Card className="m-2">
-          <p className="pt-3">About Me</p>
-        </Card>
-        <Card className="m-2">
-          <p className="pt-3">Work Experience</p>
-        </Card>
-        <Card className="m-2">
-          <p className="pt-3">Skills</p>
-        </Card>
-      </Card>
+      <div className="d-grid gap-2">
+        <Button variant="outline-dark mt-2" onClick={handlePrint}>
+          Download PDF
+        </Button>
+      </div>
     </div>
   );
 }
