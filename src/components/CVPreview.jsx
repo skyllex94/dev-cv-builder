@@ -9,7 +9,7 @@ import { FiPhone } from "react-icons/fi";
 import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import Row1 from "./Row1";
+import DisplayGenInfo from "./DisplayGenInfo";
 import Row2 from "./Row2";
 import DisplayWork from "./DisplayWork";
 
@@ -26,7 +26,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
       index: 2,
     },
   ];
-  const Components = [Row1, Row2, DisplayWork];
+  const Components = [DisplayGenInfo, Row2, DisplayWork];
 
   const [onDrop, setOnDrop] = useState(Components);
 

@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "antd/dist/antd.css";
 
 import Landing from "./components/Landing";
 import Builder from "./components/Builder";

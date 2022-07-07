@@ -9,7 +9,7 @@ import { FiPhone } from "react-icons/fi";
 import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { Draggable } from "react-beautiful-dnd";
 
-function Row1(id, index) {
+function DisplayGenInfo(id, index) {
   return (
     <Draggable draggableId="1" key="1" index={1}>
       {(provided) => (
@@ -80,4 +80,4 @@ function Row1(id, index) {
   );
 }
 
-export default Row1;
+export default DisplayGenInfo;

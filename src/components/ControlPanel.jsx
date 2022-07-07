@@ -1,7 +1,11 @@
 import "../index.css";
-import Card from "react-bootstrap/esm/Card";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/esm/Button";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
+import Card from "react-bootstrap/esm/Card";
+import { Switch } from "antd";
 
 import ModalInfoContent from "./ModalInfoContent";
 
@@ -14,6 +18,24 @@ function ControlPanel({ handlePrint }) {
   const [modalSummary, setModalSummary] = useState(false);
   const [modalWork, setModalWork] = useState(false);
 
+  const [showGenInfo, setShowGenInfo] = useState(true);
+
+  const toggleModal = (showState) => {
+    const genInfo = document.querySelector(".general-info-section");
+    if (genInfo === null) {
+      return;
+    }
+    if (showState) {
+      genInfo.classList.remove("d-none");
+    } else {
+      genInfo.classList.add("d-none");
+    }
+  };
+
+  const ToggleSwitch = () => {
+    showGenInfo ? setShowGenInfo(false) : setShowGenInfo(true);
+  };
+
   return (
     <div className="control-panel">
       <Accordion className="mb-2 bg-light" defaultActiveKey={["0"]} alwaysOpen>
@@ -23,12 +45,21 @@ function ControlPanel({ handlePrint }) {
           </Accordion.Header>
           <Accordion.Body>
             <div className="d-grid gap-2">
-              <Button
-                variant="light py-3 mt-1"
-                onClick={() => setModalGenInfo(true)}
-              >
-                General Information
-              </Button>
+              <Row>
+                <Col md={12}>
+                  <Button
+                    variant="py-3 mt-1"
+                    onClick={() => setModalGenInfo(true)}
+                  >
+                    General Information
+                  </Button>
+                  <Switch defaultChecked onClick={ToggleSwitch} />
+                  {showGenInfo
+                    ? toggleModal(showGenInfo)
+                    : toggleModal(showGenInfo)}
+                </Col>
+              </Row>
+
               <Button
                 variant="light py-3 mt-1"
                 onClick={() => setModalSummary(true)}
