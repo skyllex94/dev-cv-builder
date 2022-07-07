@@ -112,11 +112,19 @@ export const ContextProvider = ({ children }) => {
     hideModal();
   };
 
+  const displayWork = (hideModal) => {
+    const textCompany = document.querySelector(".textCompany");
+    const workCompany = document.querySelector(".workCompany");
+    textCompany.textContent = workCompany.value;
+    hideModal();
+  };
+
   return (
     <Context.Provider
       value={{
         displayGeneralInfo,
         displaySummary,
+        displayWork,
       }}
     >
       {children}

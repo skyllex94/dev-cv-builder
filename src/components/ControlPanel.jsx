@@ -16,7 +16,7 @@ function ControlPanel({ handlePrint }) {
 
   return (
     <div className="control-panel">
-      <Accordion className="mb-2 bg-light">
+      <Accordion className="mb-2 bg-light" defaultActiveKey={["0"]} alwaysOpen>
         <Accordion.Item eventKey="0">
           <Accordion.Header className="accordion_header">
             Sections

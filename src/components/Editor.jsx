@@ -1,11 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import Card from "react-bootstrap/esm/Card";
-import Button from "react-bootstrap/esm/Button";
 
 import CVPreview from "./CVPreview";
-import { useContext } from "react";
-import Context from "../context/Context";
-import { useReactToPrint } from "react-to-print";
 
 export const Editor = React.forwardRef((props, ref) => {
   return (

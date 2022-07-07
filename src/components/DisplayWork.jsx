@@ -5,9 +5,9 @@ import Col from "react-bootstrap/esm/Col";
 
 import { Draggable } from "react-beautiful-dnd";
 
-function Row2() {
+function DisplayWork() {
   return (
-    <Draggable draggableId="2" key="2" index={2}>
+    <Draggable draggableId="3" key="3" index={3}>
       {(provided) => (
         <Row
           className="summary ps-5 pt-4"
@@ -15,8 +15,8 @@ function Row2() {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <Col md={12} className="summaryField d-flex">
-            <Form.Label className="textSummary"></Form.Label>
+          <Col md={12} className="workField d-flex">
+            <Form.Label className="textCompany"></Form.Label>
           </Col>
           {provided.placeholder}
         </Row>
@@ -25,4 +25,4 @@ function Row2() {
   );
 }
 
-export default Row2;
+export default DisplayWork;

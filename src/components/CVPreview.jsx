@@ -11,6 +11,7 @@ import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Row1 from "./Row1";
 import Row2 from "./Row2";
+import DisplayWork from "./DisplayWork";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   const sections = [
@@ -25,7 +26,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
       index: 2,
     },
   ];
-  const Components = [Row1, Row2];
+  const Components = [Row1, Row2, DisplayWork];
 
   const [onDrop, setOnDrop] = useState(Components);
 
@@ -45,7 +46,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
         {(provided) => (
           <div ref={ref}>
             <Row {...provided.droppableProps} ref={provided.innerRef}>
-              {onDrop.map((Component, id, index) => (
+              {onDrop.map((Component, id) => (
                 <Component key={id} />
               ))}
 
