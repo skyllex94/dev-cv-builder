@@ -70,18 +70,8 @@ export const ContextProvider = ({ children }) => {
       document.querySelector(".linkedin").classList.add("d-none");
     }
 
-    // Check if values of the address fields is empty or not
-    let isAddressFieldsEmpty = true;
-    modalAddress.forEach((current) => {
-      if (current.value !== "") {
-        isAddressFieldsEmpty = false;
-      }
-    });
-
-    hideModal();
-
     // Display all the address info with a comma after each one
-    if (!isAddressFieldsEmpty) {
+    if (!populateFilledFields(modalAddress)) {
       textAddress.textContent = "";
       document.querySelector(".address").classList.remove("d-none");
       displayAddress(modalAddress, textAddress);
@@ -89,14 +79,32 @@ export const ContextProvider = ({ children }) => {
       textAddress.textContent = "";
       document.querySelector(".address").classList.add("d-none");
     }
+    hideModal();
   };
 
-  // display each piece of data
+  // Check if values of (address) fields is empty or not
+  function populateFilledFields(ArrOfValues) {
+    let isEmpty = true;
+    ArrOfValues.forEach((current) => {
+      if (current.value === "") {
+        console.log("yes");
+        console.log(current);
+      } else {
+        console.log("no");
+        isEmpty = false;
+      }
+    });
+    return isEmpty;
+  }
+
+  // Display each piece of data fromt the given array
   function displayAddress(readFrom, writeTo) {
     readFrom.forEach((current, key, arr) => {
       if (Object.is(arr.length - 1, key)) {
         writeTo.textContent += current.value;
-      } else writeTo.textContent += current.value + ", ";
+      } else {
+        writeTo.textContent += current.value + ", ";
+      }
     });
   }
 
@@ -115,7 +123,51 @@ export const ContextProvider = ({ children }) => {
   const displayWork = (hideModal) => {
     const textCompany = document.querySelector(".textCompany");
     const workCompany = document.querySelector(".workCompany");
+
+    const textWorkPosition = document.querySelector(".textWorkPosition");
+    const workPosition = document.querySelector(".workPosition");
+
+    const textWorkStartDate = document.querySelector(".textWorkStartDate");
+    const workStartDate = document.querySelector(".workStartDate");
+    const textWorkEndDate = document.querySelector(".textWorkEndDate");
+    const workEndDate = document.querySelector(".workEndDate");
+
+    const workLocation = document.querySelectorAll(".workLocation");
+    const textWorkLocation = document.querySelector(".textWorkLocation");
+
+    const resp = document.querySelector(".workResponsibilities");
+    const textResp = document.querySelector(".textResponsibilities");
+
+    // Format date string to display only written month and numeric year
+    if (workStartDate.value === "" && workEndDate.value === "") {
+      document.querySelector(".work-period").classList.add("d-none");
+    } else {
+      document.querySelector(".work-period").classList.remove("d-none");
+      const formatStart = workStartDate.value.replaceAll("-", " ");
+      const formatEnd = workEndDate.value.replaceAll("-", " ");
+      let start = new Date(formatStart);
+      let end = new Date(formatEnd);
+      let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
+      let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
+      let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
+      let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
+      textWorkStartDate.textContent = `${mo}, ${ye}`;
+      textWorkEndDate.textContent = `${mo2}, ${ye2}`;
+    }
+
+    // Populate the Work Address with commas after each of them
+    textWorkLocation.textContent = "";
+    if (!populateFilledFields(workLocation)) {
+      document.querySelector(".work-location-group").classList.remove("d-none");
+      displayAddress(workLocation, textWorkLocation);
+    } else {
+      document.querySelector(".work-location-group").classList.add("d-none");
+    }
+
     textCompany.textContent = workCompany.value;
+    textWorkPosition.textContent = workPosition.value;
+    textResp.textContent = resp.value;
+
     hideModal();
   };
 

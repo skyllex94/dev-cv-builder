@@ -5,7 +5,7 @@ import Col from "react-bootstrap/esm/Col";
 
 import { Draggable } from "react-beautiful-dnd";
 
-function Row2() {
+function DisplaySummary() {
   return (
     <Draggable draggableId="2" key="2" index={2}>
       {(provided) => (
@@ -25,4 +25,4 @@ function Row2() {
   );
 }
 
-export default Row2;
+export default DisplaySummary;

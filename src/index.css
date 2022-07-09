@@ -36,6 +36,7 @@ code {
 
 .cv-preview {
   min-height: 50vh;
+  /* width: 55vw; */
 }
 
 .general-info-section {
@@ -60,6 +61,40 @@ font-family: 'Inter', sans-serif;
 
 .textSummary {
   font-weight: 300;
+  font-size: 14px;
+  color: #696969;
+  text-align: left;
+}
+
+.section-titles {
+  font-weight: 800;
+  font-size: 15px;
+  color: #3c3c3c;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.textCompany  {
+  font-weight: 600;
   font-size: 16px;
-  color: #000000;
+  color: #1b1b1b;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.work-position, .work-location, .work-location-group, .work-responsibilities {
+  font-weight: 400;
+  font-size: 14px;
+  color: #696969;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.work-responsibilities {
+  font-weight: 400;
+  font-size: 14px;
+  font-style: italic;
+  color: #696969;
+  text-align: left;
+  text-transform: capitalize;
 }

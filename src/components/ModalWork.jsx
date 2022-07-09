@@ -12,8 +12,8 @@ import Context from "../context/Context";
 function ModalWork(props) {
   const { displayWork } = useContext(Context);
 
-  const [position1, setPosition1] = useState("");
-  const [company1, setCompany1] = useState("");
+  const [company1, setCompany1] = useState("DXC Technology Inn");
+  const [position1, setPosition1] = useState("Front-End Developer");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [workCity, setWorkCity] = useState("");
@@ -112,7 +112,7 @@ function ModalWork(props) {
                       <FloatingLabel label="City">
                         <Form.Control
                           type="text"
-                          className="workCity mb-2"
+                          className="workLocation mb-2"
                           placeholder="Boston"
                           value={workCity}
                           onChange={persistWorkCity}
@@ -123,7 +123,7 @@ function ModalWork(props) {
                       <FloatingLabel label="State">
                         <Form.Control
                           type="text"
-                          className="workState mb-2"
+                          className="workLocation mb-2"
                           placeholder="MA"
                           value={workState}
                           onChange={persistWorkState}
@@ -134,7 +134,7 @@ function ModalWork(props) {
                       <FloatingLabel label="Country">
                         <Form.Control
                           type="text"
-                          className="workCountry mb-2"
+                          className="workLocation mb-2"
                           placeholder="USA"
                           value={workCountry}
                           onChange={persistWorkCountry}
@@ -146,7 +146,7 @@ function ModalWork(props) {
                     <Form.Control
                       as="textarea"
                       placeholder="Leave a comment here"
-                      className="WorkResponsibilities"
+                      className="workResponsibilities"
                       value={responsibilities}
                       onChange={persistResponsibilities}
                       style={{ height: "100px" }}

@@ -1,7 +1,6 @@
 import "../index.css";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/esm/Button";
-import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Card from "react-bootstrap/esm/Card";
@@ -19,6 +18,8 @@ function ControlPanel({ handlePrint }) {
   const [modalWork, setModalWork] = useState(false);
 
   const [showGenInfo, setShowGenInfo] = useState(true);
+  const [showSummary, setShowSummary] = useState(true);
+  const [showWork, setShowWork] = useState(true);
 
   const toggleModal = (showState) => {
     const genInfo = document.querySelector(".general-info-section");
@@ -34,6 +35,38 @@ function ControlPanel({ handlePrint }) {
 
   const ToggleSwitch = () => {
     showGenInfo ? setShowGenInfo(false) : setShowGenInfo(true);
+  };
+
+  const toggleModalSummary = (showState) => {
+    const genInfo = document.querySelector(".summaryField");
+    if (genInfo === null) {
+      return;
+    }
+    if (showState) {
+      genInfo.classList.remove("d-none");
+    } else {
+      genInfo.classList.add("d-none");
+    }
+  };
+
+  const ToggleSwitchSummary = () => {
+    showSummary ? setShowSummary(false) : setShowSummary(true);
+  };
+
+  const toggleModalWork = (showState) => {
+    const work = document.querySelector(".workField");
+    if (work === null) {
+      return;
+    }
+    if (showState) {
+      work.classList.remove("d-none");
+    } else {
+      work.classList.add("d-none");
+    }
+  };
+
+  const ToggleSwitchWork = () => {
+    showWork ? setShowWork(false) : setShowWork(true);
   };
 
   return (
@@ -59,19 +92,35 @@ function ControlPanel({ handlePrint }) {
                     : toggleModal(showGenInfo)}
                 </Col>
               </Row>
+              <Row>
+                <Col md={12}>
+                  <Button
+                    variant="py-3 mt-1"
+                    onClick={() => setModalSummary(true)}
+                  >
+                    Summary
+                  </Button>
+                  <Switch defaultChecked onClick={ToggleSwitchSummary} />
+                  {showSummary
+                    ? toggleModalSummary(showSummary)
+                    : toggleModalSummary(showSummary)}
+                </Col>
+              </Row>
 
-              <Button
-                variant="light py-3 mt-1"
-                onClick={() => setModalSummary(true)}
-              >
-                Summary
-              </Button>
-              <Button
-                variant="light py-3 mt-1"
-                onClick={() => setModalWork(true)}
-              >
-                Work Experience
-              </Button>
+              <Row>
+                <Col md={12}>
+                  <Button
+                    variant="py-3 mt-1"
+                    onClick={() => setModalWork(true)}
+                  >
+                    Work Experience
+                  </Button>
+                  <Switch defaultChecked onClick={ToggleSwitchWork} />
+                  {showWork
+                    ? toggleModalWork(showWork)
+                    : toggleModalWork(showWork)}
+                </Col>
+              </Row>
             </div>
 
             <ModalInfoContent

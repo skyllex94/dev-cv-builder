@@ -10,7 +10,7 @@ import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import DisplayGenInfo from "./DisplayGenInfo";
-import Row2 from "./Row2";
+import DisplaySummary from "./DisplaySummary";
 import DisplayWork from "./DisplayWork";
 
 export const CVPreview = React.forwardRef((props, ref) => {
@@ -26,7 +26,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
       index: 2,
     },
   ];
-  const Components = [DisplayGenInfo, Row2, DisplayWork];
+  const Components = [DisplayGenInfo, DisplaySummary, DisplayWork];
 
   const [onDrop, setOnDrop] = useState(Components);
 

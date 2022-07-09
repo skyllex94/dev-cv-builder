@@ -12,18 +12,20 @@ import { AiFillLinkedin } from "react-icons/ai";
 function ModalInfoContent(props) {
   const { displayGeneralInfo } = useContext(Context);
 
-  const [name, setName] = useState("");
-  const [position, setPosition] = useState("");
+  const [name, setName] = useState("Kamen Kanchev");
+  const [position, setPosition] = useState("Front-end Developer");
 
-  const [addressCity, setAddressCity] = useState("");
-  const [addressState, setAddressState] = useState("");
-  const [addressZIP, setAddressZIP] = useState("");
+  const [addressCity, setAddressCity] = useState("Boston");
+  const [addressState, setAddressState] = useState("MA");
+  const [addressZIP, setAddressZIP] = useState("02130");
 
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [website, setWebsite] = useState("");
-  const [github, setGithub] = useState("");
-  const [linkedin, setLinkedin] = useState("");
+  const [email, setEmail] = useState("kkanchev94@gmail.com");
+  const [phone, setPhone] = useState("619-817-5266");
+  const [website, setWebsite] = useState("https://kkanchev.netlify.app");
+  const [github, setGithub] = useState("https://github.com/skyllex94");
+  const [linkedin, setLinkedin] = useState(
+    "https://www.linkedin.com/in/kamen-kanchev-73a282175"
+  );
 
   const persistName = (event) => {
     setName(event.target.value);
