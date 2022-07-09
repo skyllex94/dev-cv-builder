@@ -15,7 +15,7 @@ function DisplaySummary() {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <Col md={12} className="summaryField d-flex">
+          <Col md={12} className="summaryField d-flex d-none">
             <Form.Label className="textSummary"></Form.Label>
           </Col>
           {provided.placeholder}

@@ -34,7 +34,7 @@ function ModalSummary(props) {
           <Row>
             <Col md={12}>
               <Form>
-                <Form.Group className="mb-2">
+                <Form.Group className="">
                   <Form.Label>Summary</Form.Label>
                   <Form.Control
                     as="textarea"

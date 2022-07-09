@@ -55,6 +55,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
           </div>
         )}
       </Droppable>
+      <div className="mb-5" />
     </DragDropContext>
   );
 });

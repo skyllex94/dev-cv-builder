@@ -1,4 +1,5 @@
-import { createContext, useRef } from "react";
+import { createContext } from "react";
+import parse from "html-react-parser";
 
 const Context = createContext();
 
@@ -87,10 +88,8 @@ export const ContextProvider = ({ children }) => {
     let isEmpty = true;
     ArrOfValues.forEach((current) => {
       if (current.value === "") {
-        console.log("yes");
         console.log(current);
       } else {
-        console.log("no");
         isEmpty = false;
       }
     });
@@ -120,7 +119,7 @@ export const ContextProvider = ({ children }) => {
     hideModal();
   };
 
-  const displayWork = (hideModal) => {
+  const displayWork = (hideModal, responsibilities) => {
     const textCompany = document.querySelector(".textCompany");
     const workCompany = document.querySelector(".workCompany");
 
@@ -164,11 +163,11 @@ export const ContextProvider = ({ children }) => {
       document.querySelector(".work-location-group").classList.add("d-none");
     }
 
+    hideModal();
     textCompany.textContent = workCompany.value;
     textWorkPosition.textContent = workPosition.value;
-    textResp.textContent = resp.value;
-
-    hideModal();
+    console.log(parse(responsibilities));
+    textResp.textContent = parse(responsibilities);
   };
 
   return (

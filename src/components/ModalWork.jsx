@@ -8,18 +8,23 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Context from "../context/Context";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import parse from "html-react-parser";
 
 function ModalWork(props) {
   const { displayWork } = useContext(Context);
 
   const [company1, setCompany1] = useState("DXC Technology Inn");
   const [position1, setPosition1] = useState("Front-End Developer");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [workCity, setWorkCity] = useState("");
-  const [workState, setWorkState] = useState("");
-  const [workCountry, setWorkCountry] = useState("");
-  const [responsibilities, setResponsibilities] = useState("");
+  const [startDate, setStartDate] = useState("2019-05-29");
+  const [endDate, setEndDate] = useState("2019-09-29");
+  const [workCity, setWorkCity] = useState("Boston");
+  const [workState, setWorkState] = useState("MA");
+  const [workCountry, setWorkCountry] = useState("United States");
+  const [responsibilities, setResponsibilities] = useState(
+    "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.This is my statement one. &#13; &#10; This is my statement2"
+  );
 
   function persistPosition1(event) {
     setPosition1(event.target.value);
@@ -142,16 +147,16 @@ function ModalWork(props) {
                       </FloatingLabel>
                     </Col>
                   </Row>
-                  <FloatingLabel label="Accomplishments and responsibilities">
-                    <Form.Control
-                      as="textarea"
-                      placeholder="Leave a comment here"
-                      className="workResponsibilities"
-                      value={responsibilities}
-                      onChange={persistResponsibilities}
-                      style={{ height: "100px" }}
-                    />
-                  </FloatingLabel>
+
+                  <CKEditor
+                    editor={ClassicEditor}
+                    data={responsibilities}
+                    onChange={(event, editor) => {
+                      const data = editor.getData();
+                      setResponsibilities(data);
+                    }}
+                  />
+                  <Parser resp={responsibilities} />
                 </Form.Group>
               </Form>
             </Col>
@@ -159,11 +164,17 @@ function ModalWork(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => displayWork(props.onHide)}>Submit</Button>
+        <Button onClick={() => displayWork(props.onHide, responsibilities)}>
+          Submit
+        </Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
 }
+
+const Parser = ({ resp }) => {
+  return parse(resp);
+};
 
 export default ModalWork;
