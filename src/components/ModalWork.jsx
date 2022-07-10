@@ -11,6 +11,7 @@ import Context from "../context/Context";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import parse from "html-react-parser";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 function ModalWork(props) {
   const { displayWork } = useContext(Context);
@@ -22,9 +23,12 @@ function ModalWork(props) {
   const [workCity, setWorkCity] = useState("Boston");
   const [workState, setWorkState] = useState("MA");
   const [workCountry, setWorkCountry] = useState("United States");
-  const [responsibilities, setResponsibilities] = useState(
-    "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.This is my statement one. &#13; &#10; This is my statement2"
-  );
+  const [responsibilities, setResponsibilities] = useState([
+    {
+      message:
+        "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
+    },
+  ]);
 
   function persistPosition1(event) {
     setPosition1(event.target.value);
@@ -50,6 +54,27 @@ function ModalWork(props) {
   function persistResponsibilities(event) {
     setResponsibilities(event.target.value);
   }
+
+  const handleResp = (index, event) => {
+    const values = [...responsibilities];
+    values[index][event.target.name] = event.target.value;
+    setResponsibilities(values);
+  };
+
+  const handleAddField = () => {
+    setResponsibilities([
+      ...responsibilities,
+      {
+        message: "",
+      },
+    ]);
+  };
+
+  const handleRemoveField = (index) => {
+    const values = [...responsibilities];
+    values.splice(index, 1);
+    setResponsibilities(values);
+  };
 
   return (
     <Modal
@@ -146,9 +171,42 @@ function ModalWork(props) {
                         />
                       </FloatingLabel>
                     </Col>
-                  </Row>
 
-                  <CKEditor
+                    <Row>
+                      <Col md={11}>
+                        {responsibilities.map((resp, index) => {
+                          return (
+                            <div key={index}>
+                              <FloatingLabel label="Accomplishments and Responsibilities">
+                                <Form.Control
+                                  type="text"
+                                  name="message"
+                                  placeholder="Resp"
+                                  value={resp.message}
+                                  onChange={(event) => handleResp(index, event)}
+                                />
+                              </FloatingLabel>
+                              <Col md={1}>
+                                <Button
+                                  variant="white"
+                                  onClick={() => handleAddField()}
+                                >
+                                  <AiOutlinePlus />
+                                </Button>
+                                <Button
+                                  variant="white"
+                                  onClick={() => handleRemoveField(index)}
+                                >
+                                  <AiOutlineMinus />
+                                </Button>
+                              </Col>
+                            </div>
+                          );
+                        })}
+                      </Col>
+                    </Row>
+                  </Row>
+                  {/*<CKEditor
                     editor={ClassicEditor}
                     data={responsibilities}
                     onChange={(event, editor) => {
@@ -156,7 +214,7 @@ function ModalWork(props) {
                       setResponsibilities(data);
                     }}
                   />
-                  <Parser resp={responsibilities} />
+                  <Parser resp={responsibilities} />*/}
                 </Form.Group>
               </Form>
             </Col>
@@ -173,8 +231,8 @@ function ModalWork(props) {
   );
 }
 
-const Parser = ({ resp }) => {
+function Parser({ resp }) {
   return parse(resp);
-};
+}
 
 export default ModalWork;

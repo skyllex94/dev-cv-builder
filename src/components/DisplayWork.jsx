@@ -48,9 +48,7 @@ function DisplayWork() {
               <div className="textWorkLocation me-2" />
             </Col>
             <Col md={12} className="work-responsibilities d-flex">
-              <div className="textResponsibilities">
-                <Parser />
-              </div>
+              <div className="textResponsibilities"></div>
             </Col>
           </Row>
 
@@ -60,14 +58,5 @@ function DisplayWork() {
     </Draggable>
   );
 }
-
-const Parser = () => {
-  return (
-    <ul>
-      <p>lksddsfsdghf</p>
-      <p>lksdhsdfgsdfgf32</p>
-    </ul>
-  );
-};
 
 export default DisplayWork;

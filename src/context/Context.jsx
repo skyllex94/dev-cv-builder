@@ -167,8 +167,17 @@ export const ContextProvider = ({ children }) => {
     textCompany.textContent = workCompany.value;
     textWorkPosition.textContent = workPosition.value;
     console.log(parse(responsibilities));
-    textResp.textContent = parse(responsibilities);
+    displayResp(responsibilities);
+    textResp.textContent = responsibilities;
+
+    // responsibilities.map((curr, index) => {
+    //   return (textResp.textContent = <li key={index}>{curr}</li>);
+    // });
   };
+
+  function displayResp(input) {
+    return input;
+  }
 
   return (
     <Context.Provider
