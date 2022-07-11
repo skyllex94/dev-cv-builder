@@ -4,6 +4,7 @@ import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
 
 import { Draggable } from "react-beautiful-dnd";
+import Context from "../context/Context";
 
 const HorizontalLine = () => (
   <hr
@@ -16,6 +17,7 @@ const HorizontalLine = () => (
 );
 
 function DisplayWork() {
+  const RespContext = React.createContext();
   return (
     <Draggable draggableId="3" key="3" index={3}>
       {(provided) => (
@@ -48,7 +50,11 @@ function DisplayWork() {
               <div className="textWorkLocation me-2" />
             </Col>
             <Col md={12} className="work-responsibilities d-flex">
-              <div className="textResponsibilities"></div>
+              <div className="textResponsibilities">
+                <p className="text0 mb-0 d-none"></p>
+                <p className="text1 mb-0 d-none"></p>
+                <p className="text2 mb-0 d-none"></p>
+              </div>
             </Col>
           </Row>
 

@@ -166,18 +166,14 @@ export const ContextProvider = ({ children }) => {
     hideModal();
     textCompany.textContent = workCompany.value;
     textWorkPosition.textContent = workPosition.value;
-    console.log(parse(responsibilities));
-    displayResp(responsibilities);
-    textResp.textContent = responsibilities;
-
-    // responsibilities.map((curr, index) => {
-    //   return (textResp.textContent = <li key={index}>{curr}</li>);
-    // });
+    responsibilities.map((response, index) => {
+      const paragraph = document.querySelector(`.text` + index);
+      if (response.message !== "") {
+        paragraph.classList.remove("d-none");
+        paragraph.textContent = response.message;
+      }
+    });
   };
-
-  function displayResp(input) {
-    return input;
-  }
 
   return (
     <Context.Provider

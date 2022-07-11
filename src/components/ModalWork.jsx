@@ -8,9 +8,6 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Context from "../context/Context";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import parse from "html-react-parser";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 function ModalWork(props) {
@@ -51,9 +48,6 @@ function ModalWork(props) {
   function persistWorkCountry(event) {
     setWorkCountry(event.target.value);
   }
-  function persistResponsibilities(event) {
-    setResponsibilities(event.target.value);
-  }
 
   const handleResp = (index, event) => {
     const values = [...responsibilities];
@@ -62,18 +56,26 @@ function ModalWork(props) {
   };
 
   const handleAddField = () => {
-    setResponsibilities([
-      ...responsibilities,
-      {
-        message: "",
-      },
-    ]);
+    if (responsibilities.length < 3) {
+      setResponsibilities([
+        ...responsibilities,
+        {
+          message: "",
+        },
+      ]);
+    }
+    return;
   };
 
   const handleRemoveField = (index) => {
-    const values = [...responsibilities];
-    values.splice(index, 1);
-    setResponsibilities(values);
+    if (responsibilities.length > 1) {
+      const values = [...responsibilities];
+      const paragraph = document.querySelector(`.text` + index);
+      paragraph.classList.add("d-none");
+      values.splice(index, 1);
+      setResponsibilities(values);
+    }
+    return;
   };
 
   return (
@@ -171,12 +173,11 @@ function ModalWork(props) {
                         />
                       </FloatingLabel>
                     </Col>
-
-                    <Row>
-                      <Col md={11}>
-                        {responsibilities.map((resp, index) => {
-                          return (
-                            <div key={index}>
+                    {responsibilities.map((resp, index) => {
+                      return (
+                        <div key={index}>
+                          <Row className="mb-2">
+                            <Col md={10}>
                               <FloatingLabel label="Accomplishments and Responsibilities">
                                 <Form.Control
                                   type="text"
@@ -186,25 +187,25 @@ function ModalWork(props) {
                                   onChange={(event) => handleResp(index, event)}
                                 />
                               </FloatingLabel>
-                              <Col md={1}>
-                                <Button
-                                  variant="white"
-                                  onClick={() => handleAddField()}
-                                >
-                                  <AiOutlinePlus />
-                                </Button>
-                                <Button
-                                  variant="white"
-                                  onClick={() => handleRemoveField(index)}
-                                >
-                                  <AiOutlineMinus />
-                                </Button>
-                              </Col>
-                            </div>
-                          );
-                        })}
-                      </Col>
-                    </Row>
+                            </Col>
+                            <Col md={2} className="mt-2">
+                              <Button
+                                variant="white"
+                                onClick={() => handleAddField()}
+                              >
+                                <AiOutlinePlus />
+                              </Button>
+                              <Button
+                                variant="white"
+                                onClick={() => handleRemoveField(index)}
+                              >
+                                <AiOutlineMinus />
+                              </Button>
+                            </Col>
+                          </Row>
+                        </div>
+                      );
+                    })}
                   </Row>
                   {/*<CKEditor
                     editor={ClassicEditor}
@@ -229,10 +230,6 @@ function ModalWork(props) {
       </Modal.Footer>
     </Modal>
   );
-}
-
-function Parser({ resp }) {
-  return parse(resp);
 }
 
 export default ModalWork;
