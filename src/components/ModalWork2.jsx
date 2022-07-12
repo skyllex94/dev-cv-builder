@@ -13,10 +13,10 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 function ModalWork2(props) {
   const { displayWork2 } = useContext(Context);
 
-  const [company2, setCompany2] = useState("DXC Technology");
+  const [company2, setCompany2] = useState("Microsoft LLC.");
   const [position1, setPosition1] = useState("Front-End Developer");
-  const [startDate, setStartDate] = useState("2019-05-29");
-  const [endDate, setEndDate] = useState("2019-09-29");
+  const [startDate, setStartDate] = useState("2020-01-29");
+  const [endDate, setEndDate] = useState("2020-04-29");
   const [workCity, setWorkCity] = useState("Boston");
   const [workState, setWorkState] = useState("MA");
   const [workCountry, setWorkCountry] = useState("United States");
@@ -68,9 +68,9 @@ function ModalWork2(props) {
   };
 
   const handleRemoveField = (index) => {
-    if (responsibilities.length > 1) {
+    if (responsibilities.length > 1 && responsibilities.length === index + 1) {
       const values = [...responsibilities];
-      const paragraph = document.querySelector(`.text` + index);
+      const paragraph = document.querySelector(`.text` + index + 2);
       paragraph.classList.add("d-none");
       values.splice(index, 1);
       setResponsibilities(values);

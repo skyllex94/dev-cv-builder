@@ -66,6 +66,12 @@ font-family: 'Inter', sans-serif;
   text-align: left;
 }
 
+.controlPanelWork {
+  font-weight: 400;
+  font-size: 16px;
+  color: black;
+}
+
 .section-titles {
   font-weight: 800;
   font-size: 15px;
@@ -74,7 +80,8 @@ font-family: 'Inter', sans-serif;
   text-transform: uppercase;
 }
 
-.textCompany  {
+/* ModalWork CSS */
+.textCompany, .textCompany2, .textCompany3  {
   font-weight: 600;
   font-size: 16px;
   color: #1b1b1b;
@@ -82,7 +89,7 @@ font-family: 'Inter', sans-serif;
   text-transform: capitalize;
 }
 
-.work-position, .work-location, .work-location-group {
+.work-position, .work-position2, .work-position3, .work-location, .work-location2, .work-location3, .work-location-group, .work-location-group2, .work-location-group3 {
   font-weight: 500;
   font-size: 14px;
   color: #696969;
@@ -90,7 +97,7 @@ font-family: 'Inter', sans-serif;
   text-transform: capitalize;
 }
 
-.work-responsibilities {
+.work-responsibilities, .work-responsibilities2, .work-responsibilities3 {
   font-weight: 400;
   font-size: 14px;
   font-style: italic;

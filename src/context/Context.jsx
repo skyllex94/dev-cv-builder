@@ -227,6 +227,61 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
+  const displayWork3 = (hideModal, responsibilities) => {
+    const textCompany = document.querySelector(".textCompany3");
+    const workCompany = document.querySelector(".workCompany3");
+
+    const textWorkPosition = document.querySelector(".textWorkPosition3");
+    const workPosition = document.querySelector(".workPosition3");
+
+    const textWorkStartDate = document.querySelector(".textWorkStartDate3");
+    const workStartDate = document.querySelector(".workStartDate3");
+    const textWorkEndDate = document.querySelector(".textWorkEndDate3");
+    const workEndDate = document.querySelector(".workEndDate3");
+
+    const workLocation = document.querySelectorAll(".workLocation3");
+    const textWorkLocation = document.querySelector(".textWorkLocation3");
+
+    // Format date string to display only written month and numeric year
+    if (workStartDate.value === "" && workEndDate.value === "") {
+      document.querySelector(".work-period3").classList.add("d-none");
+    } else {
+      document.querySelector(".work-period3").classList.remove("d-none");
+      const formatStart = workStartDate.value.replaceAll("-", " ");
+      const formatEnd = workEndDate.value.replaceAll("-", " ");
+      let start = new Date(formatStart);
+      let end = new Date(formatEnd);
+      let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
+      let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
+      let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
+      let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
+      textWorkStartDate.textContent = `${mo}, ${ye}`;
+      textWorkEndDate.textContent = `${mo2}, ${ye2}`;
+    }
+
+    // Populate the Work Address with commas after each of them
+    textWorkLocation.textContent = "";
+    if (!populateFilledFields(workLocation)) {
+      document
+        .querySelector(".work-location-group3")
+        .classList.remove("d-none");
+      displayAddress(workLocation, textWorkLocation);
+    } else {
+      document.querySelector(".work-location-group3").classList.add("d-none");
+    }
+
+    hideModal();
+    textCompany.textContent = workCompany.value;
+    textWorkPosition.textContent = workPosition.value;
+    responsibilities.map((response, index) => {
+      const paragraph = document.querySelector(`.text` + index + 3);
+      if (response.message !== "") {
+        paragraph.classList.remove("d-none");
+        paragraph.textContent = response.message;
+      }
+    });
+  };
+
   return (
     <Context.Provider
       value={{
@@ -234,6 +289,7 @@ export const ContextProvider = ({ children }) => {
         displaySummary,
         displayWork,
         displayWork2,
+        displayWork3,
       }}
     >
       {children}

@@ -13,18 +13,21 @@ import ModalInfoContent from "./ModalInfoContent";
 import ModalSummary from "./ModalSummary";
 import ModalWork from "./ModalWork";
 import ModalWork2 from "./ModalWork2";
+import ModalWork3 from "./ModalWork3";
 
 function ControlPanel({ handlePrint }) {
   const [modalGenInfo, setModalGenInfo] = useState(false);
   const [modalSummary, setModalSummary] = useState(false);
   const [modalWork0, setModalWork0] = useState(false);
   const [modalWork1, setModalWork1] = useState(false);
+  const [modalWork2, setModalWork2] = useState(false);
 
   const [showGenInfo, setShowGenInfo] = useState(true);
   const [showSummary, setShowSummary] = useState(true);
-  const [showWork0, setShowWork0] = useState(true);
+  const [showWork, setShowWork] = useState(true);
 
   const [workSections, setWorkSections] = useState([{ name: "Job 1" }]);
+  const allWorkModals = [setModalWork0, setModalWork1, setModalWork2];
 
   const toggleModal = (showState) => {
     const genInfo = document.querySelector(".general-info-section");
@@ -37,6 +40,8 @@ function ControlPanel({ handlePrint }) {
       genInfo.classList.add("d-none");
     }
   };
+
+  // TO-DO - Disable all fields when switch is off
 
   const ToggleSwitch = () => {
     showGenInfo ? setShowGenInfo(false) : setShowGenInfo(true);
@@ -71,23 +76,42 @@ function ControlPanel({ handlePrint }) {
   };
 
   const ToggleSwitchWork = () => {
-    showWork0 ? setShowWork0(false) : setShowWork0(true);
+    showWork ? setShowWork(false) : setShowWork(true);
   };
 
   const handleAddField = () => {
-    const values = [
-      ...workSections,
-      { name: `Job ` + (workSections.length + 1) },
-    ];
-    setWorkSections(values);
+    if (workSections.length < 3) {
+      const values = [
+        ...workSections,
+        { name: `Job ` + (workSections.length + 1) },
+      ];
+      console.log(workSections.length);
+      const nextSection = document.querySelector(
+        `.workField` + workSections.length
+      );
+      nextSection.classList.remove("d-none");
+      setWorkSections(values);
+    }
   };
 
   const handleRemoveField = (index) => {
-    if (workSections.length > 1) {
+    // Check if the item being removed is the last one and skip if there is only 1 item left
+    if (workSections.length > 1 && workSections.length === index + 1) {
       const values = [...workSections];
+      const section = document.querySelector(`.workField` + index);
+      section.classList.add("d-none");
       values.splice(index, 1);
       setWorkSections(values);
     }
+    return;
+  };
+
+  const showWorkModals = (index) => {
+    allWorkModals.map((modal, indexModal) => {
+      if (index === indexModal) {
+        modal(true);
+      }
+    });
   };
 
   return (
@@ -132,15 +156,15 @@ function ControlPanel({ handlePrint }) {
                 <Card>
                   <Row className="my-3">
                     <Col md={8}>
-                      <Form.Label className="textCompany">
+                      <Form.Label className="controlPanelWork">
                         Work Experience
                       </Form.Label>
                     </Col>
                     <Col md={4}>
                       <Switch defaultChecked onClick={ToggleSwitchWork} />
-                      {showWork0
-                        ? toggleModalWork(showWork0)
-                        : toggleModalWork(showWork0)}
+                      {showWork
+                        ? toggleModalWork(showWork)
+                        : toggleModalWork(showWork)}
                     </Col>
                   </Row>
 
@@ -152,7 +176,7 @@ function ControlPanel({ handlePrint }) {
                             <Col md={6}>
                               <Button
                                 variant="py-3 mt-1 mb-2"
-                                onClick={() => setModalWork1(true)}
+                                onClick={() => showWorkModals(index)}
                               >
                                 {section.name}
                               </Button>
@@ -192,6 +216,7 @@ function ControlPanel({ handlePrint }) {
 
             <ModalWork show={modalWork0} onHide={() => setModalWork0(false)} />
             <ModalWork2 show={modalWork1} onHide={() => setModalWork1(false)} />
+            <ModalWork3 show={modalWork2} onHide={() => setModalWork2(false)} />
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

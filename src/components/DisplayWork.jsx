@@ -20,12 +20,12 @@ function DisplayWork() {
     <Draggable draggableId="3" key="3" index={3}>
       {(provided) => (
         <Row
-          className="summary ps-5 pt-2"
+          className="workSec ps-5 pt-2"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <Row className="workField">
+          <Row className="workField0">
             <Col md={12}>
               <div className="section-titles">Work Experience</div>
               <HorizontalLine />
