@@ -134,9 +134,6 @@ export const ContextProvider = ({ children }) => {
     const workLocation = document.querySelectorAll(".workLocation");
     const textWorkLocation = document.querySelector(".textWorkLocation");
 
-    const resp = document.querySelector(".workResponsibilities");
-    const textResp = document.querySelector(".textResponsibilities");
-
     // Format date string to display only written month and numeric year
     if (workStartDate.value === "" && workEndDate.value === "") {
       document.querySelector(".work-period").classList.add("d-none");
@@ -175,12 +172,68 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
+  const displayWork2 = (hideModal, responsibilities) => {
+    const textCompany = document.querySelector(".textCompany2");
+    const workCompany = document.querySelector(".workCompany2");
+
+    const textWorkPosition = document.querySelector(".textWorkPosition2");
+    const workPosition = document.querySelector(".workPosition2");
+
+    const textWorkStartDate = document.querySelector(".textWorkStartDate2");
+    const workStartDate = document.querySelector(".workStartDate2");
+    const textWorkEndDate = document.querySelector(".textWorkEndDate2");
+    const workEndDate = document.querySelector(".workEndDate2");
+
+    const workLocation = document.querySelectorAll(".workLocation2");
+    const textWorkLocation = document.querySelector(".textWorkLocation2");
+
+    // Format date string to display only written month and numeric year
+    if (workStartDate.value === "" && workEndDate.value === "") {
+      document.querySelector(".work-period2").classList.add("d-none");
+    } else {
+      document.querySelector(".work-period2").classList.remove("d-none");
+      const formatStart = workStartDate.value.replaceAll("-", " ");
+      const formatEnd = workEndDate.value.replaceAll("-", " ");
+      let start = new Date(formatStart);
+      let end = new Date(formatEnd);
+      let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
+      let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
+      let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
+      let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
+      textWorkStartDate.textContent = `${mo}, ${ye}`;
+      textWorkEndDate.textContent = `${mo2}, ${ye2}`;
+    }
+
+    // Populate the Work Address with commas after each of them
+    textWorkLocation.textContent = "";
+    if (!populateFilledFields(workLocation)) {
+      document
+        .querySelector(".work-location-group2")
+        .classList.remove("d-none");
+      displayAddress(workLocation, textWorkLocation);
+    } else {
+      document.querySelector(".work-location-group2").classList.add("d-none");
+    }
+
+    hideModal();
+    textCompany.textContent = workCompany.value;
+    textWorkPosition.textContent = workPosition.value;
+    responsibilities.map((response, index) => {
+      const paragraph = document.querySelector(`.text` + index + 2);
+      if (response.message !== "") {
+        paragraph.classList.remove("d-none");
+        paragraph.textContent = response.message;
+      }
+    });
+  };
+
   return (
     <Context.Provider
       value={{
         displayGeneralInfo,
         displaySummary,
         displayWork,
+        displayWork2,
       }}
     >
       {children}

@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
-
-import Form from "react-bootstrap/Form";
-import { GrLocation } from "react-icons/gr";
-import { BiMailSend } from "react-icons/bi";
-import { FiPhone } from "react-icons/fi";
-import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import DisplayGenInfo from "./DisplayGenInfo";
 import DisplaySummary from "./DisplaySummary";
 import DisplayWork from "./DisplayWork";
+import DisplayWork2 from "./DisplayWork2";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   const sections = [
@@ -26,7 +20,12 @@ export const CVPreview = React.forwardRef((props, ref) => {
       index: 2,
     },
   ];
-  const Components = [DisplayGenInfo, DisplaySummary, DisplayWork];
+  const Components = [
+    DisplayGenInfo,
+    DisplaySummary,
+    DisplayWork,
+    DisplayWork2,
+  ];
 
   const [onDrop, setOnDrop] = useState(Components);
 

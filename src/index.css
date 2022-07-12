@@ -82,7 +82,7 @@ font-family: 'Inter', sans-serif;
   text-transform: capitalize;
 }
 
-.work-position, .work-location, .work-location-group, .work-responsibilities {
+.work-position, .work-location, .work-location-group {
   font-weight: 500;
   font-size: 14px;
   color: #696969;

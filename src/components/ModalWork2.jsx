@@ -10,10 +10,10 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Context from "../context/Context";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
-function ModalWork(props) {
-  const { displayWork } = useContext(Context);
+function ModalWork2(props) {
+  const { displayWork2 } = useContext(Context);
 
-  const [company1, setCompany1] = useState("DXC Technology Inn");
+  const [company2, setCompany2] = useState("DXC Technology");
   const [position1, setPosition1] = useState("Front-End Developer");
   const [startDate, setStartDate] = useState("2019-05-29");
   const [endDate, setEndDate] = useState("2019-09-29");
@@ -30,8 +30,8 @@ function ModalWork(props) {
   function persistPosition1(event) {
     setPosition1(event.target.value);
   }
-  function persistCompany1(event) {
-    setCompany1(event.target.value);
+  function persistCompany2(event) {
+    setCompany2(event.target.value);
   }
   function persistStartDate(event) {
     setStartDate(event.target.value);
@@ -99,17 +99,17 @@ function ModalWork(props) {
                   <FloatingLabel label="Company or Organization">
                     <Form.Control
                       type="text"
-                      className="workCompany mb-2"
+                      className="workCompany2 mb-2"
                       placeholder="Microsoft LLC."
-                      value={company1}
-                      onChange={persistCompany1}
+                      value={company2}
+                      onChange={persistCompany2}
                     />
                   </FloatingLabel>
 
                   <FloatingLabel label="Job Title">
                     <Form.Control
                       type="text"
-                      className="workPosition mb-2"
+                      className="workPosition2 mb-2"
                       placeholder="Senior Software Engineer"
                       value={position1}
                       onChange={persistPosition1}
@@ -120,7 +120,7 @@ function ModalWork(props) {
                       <FloatingLabel label="Start Date">
                         <Form.Control
                           type="date"
-                          className="workStartDate mb-2"
+                          className="workStartDate2 mb-2"
                           placeholder="02/2022"
                           value={startDate}
                           onChange={persistStartDate}
@@ -131,7 +131,7 @@ function ModalWork(props) {
                       <FloatingLabel label="End Date">
                         <Form.Control
                           type="date"
-                          className="workEndDate mb-2"
+                          className="workEndDate2 mb-2"
                           placeholder="12/2022"
                           value={endDate}
                           onChange={persistEndDate}
@@ -144,7 +144,7 @@ function ModalWork(props) {
                       <FloatingLabel label="City">
                         <Form.Control
                           type="text"
-                          className="workLocation mb-2"
+                          className="workLocation2 mb-2"
                           placeholder="Boston"
                           value={workCity}
                           onChange={persistWorkCity}
@@ -155,7 +155,7 @@ function ModalWork(props) {
                       <FloatingLabel label="State">
                         <Form.Control
                           type="text"
-                          className="workLocation mb-2"
+                          className="workLocation2 mb-2"
                           placeholder="MA"
                           value={workState}
                           onChange={persistWorkState}
@@ -166,7 +166,7 @@ function ModalWork(props) {
                       <FloatingLabel label="Country">
                         <Form.Control
                           type="text"
-                          className="workLocation mb-2"
+                          className="workLocation2 mb-2"
                           placeholder="USA"
                           value={workCountry}
                           onChange={persistWorkCountry}
@@ -223,7 +223,7 @@ function ModalWork(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => displayWork(props.onHide, responsibilities)}>
+        <Button onClick={() => displayWork2(props.onHide, responsibilities)}>
           Submit
         </Button>
         <Button onClick={props.onHide}>Close</Button>
@@ -232,4 +232,4 @@ function ModalWork(props) {
   );
 }
 
-export default ModalWork;
+export default ModalWork2;

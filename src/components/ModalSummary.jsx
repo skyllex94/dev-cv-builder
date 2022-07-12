@@ -42,7 +42,7 @@ function ModalSummary(props) {
                     name="message"
                     value={message}
                     onChange={handleChange}
-                    rows={3}
+                    rows={5}
                   />
                 </Form.Group>
               </Form>
