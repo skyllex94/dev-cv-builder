@@ -19,7 +19,7 @@ function DisplayGenInfo() {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <Col className="name col-12 d-flex pt-3 d-none">
+          <Col className="name col-12 d-flex pt-1 d-none">
             <Form className="pt-4">
               <Form.Label className="textName"></Form.Label>
             </Form>

@@ -20,7 +20,7 @@ function DisplayWork() {
     <Draggable draggableId="3" key="3" index={3}>
       {(provided) => (
         <Row
-          className="workSec ps-5 pt-2"
+          className="summary ps-5 pt-2"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}

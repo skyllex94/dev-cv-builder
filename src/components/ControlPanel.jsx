@@ -25,6 +25,7 @@ function ControlPanel({ handlePrint }) {
   const [showGenInfo, setShowGenInfo] = useState(true);
   const [showSummary, setShowSummary] = useState(true);
   const [showWork, setShowWork] = useState(true);
+  const [showSkills, setShowSkills] = useState(true);
 
   const [workSections, setWorkSections] = useState([{ name: "Job 1" }]);
   const allWorkModals = [setModalWork0, setModalWork1, setModalWork2];
@@ -43,10 +44,6 @@ function ControlPanel({ handlePrint }) {
 
   // TO-DO - Disable all fields when switch is off
 
-  const ToggleSwitch = () => {
-    showGenInfo ? setShowGenInfo(false) : setShowGenInfo(true);
-  };
-
   const toggleModalSummary = (showState) => {
     const genInfo = document.querySelector(".summaryField");
     if (genInfo === null) {
@@ -59,26 +56,38 @@ function ControlPanel({ handlePrint }) {
     }
   };
 
-  const ToggleSwitchSummary = () => {
-    showSummary ? setShowSummary(false) : setShowSummary(true);
+  // On and Off State switch when toggling switch button for each section
+  const ToggleSwitchButton = (state, setState) => {
+    state ? setState(false) : setState(true);
   };
 
-  const toggleModalWork = (showState) => {
-    const work = document.querySelector(".workField");
-    if (work === null) {
-      return;
-    }
-    if (showState) {
-      work.classList.remove("d-none");
-    } else {
-      work.classList.add("d-none");
-    }
+  const toggleModalWork = () => {
+    const work = document.querySelector(".workField0");
+    const work1 = document.querySelector(".workField1");
+    const work2 = document.querySelector(".workField2");
+    const allWork = [work, work1, work2];
+    console.log(work);
+    console.log(allWork);
+    allWork.forEach((curr) => {
+      // if (curr.classList.contains("d-none")) {
+      //   curr.classList.add("d-none");
+      // }
+      // curr.classList.remove("d-none");
+    });
+  };
+
+  const toggleModalSkills = () => {
+    console.log("hi");
   };
 
   const ToggleSwitchWork = () => {
-    showWork ? setShowWork(false) : setShowWork(true);
+    allWorkModals.map((modal, modalIndex) => {
+      modal(false);
+    });
+    // showWork ? setShowWork(false) : setShowWork(true);
   };
 
+  // Adding additional job field - maximum of 3
   const handleAddField = () => {
     if (workSections.length < 3) {
       const values = [
@@ -94,6 +103,7 @@ function ControlPanel({ handlePrint }) {
     }
   };
 
+  // Removing selected job field based on the index of the job
   const handleRemoveField = (index) => {
     // Check if the item being removed is the last one and skip if there is only 1 item left
     if (workSections.length > 1 && workSections.length === index + 1) {
@@ -131,7 +141,12 @@ function ControlPanel({ handlePrint }) {
                   >
                     General Information
                   </Button>
-                  <Switch defaultChecked onClick={ToggleSwitch} />
+                  <Switch
+                    defaultChecked
+                    onClick={() =>
+                      ToggleSwitchButton(showGenInfo, setShowGenInfo)
+                    }
+                  />
                   {showGenInfo
                     ? toggleModal(showGenInfo)
                     : toggleModal(showGenInfo)}
@@ -145,7 +160,12 @@ function ControlPanel({ handlePrint }) {
                   >
                     Summary
                   </Button>
-                  <Switch defaultChecked onClick={ToggleSwitchSummary} />
+                  <Switch
+                    defaultChecked
+                    onClick={() =>
+                      ToggleSwitchButton(showSummary, setShowSummary)
+                    }
+                  />
                   {showSummary
                     ? toggleModalSummary(showSummary)
                     : toggleModalSummary(showSummary)}
@@ -155,13 +175,16 @@ function ControlPanel({ handlePrint }) {
               <Row>
                 <Card>
                   <Row className="my-3">
-                    <Col md={8}>
-                      <Form.Label className="controlPanelWork">
+                    <Col md={12}>
+                      <Form.Label className="controlPanelWork me-3">
                         Work Experience
                       </Form.Label>
-                    </Col>
-                    <Col md={4}>
-                      <Switch defaultChecked onClick={ToggleSwitchWork} />
+                      <Switch
+                        defaultChecked
+                        onClick={() =>
+                          ToggleSwitchButton(showWork, setShowWork)
+                        }
+                      />
                       {showWork
                         ? toggleModalWork(showWork)
                         : toggleModalWork(showWork)}
@@ -202,6 +225,25 @@ function ControlPanel({ handlePrint }) {
                     })}
                   </Col>
                 </Card>
+              </Row>
+              <Row>
+                <Col md={12}>
+                  <Button
+                    variant="py-3 mt-1"
+                    onClick={() => setShowSkills(true)}
+                  >
+                    Skills
+                  </Button>
+                  <Switch
+                    defaultChecked
+                    onClick={() =>
+                      ToggleSwitchButton(showSkills, setShowSkills)
+                    }
+                  />
+                  {showSkills
+                    ? toggleModalSkills(showSkills)
+                    : toggleModalSkills(showSkills)}
+                </Col>
               </Row>
             </div>
 

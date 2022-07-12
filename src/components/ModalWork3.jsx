@@ -13,7 +13,7 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 function ModalWork3(props) {
   const { displayWork3 } = useContext(Context);
 
-  const [company1, setCompany1] = useState("Microsoft LLC.");
+  const [company1, setCompany1] = useState("Nvidia Corp.");
   const [position1, setPosition1] = useState("Front-End Developer");
   const [startDate, setStartDate] = useState("2020-01-29");
   const [endDate, setEndDate] = useState("2020-04-29");

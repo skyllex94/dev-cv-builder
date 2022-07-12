@@ -10,7 +10,7 @@ function DisplaySummary() {
     <Draggable draggableId="2" key="2" index={2}>
       {(provided) => (
         <Row
-          className="summary ps-5 pt-4"
+          className="summary ps-5 pt-3"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
