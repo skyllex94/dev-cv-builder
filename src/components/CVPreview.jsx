@@ -7,6 +7,7 @@ import DisplaySummary from "./DisplaySummary";
 import DisplayWork from "./DisplayWork";
 import DisplayWork2 from "./DisplayWork2";
 import DisplayWork3 from "./DisplayWork3";
+// import DisplaySkills from "./DisplaySkills";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   const sections = [

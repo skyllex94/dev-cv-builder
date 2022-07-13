@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import parse from "html-react-parser";
 
 const Context = createContext();
 
@@ -282,6 +281,18 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
+  const displaySkills = (onHide, skills) => {
+    skills.map((curSkill, index) => {
+      const newParagraph = document.createElement("p");
+      const doc = document.querySelector(".text0");
+      newParagraph.textContent = curSkill.skill;
+      console.log(newParagraph);
+    });
+
+    console.log({ skills });
+    onHide();
+  };
+
   return (
     <Context.Provider
       value={{
@@ -290,6 +301,7 @@ export const ContextProvider = ({ children }) => {
         displayWork,
         displayWork2,
         displayWork3,
+        displaySkills,
       }}
     >
       {children}

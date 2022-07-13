@@ -11,7 +11,7 @@ import Context from "../context/Context";
 import { GrClose } from "react-icons/gr";
 
 function ModalSkills(props) {
-  const { displayWork3 } = useContext(Context);
+  const { displaySkills } = useContext(Context);
 
   const [company1, setCompany1] = useState("Nvidia Corp.");
   const [position1, setPosition1] = useState("Front-End Developer");
@@ -219,45 +219,7 @@ function ModalSkills(props) {
                         />
                       </FloatingLabel>
                     </Col>
-                    {responsibilities.map((resp, index) => {
-                      return (
-                        <div key={index}>
-                          <Row className="mb-2">
-                            <Col md={10}>
-                              <FloatingLabel label="Accomplishments and Responsibilities">
-                                <Form.Control
-                                  type="text"
-                                  name="message"
-                                  placeholder="Resp"
-                                  value={resp.message}
-                                  onChange={(event) => handleResp(index, event)}
-                                />
-                              </FloatingLabel>
-                            </Col>
-                            <Col md={2} className="mt-2">
-                              <Button
-                                variant="white"
-                                onClick={() => handleAddField()}
-                              ></Button>
-                              <Button
-                                variant="white"
-                                onClick={() => handleRemoveField(index)}
-                              ></Button>
-                            </Col>
-                          </Row>
-                        </div>
-                      );
-                    })}
                   </Row>
-                  {/*<CKEditor
-                    editor={ClassicEditor}
-                    data={responsibilities}
-                    onChange={(event, editor) => {
-                      const data = editor.getData();
-                      setResponsibilities(data);
-                    }}
-                  />
-                  <Parser resp={responsibilities} />*/}
                 </Form.Group>
               </Form>
             </Col>
@@ -265,7 +227,7 @@ function ModalSkills(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => displayWork3(props.onHide, responsibilities)}>
+        <Button onClick={() => displaySkills(props.onHide, skills)}>
           Submit
         </Button>
         <Button onClick={props.onHide}>Close</Button>
