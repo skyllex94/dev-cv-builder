@@ -14,6 +14,7 @@ import ModalSummary from "./ModalSummary";
 import ModalWork from "./ModalWork";
 import ModalWork2 from "./ModalWork2";
 import ModalWork3 from "./ModalWork3";
+import ModalSkills from "./ModalSkills";
 
 function ControlPanel({ handlePrint }) {
   const [modalGenInfo, setModalGenInfo] = useState(false);
@@ -21,6 +22,7 @@ function ControlPanel({ handlePrint }) {
   const [modalWork0, setModalWork0] = useState(false);
   const [modalWork1, setModalWork1] = useState(false);
   const [modalWork2, setModalWork2] = useState(false);
+  const [modalSkills, setModalSkills] = useState(false);
 
   const [showGenInfo, setShowGenInfo] = useState(true);
   const [showSummary, setShowSummary] = useState(true);
@@ -45,14 +47,14 @@ function ControlPanel({ handlePrint }) {
   // TO-DO - Disable all fields when switch is off
 
   const toggleModalSummary = (showState) => {
-    const genInfo = document.querySelector(".summaryField");
-    if (genInfo === null) {
+    const summary = document.querySelector(".summaryField");
+    if (summary === null) {
       return;
     }
     if (showState) {
-      genInfo.classList.remove("d-none");
+      summary.classList.remove("d-none");
     } else {
-      genInfo.classList.add("d-none");
+      summary.classList.add("d-none");
     }
   };
 
@@ -230,7 +232,7 @@ function ControlPanel({ handlePrint }) {
                 <Col md={12}>
                   <Button
                     variant="py-3 mt-1"
-                    onClick={() => setShowSkills(true)}
+                    onClick={() => setModalSkills(true)}
                   >
                     Skills
                   </Button>
@@ -259,6 +261,10 @@ function ControlPanel({ handlePrint }) {
             <ModalWork show={modalWork0} onHide={() => setModalWork0(false)} />
             <ModalWork2 show={modalWork1} onHide={() => setModalWork1(false)} />
             <ModalWork3 show={modalWork2} onHide={() => setModalWork2(false)} />
+            <ModalSkills
+              show={modalSkills}
+              onHide={() => setModalSkills(false)}
+            />
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

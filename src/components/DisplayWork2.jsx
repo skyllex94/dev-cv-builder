@@ -22,12 +22,18 @@ function DisplayWork2() {
             <Col md={12} className="work-position2 d-flex">
               <div className="textWorkPosition2 me-2" />
               <div className="work-period2 d-none">
-                <Col className="d-flex">
+                <Col className="d-flex ">
                   | <div className="textWorkStartDate2 ms-2 me-1" /> -
-                  <div className="textWorkEndDate2 ms-1" />
+                  <div className="textWorkEndDate2 me-2 ms-1" />
+                  <Col className="work-location-group2 d-flex">
+                    | <div className="textWorkLocation2 ms-2" />
+                    <div className="textWorkLocation2 me-2" />
+                    <div className="textWorkLocation2 me-2" />
+                  </Col>
                 </Col>
               </div>
             </Col>
+
             <Col md={12} className="work-location-group2 d-flex">
               <div className="textWorkLocation2" />
               <div className="textWorkLocation2 me-2" />

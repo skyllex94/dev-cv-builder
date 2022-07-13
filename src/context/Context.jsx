@@ -118,7 +118,7 @@ export const ContextProvider = ({ children }) => {
     }
     hideModal();
   };
-
+  // TODO: Get and index value and add it with template literal to the classNames to remove the function repeat
   const displayWork = (hideModal, responsibilities) => {
     const textCompany = document.querySelector(".textCompany");
     const workCompany = document.querySelector(".workCompany");

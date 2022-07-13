@@ -36,17 +36,18 @@ function DisplayWork() {
             <Col md={12} className="work-position d-flex">
               <div className="textWorkPosition me-2" />
               <div className="work-period d-none">
-                <Col className="d-flex">
+                <Col className="d-flex ">
                   | <div className="textWorkStartDate ms-2 me-1" /> -
-                  <div className="textWorkEndDate ms-1" />
+                  <div className="textWorkEndDate me-2 ms-1" />
+                  <Col className="work-location-group d-flex">
+                    | <div className="textWorkLocation ms-2" />
+                    <div className="textWorkLocation me-2" />
+                    <div className="textWorkLocation me-2" />
+                  </Col>
                 </Col>
               </div>
             </Col>
-            <Col md={12} className="work-location-group d-flex">
-              <div className="textWorkLocation" />
-              <div className="textWorkLocation me-2" />
-              <div className="textWorkLocation me-2" />
-            </Col>
+
             <Col md={12} className="work-responsibilities d-flex">
               <div className="textResponsibilities">
                 <p className="text0 mb-0 d-none"></p>
