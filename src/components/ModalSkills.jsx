@@ -32,6 +32,18 @@ function ModalSkills(props) {
     {
       skill: "Heroku",
     },
+    {
+      skill: "SASS",
+    },
+    {
+      skill: "SQLite",
+    },
+    {
+      skill: "Python",
+    },
+    {
+      skill: "Flask",
+    },
   ]);
 
   const insertSkill = (event, index) => {

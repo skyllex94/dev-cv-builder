@@ -21,8 +21,8 @@ function DisplaySkills() {
               <HorizontalLine />
             </Col>
 
-            <Col md={12} className="d-flex">
-              <ul className="skillsGroup d-flex"></ul>
+            <Col md={12}>
+              <Row className="skillsGroup"></Row>
             </Col>
           </Row>
           {provided.placeholder}

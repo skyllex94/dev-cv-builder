@@ -288,15 +288,16 @@ export const ContextProvider = ({ children }) => {
 
     // Create a li for each skill and display it
     skills.map((curSkill, index) => {
-      const newLi = document.createElement("li");
-      const newCol = document.createElement("col");
+      // TODO: Adding a col element so they can be properly structured
+      const element = document.createElement("div");
+      element.textContent = curSkill.skill;
 
-      newLi.textContent = curSkill.skill;
-      newCol.appendChild(newLi);
-      ul.appendChild(newLi);
+      const col = document.createElement("div");
+      col.className = "col-auto mb-2";
+      // Append the element to the flexible column and append the column to the row
+      col.appendChild(element);
+      ul.appendChild(col);
     });
-
-    console.log({ skills });
     onHide();
   };
 
