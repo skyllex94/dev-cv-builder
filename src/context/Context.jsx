@@ -283,8 +283,8 @@ export const ContextProvider = ({ children }) => {
 
   const displaySkills = (onHide, skills) => {
     // Remove all prior elements before iterating over array
-    const ul = document.querySelector(".skillsGroup");
-    removeAllChildNodes(ul);
+    const group = document.querySelector(".skillsGroup");
+    removeAllChildNodes(group);
 
     // Create a li for each skill and display it
     skills.map((curSkill, index) => {
@@ -296,7 +296,7 @@ export const ContextProvider = ({ children }) => {
       col.className = "col-auto mb-2";
       // Append the element to the flexible column and append the column to the row
       col.appendChild(element);
-      ul.appendChild(col);
+      group.appendChild(col);
     });
     onHide();
   };
@@ -307,6 +307,66 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  const displayEducation = (hideModal, accomplishments) => {
+    const textStudyField = document.querySelector(".textStudyField");
+    const educationStudy = document.querySelector(".educationStudy");
+
+    const textUniversity = document.querySelector(".textUniversity");
+    const educationGraduated = document.querySelector(".educationGraduated");
+
+    const startDate = document.querySelector(".textEduStartDate");
+    const educationStartDate = document.querySelector(".educationStartDate");
+    const endDate = document.querySelector(".textEduEndDate");
+    const educationEndDate = document.querySelector(".educationEndDate");
+
+    const textEduLocation = document.querySelector(".textEduLocation");
+    const educationLocation = document.querySelectorAll(".educationLocation");
+
+    // Format date string to display only written month and numeric year
+    if (startDate.value === "" && endDate.value === "") {
+      document.querySelector(".edu-period").classList.add("d-none");
+    } else {
+      document.querySelector(".edu-period").classList.remove("d-none");
+      const formatStart = educationStartDate.value.replaceAll("-", " ");
+      const formatEnd = educationEndDate.value.replaceAll("-", " ");
+      let start = new Date(formatStart);
+      let end = new Date(formatEnd);
+      let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
+      let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
+      let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
+      let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
+      startDate.textContent = `${mo}, ${ye}`;
+      endDate.textContent = `${mo2}, ${ye2}`;
+    }
+
+    // Populate the Education Address with commas after each of them
+    textEduLocation.textContent = "";
+    if (!populateFilledFields(educationLocation)) {
+      document.querySelector(".edu-location-group").classList.remove("d-none");
+      displayAddress(educationLocation, textEduLocation);
+    } else {
+      document.querySelector(".edu-location-group").classList.add("d-none");
+    }
+
+    hideModal();
+    textStudyField.textContent = educationStudy.value;
+    textUniversity.textContent = educationGraduated.value;
+
+    const groupInsert = document.querySelector(".textAccomplish");
+    removeAllChildNodes(groupInsert);
+
+    accomplishments.map((curr) => {
+      const paragraph = document.createElement("p");
+      paragraph.className = "mb-0";
+
+      if (curr.message !== "") {
+        paragraph.classList.remove("d-none");
+        paragraph.textContent = curr.message;
+        groupInsert.appendChild(paragraph);
+      }
+    });
+  };
+
   return (
     <Context.Provider
       value={{
@@ -316,6 +376,7 @@ export const ContextProvider = ({ children }) => {
         displayWork2,
         displayWork3,
         displaySkills,
+        displayEducation,
       }}
     >
       {children}

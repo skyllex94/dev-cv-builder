@@ -15,6 +15,7 @@ import ModalWork from "./ModalWork";
 import ModalWork2 from "./ModalWork2";
 import ModalWork3 from "./ModalWork3";
 import ModalSkills from "./ModalSkills";
+import ModalEducation from "./ModalEducation";
 
 function ControlPanel({ handlePrint }) {
   const [modalGenInfo, setModalGenInfo] = useState(false);
@@ -23,11 +24,13 @@ function ControlPanel({ handlePrint }) {
   const [modalWork1, setModalWork1] = useState(false);
   const [modalWork2, setModalWork2] = useState(false);
   const [modalSkills, setModalSkills] = useState(false);
+  const [modalEducation, setModalEducation] = useState(false);
 
   const [showGenInfo, setShowGenInfo] = useState(true);
   const [showSummary, setShowSummary] = useState(true);
   const [showWork, setShowWork] = useState(true);
   const [showSkills, setShowSkills] = useState(true);
+  const [showEducation, setShowEducation] = useState(true);
 
   const [workSections, setWorkSections] = useState([{ name: "Job 1" }]);
   const allWorkModals = [setModalWork0, setModalWork1, setModalWork2];
@@ -90,11 +93,16 @@ function ControlPanel({ handlePrint }) {
     }
   };
 
-  const ToggleSwitchWork = () => {
-    allWorkModals.map((modal, modalIndex) => {
-      modal(false);
-    });
-    // showWork ? setShowWork(false) : setShowWork(true);
+  const toggleModalEducation = (showState, className) => {
+    const education = document.querySelector(`.` + className);
+    if (education === null) {
+      return;
+    }
+    if (showState) {
+      education.classList.remove("d-none");
+    } else {
+      education.classList.add("d-none");
+    }
   };
 
   // Adding additional job field - maximum of 3
@@ -104,7 +112,6 @@ function ControlPanel({ handlePrint }) {
         ...workSections,
         { name: `Job ` + (workSections.length + 1) },
       ];
-      console.log(workSections.length);
       const nextSection = document.querySelector(
         `.workField` + workSections.length
       );
@@ -255,6 +262,25 @@ function ControlPanel({ handlePrint }) {
                     : toggleModalSkills(showSkills)}
                 </Col>
               </Row>
+              <Row>
+                <Col md={12}>
+                  <Button
+                    variant="py-3 mt-1"
+                    onClick={() => setModalEducation(true)}
+                  >
+                    Education
+                  </Button>
+                  <Switch
+                    defaultChecked
+                    onClick={() =>
+                      ToggleSwitchButton(showEducation, setShowEducation)
+                    }
+                  />
+                  {showEducation
+                    ? toggleModalEducation(showEducation, "educationField")
+                    : toggleModalEducation(showEducation, "educationField")}
+                </Col>
+              </Row>
             </div>
 
             <ModalInfoContent
@@ -272,6 +298,10 @@ function ControlPanel({ handlePrint }) {
             <ModalSkills
               show={modalSkills}
               onHide={() => setModalSkills(false)}
+            />
+            <ModalEducation
+              show={modalEducation}
+              onHide={() => setModalEducation(false)}
             />
           </Accordion.Body>
         </Accordion.Item>

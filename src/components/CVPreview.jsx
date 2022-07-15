@@ -8,6 +8,7 @@ import DisplayWork from "./DisplayWork";
 import DisplayWork2 from "./DisplayWork2";
 import DisplayWork3 from "./DisplayWork3";
 import DisplaySkills from "./DisplaySkills";
+import DisplayEducation from "./DisplayEducation";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   const sections = [
@@ -29,6 +30,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
     DisplayWork2,
     DisplayWork3,
     DisplaySkills,
+    DisplayEducation,
   ];
 
   const [onDrop, setOnDrop] = useState(Components);
