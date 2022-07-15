@@ -68,8 +68,8 @@ function ControlPanel({ handlePrint }) {
     const work1 = document.querySelector(".workField1");
     const work2 = document.querySelector(".workField2");
     const allWork = [work, work1, work2];
-    console.log(work);
-    console.log(allWork);
+    // console.log(work);
+    // console.log(allWork);
     allWork.forEach((curr) => {
       // if (curr.classList.contains("d-none")) {
       //   curr.classList.add("d-none");
@@ -78,8 +78,16 @@ function ControlPanel({ handlePrint }) {
     });
   };
 
-  const toggleModalSkills = () => {
-    console.log("hi");
+  const toggleModalSkills = (showState) => {
+    const skills = document.querySelector(".skillsField");
+    if (skills === null) {
+      return;
+    }
+    if (showState) {
+      skills.classList.remove("d-none");
+    } else {
+      skills.classList.add("d-none");
+    }
   };
 
   const ToggleSwitchWork = () => {

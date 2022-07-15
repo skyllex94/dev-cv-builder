@@ -105,3 +105,20 @@ font-family: 'Inter', sans-serif;
   text-align: left;
   text-transform: capitalize;
 }
+
+ul {
+  list-style-type: none;
+}
+
+.skillsGroup {
+  text-align: left;
+  padding-inline-start: 0px !important;
+}
+
+.skillsGroup li {
+  background-color: #eaeaea;
+  text-transform: capitalize;
+  padding: 5px 7.5px;
+  margin: 0 7px 0;
+  border-radius: 4px;
+}

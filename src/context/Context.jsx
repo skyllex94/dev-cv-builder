@@ -282,16 +282,29 @@ export const ContextProvider = ({ children }) => {
   };
 
   const displaySkills = (onHide, skills) => {
+    // Remove all prior elements before iterating over array
+    const ul = document.querySelector(".skillsGroup");
+    removeAllChildNodes(ul);
+
+    // Create a li for each skill and display it
     skills.map((curSkill, index) => {
-      const newParagraph = document.createElement("p");
-      const doc = document.querySelector(".text0");
-      newParagraph.textContent = curSkill.skill;
-      console.log(newParagraph);
+      const newLi = document.createElement("li");
+      const newCol = document.createElement("col");
+
+      newLi.textContent = curSkill.skill;
+      newCol.appendChild(newLi);
+      ul.appendChild(newLi);
     });
 
     console.log({ skills });
     onHide();
   };
+
+  function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
+  }
 
   return (
     <Context.Provider

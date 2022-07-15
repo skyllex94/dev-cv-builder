@@ -5,12 +5,12 @@ import Col from "react-bootstrap/esm/Col";
 
 import { Draggable } from "react-beautiful-dnd";
 
-const HorizontalLine = () => (
+export const HorizontalLine = () => (
   <hr
     style={{
       color: "black",
       backgroundColor: "black",
-      height: 1,
+      height: 0.5,
     }}
   />
 );
@@ -20,7 +20,7 @@ function DisplayWork() {
     <Draggable draggableId="3" key="3" index={3}>
       {(provided) => (
         <Row
-          className="summary ps-5 pt-2"
+          className="workSec ps-5 pt-2"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
