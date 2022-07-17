@@ -16,6 +16,7 @@ import ModalWork2 from "./ModalWork2";
 import ModalWork3 from "./ModalWork3";
 import ModalSkills from "./ModalSkills";
 import ModalEducation from "./ModalEducation";
+import ModalLanguages from "./ModalLanguages";
 
 function ControlPanel({ handlePrint }) {
   const [modalGenInfo, setModalGenInfo] = useState(false);
@@ -25,12 +26,14 @@ function ControlPanel({ handlePrint }) {
   const [modalWork2, setModalWork2] = useState(false);
   const [modalSkills, setModalSkills] = useState(false);
   const [modalEducation, setModalEducation] = useState(false);
+  const [modalLanguages, setModalLanguages] = useState(false);
 
   const [showGenInfo, setShowGenInfo] = useState(true);
   const [showSummary, setShowSummary] = useState(true);
   const [showWork, setShowWork] = useState(true);
   const [showSkills, setShowSkills] = useState(true);
   const [showEducation, setShowEducation] = useState(true);
+  const [showLanguages, setShowLanguages] = useState(true);
 
   const [workSections, setWorkSections] = useState([{ name: "Job 1" }]);
   const allWorkModals = [setModalWork0, setModalWork1, setModalWork2];
@@ -93,8 +96,8 @@ function ControlPanel({ handlePrint }) {
     }
   };
 
-  const toggleModalEducation = (showState, className) => {
-    const education = document.querySelector(`.` + className);
+  const toggleModalEducation = (showState, UIclassName) => {
+    const education = document.querySelector("." + UIclassName);
     if (education === null) {
       return;
     }
@@ -281,6 +284,25 @@ function ControlPanel({ handlePrint }) {
                     : toggleModalEducation(showEducation, "educationField")}
                 </Col>
               </Row>
+              <Row>
+                <Col md={12}>
+                  <Button
+                    variant="py-3 mt-1"
+                    onClick={() => setModalLanguages(true)}
+                  >
+                    Languages
+                  </Button>
+                  <Switch
+                    defaultChecked
+                    onClick={() =>
+                      ToggleSwitchButton(showLanguages, setShowLanguages)
+                    }
+                  />
+                  {showLanguages
+                    ? toggleModalEducation(showLanguages, "languagesField")
+                    : toggleModalEducation(showLanguages, "languagesField")}
+                </Col>
+              </Row>
             </div>
 
             <ModalInfoContent
@@ -302,6 +324,10 @@ function ControlPanel({ handlePrint }) {
             <ModalEducation
               show={modalEducation}
               onHide={() => setModalEducation(false)}
+            />
+            <ModalLanguages
+              show={modalLanguages}
+              onHide={() => setModalLanguages(false)}
             />
           </Accordion.Body>
         </Accordion.Item>

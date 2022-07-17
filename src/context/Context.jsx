@@ -281,16 +281,24 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
-  const displaySkills = (onHide, skills) => {
+  const displayInlineText = (onHide, itemsArray, UIClassName) => {
     // Remove all prior elements before iterating over array
-    const group = document.querySelector(".skillsGroup");
+    const group = document.querySelector("." + UIClassName);
     removeAllChildNodes(group);
 
     // Create a li for each skill and display it
-    skills.map((curSkill, index) => {
+    itemsArray.map((curr, index) => {
       // TODO: Adding a col element so they can be properly structured
       const element = document.createElement("div");
-      element.textContent = curSkill.skill;
+      if (UIClassName.includes("language")) {
+        if (itemsArray.length === index + 1) {
+          element.textContent = curr.language;
+        } else {
+          element.textContent = curr.language + ",";
+        }
+      } else {
+        element.textContent = curr.skill;
+      }
 
       const col = document.createElement("div");
       col.className = "col-auto mb-2";
@@ -367,6 +375,10 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
+  const displayLanguages = (hideModal, accomplishments) => {
+    hideModal();
+  };
+
   return (
     <Context.Provider
       value={{
@@ -375,8 +387,9 @@ export const ContextProvider = ({ children }) => {
         displayWork,
         displayWork2,
         displayWork3,
-        displaySkills,
+        displayInlineText,
         displayEducation,
+        displayLanguages,
       }}
     >
       {children}

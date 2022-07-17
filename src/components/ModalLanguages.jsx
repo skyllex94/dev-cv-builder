@@ -10,57 +10,36 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Context from "../context/Context";
 import { GrClose } from "react-icons/gr";
 
-function ModalSkills(props) {
+function ModalLanguages(props) {
   const { displayInlineText } = useContext(Context);
 
-  const [skills, setSkills] = useState([
+  const [languages, setLanguages] = useState([
     {
-      skill: "Javascript",
+      language: "English",
     },
     {
-      skill: "React.js",
+      language: "Bulgarian",
     },
     {
-      skill: "Bootstrap 5",
-    },
-    {
-      skill: "Git",
-    },
-    {
-      skill: "HTML5/CSS3",
-    },
-    {
-      skill: "Heroku",
-    },
-    {
-      skill: "SASS",
-    },
-    {
-      skill: "SQLite",
-    },
-    {
-      skill: "Python",
-    },
-    {
-      skill: "Flask",
+      language: "Spanish",
     },
   ]);
 
-  const insertSkill = (event, index) => {
-    const values = [...skills];
+  const insertLanguages = (event, index) => {
+    const values = [...languages];
     values[index][event.target.name] = event.target.value;
-    setSkills(values);
+    setLanguages(values);
   };
 
-  function addSkill() {
-    const values = [...skills, { skill: "" }];
-    setSkills(values);
+  function addLanguages() {
+    const values = [...languages, { language: "" }];
+    setLanguages(values);
   }
 
-  const removeSkill = (index) => {
-    const values = [...skills];
+  const removeLanguage = (index) => {
+    const values = [...languages];
     values.splice(index, 1);
-    setSkills(values);
+    setLanguages(values);
   };
 
   return (
@@ -71,32 +50,32 @@ function ModalSkills(props) {
       size="lg"
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Skills</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Languages</Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
         <Container>
           <Row>
-            {skills.map((skill, index) => {
+            {languages.map((language, index) => {
               return (
                 <Col className="d-flex mb-2 g-1" md={3} xs={6} key={index}>
                   <Form.Group>
-                    <FloatingLabel label="Skill">
+                    <FloatingLabel label="Language">
                       <Form.Control
                         type="text"
-                        name="skill"
-                        placeholder="vanilla JS"
-                        value={skill.skill}
-                        onChange={(event) => insertSkill(event, index)}
+                        name="language"
+                        placeholder="English"
+                        value={language.language}
+                        onChange={(event) => insertLanguages(event, index)}
                       />
                     </FloatingLabel>
                   </Form.Group>
-                  <Button variant="white" onClick={() => removeSkill(index)}>
+                  <Button variant="white" onClick={() => removeLanguage(index)}>
                     <GrClose />
                   </Button>
                 </Col>
               );
             })}
-            <Button className="mb-2" onClick={addSkill}>
+            <Button className="mb-2" onClick={addLanguages}>
               Add
             </Button>
           </Row>
@@ -104,7 +83,9 @@ function ModalSkills(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button
-          onClick={() => displayInlineText(props.onHide, skills, "skillsGroup")}
+          onClick={() =>
+            displayInlineText(props.onHide, languages, "languagesGroup")
+          }
         >
           Submit
         </Button>
@@ -114,4 +95,4 @@ function ModalSkills(props) {
   );
 }
 
-export default ModalSkills;
+export default ModalLanguages;
