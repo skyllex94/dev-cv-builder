@@ -15,7 +15,7 @@ export const HorizontalLine = () => (
   />
 );
 
-function DisplayWork() {
+function DisplayWork(props) {
   return (
     <Draggable draggableId="3" key="3" index={3}>
       {(provided) => (
@@ -25,35 +25,31 @@ function DisplayWork() {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <Row className="workField0">
+          <Row className={"workField" + (props.index - 1)}>
             <Col md={12}>
-              <div className="section-titles">Work Experience</div>
+              <div className="section-titles"></div>
               <HorizontalLine />
             </Col>
             <Col md={12} className="d-flex">
-              <Form.Label className="textCompany"></Form.Label>
+              <Form.Label className={"textCompany" + (props.index - 1)}></Form.Label>
             </Col>
-            <Col md={12} className="work-position d-flex">
-              <div className="textWorkPosition me-2" />
-              <div className="work-period d-none">
-                <Col className="d-flex ">
-                  | <div className="textWorkStartDate ms-2 me-1" /> -
-                  <div className="textWorkEndDate me-2 ms-1" />
-                  <Col className="work-location-group d-flex">
-                    | <div className="textWorkLocation ms-2" />
-                    <div className="textWorkLocation me-2" />
-                    <div className="textWorkLocation me-2" />
+            <Col md={12} className={"work-position" + (props.index - 1)}>
+              <div className={"me-2 textWorkPosition" + (props.index - 1)} />
+              <div className={"d-none work-period" + (props.index - 1)}>
+                <Col className="d-flex">
+                  | <div className={"ms-2 me-1 textWorkStartDate" + (props.index - 1)} /> -
+                  <div className={"me-2 ms-1 textWorkEndDate" + (props.index - 1)} />
+                  <Col className={"d-flex work-location-group" + (props.index - 1)}>
+                    | <div className={"ms-2 textWorkLocation" + (props.index - 1)} />
+                    <div className={"ms-2 textWorkLocation" + (props.index - 1)} />
+                    <div className={"ms-2 textWorkLocation" + (props.index - 1)} />
                   </Col>
                 </Col>
               </div>
             </Col>
 
-            <Col md={12} className="work-responsibilities d-flex">
-              <div className="textResponsibilities">
-                <p className="text0 mb-0 d-none"></p>
-                <p className="text1 mb-0 d-none"></p>
-                <p className="text2 mb-0 d-none"></p>
-              </div>
+            <Col xs={12} className={"work-responsibilities" + (props.index - 1)}>
+              <div className={"textResponsibilities" + (props.index - 1)}></div>
             </Col>
           </Row>
 

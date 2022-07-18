@@ -11,10 +11,10 @@ import Context from "../context/Context";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 function ModalWork3(props) {
-  const { displayWork3 } = useContext(Context);
+  const { displayWork } = useContext(Context);
 
-  const [company1, setCompany1] = useState("Nvidia Corp.");
-  const [position1, setPosition1] = useState("Front-End Developer");
+  const [company, setCompany] = useState("Nvidia Corp.");
+  const [position, setPosition] = useState("Front-End Developer");
   const [startDate, setStartDate] = useState("2020-01-29");
   const [endDate, setEndDate] = useState("2020-04-29");
   const [workCity, setWorkCity] = useState("Boston");
@@ -26,28 +26,6 @@ function ModalWork3(props) {
         "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
     },
   ]);
-
-  function persistPosition1(event) {
-    setPosition1(event.target.value);
-  }
-  function persistCompany1(event) {
-    setCompany1(event.target.value);
-  }
-  function persistStartDate(event) {
-    setStartDate(event.target.value);
-  }
-  function persistEndDate(event) {
-    setEndDate(event.target.value);
-  }
-  function persistWorkCity(event) {
-    setWorkCity(event.target.value);
-  }
-  function persistWorkState(event) {
-    setWorkState(event.target.value);
-  }
-  function persistWorkCountry(event) {
-    setWorkCountry(event.target.value);
-  }
 
   const handleResp = (index, event) => {
     const values = [...responsibilities];
@@ -70,8 +48,6 @@ function ModalWork3(props) {
   const handleRemoveField = (index) => {
     if (responsibilities.length > 1 && responsibilities.length === index + 1) {
       const values = [...responsibilities];
-      const paragraph = document.querySelector(`.text` + index + 3);
-      paragraph.classList.add("d-none");
       values.splice(index, 1);
       setResponsibilities(values);
     }
@@ -101,8 +77,9 @@ function ModalWork3(props) {
                       type="text"
                       className="workCompany3 mb-2"
                       placeholder="Microsoft LLC."
-                      value={company1}
-                      onChange={persistCompany1}
+                      value={company}
+                      onChange={event => 
+                        setCompany(event.target.value)}
                     />
                   </FloatingLabel>
 
@@ -111,8 +88,10 @@ function ModalWork3(props) {
                       type="text"
                       className="workPosition3 mb-2"
                       placeholder="Senior Software Engineer"
-                      value={position1}
-                      onChange={persistPosition1}
+                      value={position}
+                      onChange={event => {
+                        setPosition(event.target.value);
+                      }}
                     />
                   </FloatingLabel>
                   <Row>
@@ -123,7 +102,9 @@ function ModalWork3(props) {
                           className="workStartDate3 mb-2"
                           placeholder="02/2022"
                           value={startDate}
-                          onChange={persistStartDate}
+                          onChange={event => {
+                            setStartDate(event.target.value);
+                          }}
                         />
                       </FloatingLabel>
                     </Col>
@@ -134,7 +115,9 @@ function ModalWork3(props) {
                           className="workEndDate3 mb-2"
                           placeholder="12/2022"
                           value={endDate}
-                          onChange={persistEndDate}
+                          onChange={event => {
+                            setEndDate(event.target.value);
+                          }}
                         />
                       </FloatingLabel>
                     </Col>
@@ -147,7 +130,9 @@ function ModalWork3(props) {
                           className="workLocation3 mb-2"
                           placeholder="Boston"
                           value={workCity}
-                          onChange={persistWorkCity}
+                          onChange={event => {
+                            setWorkCity(event.target.value);
+                          }}
                         />
                       </FloatingLabel>
                     </Col>
@@ -158,7 +143,9 @@ function ModalWork3(props) {
                           className="workLocation3 mb-2"
                           placeholder="MA"
                           value={workState}
-                          onChange={persistWorkState}
+                          onChange={event => {
+                            setWorkState(event.target.value);
+                          }}
                         />
                       </FloatingLabel>
                     </Col>
@@ -169,7 +156,9 @@ function ModalWork3(props) {
                           className="workLocation3 mb-2"
                           placeholder="USA"
                           value={workCountry}
-                          onChange={persistWorkCountry}
+                          onChange={event => {
+                            setWorkCountry(event.target.value);
+                          }}
                         />
                       </FloatingLabel>
                     </Col>
@@ -223,7 +212,7 @@ function ModalWork3(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => displayWork3(props.onHide, responsibilities)}>
+        <Button onClick={() => displayWork(props.onHide, responsibilities, 3)}>
           Submit
         </Button>
         <Button onClick={props.onHide}>Close</Button>

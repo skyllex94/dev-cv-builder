@@ -36,7 +36,7 @@ function DisplayEducation() {
             <Col md={12} className="edu-university d-flex">
               <div className="textUniversity me-2" />
               <div className="edu-period d-none">
-                <Col className="d-flex ">
+                <Col className="d-flex">
                   | <div className="textEduStartDate ms-2 me-1" /> -
                   <div className="textEduEndDate me-2 ms-1" />
                   <Col className="edu-location-group d-flex">
@@ -48,7 +48,7 @@ function DisplayEducation() {
               </div>
             </Col>
 
-            <Col md={12} className="edu-accomplish d-flex">
+            <Col md={12} className="edu-accomplish">
               <div className="textAccomplish"></div>
             </Col>
           </Row>

@@ -40,9 +40,6 @@ function DisplayWork3() {
             </Col>
             <Col md={12} className="work-responsibilities3 d-flex">
               <div className="textResponsibilities3">
-                <p className="text03 mb-0 d-none"></p>
-                <p className="text13 mb-0 d-none"></p>
-                <p className="text23 mb-0 d-none"></p>
               </div>
             </Col>
           </Row>

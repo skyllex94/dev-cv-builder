@@ -81,7 +81,7 @@ font-family: 'Inter', sans-serif;
 }
 
 /* ModalWork CSS */
-.textCompany, .textCompany2, .textCompany3, .textStudyField {
+.textCompany1, .textCompany2, .textCompany3, .textStudyField {
   font-weight: 600;
   font-size: 16px;
   color: #1b1b1b;
@@ -89,7 +89,7 @@ font-family: 'Inter', sans-serif;
   text-transform: capitalize;
 }
 
-.work-position, .work-position2, .work-position3, .edu-university, .work-location, .work-location2, .work-location3, .work-location-group, .work-location-group2, .work-location-group3 {
+.work-position1, .work-position2, .work-position3, .edu-university, .work-location1, .work-location2, .work-location3, .work-location-group1, .work-location-group2, .work-location-group3 {
   font-weight: 500;
   font-size: 14px;
   color: #696969;
@@ -97,7 +97,7 @@ font-family: 'Inter', sans-serif;
   text-transform: capitalize;
 }
 
-.work-responsibilities, .work-responsibilities2, .edu-accomplish, .work-responsibilities3 {
+.work-responsibilities1, .work-responsibilities2, .edu-accomplish, .work-responsibilities3 {
   font-weight: 400;
   font-size: 14px;
   font-style: italic;

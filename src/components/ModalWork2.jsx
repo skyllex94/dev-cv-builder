@@ -11,7 +11,7 @@ import Context from "../context/Context";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 function ModalWork2(props) {
-  const { displayWork2 } = useContext(Context);
+  const { displayWork } = useContext(Context);
 
   const [company2, setCompany2] = useState("Microsoft LLC.");
   const [position1, setPosition1] = useState("Front-End Developer");
@@ -70,8 +70,6 @@ function ModalWork2(props) {
   const handleRemoveField = (index) => {
     if (responsibilities.length > 1 && responsibilities.length === index + 1) {
       const values = [...responsibilities];
-      const paragraph = document.querySelector(`.text` + index + 2);
-      paragraph.classList.add("d-none");
       values.splice(index, 1);
       setResponsibilities(values);
     }
@@ -223,7 +221,7 @@ function ModalWork2(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => displayWork2(props.onHide, responsibilities)}>
+        <Button onClick={() => displayWork(props.onHide, responsibilities, 2)}>
           Submit
         </Button>
         <Button onClick={props.onHide}>Close</Button>

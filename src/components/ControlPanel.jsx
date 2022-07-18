@@ -96,8 +96,8 @@ function ControlPanel({ handlePrint }) {
     }
   };
 
-  const toggleModalEducation = (showState, UIclassName) => {
-    const education = document.querySelector("." + UIclassName);
+  const toggleModalEducation = (showState, UIClassName) => {
+    const education = document.querySelector("." + UIClassName);
     if (education === null) {
       return;
     }
@@ -116,7 +116,7 @@ function ControlPanel({ handlePrint }) {
         { name: `Job ` + (workSections.length + 1) },
       ];
       const nextSection = document.querySelector(
-        `.workField` + workSections.length
+        `.workField` + (workSections.length)
       );
       nextSection.classList.remove("d-none");
       setWorkSections(values);
@@ -128,7 +128,8 @@ function ControlPanel({ handlePrint }) {
     // Check if the item being removed is the last one and skip if there is only 1 item left
     if (workSections.length > 1 && workSections.length === index + 1) {
       const values = [...workSections];
-      const section = document.querySelector(`.workField` + index);
+      console.log(index)
+      const section = document.querySelector(`.workField` + (index + 1));
       section.classList.add("d-none");
       values.splice(index, 1);
       setWorkSections(values);

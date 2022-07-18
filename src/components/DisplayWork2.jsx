@@ -41,9 +41,6 @@ function DisplayWork2() {
             </Col>
             <Col md={12} className="work-responsibilities2 d-flex">
               <div className="textResponsibilities2">
-                <p className="text02 mb-0 d-none"></p>
-                <p className="text12 mb-0 d-none"></p>
-                <p className="text22 mb-0 d-none"></p>
               </div>
             </Col>
           </Row>

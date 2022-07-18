@@ -28,8 +28,8 @@ export const CVPreview = React.forwardRef((props, ref) => {
     DisplayGenInfo,
     DisplaySummary,
     DisplayWork,
-    DisplayWork2,
-    DisplayWork3,
+    DisplayWork,
+    DisplayWork,
     DisplaySkills,
     DisplayEducation,
     DisplayLanguages,
@@ -54,7 +54,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
           <div ref={ref}>
             <Row {...provided.droppableProps} ref={provided.innerRef}>
               {onDrop.map((Component, id) => (
-                <Component key={id} />
+                <Component key={id} index={id}/>
               ))}
 
               {provided.placeholder}
