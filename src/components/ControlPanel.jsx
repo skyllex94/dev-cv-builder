@@ -22,7 +22,13 @@ function ControlPanel({ handlePrint }) {
   const [modalGenInfo, setModalGenInfo] = useState(false);
   const [modalSummary, setModalSummary] = useState(false);
   const [modalWork0, setModalWork0] = useState(false);
+  
   const [modalWork1, setModalWork1] = useState(false);
+
+
+  let modalsWork = [modalWork0, modalWork1]
+  let allSetModalsWork = [setModalWork0, setModalWork1]
+
   const [modalWork2, setModalWork2] = useState(false);
   const [modalSkills, setModalSkills] = useState(false);
   const [modalEducation, setModalEducation] = useState(false);
@@ -74,8 +80,7 @@ function ControlPanel({ handlePrint }) {
     const work1 = document.querySelector(".workField1");
     const work2 = document.querySelector(".workField2");
     const allWork = [work, work1, work2];
-    // console.log(work);
-    // console.log(allWork);
+   
     allWork.forEach((curr) => {
       // if (curr.classList.contains("d-none")) {
       //   curr.classList.add("d-none");
@@ -108,18 +113,36 @@ function ControlPanel({ handlePrint }) {
     }
   };
 
-  // Adding additional job field - maximum of 3
-  const handleAddField = () => {
-    if (workSections.length < 3) {
+  // Adding additional job field - maximum of 5
+  const HandleAddField = () => {
+    
+    if (workSections.length < 5) {
       const values = [
         ...workSections,
         { name: `Job ` + (workSections.length + 1) },
       ];
+      let artState = false
+      const addStateModal = [...modalsWork, artState]
+      const addSetStateModal = [...allSetModalsWork, function Handle(){
+        if(!artState) {
+          artState = true
+        } else {
+          artState = false
+        }
+      }]
+
       const nextSection = document.querySelector(
-        `.workField` + (workSections.length)
+        `.workField` + (workSections.length + 1)
       );
       nextSection.classList.remove("d-none");
+      workSections.map((section) => {
+        return (
+          <ModalWork show={showWork} onHide={false} />
+        )
+      })
       setWorkSections(values);
+      modalsWork = addStateModal
+      allSetModalsWork = addSetStateModal
     }
   };
 
@@ -138,7 +161,7 @@ function ControlPanel({ handlePrint }) {
   };
 
   const showWorkModals = (index) => {
-    allWorkModals.map((modal, indexModal) => {
+    allSetModalsWork.map((modal, indexModal) => {
       if (index === indexModal) {
         modal(true);
       }
@@ -229,7 +252,7 @@ function ControlPanel({ handlePrint }) {
                             <Col md={6} className="d-flex ">
                               <Button
                                 variant="white"
-                                onClick={() => handleAddField()}
+                                onClick={() => HandleAddField()}
                               >
                                 <AiOutlinePlus />
                               </Button>
@@ -241,6 +264,7 @@ function ControlPanel({ handlePrint }) {
                               </Button>
                             </Col>
                           </Row>
+                          <ModalWork show={modalsWork[index]} onHide={() => allSetModalsWork[index](false)} jobCount={index} />
                         </div>
                       );
                     })}
@@ -315,9 +339,7 @@ function ControlPanel({ handlePrint }) {
               onHide={() => setModalSummary(false)}
             />
 
-            <ModalWork show={modalWork0} onHide={() => setModalWork0(false)} />
-            <ModalWork2 show={modalWork1} onHide={() => setModalWork1(false)} />
-            <ModalWork3 show={modalWork2} onHide={() => setModalWork2(false)} />
+            
             <ModalSkills
               show={modalSkills}
               onHide={() => setModalSkills(false)}

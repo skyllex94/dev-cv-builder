@@ -117,7 +117,8 @@ export const ContextProvider = ({ children }) => {
     }
     hideModal();
   };
-  // TODO: Get and index value and add it with template literal to the classNames to remove the function repeat
+
+  // Displaying on the CVPreview Component all of the inputted fields for the work section
   const displayWork = (hideModal, responsibilities, index) => {
     const textCompany = document.querySelector(".textCompany" + index);
     const workCompany = document.querySelector(".workCompany" + index);

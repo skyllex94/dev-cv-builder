@@ -30,6 +30,8 @@ export const CVPreview = React.forwardRef((props, ref) => {
     DisplayWork,
     DisplayWork,
     DisplayWork,
+    DisplayWork,
+    DisplayWork,
     DisplaySkills,
     DisplayEducation,
     DisplayLanguages,

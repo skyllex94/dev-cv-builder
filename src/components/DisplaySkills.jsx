@@ -10,7 +10,7 @@ function DisplaySkills() {
     <Draggable draggableId="6" key="6" index={6}>
       {(provided) => (
         <Row
-          className="skills ps-5 pt-2"
+          className="skills ps-5 pt-3"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}

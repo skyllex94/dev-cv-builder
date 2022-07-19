@@ -26,6 +26,8 @@ function ModalWork(props) {
         "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
     },
   ]);
+  
+  const jobCount = props.jobCount + 1;
 
   const handleResp = (index, event) => {
     const values = [...responsibilities];
@@ -63,7 +65,7 @@ function ModalWork(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Work Experience
+          Work Experience {jobCount}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
@@ -75,7 +77,7 @@ function ModalWork(props) {
                   <FloatingLabel label="Company or Organization">
                     <Form.Control
                       type="text"
-                      className="workCompany1 mb-2"
+                      className={"mb-2 workCompany" + jobCount}
                       placeholder="Microsoft LLC."
                       value={company}
                       onChange={(event) => {
@@ -87,7 +89,7 @@ function ModalWork(props) {
                   <FloatingLabel label="Job Title">
                     <Form.Control
                       type="text"
-                      className="workPosition1 mb-2"
+                      className={"mb-2 workPosition" + jobCount}
                       placeholder="Senior Software Engineer"
                       value={position}
                       onChange={event => {
@@ -100,7 +102,7 @@ function ModalWork(props) {
                       <FloatingLabel label="Start Date">
                         <Form.Control
                           type="date"
-                          className="workStartDate1 mb-2"
+                          className={"mb-2 workStartDate" + jobCount}
                           placeholder="02/2022"
                           value={startDate}
                           onChange={event => {
@@ -113,7 +115,7 @@ function ModalWork(props) {
                       <FloatingLabel label="End Date">
                         <Form.Control
                           type="date"
-                          className="workEndDate1 mb-2"
+                          className={"mb-2 workEndDate" + jobCount}
                           placeholder="12/2022"
                           value={endDate}
                           onChange={event => {
@@ -128,7 +130,7 @@ function ModalWork(props) {
                       <FloatingLabel label="City">
                         <Form.Control
                           type="text"
-                          className="workLocation1 mb-2"
+                          className={"mb-2 workLocation" + jobCount}
                           placeholder="Boston"
                           value={workCity}
                           onChange={event => {
@@ -141,7 +143,7 @@ function ModalWork(props) {
                       <FloatingLabel label="State">
                         <Form.Control
                           type="text"
-                          className="workLocation1 mb-2"
+                          className={"mb-2 workLocation" + jobCount}
                           placeholder="MA"
                           value={workState}
                           onChange={event => {
@@ -154,7 +156,7 @@ function ModalWork(props) {
                       <FloatingLabel label="Country">
                         <Form.Control
                           type="text"
-                          className="workLocation1 mb-2"
+                          className={"mb-2 workLocation" + jobCount}
                           placeholder="USA"
                           value={workCountry}
                           onChange={event => {
@@ -204,7 +206,7 @@ function ModalWork(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => displayWork(props.onHide, responsibilities, 1)}>
+        <Button onClick={() => displayWork(props.onHide, responsibilities, jobCount)}>
           Submit
         </Button>
         <Button onClick={props.onHide}>Close</Button>
