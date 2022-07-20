@@ -5,8 +5,6 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import DisplayGenInfo from "./DisplayGenInfo";
 import DisplaySummary from "./DisplaySummary";
 import DisplayWork from "./DisplayWork";
-import DisplayWork2 from "./DisplayWork2";
-import DisplayWork3 from "./DisplayWork3";
 import DisplaySkills from "./DisplaySkills";
 import DisplayEducation from "./DisplayEducation";
 import DisplayLanguages from "./DisplayLanguages";
@@ -56,7 +54,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
           <div ref={ref}>
             <Row {...provided.droppableProps} ref={provided.innerRef}>
               {onDrop.map((Component, id) => (
-                <Component key={id} index={id}/>
+                <Component key={id} index={id} />
               ))}
 
               {provided.placeholder}

@@ -120,18 +120,27 @@ export const ContextProvider = ({ children }) => {
 
   // Displaying on the CVPreview Component all of the inputted fields for the work section
   const displayWork = (hideModal, responsibilities, index) => {
+    const displayWholeSection = document.querySelector(".workSec" + index);
+    displayWholeSection.classList.remove("d-none");
+
     const textCompany = document.querySelector(".textCompany" + index);
     const workCompany = document.querySelector(".workCompany" + index);
 
-    const textWorkPosition = document.querySelector(".textWorkPosition" + index);
+    const textWorkPosition = document.querySelector(
+      ".textWorkPosition" + index
+    );
     const workPosition = document.querySelector(".workPosition" + index);
 
-    const textWorkStartDate = document.querySelector(".textWorkStartDate" + index);
+    const textWorkStartDate = document.querySelector(
+      ".textWorkStartDate" + index
+    );
     const workStartDate = document.querySelector(".workStartDate" + index);
     const textWorkEndDate = document.querySelector(".textWorkEndDate" + index);
     const workEndDate = document.querySelector(".workEndDate" + index);
 
-    const textWorkLocation = document.querySelector(".textWorkLocation" + index);
+    const textWorkLocation = document.querySelector(
+      ".textWorkLocation" + index
+    );
     const workLocation = document.querySelectorAll(".workLocation" + index);
 
     // Format date string to display only written month and numeric year
@@ -154,27 +163,31 @@ export const ContextProvider = ({ children }) => {
     // Populate the Work Address with commas after each of them
     textWorkLocation.textContent = "";
     if (!populateFilledFields(workLocation)) {
-      document.querySelector(".work-location-group" + index).classList.remove("d-none");
+      document
+        .querySelector(".work-location-group" + index)
+        .classList.remove("d-none");
       displayAddress(workLocation, textWorkLocation);
     } else {
-      document.querySelector(".work-location-group" + index).classList.add("d-none");
+      document
+        .querySelector(".work-location-group" + index)
+        .classList.add("d-none");
     }
 
     hideModal();
     textCompany.textContent = workCompany.value;
     textWorkPosition.textContent = workPosition.value;
 
-    const group = document.querySelector(".textResponsibilities" + index)
-    removeAllChildNodes(group)
+    const group = document.querySelector(".textResponsibilities" + index);
+    removeAllChildNodes(group);
 
     responsibilities.map((response) => {
       const paragraph = document.createElement("p");
       paragraph.className = "mb-0";
-      
+
       if (response.message !== "") {
         paragraph.classList.remove("d-none");
         paragraph.textContent = response.message;
-        group.appendChild(paragraph)
+        group.appendChild(paragraph);
       }
     });
   };
