@@ -16,6 +16,10 @@ export const CVPreview = React.forwardRef((props, ref) => {
       content: <DisplaySummary />,
     },
     {
+      id: "work",
+      content: <DisplayWork />,
+    },
+    {
       id: "skills",
       content: <DisplaySkills />,
     },
@@ -45,10 +49,8 @@ export const CVPreview = React.forwardRef((props, ref) => {
   const [onDrop, setOnDrop] = useState(sections);
 
   function handleOnDrop(result) {
-    console.log(result);
     let items = onDrop;
-
-    console.log(items);
+    // console.log(items);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     setOnDrop(items);

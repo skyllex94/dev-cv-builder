@@ -120,7 +120,7 @@ export const ContextProvider = ({ children }) => {
 
   // Displaying on the CVPreview Component all of the inputted fields for the work section
   const displayWork = (hideModal, responsibilities, index) => {
-    const displayWholeSection = document.querySelector(".workSec" + index);
+    const displayWholeSection = document.querySelector(".work");
     displayWholeSection.classList.remove("d-none");
 
     const textCompany = document.querySelector(".textCompany" + index);

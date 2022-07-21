@@ -50,7 +50,7 @@ function ControlPanel({ handlePrint }) {
   const [workSections, setWorkSections] = useState([{ name: "Job 1" }]);
 
   const toggleModal = (showState) => {
-    const genInfo = document.querySelector(".general-info-section");
+    const genInfo = document.querySelector(".general-info");
     if (genInfo === null) {
       return;
     }
