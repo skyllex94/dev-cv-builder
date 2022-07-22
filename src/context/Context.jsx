@@ -122,6 +122,8 @@ export const ContextProvider = ({ children }) => {
   const displayWork = (hideModal, responsibilities, index) => {
     const displayWholeSection = document.querySelector(".work");
     displayWholeSection.classList.remove("d-none");
+    const workDisplay = document.querySelector(".workField" + index);
+    workDisplay.classList.remove("d-none");
 
     const textCompany = document.querySelector(".textCompany" + index);
     const workCompany = document.querySelector(".workCompany" + index);
@@ -147,6 +149,7 @@ export const ContextProvider = ({ children }) => {
     if (workStartDate.value === "" && workEndDate.value === "") {
       document.querySelector(".work-period" + index).classList.add("d-none");
     } else {
+      console.log(index);
       document.querySelector(".work-period" + index).classList.remove("d-none");
       const formatStart = workStartDate.value.replaceAll("-", " ");
       const formatEnd = workEndDate.value.replaceAll("-", " ");

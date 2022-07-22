@@ -27,7 +27,7 @@ function ModalWork(props) {
     },
   ]);
 
-  const jobCount = props.jobCount + 1;
+  const jobAmount = props.jobCount + 1;
 
   const handleResp = (index, event) => {
     const values = [...responsibilities];
@@ -65,7 +65,7 @@ function ModalWork(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Work Experience {jobCount}
+          Work Experience {jobAmount}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
@@ -77,7 +77,7 @@ function ModalWork(props) {
                   <FloatingLabel label="Company or Organization">
                     <Form.Control
                       type="text"
-                      className={"mb-2 workCompany" + jobCount}
+                      className={"mb-2 workCompany" + jobAmount}
                       placeholder="Microsoft LLC."
                       value={company}
                       onChange={(event) => {
@@ -89,7 +89,7 @@ function ModalWork(props) {
                   <FloatingLabel label="Job Title">
                     <Form.Control
                       type="text"
-                      className={"mb-2 workPosition" + jobCount}
+                      className={"mb-2 workPosition" + jobAmount}
                       placeholder="Senior Software Engineer"
                       value={position}
                       onChange={(event) => {
@@ -102,7 +102,7 @@ function ModalWork(props) {
                       <FloatingLabel label="Start Date">
                         <Form.Control
                           type="date"
-                          className={"mb-2 workStartDate" + jobCount}
+                          className={"mb-2 workStartDate" + jobAmount}
                           placeholder="02/2022"
                           value={startDate}
                           onChange={(event) => {
@@ -115,7 +115,7 @@ function ModalWork(props) {
                       <FloatingLabel label="End Date">
                         <Form.Control
                           type="date"
-                          className={"mb-2 workEndDate" + jobCount}
+                          className={"mb-2 workEndDate" + jobAmount}
                           placeholder="12/2022"
                           value={endDate}
                           onChange={(event) => {
@@ -130,7 +130,7 @@ function ModalWork(props) {
                       <FloatingLabel label="City">
                         <Form.Control
                           type="text"
-                          className={"mb-2 workLocation" + jobCount}
+                          className={"mb-2 workLocation" + jobAmount}
                           placeholder="Boston"
                           value={workCity}
                           onChange={(event) => {
@@ -143,7 +143,7 @@ function ModalWork(props) {
                       <FloatingLabel label="State">
                         <Form.Control
                           type="text"
-                          className={"mb-2 workLocation" + jobCount}
+                          className={"mb-2 workLocation" + jobAmount}
                           placeholder="MA"
                           value={workState}
                           onChange={(event) => {
@@ -156,7 +156,7 @@ function ModalWork(props) {
                       <FloatingLabel label="Country">
                         <Form.Control
                           type="text"
-                          className={"mb-2 workLocation" + jobCount}
+                          className={"mb-2 workLocation" + jobAmount}
                           placeholder="USA"
                           value={workCountry}
                           onChange={(event) => {
@@ -207,7 +207,7 @@ function ModalWork(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button
-          onClick={() => displayWork(props.onHide, responsibilities, jobCount)}
+          onClick={() => displayWork(props.onHide, responsibilities, jobAmount)}
         >
           Submit
         </Button>

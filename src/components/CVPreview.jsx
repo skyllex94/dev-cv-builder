@@ -33,24 +33,10 @@ export const CVPreview = React.forwardRef((props, ref) => {
     },
   ];
 
-  const Components = [
-    DisplayGenInfo,
-    DisplaySummary,
-    // DisplayWork,
-    // DisplayWork,
-    // DisplayWork,
-    // DisplayWork,
-    // DisplayWork,
-    DisplaySkills,
-    DisplayEducation,
-    DisplayLanguages,
-  ];
-
   const [onDrop, setOnDrop] = useState(sections);
 
   function handleOnDrop(result) {
     let items = onDrop;
-    // console.log(items);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     setOnDrop(items);

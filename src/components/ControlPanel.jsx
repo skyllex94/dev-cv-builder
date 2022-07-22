@@ -127,13 +127,10 @@ function ControlPanel({ handlePrint }) {
         { name: `Job ` + (workSections.length + 1) },
       ];
 
-      // const nextSection = document.querySelector(
-      //   `.workField` + (workSections.length + 1)
-      // );
-      // nextSection.classList.remove("d-none");
       workSections.map((section) => {
         return <ModalWork show={showWork} onHide={false} />;
       });
+
       setWorkSections(values);
     }
   };
@@ -143,10 +140,10 @@ function ControlPanel({ handlePrint }) {
     // Check if the item being removed is the last one and skip if there is only 1 item left
     if (workSections.length > 1 && workSections.length === index + 1) {
       const values = [...workSections];
-      const displayWholeSection = document.querySelector(
-        ".workSec" + (index + 1)
+      const displayWorkSection = document.querySelector(
+        ".workField" + (index + 1)
       );
-      displayWholeSection.classList.add("d-none");
+      displayWorkSection.classList.add("d-none");
       values.splice(index, 1);
       setWorkSections(values);
     }
