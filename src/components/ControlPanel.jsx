@@ -350,7 +350,7 @@ function ControlPanel({ handlePrint }) {
       </Accordion>
 
       <div className="d-grid gap-2">
-        <Button variant="outline-dark mt-2" onClick={handlePrint}>
+        <Button variant="outline-dark my-2" onClick={handlePrint}>
           Download PDF
         </Button>
       </div>

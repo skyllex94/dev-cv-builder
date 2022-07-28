@@ -8,7 +8,7 @@ export const HorizontalLine = () => (
     style={{
       color: "black",
       backgroundColor: "black",
-      height: 0.5,
+      height: 1,
     }}
   />
 );

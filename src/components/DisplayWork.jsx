@@ -8,7 +8,7 @@ export const HorizontalLine = () => (
     style={{
       color: "black",
       backgroundColor: "black",
-      height: 0.5,
+      height: 1,
     }}
   />
 );
@@ -24,7 +24,7 @@ const amountOfJobs = [
 function DisplayWork() {
   return amountOfJobs.map((job, index) => {
     return (
-      <div id="workSection">
+      <div id="workSection" key={index}>
         {job.job === 1 ? (
           <Col md={12}>
             <div className="section-titles">Work Experience</div>
