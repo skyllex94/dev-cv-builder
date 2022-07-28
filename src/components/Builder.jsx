@@ -17,6 +17,8 @@ function Builder() {
     documentTitle: "Current_CV",
   });
 
+  // node --max_old_space_size=2560 node_modules/.bin/ - add when deploying to Heroku to start and build before react-scripts
+
   return (
     <ContextProvider>
       <Header />

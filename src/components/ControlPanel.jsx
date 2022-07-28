@@ -62,13 +62,16 @@ function ControlPanel({ handlePrint }) {
   };
 
   const toggleModalSummary = (showState) => {
-    const summary = document.querySelector(".summaryField");
-    if (summary === null) {
+    const summary = document.querySelector(".summary");
+    const summaryField = document.querySelector(".summaryField");
+    if (summaryField === null) {
       return;
     }
     if (showState) {
+      summaryField.classList.remove("d-none");
       summary.classList.remove("d-none");
     } else {
+      summaryField.classList.add("d-none");
       summary.classList.add("d-none");
     }
   };
@@ -230,7 +233,7 @@ function ControlPanel({ handlePrint }) {
                       return (
                         <div key={index}>
                           <Row className="mb-2">
-                            <Col md={6}>
+                            <Col xs={6}>
                               <Button
                                 variant="py-3 mt-1 mb-2"
                                 onClick={() => showWorkModals(index)}
@@ -239,7 +242,7 @@ function ControlPanel({ handlePrint }) {
                               </Button>
                             </Col>
 
-                            <Col md={6} className="d-flex ">
+                            <Col xs={6}>
                               <Button
                                 variant="white"
                                 onClick={() => handleAddField()}

@@ -41,6 +41,7 @@ code {
 
 .general-info {
   font-family: "Inter", sans-serif;
+  text-align: left;
 }
 
 .textName {
@@ -64,7 +65,7 @@ code {
   color: #696969;
 }
 
-.textSummary {
+.summaryField {
   font-weight: 300;
   font-size: 14px;
   color: #696969;

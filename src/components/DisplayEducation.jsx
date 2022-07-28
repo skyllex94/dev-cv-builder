@@ -2,16 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
-
-export const HorizontalLine = () => (
-  <hr
-    style={{
-      color: "black",
-      backgroundColor: "black",
-      height: 1,
-    }}
-  />
-);
+import { HorizontalLine } from "../utils/Utils";
 
 function DisplayEducation() {
   return (

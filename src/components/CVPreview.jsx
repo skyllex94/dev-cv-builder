@@ -37,6 +37,9 @@ export const CVPreview = React.forwardRef((props, ref) => {
 
   function handleOnDrop(result) {
     let items = onDrop;
+    if (result.destination == null) {
+      return;
+    }
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     setOnDrop(items);

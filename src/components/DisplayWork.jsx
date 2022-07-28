@@ -2,16 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
-
-export const HorizontalLine = () => (
-  <hr
-    style={{
-      color: "black",
-      backgroundColor: "black",
-      height: 1,
-    }}
-  />
-);
+import { HorizontalLine } from "../utils/Utils";
 
 const amountOfJobs = [
   { job: 1 },
@@ -24,7 +15,7 @@ const amountOfJobs = [
 function DisplayWork() {
   return amountOfJobs.map((job, index) => {
     return (
-      <div id="workSection" key={index}>
+      <Row id="workSection" key={index}>
         {job.job === 1 ? (
           <Col md={12}>
             <div className="section-titles">Work Experience</div>
@@ -54,7 +45,7 @@ function DisplayWork() {
             <div className={"textResponsibilities" + job.job}></div>
           </Col>
         </Row>
-      </div>
+      </Row>
     );
   });
 }
