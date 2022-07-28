@@ -23,11 +23,11 @@ function Builder() {
     <ContextProvider>
       <Header />
       <Container fluid className="p-4 bg-light">
-        <Row className="d-flex">
+        <Row className="d-flex justify-content-lg-center">
           <Col md={3}>
             <ControlPanel handlePrint={handlePrint} />
           </Col>
-          <Col md={9}>
+          <Col md={8}>
             <Editor ref={componentRef} />
           </Col>
         </Row>
