@@ -15,6 +15,7 @@ import ModalWork from "./ModalWork";
 import ModalSkills from "./ModalSkills";
 import ModalEducation from "./ModalEducation";
 import ModalLanguages from "./ModalLanguages";
+import ModalProjects from "./ModalProjects";
 
 function ControlPanel({ handlePrint }) {
   const [modalGenInfo, setModalGenInfo] = useState(false);
@@ -39,6 +40,7 @@ function ControlPanel({ handlePrint }) {
   const [modalSkills, setModalSkills] = useState(false);
   const [modalEducation, setModalEducation] = useState(false);
   const [modalLanguages, setModalLanguages] = useState(false);
+  const [modalProjects, setModalProjects] = useState(false);
 
   const [showGenInfo, setShowGenInfo] = useState(true);
   const [showSummary, setShowSummary] = useState(true);
@@ -46,35 +48,9 @@ function ControlPanel({ handlePrint }) {
   const [showSkills, setShowSkills] = useState(true);
   const [showEducation, setShowEducation] = useState(true);
   const [showLanguages, setShowLanguages] = useState(true);
+  const [showProjects, setShowProjects] = useState(true);
 
   const [workSections, setWorkSections] = useState([{ name: "Job 1" }]);
-
-  const toggleModal = (showState) => {
-    const genInfo = document.querySelector(".general-info");
-    if (genInfo === null) {
-      return;
-    }
-    if (showState) {
-      genInfo.classList.remove("d-none");
-    } else {
-      genInfo.classList.add("d-none");
-    }
-  };
-
-  const toggleModalSummary = (showState) => {
-    const summary = document.querySelector(".summary");
-    const summaryField = document.querySelector(".summaryField");
-    if (summaryField === null) {
-      return;
-    }
-    if (showState) {
-      summaryField.classList.remove("d-none");
-      summary.classList.remove("d-none");
-    } else {
-      summaryField.classList.add("d-none");
-      summary.classList.add("d-none");
-    }
-  };
 
   // On and Off State switch when toggling switch button for each section
   const ToggleSwitchButton = (state, setState) => {
@@ -98,19 +74,7 @@ function ControlPanel({ handlePrint }) {
     }
   };
 
-  const toggleModalSkills = (showState) => {
-    const skills = document.querySelector(".skillsField");
-    if (skills === null) {
-      return;
-    }
-    if (showState) {
-      skills.classList.remove("d-none");
-    } else {
-      skills.classList.add("d-none");
-    }
-  };
-
-  const toggleModalEducation = (showState, UIClassName) => {
+  const toggleCurrModal = (showState, UIClassName) => {
     const education = document.querySelector("." + UIClassName);
     if (education === null) {
       return;
@@ -123,7 +87,7 @@ function ControlPanel({ handlePrint }) {
   };
 
   // Adding additional job field - maximum of 5
-  const handleAddField = () => {
+  const handleAddField = (index) => {
     if (workSections.length < 5) {
       const values = [
         ...workSections,
@@ -131,7 +95,7 @@ function ControlPanel({ handlePrint }) {
       ];
 
       workSections.map((section) => {
-        return <ModalWork show={showWork} onHide={false} />;
+        return <ModalWork show={showWork} onHide={false} jobCount={index} />;
       });
 
       setWorkSections(values);
@@ -185,8 +149,8 @@ function ControlPanel({ handlePrint }) {
                     }
                   />
                   {showGenInfo
-                    ? toggleModal(showGenInfo)
-                    : toggleModal(showGenInfo)}
+                    ? toggleCurrModal(showGenInfo, "general-info")
+                    : toggleCurrModal(showGenInfo, "general-info")}
                 </Col>
               </Row>
               <Row>
@@ -204,8 +168,8 @@ function ControlPanel({ handlePrint }) {
                     }
                   />
                   {showSummary
-                    ? toggleModalSummary(showSummary)
-                    : toggleModalSummary(showSummary)}
+                    ? toggleCurrModal(showSummary, "summaryField")
+                    : toggleCurrModal(showSummary, "summaryField")}
                 </Col>
               </Row>
 
@@ -223,8 +187,8 @@ function ControlPanel({ handlePrint }) {
                         }
                       />
                       {showWork
-                        ? toggleModalWork(showWork)
-                        : toggleModalWork(showWork)}
+                        ? toggleCurrModal(showWork, "work")
+                        : toggleCurrModal(showWork, "work")}
                     </Col>
                   </Row>
 
@@ -233,7 +197,7 @@ function ControlPanel({ handlePrint }) {
                       return (
                         <div key={index}>
                           <Row className="mb-2">
-                            <Col xs={6}>
+                            <Col md={6}>
                               <Button
                                 variant="py-3 mt-1 mb-2"
                                 onClick={() => showWorkModals(index)}
@@ -242,10 +206,10 @@ function ControlPanel({ handlePrint }) {
                               </Button>
                             </Col>
 
-                            <Col xs={6}>
+                            <Col md={6} className="d-flex ">
                               <Button
                                 variant="white"
-                                onClick={() => handleAddField()}
+                                onClick={() => handleAddField(index)}
                               >
                                 <AiOutlinePlus />
                               </Button>
@@ -283,8 +247,8 @@ function ControlPanel({ handlePrint }) {
                     }
                   />
                   {showSkills
-                    ? toggleModalSkills(showSkills)
-                    : toggleModalSkills(showSkills)}
+                    ? toggleCurrModal(showSkills, "skillsField")
+                    : toggleCurrModal(showSkills, "skillsField")}
                 </Col>
               </Row>
               <Row>
@@ -302,8 +266,8 @@ function ControlPanel({ handlePrint }) {
                     }
                   />
                   {showEducation
-                    ? toggleModalEducation(showEducation, "educationField")
-                    : toggleModalEducation(showEducation, "educationField")}
+                    ? toggleCurrModal(showEducation, "educationField")
+                    : toggleCurrModal(showEducation, "educationField")}
                 </Col>
               </Row>
               <Row>
@@ -321,8 +285,27 @@ function ControlPanel({ handlePrint }) {
                     }
                   />
                   {showLanguages
-                    ? toggleModalEducation(showLanguages, "languagesField")
-                    : toggleModalEducation(showLanguages, "languagesField")}
+                    ? toggleCurrModal(showLanguages, "languagesField")
+                    : toggleCurrModal(showLanguages, "languagesField")}
+                </Col>
+              </Row>
+              <Row>
+                <Col md={12}>
+                  <Button
+                    variant="py-3 mt-1"
+                    onClick={() => setModalProjects(true)}
+                  >
+                    Personal Projects
+                  </Button>
+                  <Switch
+                    defaultChecked
+                    onClick={() =>
+                      ToggleSwitchButton(showProjects, setShowProjects)
+                    }
+                  />
+                  {showProjects
+                    ? toggleCurrModal(showProjects, "projectsField")
+                    : toggleCurrModal(showProjects, "projectsField")}
                 </Col>
               </Row>
             </div>
@@ -348,12 +331,16 @@ function ControlPanel({ handlePrint }) {
               show={modalLanguages}
               onHide={() => setModalLanguages(false)}
             />
+            <ModalProjects
+              show={modalProjects}
+              onHide={() => setModalProjects(false)}
+            />
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
 
       <div className="d-grid gap-2">
-        <Button variant="outline-dark my-2" onClick={handlePrint}>
+        <Button variant="outline-dark mt-2" onClick={handlePrint}>
           Download PDF
         </Button>
       </div>

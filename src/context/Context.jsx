@@ -289,6 +289,10 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
+  const displayProjects = (hideModal) => {
+    hideModal();
+  };
+
   const displayLanguages = (hideModal, accomplishments) => {
     hideModal();
   };
@@ -302,6 +306,7 @@ export const ContextProvider = ({ children }) => {
         displayInlineText,
         displayEducation,
         displayLanguages,
+        displayProjects,
       }}
     >
       {children}

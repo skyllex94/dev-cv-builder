@@ -8,6 +8,7 @@ import DisplayWork from "./DisplayWork";
 import DisplaySkills from "./DisplaySkills";
 import DisplayEducation from "./DisplayEducation";
 import DisplayLanguages from "./DisplayLanguages";
+import DisplayProjects from "./DisplayProjects";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   const sections = [
@@ -30,6 +31,10 @@ export const CVPreview = React.forwardRef((props, ref) => {
     {
       id: "languages",
       content: <DisplayLanguages />,
+    },
+    {
+      id: "projects",
+      content: <DisplayProjects />,
     },
   ];
 
