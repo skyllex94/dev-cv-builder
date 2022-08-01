@@ -43,7 +43,7 @@ function ControlPanel({ handlePrint }) {
   const [modalProjects, setModalProjects] = useState(false);
   const UIClassesForDisplayProjects = [
     ".projectName",
-    ".primaryLanguage",
+    ".projectDesc",
     ".projectStartDate",
     ".projectEndDate",
     ".projectAccomplishments",
@@ -341,7 +341,7 @@ function ControlPanel({ handlePrint }) {
             <ModalProjects
               show={modalProjects}
               onHide={() => setModalProjects(false)}
-              UIClasses={UIClassesForDisplayProjects}
+              uiclasses={UIClassesForDisplayProjects}
             />
           </Accordion.Body>
         </Accordion.Item>

@@ -309,8 +309,20 @@ export const ContextProvider = ({ children }) => {
     const modalEndDate = document.querySelector(arrModalValues[3]);
 
     const projectWebsite = document.querySelector(".modalProjectLink");
-    if (projectWebsite !== "") {
+    const projectGithub = document.querySelector(".modalProjectGithub");
+
+    if (projectWebsite.value === "") {
+      document.querySelector(".projectLink").classList.add("d-none");
+    } else {
+      document.querySelector(".projectLink").classList.remove("d-none");
       document.getElementById("projectLink").href = projectWebsite.value;
+    }
+    if (projectGithub.value === "") {
+      document.querySelector(".prjGithubLink").classList.add("d-none");
+      console.log(document.querySelector(".prjGithubLink"));
+    } else {
+      document.querySelector(".prjGithubLink").classList.remove("d-none");
+      document.getElementById("prjGithubLink").href = projectGithub.value;
     }
 
     // Fetch primary information
@@ -325,7 +337,6 @@ export const ContextProvider = ({ children }) => {
       const formatStart = modalStartDate.value.replaceAll("-", " ");
       const formatEnd = modalEndDate.value.replaceAll("-", " ");
       let start = new Date(formatStart);
-      console.log(formatStart);
       let end = new Date(formatEnd);
       let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
       let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
