@@ -2,7 +2,9 @@ import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
+import Nav from "react-bootstrap/Nav";
 import { HorizontalLine } from "../utils/Utils";
+import { FiExternalLink } from "react-icons/fi";
 
 function DisplayProjects() {
   return (
@@ -12,25 +14,28 @@ function DisplayProjects() {
         <HorizontalLine />
       </Col>
       <Col md={12} className="d-flex">
-        <Form.Label className="projectsField"></Form.Label>
+        <Form.Label className="projectName"></Form.Label>
+
+        <Nav.Link
+          id="projectLink"
+          className="projectLink d-none"
+          href="https://www.facebook.com/"
+        >
+          <FiExternalLink className="ms-2 mt-1" />
+        </Nav.Link>
       </Col>
-      <Col md={12} className="projectName d-flex">
-        <div className="textUniversity me-2" />
-        <div className="edu-period d-none">
+      <Col md={12} className="d-flex project-info">
+        <div className="me-2 primaryLanguage" />
+        <div className="d-none project-period">
           <Col className="d-flex">
-            | <div className="textEduStartDate ms-2 me-1" /> -
-            <div className="textEduEndDate me-2 ms-1" />
-            <Col className="edu-location-group d-flex">
-              | <div className="textEduLocation ms-2" />
-              <div className="textEduLocation me-2" />
-              <div className="textEduLocation me-2" />
-            </Col>
+            | <div className="ms-2 me-1 projectStartDate" /> -
+            <div className="me-2 ms-1 projectEndDate" />
           </Col>
         </div>
       </Col>
 
-      <Col md={12} className="edu-accomplish">
-        <div className="textAccomplish"></div>
+      <Col md={12} className="project-accomplish d-flex">
+        <div className="projectAccomplishments"></div>
       </Col>
     </Row>
   );

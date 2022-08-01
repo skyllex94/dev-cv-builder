@@ -88,7 +88,8 @@ code {
 
 /* ModalWork CSS */
 [class*="textCompany"],
-.textStudyField {
+.textStudyField,
+[class*="projectName"] {
   font-weight: 600;
   font-size: 16px;
   color: #1b1b1b;
@@ -99,7 +100,8 @@ code {
 [class*="work-position"],
 [class*="work-location"],
 [class*="work-location-group"],
-.edu-university {
+.edu-university,
+[class*="project-info"] {
   font-weight: 500;
   font-size: 14px;
   color: #696969;
@@ -108,7 +110,8 @@ code {
 }
 
 [class*="work-responsibilities"],
-.edu-accomplish {
+.edu-accomplish,
+[class*="project-accomplish"] {
   font-weight: 400;
   font-size: 14px;
   font-style: italic;

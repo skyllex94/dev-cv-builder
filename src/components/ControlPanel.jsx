@@ -41,6 +41,13 @@ function ControlPanel({ handlePrint }) {
   const [modalEducation, setModalEducation] = useState(false);
   const [modalLanguages, setModalLanguages] = useState(false);
   const [modalProjects, setModalProjects] = useState(false);
+  const UIClassesForDisplayProjects = [
+    ".projectName",
+    ".primaryLanguage",
+    ".projectStartDate",
+    ".projectEndDate",
+    ".projectAccomplishments",
+  ];
 
   const [showGenInfo, setShowGenInfo] = useState(true);
   const [showSummary, setShowSummary] = useState(true);
@@ -334,6 +341,7 @@ function ControlPanel({ handlePrint }) {
             <ModalProjects
               show={modalProjects}
               onHide={() => setModalProjects(false)}
+              UIClasses={UIClassesForDisplayProjects}
             />
           </Accordion.Body>
         </Accordion.Item>

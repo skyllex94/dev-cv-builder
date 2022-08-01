@@ -9,37 +9,47 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Context from "../context/Context";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import DisplayProjects from "./DisplayProjects";
 
 function ModalProjects(props) {
   const { displayProjects } = useContext(Context);
 
-  const [company, setCompany] = useState("DXC Technology Inn");
-  const [position, setPosition] = useState("Front-End Developer");
+  const [project, setProject] = useState("Dev-CV-Builder");
+  const [projectLink, setProjectLink] = useState(
+    "https://dev-cv-builder.herokuapp.com"
+  );
+  const [projectGithub, setProjectGithub] = useState(
+    "https://github.com/skyllex94/dev-cv-builder"
+  );
+  const [primaryLanguage, setPrimaryLanguage] = useState(
+    "React.js, Javascript"
+  );
   const [startDate, setStartDate] = useState("2019-05-29");
   const [endDate, setEndDate] = useState("2019-09-29");
-  const [workCity, setWorkCity] = useState("Boston");
-  const [workState, setWorkState] = useState("MA");
-  const [workCountry, setWorkCountry] = useState("United States");
-  const [responsibilities, setResponsibilities] = useState([
+  const [highlights, setHighlights] = useState([
     {
-      message:
-        "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
+      message: "- Improved skillset by 200% with this last project I did.",
     },
   ]);
 
+  const modalValues = [
+    ".modalProjectName",
+    ".modalPrimaryLanguage",
+    ".modalProjectStartDate",
+    ".modalProjectEndDate",
+  ];
+
   const jobAmount = props.jobCount + 1;
 
-  const handleResp = (index, event) => {
-    const values = [...responsibilities];
+  const handleHighlight = (index, event) => {
+    const values = [...highlights];
     values[index][event.target.name] = event.target.value;
-    setResponsibilities(values);
+    setHighlights(values);
   };
 
   const handleAddField = () => {
-    if (responsibilities.length < 3) {
-      setResponsibilities([
-        ...responsibilities,
+    if (highlights.length < 3) {
+      setHighlights([
+        ...highlights,
         {
           message: "- ",
         },
@@ -49,10 +59,10 @@ function ModalProjects(props) {
   };
 
   const handleRemoveField = (index) => {
-    if (responsibilities.length > 1 && responsibilities.length === index + 1) {
-      const values = [...responsibilities];
+    if (highlights.length > 1 && highlights.length === index + 1) {
+      const values = [...highlights];
       values.splice(index, 1);
-      setResponsibilities(values);
+      setHighlights(values);
     }
     return;
   };
@@ -75,26 +85,56 @@ function ModalProjects(props) {
             <Col md={12}>
               <Form>
                 <Form.Group className="mb-3">
-                  <FloatingLabel label="Company or Organization">
+                  <FloatingLabel label="Project Name">
                     <Form.Control
                       type="text"
-                      className={"mb-2 workCompany" + jobAmount}
-                      placeholder="Microsoft LLC."
-                      value={company}
+                      className={"mb-2 modalProjectName"}
+                      placeholder="Iriscope"
+                      value={project}
                       onChange={(event) => {
-                        setCompany(event.target.value);
+                        setProject(event.target.value);
                       }}
                     />
                   </FloatingLabel>
+                  <Form.Group>
+                    <Row>
+                      <Col md={6}>
+                        <FloatingLabel label="Link">
+                          <Form.Control
+                            type="text"
+                            className={"mb-2 modalProjectLink"}
+                            placeholder="projectWebsite"
+                            value={projectLink}
+                            onChange={(event) => {
+                              setProjectLink(event.target.value);
+                            }}
+                          />
+                        </FloatingLabel>
+                      </Col>
+                      <Col md={6}>
+                        <FloatingLabel label="Github Repo">
+                          <Form.Control
+                            type="text"
+                            className={"mb-2 modalProjectGithub"}
+                            placeholder="projectGithub"
+                            value={projectGithub}
+                            onChange={(event) => {
+                              setProjectGithub(event.target.value);
+                            }}
+                          />
+                        </FloatingLabel>
+                      </Col>
+                    </Row>
+                  </Form.Group>
 
-                  <FloatingLabel label="Job Title">
+                  <FloatingLabel label="Primary Language">
                     <Form.Control
                       type="text"
-                      className={"mb-2 workPosition" + jobAmount}
-                      placeholder="Senior Software Engineer"
-                      value={position}
+                      className={"mb-2 modalPrimaryLanguage"}
+                      placeholder="React.js"
+                      value={primaryLanguage}
                       onChange={(event) => {
-                        setPosition(event.target.value);
+                        setPrimaryLanguage(event.target.value);
                       }}
                     />
                   </FloatingLabel>
@@ -103,7 +143,7 @@ function ModalProjects(props) {
                       <FloatingLabel label="Start Date">
                         <Form.Control
                           type="date"
-                          className={"mb-2 workStartDate" + jobAmount}
+                          className={"mb-2 modalProjectStartDate"}
                           placeholder="02/2022"
                           value={startDate}
                           onChange={(event) => {
@@ -116,7 +156,7 @@ function ModalProjects(props) {
                       <FloatingLabel label="End Date">
                         <Form.Control
                           type="date"
-                          className={"mb-2 workEndDate" + jobAmount}
+                          className={"mb-2 modalProjectEndDate"}
                           placeholder="12/2022"
                           value={endDate}
                           onChange={(event) => {
@@ -127,57 +167,20 @@ function ModalProjects(props) {
                     </Col>
                   </Row>
                   <Row>
-                    <Col xs={6} md={4}>
-                      <FloatingLabel label="City">
-                        <Form.Control
-                          type="text"
-                          className={"mb-2 workLocation" + jobAmount}
-                          placeholder="Boston"
-                          value={workCity}
-                          onChange={(event) => {
-                            setWorkCity(event.target.value);
-                          }}
-                        />
-                      </FloatingLabel>
-                    </Col>
-                    <Col xs={6} md={4}>
-                      <FloatingLabel label="State">
-                        <Form.Control
-                          type="text"
-                          className={"mb-2 workLocation" + jobAmount}
-                          placeholder="MA"
-                          value={workState}
-                          onChange={(event) => {
-                            setWorkState(event.target.value);
-                          }}
-                        />
-                      </FloatingLabel>
-                    </Col>
-                    <Col xs={6} md={4}>
-                      <FloatingLabel label="Country">
-                        <Form.Control
-                          type="text"
-                          className={"mb-2 workLocation" + jobAmount}
-                          placeholder="USA"
-                          value={workCountry}
-                          onChange={(event) => {
-                            setWorkCountry(event.target.value);
-                          }}
-                        />
-                      </FloatingLabel>
-                    </Col>
-                    {responsibilities.map((resp, index) => {
+                    {highlights.map((highlight, index) => {
                       return (
                         <div key={index}>
                           <Row className="mb-2">
                             <Col md={10}>
-                              <FloatingLabel label="Accomplishments and Responsibilities">
+                              <FloatingLabel label="Highlights">
                                 <Form.Control
                                   type="text"
                                   name="message"
-                                  placeholder="Resp"
-                                  value={resp.message}
-                                  onChange={(event) => handleResp(index, event)}
+                                  placeholder="highlights"
+                                  value={highlight.message}
+                                  onChange={(event) =>
+                                    handleHighlight(index, event)
+                                  }
                                 />
                               </FloatingLabel>
                             </Col>
@@ -207,7 +210,18 @@ function ModalProjects(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => displayProjects(props.onHide)}>Submit</Button>
+        <Button
+          onClick={() =>
+            displayProjects(
+              props.onHide,
+              props.UIClasses,
+              modalValues,
+              highlights
+            )
+          }
+        >
+          Submit
+        </Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>

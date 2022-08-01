@@ -270,7 +270,6 @@ export const ContextProvider = ({ children }) => {
       document.querySelector(".edu-location-group").classList.add("d-none");
     }
 
-    hideModal();
     textStudyField.textContent = educationStudy.value;
     textUniversity.textContent = educationGraduated.value;
 
@@ -287,9 +286,69 @@ export const ContextProvider = ({ children }) => {
         groupInsert.appendChild(paragraph);
       }
     });
+
+    hideModal();
   };
 
-  const displayProjects = (hideModal) => {
+  const displayProjects = (
+    hideModal,
+    arrUIClasses,
+    arrModalValues,
+    highlights
+  ) => {
+    const previewProjectName = document.querySelector(arrUIClasses[0]);
+    const modalProjectName = document.querySelector(arrModalValues[0]);
+
+    const previewPrimaryLanguage = document.querySelector(arrUIClasses[1]);
+    const modalPrimaryLanguage = document.querySelector(arrModalValues[1]);
+
+    const previewStartDate = document.querySelector(arrUIClasses[2]);
+    const modalStartDate = document.querySelector(arrModalValues[2]);
+
+    const previewEndDate = document.querySelector(arrUIClasses[3]);
+    const modalEndDate = document.querySelector(arrModalValues[3]);
+
+    const projectWebsite = document.querySelector(".modalProjectLink");
+    if (projectWebsite !== "") {
+      document.getElementById("projectLink").href = projectWebsite.value;
+    }
+
+    // Fetch primary information
+    previewProjectName.textContent = modalProjectName.value;
+    previewPrimaryLanguage.textContent = modalPrimaryLanguage.value;
+
+    // Format date string to display only written month and numeric year
+    if (modalStartDate.value === "" && modalEndDate.value === "") {
+      document.querySelector(".project-period").classList.add("d-none");
+    } else {
+      document.querySelector(".project-period").classList.remove("d-none");
+      const formatStart = modalStartDate.value.replaceAll("-", " ");
+      const formatEnd = modalEndDate.value.replaceAll("-", " ");
+      let start = new Date(formatStart);
+      console.log(formatStart);
+      let end = new Date(formatEnd);
+      let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
+      let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
+      let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
+      let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
+      previewStartDate.textContent = `${mo}, ${ye}`;
+      previewEndDate.textContent = `${mo2}, ${ye2}`;
+    }
+
+    const groupInsert = document.querySelector(arrUIClasses[4]);
+    removeAllChildNodes(groupInsert);
+
+    highlights.map((curr) => {
+      const paragraph = document.createElement("p");
+      paragraph.className = "mb-0";
+
+      if (curr.message !== "") {
+        paragraph.classList.remove("d-none");
+        paragraph.textContent = curr.message;
+        groupInsert.appendChild(paragraph);
+      }
+    });
+
     hideModal();
   };
 
