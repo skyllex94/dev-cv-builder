@@ -18,7 +18,7 @@ function DisplayWork() {
       <Row id="workSection" key={index}>
         {job.job === 1 ? (
           <Col md={12}>
-            <div className="section-titles">Work Experience</div>
+            <div className="section-titles mt-3">Work Experience</div>
             <HorizontalLine />
           </Col>
         ) : null}

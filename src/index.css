@@ -32,11 +32,15 @@ code {
   /* background-color: #f2f2f2; */
   font-family: "Inter", sans-serif;
   font-weight: 700;
+  -ms-flex: 0 0 350px;
+  flex: 0 0 350px;
 }
 
 .cv-preview {
   min-height: 50vh;
   /* width: 55vw; */
+  -ms-flex: 0 0 860px;
+  flex: 0 0 860px;
 }
 
 .general-info {
@@ -145,21 +149,11 @@ code {
   text-align: left;
 }
 
-.techAlign {
+[class*="techAlign"] {
   text-align: left;
 }
 
 .techUsedItem {
   font-size: 14px;
   text-decoration: underline;
-}
-
-.control-panel {
-  -ms-flex: 0 0 350px;
-  flex: 0 0 350px;
-}
-
-.cv-preview {
-  -ms-flex: 0 0 860px;
-  flex: 0 0 860px;
 }

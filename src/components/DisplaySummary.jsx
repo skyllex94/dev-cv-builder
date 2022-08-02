@@ -4,7 +4,7 @@ import Row from "react-bootstrap/esm/Row";
 
 function DisplaySummary() {
   return (
-    <Row className="summaryField d-none d-flex">
+    <Row className="summaryField mt-3">
       <Col md={12}>
         <p className="textSummary"></p>
       </Col>

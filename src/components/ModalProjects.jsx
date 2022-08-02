@@ -45,7 +45,7 @@ function ModalProjects(props) {
     ".modalProjectEndDate",
   ];
 
-  const jobAmount = props.jobCount + 1;
+  const projectsAmount = props.projectcount + 1;
 
   const handleHighlight = (index, event) => {
     const values = [...highlights];
@@ -100,7 +100,7 @@ function ModalProjects(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Personal Projects
+          Personal Projects {projectsAmount}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
@@ -112,7 +112,7 @@ function ModalProjects(props) {
                   <FloatingLabel label="Project Name *">
                     <Form.Control
                       type="text"
-                      className={"mb-2 modalProjectName"}
+                      className={"mb-2 modalProjectName" + projectsAmount}
                       value={project}
                       onChange={(event) => {
                         setProject(event.target.value);
@@ -125,7 +125,7 @@ function ModalProjects(props) {
                         <FloatingLabel label="Link to Website">
                           <Form.Control
                             type="text"
-                            className={"mb-2 modalProjectLink"}
+                            className={"mb-2 modalProjectLink" + projectsAmount}
                             placeholder="projectWebsite"
                             value={projectLink}
                             onChange={(event) => {
@@ -138,7 +138,9 @@ function ModalProjects(props) {
                         <FloatingLabel label="Github Repo">
                           <Form.Control
                             type="text"
-                            className={"mb-2 modalProjectGithub"}
+                            className={
+                              "mb-2 modalProjectGithub" + projectsAmount
+                            }
                             placeholder="projectGithub"
                             value={projectGithub}
                             onChange={(event) => {
@@ -153,7 +155,7 @@ function ModalProjects(props) {
                   <FloatingLabel label="Project Description *">
                     <Form.Control
                       type="text"
-                      className={"mb-2 modalDesc"}
+                      className={"mb-2 modalDesc" + projectsAmount}
                       placeholder="desc"
                       value={desc}
                       onChange={(event) => {
@@ -174,7 +176,7 @@ function ModalProjects(props) {
                             <FloatingLabel label="Technology:">
                               <Form.Control
                                 type="text"
-                                className={"mb-2 modalTech"}
+                                className={"mb-2 modalTech" + projectsAmount}
                                 placeholder="tech"
                                 name="tech"
                                 value={tech.tech}
@@ -203,7 +205,9 @@ function ModalProjects(props) {
                       <FloatingLabel label="Start Date">
                         <Form.Control
                           type="date"
-                          className={"mb-2 modalProjectStartDate"}
+                          className={
+                            "mb-2 modalProjectStartDate" + projectsAmount
+                          }
                           placeholder="02/2022"
                           value={startDate}
                           onChange={(event) => {
@@ -216,7 +220,9 @@ function ModalProjects(props) {
                       <FloatingLabel label="End Date">
                         <Form.Control
                           type="date"
-                          className={"mb-2 modalProjectEndDate"}
+                          className={
+                            "mb-2 modalProjectEndDate" + projectsAmount
+                          }
                           placeholder="12/2022"
                           value={endDate}
                           onChange={(event) => {
@@ -272,13 +278,7 @@ function ModalProjects(props) {
       <Modal.Footer>
         <Button
           onClick={() =>
-            displayProjects(
-              props.onHide,
-              props.uiclasses,
-              modalValues,
-              techUsed,
-              highlights
-            )
+            displayProjects(props.onHide, techUsed, highlights, projectsAmount)
           }
         >
           Submit

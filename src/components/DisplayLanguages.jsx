@@ -5,7 +5,7 @@ import { HorizontalLine } from "../utils/Utils";
 
 function DisplayLanguages() {
   return (
-    <Row className="languagesField">
+    <Row className="languagesField mt-3">
       <Col md={12}>
         <div className="section-titles">Languages</div>
         <HorizontalLine />

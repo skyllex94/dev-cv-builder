@@ -27,7 +27,7 @@ function ModalWork(props) {
     },
   ]);
 
-  const jobAmount = props.jobCount + 1;
+  const jobAmount = props.jobcount + 1;
 
   const handleResp = (index, event) => {
     const values = [...responsibilities];

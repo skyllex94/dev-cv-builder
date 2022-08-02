@@ -6,7 +6,7 @@ import { HorizontalLine } from "../utils/Utils";
 
 function DisplayEducation() {
   return (
-    <Row className="educationField">
+    <Row className="educationField mt-3">
       <Col md={12}>
         <div className="section-titles">Education</div>
         <HorizontalLine />

@@ -5,7 +5,7 @@ import { HorizontalLine } from "../utils/Utils";
 
 function DisplaySkills() {
   return (
-    <Row className="skillsField">
+    <Row className="skillsField mt-3">
       <Col md={12}>
         <div className="section-titles">Skills</div>
         <HorizontalLine />

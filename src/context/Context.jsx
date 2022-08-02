@@ -87,7 +87,6 @@ export const ContextProvider = ({ children }) => {
     let isEmpty = true;
     ArrOfValues.forEach((current) => {
       if (current.value === "") {
-        console.log(current);
       } else {
         isEmpty = false;
       }
@@ -149,7 +148,6 @@ export const ContextProvider = ({ children }) => {
     if (workStartDate.value === "" && workEndDate.value === "") {
       document.querySelector(".work-period" + index).classList.add("d-none");
     } else {
-      console.log(index);
       document.querySelector(".work-period" + index).classList.remove("d-none");
       const formatStart = workStartDate.value.replaceAll("-", " ");
       const formatEnd = workEndDate.value.replaceAll("-", " ");
@@ -290,51 +288,62 @@ export const ContextProvider = ({ children }) => {
     hideModal();
   };
 
-  const displayProjects = (
-    hideModal,
-    arrUIClasses,
-    arrModalValues,
-    techUsed,
-    highlights
-  ) => {
-    const previewProjectName = document.querySelector(arrUIClasses[0]);
-    const modalProjectName = document.querySelector(arrModalValues[0]);
+  const displayProjects = (hideModal, techUsed, highlights, index) => {
+    const prjDisplay = document.querySelector(".projectField" + index);
+    prjDisplay.classList.remove("d-none");
 
-    const previewPrimaryLanguage = document.querySelector(arrUIClasses[1]);
-    const modalPrimaryLanguage = document.querySelector(arrModalValues[1]);
+    const previewProjectName = document.querySelector(".projectName" + index);
+    const modalProjectName = document.querySelector(
+      ".modalProjectName" + index
+    );
 
-    const previewStartDate = document.querySelector(arrUIClasses[2]);
-    const modalStartDate = document.querySelector(arrModalValues[2]);
+    const previewDesc = document.querySelector(".projectDesc" + index);
+    const modalDesc = document.querySelector(".modalDesc" + index);
 
-    const previewEndDate = document.querySelector(arrUIClasses[3]);
-    const modalEndDate = document.querySelector(arrModalValues[3]);
+    const previewStartDate = document.querySelector(
+      ".projectStartDate" + index
+    );
+    const modalStartDate = document.querySelector(
+      ".modalProjectStartDate" + index
+    );
 
-    const projectWebsite = document.querySelector(".modalProjectLink");
-    const projectGithub = document.querySelector(".modalProjectGithub");
+    const previewEndDate = document.querySelector(".projectEndDate" + index);
+    const modalEndDate = document.querySelector(".modalProjectEndDate" + index);
+
+    const projectWebsite = document.querySelector(".modalProjectLink" + index);
+    const projectGithub = document.querySelector(".modalProjectGithub" + index);
+
+    console.log(document.querySelector(".projectLink" + index));
 
     if (projectWebsite.value === "") {
-      document.querySelector(".projectLink").classList.add("d-none");
+      document.querySelector(".projectLink" + index).classList.add("d-none");
     } else {
-      document.querySelector(".projectLink").classList.remove("d-none");
-      document.getElementById("projectLink").href = projectWebsite.value;
+      document.querySelector(".projectLink" + index).classList.remove("d-none");
+      document.getElementById("projectLink" + index).href =
+        projectWebsite.value;
     }
     if (projectGithub.value === "") {
-      document.querySelector(".prjGithubLink").classList.add("d-none");
-      console.log(document.querySelector(".prjGithubLink"));
+      document.querySelector(".prjGithubLink" + index).classList.add("d-none");
+      console.log(document.querySelector(".prjGithubLink" + index));
     } else {
-      document.querySelector(".prjGithubLink").classList.remove("d-none");
-      document.getElementById("prjGithubLink").href = projectGithub.value;
+      document
+        .querySelector(".prjGithubLink" + index)
+        .classList.remove("d-none");
+      document.getElementById("prjGithubLink" + index).href =
+        projectGithub.value;
     }
 
     // Fetch primary information
     previewProjectName.textContent = modalProjectName.value;
-    previewPrimaryLanguage.textContent = modalPrimaryLanguage.value;
+    previewDesc.textContent = modalDesc.value;
 
     // Format date string to display only written month and numeric year
     if (modalStartDate.value === "" && modalEndDate.value === "") {
-      document.querySelector(".project-period").classList.add("d-none");
+      document.querySelector(".project-period" + index).classList.add("d-none");
     } else {
-      document.querySelector(".project-period").classList.remove("d-none");
+      document
+        .querySelector(".project-period" + index)
+        .classList.remove("d-none");
       const formatStart = modalStartDate.value.replaceAll("-", " ");
       const formatEnd = modalEndDate.value.replaceAll("-", " ");
       let start = new Date(formatStart);
@@ -347,7 +356,9 @@ export const ContextProvider = ({ children }) => {
       previewEndDate.textContent = `${mo2}, ${ye2}`;
     }
 
-    const groupInsert = document.querySelector(arrUIClasses[4]);
+    const groupInsert = document.querySelector(
+      ".projectAccomplishments" + index
+    );
     removeAllChildNodes(groupInsert);
 
     highlights.map((curr) => {
@@ -362,11 +373,11 @@ export const ContextProvider = ({ children }) => {
     });
 
     // Remove all prior elements before iterating over array
-    const group = document.querySelector(".techGroup");
+    const group = document.querySelector(".techGroup" + index);
     removeAllChildNodes(group);
 
     // Create a li for each skill and display it
-    const techTitle = document.querySelector(".techTitle");
+    const techTitle = document.querySelector(".techTitle" + index);
     techUsed.map((curr, index) => {
       const element = document.createElement("div");
 

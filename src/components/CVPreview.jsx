@@ -41,10 +41,9 @@ export const CVPreview = React.forwardRef((props, ref) => {
   const [onDrop, setOnDrop] = useState(sections);
 
   function handleOnDrop(result) {
+    if (!result.destination) return;
     let items = onDrop;
-    if (result.destination == null) {
-      return;
-    }
+    console.log(result);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     setOnDrop(items);
@@ -65,7 +64,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
                 <Draggable draggableId={curr.id} key={curr.id} index={index}>
                   {(provided) => (
                     <Row
-                      className={curr.id + " pt-3"}
+                      className={curr.id}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
@@ -75,7 +74,6 @@ export const CVPreview = React.forwardRef((props, ref) => {
                   )}
                 </Draggable>
               ))}
-
               {provided.placeholder}
             </Row>
           </div>
