@@ -202,7 +202,6 @@ export const ContextProvider = ({ children }) => {
 
     // Create a li for each skill and display it
     itemsArray.map((curr, index) => {
-      // TODO: Adding a col element so they can be properly structured
       const element = document.createElement("div");
       if (UIClassName.includes("language")) {
         if (itemsArray.length === index + 1) {
@@ -216,6 +215,7 @@ export const ContextProvider = ({ children }) => {
 
       const col = document.createElement("div");
       col.className = "col-auto mb-2";
+
       // Append the element to the flexible column and append the column to the row
       col.appendChild(element);
       group.appendChild(col);
@@ -294,6 +294,7 @@ export const ContextProvider = ({ children }) => {
     hideModal,
     arrUIClasses,
     arrModalValues,
+    techUsed,
     highlights
   ) => {
     const previewProjectName = document.querySelector(arrUIClasses[0]);
@@ -359,6 +360,31 @@ export const ContextProvider = ({ children }) => {
         groupInsert.appendChild(paragraph);
       }
     });
+
+    // Remove all prior elements before iterating over array
+    const group = document.querySelector(".techGroup");
+    removeAllChildNodes(group);
+
+    // Create a li for each skill and display it
+    const techTitle = document.querySelector(".techTitle");
+    techUsed.map((curr, index) => {
+      const element = document.createElement("div");
+
+      // Append the element to the the column and to the row
+      if (techUsed.length - 1 === index) {
+        element.textContent = curr.tech;
+      } else {
+        element.textContent = curr.tech + ",";
+      }
+      element.className = "techUsedItem d-inline mx-2";
+      group.appendChild(element);
+    });
+    // Check if you have any elements in in the array, if not hide the title
+    if (techUsed.length === 0) {
+      techTitle.classList.add("d-none");
+    } else {
+      techTitle.classList.remove("d-none");
+    }
 
     hideModal();
   };

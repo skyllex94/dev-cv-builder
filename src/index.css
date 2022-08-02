@@ -144,3 +144,22 @@ code {
   text-transform: capitalize;
   text-align: left;
 }
+
+.techAlign {
+  text-align: left;
+}
+
+.techUsedItem {
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.control-panel {
+  -ms-flex: 0 0 350px;
+  flex: 0 0 350px;
+}
+
+.cv-preview {
+  -ms-flex: 0 0 860px;
+  flex: 0 0 860px;
+}

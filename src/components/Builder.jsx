@@ -24,10 +24,10 @@ function Builder() {
       <Header />
       <Container fluid className="p-4 bg-light">
         <Row className="d-flex justify-content-lg-center">
-          <Col md={3}>
+          <Col className="control-panel">
             <ControlPanel handlePrint={handlePrint} />
           </Col>
-          <Col md={8}>
+          <Col className="cv-preview">
             <Editor ref={componentRef} />
           </Col>
         </Row>

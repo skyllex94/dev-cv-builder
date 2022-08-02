@@ -190,7 +190,11 @@ function ModalProjects(props) {
                           </Col>
                         );
                       })}
-                      <Button onClick={addTech}>Add</Button>
+                      <Col className="d-flex justify-content-end">
+                        <Button onClick={addTech} className="mb-2">
+                          Add
+                        </Button>
+                      </Col>
                     </Row>
                   </Form.Group>
 
@@ -272,6 +276,7 @@ function ModalProjects(props) {
               props.onHide,
               props.uiclasses,
               modalValues,
+              techUsed,
               highlights
             )
           }

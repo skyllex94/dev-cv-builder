@@ -18,10 +18,10 @@ function DisplayProjects() {
         <Form.Label className="projectName"></Form.Label>
 
         <Nav.Link id="projectLink" className="projectLink d-none" href="">
-          <FiExternalLink className="ms-2 mt-1" />
+          <FiExternalLink className="mx-1 mt-1" />
         </Nav.Link>
         <Nav.Link id="prjGithubLink" className="prjGithubLink d-none" href="">
-          <AiFillGithub className="ms-2 mt-1" />
+          <AiFillGithub className="mx-1 mt-1" />
         </Nav.Link>
       </Col>
       <Col md={12} className="d-flex project-info">
@@ -32,6 +32,10 @@ function DisplayProjects() {
             <div className="me-2 ms-1 projectEndDate" />
           </Col>
         </div>
+      </Col>
+      <Col md={12} className="techAlign">
+        <div className="d-inline techTitle d-none">Technologies Used: </div>
+        <div className="d-inline techGroup"></div>
       </Col>
 
       <Col md={12} className="project-accomplish d-flex">
