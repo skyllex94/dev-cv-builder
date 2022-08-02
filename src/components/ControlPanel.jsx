@@ -8,6 +8,7 @@ import Card from "react-bootstrap/esm/Card";
 import Form from "react-bootstrap/esm/Form";
 import { Switch } from "antd";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { MdDriveFileRenameOutline } from "react-icons/md";
 
 import ModalInfoContent from "./ModalInfoContent";
 import ModalSummary from "./ModalSummary";
@@ -16,6 +17,7 @@ import ModalSkills from "./ModalSkills";
 import ModalEducation from "./ModalEducation";
 import ModalLanguages from "./ModalLanguages";
 import ModalProjects from "./ModalProjects";
+import RenameModal from "./RenameModal";
 
 function ControlPanel({ handlePrint }) {
   const [modalGenInfo, setModalGenInfo] = useState(false);
@@ -82,14 +84,14 @@ function ControlPanel({ handlePrint }) {
   };
 
   const toggleCurrModal = (showState, UIClassName) => {
-    const education = document.querySelector("." + UIClassName);
-    if (education === null) {
+    const modal = document.querySelector("." + UIClassName);
+    if (modal === null) {
       return;
     }
     if (showState) {
-      education.classList.remove("d-none");
+      modal.classList.remove("d-none");
     } else {
-      education.classList.add("d-none");
+      modal.classList.add("d-none");
     }
   };
 
@@ -122,6 +124,9 @@ function ControlPanel({ handlePrint }) {
     });
   };
 
+  const [modalName, setModalName] = useState("General Information");
+  const [renameModal, setRenameModal] = useState(false);
+
   return (
     <div className="control-panel">
       <Accordion className="mb-2 bg-light" defaultActiveKey={["0"]} alwaysOpen>
@@ -132,15 +137,18 @@ function ControlPanel({ handlePrint }) {
           <Accordion.Body>
             <div className="d-grid gap-2">
               <Row>
-                <Col md={10} className="d-flex justify-content-start">
+                <Col md={8} className="d-flex justify-content-start">
                   <Button
                     variant="py-3 mt-1"
                     onClick={() => setModalGenInfo(true)}
                   >
-                    General Information
+                    {modalName}
                   </Button>
                 </Col>
-                <Col md={2} className="d-flex mt-2 justify-content-end">
+                <Col md={4} className="d-flex mt-2 justify-content-end">
+                  <Button variant="white" onClick={() => setRenameModal(true)}>
+                    <MdDriveFileRenameOutline />
+                  </Button>
                   <Switch
                     defaultChecked
                     onClick={() =>
@@ -389,6 +397,13 @@ function ControlPanel({ handlePrint }) {
                 </Card>
               </Row>
             </div>
+
+            <RenameModal
+              show={renameModal}
+              onHide={() => setRenameModal(false)}
+              currName={modalName}
+              setCurrName={setModalName}
+            />
 
             <ModalInfoContent
               show={modalGenInfo}
