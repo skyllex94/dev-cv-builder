@@ -8,6 +8,8 @@ import Container from "react-bootstrap/esm/Container";
 import React from "react";
 import { useReactToPrint } from "react-to-print";
 import { ContextProvider } from "../context/Context";
+import { ImPageBreak } from "react-icons/im";
+import { IoMdArrowDropleft } from "react-icons/io";
 
 function Builder() {
   const componentRef = React.useRef();
@@ -27,8 +29,16 @@ function Builder() {
           <Col className="control-panel">
             <ControlPanel handlePrint={handlePrint} />
           </Col>
+
           <Col className="cv-preview">
             <Editor ref={componentRef} />
+          </Col>
+
+          <Col className="separatorSection">
+            <div>
+              <IoMdArrowDropleft />
+              <ImPageBreak className="separator" />
+            </div>
           </Col>
         </Row>
       </Container>

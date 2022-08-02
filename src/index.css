@@ -38,9 +38,18 @@ code {
 
 .cv-preview {
   min-height: 50vh;
-  /* width: 55vw; */
   -ms-flex: 0 0 860px;
   flex: 0 0 860px;
+}
+
+.separatorSection {
+  -ms-flex: 0 0 75px;
+  flex: 0 0 75px;
+}
+
+.separator {
+  max-height: 1870px;
+  border-bottom: 1px solid black;
 }
 
 .general-info {

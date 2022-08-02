@@ -25,11 +25,8 @@ function DisplayProjects() {
             <HorizontalLine />
           </Col>
         ) : null}
-        <Row className="mt-2">
-          <Col
-            md={3}
-            className={"d-flex mt-3 d-none projectField" + project.project}
-          >
+        <Row className="align-items-center">
+          <Col className={" col-3 d-none projectField" + project.project}>
             <Col className="d-inline d-flex">
               <Form.Label className={"projectName" + project.project} />
               <Nav.Link
@@ -49,9 +46,9 @@ function DisplayProjects() {
             </Col>
           </Col>
 
-          <Col md={9} className="d-flex d-inline">
+          <Col className="col-9">
             <Row>
-              <Col className={"d-flex d-inline project-info" + project.project}>
+              <Col className={"d-flex project-info" + project.project}>
                 <div className={"me-2 projectDesc" + project.project} />
                 <div className={"d-none project-period" + project.project}>
                   <Col className="d-flex">
