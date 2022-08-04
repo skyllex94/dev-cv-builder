@@ -19,6 +19,8 @@ import ModalLanguages from "./ModalLanguages";
 import ModalProjects from "./ModalProjects";
 import RenameModal from "./RenameModal";
 
+import { NavLink } from "react-router-dom";
+
 function ControlPanel({ handlePrint }) {
   const [modalGenInfo, setModalGenInfo] = useState(false);
   const [modalSummary, setModalSummary] = useState(false);
@@ -127,6 +129,8 @@ function ControlPanel({ handlePrint }) {
   const [modalName, setModalName] = useState("Skilly");
   const [renameModal, setRenameModal] = useState(false);
 
+  const renameSection = () => {};
+
   return (
     <div className="control-panel">
       <Accordion className="mb-2 bg-light" defaultActiveKey={["0"]} alwaysOpen>
@@ -138,12 +142,12 @@ function ControlPanel({ handlePrint }) {
             <div className="d-grid gap-2">
               <Row>
                 <Col md={10} className="d-flex justify-content-start">
-                  <Button
-                    variant="py-3 mt-1"
+                  <Form.Label
+                    className="section-styling mt-2"
                     onClick={() => setModalGenInfo(true)}
                   >
                     General Information
-                  </Button>
+                  </Form.Label>
                 </Col>
                 <Col md={2} className="d-flex mt-2 justify-content-end">
                   <Switch
@@ -160,12 +164,12 @@ function ControlPanel({ handlePrint }) {
 
               <Row>
                 <Col md={10} className="d-flex justify-content-start">
-                  <Button
-                    variant="py-3 mt-1"
+                  <Form.Label
+                    className="section-styling mt-2"
                     onClick={() => setModalSummary(true)}
                   >
                     Summary
-                  </Button>
+                  </Form.Label>
                 </Col>
                 <Col md={2} className="d-flex mt-2 justify-content-end">
                   <Switch
@@ -184,17 +188,17 @@ function ControlPanel({ handlePrint }) {
                 <Card>
                   <Row className="my-3">
                     <Col md={10} className="d-flex justify-content-start">
-                      <Form.Label className="controlPanelWork ms-2">
+                      <Form.Label className="cp-work-styling ms-2">
                         {modalName}
                       </Form.Label>
                     </Col>
                     <Col md={2} className="d-flex justify-content-end">
-                      <Button
-                        variant="white"
+                      <Form.Label
+                        className="section-styling me-2"
                         onClick={() => setRenameModal(true)}
                       >
                         <MdDriveFileRenameOutline />
-                      </Button>
+                      </Form.Label>
                       <Switch
                         defaultChecked
                         onClick={() =>
@@ -213,19 +217,19 @@ function ControlPanel({ handlePrint }) {
                         <div key={index}>
                           <Row className="mb-2">
                             <Col md={6}>
-                              <Button
-                                variant="py-3 mt-1 mb-2"
+                              <Form.Label
+                                className="section-styling my-2"
                                 onClick={() =>
                                   showModals(index, allSetModalsWork)
                                 }
                               >
                                 {section.name}
-                              </Button>
+                              </Form.Label>
                             </Col>
 
                             <Col md={6} className="d-flex">
-                              <Button
-                                variant="white"
+                              <Form.Label
+                                className="section-styling mt-2 me-3"
                                 onClick={() =>
                                   handleAddField(
                                     index,
@@ -236,9 +240,9 @@ function ControlPanel({ handlePrint }) {
                                 }
                               >
                                 <AiOutlinePlus />
-                              </Button>
-                              <Button
-                                variant="white"
+                              </Form.Label>
+                              <Form.Label
+                                className="section-styling mt-2"
                                 onClick={() =>
                                   handleRemoveField(
                                     index,
@@ -249,7 +253,7 @@ function ControlPanel({ handlePrint }) {
                                 }
                               >
                                 <AiOutlineMinus />
-                              </Button>
+                              </Form.Label>
                             </Col>
                           </Row>
                           <ModalWork
@@ -265,9 +269,12 @@ function ControlPanel({ handlePrint }) {
               </Row>
               <Row>
                 <Col md={10} className="d-flex justify-content-start">
-                  <Button variant="white" onClick={() => setModalSkills(true)}>
+                  <Form.Label
+                    className="section-styling mt-2"
+                    onClick={() => setModalSkills(true)}
+                  >
                     Skills
-                  </Button>
+                  </Form.Label>
                 </Col>
                 <Col md={2} className="d-flex mt-2 justify-content-end">
                   <Switch
@@ -283,12 +290,12 @@ function ControlPanel({ handlePrint }) {
               </Row>
               <Row>
                 <Col md={10} className="d-flex justify-content-start">
-                  <Button
-                    variant="white"
+                  <Form.Label
+                    className="section-styling mt-2"
                     onClick={() => setModalEducation(true)}
                   >
                     Education
-                  </Button>
+                  </Form.Label>
                 </Col>
                 <Col md={2} className="d-flex mt-2 justify-content-end">
                   <Switch
@@ -304,12 +311,12 @@ function ControlPanel({ handlePrint }) {
               </Row>
               <Row>
                 <Col md={10} className="d-flex justify-content-start">
-                  <Button
-                    variant="white"
+                  <Form.Label
+                    className="section-styling mt-2"
                     onClick={() => setModalLanguages(true)}
                   >
                     Languages
-                  </Button>
+                  </Form.Label>
                 </Col>
                 <Col md={2} className="d-flex mt-2 justify-content-end">
                   <Switch
@@ -327,7 +334,7 @@ function ControlPanel({ handlePrint }) {
                 <Card>
                   <Row>
                     <Col md={10} className="d-flex justify-content-start mt-3">
-                      <Form.Label className="controlPanelWork ms-2">
+                      <Form.Label className="cp-work-styling ms-2">
                         Personal Projects
                       </Form.Label>
                     </Col>
@@ -349,19 +356,19 @@ function ControlPanel({ handlePrint }) {
                         <div key={index}>
                           <Row className="mb-2">
                             <Col md={6}>
-                              <Button
-                                variant="py-3 mt-1 mb-2"
+                              <Form.Label
+                                className="section-styling my-2"
                                 onClick={() =>
                                   showModals(index, allSetModalsProject)
                                 }
                               >
                                 {section.name}
-                              </Button>
+                              </Form.Label>
                             </Col>
 
                             <Col md={6} className="d-flex">
-                              <Button
-                                variant="white"
+                              <Form.Label
+                                className="section-styling mt-2 me-3"
                                 onClick={() =>
                                   handleAddField(
                                     index,
@@ -372,9 +379,9 @@ function ControlPanel({ handlePrint }) {
                                 }
                               >
                                 <AiOutlinePlus />
-                              </Button>
-                              <Button
-                                variant="white"
+                              </Form.Label>
+                              <Form.Label
+                                className="section-styling mt-2"
                                 onClick={() =>
                                   handleRemoveField(
                                     index,
@@ -385,7 +392,7 @@ function ControlPanel({ handlePrint }) {
                                 }
                               >
                                 <AiOutlineMinus />
-                              </Button>
+                              </Form.Label>
                             </Col>
                           </Row>
                           <ModalProjects
