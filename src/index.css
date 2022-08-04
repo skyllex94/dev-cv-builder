@@ -91,7 +91,7 @@ code {
   color: black;
 }
 
-.section-titles {
+[class*="section-titles"] {
   font-weight: 800;
   font-size: 15px;
   color: #3c3c3c;

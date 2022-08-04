@@ -22,9 +22,11 @@ function RenameModal(props) {
               <Form.Control
                 type="text"
                 className={"mb-2 renameSection"}
-                value={props.currName}
+                value={props.currname}
                 onChange={(event) => {
-                  props.setCurrName(event.target.value);
+                  props.setcurrname(event.target.value);
+                  document.querySelector(props.class).textContent =
+                    event.target.value;
                 }}
               />
             </FloatingLabel>

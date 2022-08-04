@@ -124,7 +124,7 @@ function ControlPanel({ handlePrint }) {
     });
   };
 
-  const [modalName, setModalName] = useState("General Information");
+  const [modalName, setModalName] = useState("Skilly");
   const [renameModal, setRenameModal] = useState(false);
 
   return (
@@ -137,18 +137,15 @@ function ControlPanel({ handlePrint }) {
           <Accordion.Body>
             <div className="d-grid gap-2">
               <Row>
-                <Col md={8} className="d-flex justify-content-start">
+                <Col md={10} className="d-flex justify-content-start">
                   <Button
                     variant="py-3 mt-1"
                     onClick={() => setModalGenInfo(true)}
                   >
-                    {modalName}
+                    General Information
                   </Button>
                 </Col>
-                <Col md={4} className="d-flex mt-2 justify-content-end">
-                  <Button variant="white" onClick={() => setRenameModal(true)}>
-                    <MdDriveFileRenameOutline />
-                  </Button>
+                <Col md={2} className="d-flex mt-2 justify-content-end">
                   <Switch
                     defaultChecked
                     onClick={() =>
@@ -187,11 +184,17 @@ function ControlPanel({ handlePrint }) {
                 <Card>
                   <Row className="my-3">
                     <Col md={10} className="d-flex justify-content-start">
-                      <Form.Label className="controlPanelWork me-3">
-                        Work Experience
+                      <Form.Label className="controlPanelWork ms-2">
+                        {modalName}
                       </Form.Label>
                     </Col>
                     <Col md={2} className="d-flex justify-content-end">
+                      <Button
+                        variant="white"
+                        onClick={() => setRenameModal(true)}
+                      >
+                        <MdDriveFileRenameOutline />
+                      </Button>
                       <Switch
                         defaultChecked
                         onClick={() =>
@@ -324,7 +327,7 @@ function ControlPanel({ handlePrint }) {
                 <Card>
                   <Row>
                     <Col md={10} className="d-flex justify-content-start mt-3">
-                      <Form.Label className="controlPanelWork me-3">
+                      <Form.Label className="controlPanelWork ms-2">
                         Personal Projects
                       </Form.Label>
                     </Col>
@@ -401,8 +404,9 @@ function ControlPanel({ handlePrint }) {
             <RenameModal
               show={renameModal}
               onHide={() => setRenameModal(false)}
-              currName={modalName}
-              setCurrName={setModalName}
+              currname={modalName}
+              setcurrname={setModalName}
+              class=".section-titlesw"
             />
 
             <ModalInfoContent
