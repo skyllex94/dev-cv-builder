@@ -126,10 +126,40 @@ function ControlPanel({ handlePrint }) {
     });
   };
 
-  const [modalName, setModalName] = useState("Skilly");
-  const [renameModal, setRenameModal] = useState(false);
+  const [renameWork, setRenameWork] = useState({
+    value: "Work Experience",
+    isInEditMode: false,
+  });
+  const [renameSkills, setRenameSkills] = useState({
+    value: "Skills",
+    isInEditMode: false,
+  });
 
-  const renameSection = () => {};
+  const toggleRenameMode = (state, setState) => {
+    setState({ isInEditMode: !state.isInEditMode, value: state.value });
+  };
+
+  const renderEditView = (value, setValue, UIClassName) => {
+    return (
+      <Col className="d-flex d-inline">
+        <Form.Control
+          type="text"
+          defaultValue={value}
+          onChange={(event) =>
+            setValue({ isInEditMode: true, value: event.target.value })
+          }
+        />
+        <Button onClick={() => updateRenameValue(value, setValue, UIClassName)}>
+          OK
+        </Button>
+      </Col>
+    );
+  };
+
+  const updateRenameValue = (value, setValue, UIClassName) => {
+    setValue({ isInEditMode: false, value: value });
+    document.querySelector(UIClassName).textContent = value;
+  };
 
   return (
     <div className="control-panel">
@@ -144,11 +174,13 @@ function ControlPanel({ handlePrint }) {
                 <Col md={10} className="d-flex justify-content-start">
                   <Form.Label
                     className="section-styling mt-2"
+                    type="text"
                     onClick={() => setModalGenInfo(true)}
                   >
                     General Information
                   </Form.Label>
                 </Col>
+
                 <Col md={2} className="d-flex mt-2 justify-content-end">
                   <Switch
                     defaultChecked
@@ -187,15 +219,23 @@ function ControlPanel({ handlePrint }) {
               <Row>
                 <Card>
                   <Row className="my-3">
-                    <Col md={10} className="d-flex justify-content-start">
+                    <Col md={9} className="d-flex justify-content-start">
                       <Form.Label className="cp-work-styling ms-2">
-                        {modalName}
+                        {renameWork.isInEditMode
+                          ? renderEditView(
+                              renameWork.value,
+                              setRenameWork,
+                              ".section-titles-work"
+                            )
+                          : renameWork.value}
                       </Form.Label>
                     </Col>
-                    <Col md={2} className="d-flex justify-content-end">
+                    <Col md={3} className="d-flex justify-content-end">
                       <Form.Label
                         className="section-styling me-2"
-                        onClick={() => setRenameModal(true)}
+                        onClick={() =>
+                          toggleRenameMode(renameWork, setRenameWork)
+                        }
                       >
                         <MdDriveFileRenameOutline />
                       </Form.Label>
@@ -268,15 +308,33 @@ function ControlPanel({ handlePrint }) {
                 </Card>
               </Row>
               <Row>
-                <Col md={10} className="d-flex justify-content-start">
-                  <Form.Label
-                    className="section-styling mt-2"
-                    onClick={() => setModalSkills(true)}
-                  >
-                    Skills
-                  </Form.Label>
+                <Col md={9} className="d-flex justify-content-start">
+                  {renameSkills.isInEditMode ? (
+                    <Form.Label className="section-styling mt-2">
+                      {renderEditView(
+                        renameSkills.value,
+                        setRenameSkills,
+                        ".section-titles-skills"
+                      )}
+                    </Form.Label>
+                  ) : (
+                    <Form.Label
+                      className="section-styling mt-2"
+                      onClick={() => setModalSkills(true)}
+                    >
+                      {renameSkills.value}
+                    </Form.Label>
+                  )}
                 </Col>
-                <Col md={2} className="d-flex mt-2 justify-content-end">
+                <Col md={3} className="d-flex mt-2 justify-content-end">
+                  <Form.Label
+                    className="section-styling me-2"
+                    onClick={() =>
+                      toggleRenameMode(renameSkills, setRenameSkills)
+                    }
+                  >
+                    <MdDriveFileRenameOutline />
+                  </Form.Label>
                   <Switch
                     defaultChecked
                     onClick={() =>
@@ -407,14 +465,6 @@ function ControlPanel({ handlePrint }) {
                 </Card>
               </Row>
             </div>
-
-            <RenameModal
-              show={renameModal}
-              onHide={() => setRenameModal(false)}
-              currname={modalName}
-              setcurrname={setModalName}
-              class=".section-titlesw"
-            />
 
             <ModalInfoContent
               show={modalGenInfo}

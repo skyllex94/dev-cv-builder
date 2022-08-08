@@ -7,7 +7,7 @@ function DisplaySkills() {
   return (
     <Row className="skillsField mt-3">
       <Col md={12}>
-        <div className="section-titles">Skills</div>
+        <div className="section-titles-skills">Skills</div>
         <HorizontalLine />
       </Col>
 

@@ -101,6 +101,7 @@ code {
 
 .section-styling:hover {
   color: #696969;
+  cursor: pointer;
 }
 
 .cp-work-styling {
