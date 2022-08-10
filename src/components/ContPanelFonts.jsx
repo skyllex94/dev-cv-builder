@@ -28,7 +28,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("Inter, sans-serif")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Default
         </Form.Label>
@@ -36,7 +36,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("Arial, sans-serif")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Arial, sans-serif
         </Form.Label>
@@ -44,7 +44,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("Trebuchet MS, sans-serif")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Trebuchet MS, sans-serif
         </Form.Label>
@@ -52,7 +52,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("Montserrat, sans-serif")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Montserrat, sans-serif
         </Form.Label>
@@ -60,7 +60,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("Raleway, sans-serif")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Raleway, sans-serif
         </Form.Label>
@@ -68,7 +68,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("Ubuntu, sans-serif")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Ubuntu, sans-serif
         </Form.Label>
@@ -77,7 +77,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("Times, Times New Roman, serif")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Times, Times New Roman, serif
         </Form.Label>
@@ -85,7 +85,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("Georgia, serif")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Georgia, serif
         </Form.Label>
@@ -93,7 +93,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("monospace")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Default, monospace
         </Form.Label>
@@ -101,7 +101,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("Courier New, monospace")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Courier New, monospace
         </Form.Label>
@@ -109,7 +109,7 @@ function ContPanelFonts() {
       <Row>
         <Form.Label
           onClick={() => changeFont("Apple Chancery, cursive")}
-          className="font-options ms-2 pb-2"
+          className="font-options ms-2 pb-2 section-styling"
         >
           Apple Chancery, cursive
         </Form.Label>

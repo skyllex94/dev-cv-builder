@@ -9,14 +9,20 @@ import cv from "../img/cv-example.png";
 function Landing() {
   return (
     <Container fluid>
-      <Row>
-        <Col className="left_side col-6">
+      <Row className="align-items-center mt-5">
+        <Col
+          md={7}
+          className="left_side justify-content-center align-items-center"
+        >
           <img src="/logo.png" alt="" />
-          <p className="landing_title">Free Developer CV Builder</p>
+          <p className="landing_title px-4">Free Developer CV Builder</p>
           <h4 className="landing_text">
             No more wasting time and money. You can start building your software
             developer "Curriculum Vitae" right away and export it for free.{" "}
           </h4>
+          <Button variant="outline-dark" className="px-3 py-2">
+            Create CV
+          </Button>
           <Link to="/build">
             <Button variant="outline-dark" className="px-3 py-2">
               Create CV
@@ -26,7 +32,10 @@ function Landing() {
             View Your CV
           </Button>
         </Col>
-        <Col className="col-6">
+        <Col
+          md={5}
+          className="d-flex justify-content-center align-items-center"
+        >
           <img className="img-fluid" src={cv} alt="Logo" />
         </Col>
       </Row>

@@ -268,7 +268,7 @@ function ContPanelSections() {
                         </Form.Label>
                       </Col>
 
-                      <Col md={6} className="d-flex">
+                      <Col md={6} className="d-flex justify-content-end">
                         <Form.Label
                           className="section-styling mt-2 me-3"
                           onClick={() =>

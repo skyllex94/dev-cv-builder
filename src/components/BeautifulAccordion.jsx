@@ -11,14 +11,6 @@ const data = [
     title: "Fonts",
     content: <ContPanelFonts />,
   },
-  {
-    title: "Purchasing process",
-    content: "tes",
-  },
-  {
-    title: "Usage guides",
-    content: "tes",
-  },
 ];
 
 class BeautifulAccordion extends React.Component {
@@ -41,7 +33,7 @@ class BeautifulAccordion extends React.Component {
 
 class AccordionItem extends React.Component {
   state = {
-    opened: false,
+    opened: true,
   };
 
   render() {
