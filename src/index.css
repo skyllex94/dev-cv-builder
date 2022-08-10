@@ -29,7 +29,6 @@ code {
 }
 
 .control-panel {
-  /* background-color: #f2f2f2; */
   font-family: "Inter", sans-serif;
   font-weight: 700;
   -ms-flex: 0 0 400px;
@@ -37,6 +36,7 @@ code {
 }
 
 .cv-preview {
+  /* font-family: "Georgia", serif; */
   min-height: 50vh;
   -ms-flex: 0 0 860px;
   flex: 0 0 860px;
@@ -52,10 +52,20 @@ code {
   border-bottom: 1px solid black;
 }
 
+/* ------------ Fonts Section -------------- */
 .general-info {
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
+}
+
+.font-section {
   text-align: left;
 }
+
+.font-options:hover {
+  color: #696969;
+  cursor: pointer;
+}
+/* ------------  -------------- */
 
 .textName {
   font-weight: 800;
@@ -86,7 +96,7 @@ code {
 }
 
 [class*="section-titles"] {
-  font-weight: 800;
+  font-weight: 800 !important;
   font-size: 15px;
   color: #3c3c3c;
   text-align: left;
@@ -151,7 +161,6 @@ code {
 }
 
 .skillsGroup div {
-  font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 14px;
   background-color: #f5f4f4;
@@ -162,7 +171,6 @@ code {
 }
 
 .languagesGroup div {
-  font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 14px;
   text-transform: capitalize;

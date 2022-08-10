@@ -1,5 +1,6 @@
 import React from "react";
 import ContPanelSections from "./ContPanelSections";
+import ContPanelFonts from "./ContPanelFonts";
 
 const data = [
   {
@@ -8,7 +9,7 @@ const data = [
   },
   {
     title: "Fonts",
-    content: "tes",
+    content: <ContPanelFonts />,
   },
   {
     title: "Purchasing process",

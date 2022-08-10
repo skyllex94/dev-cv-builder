@@ -174,7 +174,7 @@ function ContPanelSections() {
 
   return (
     <>
-      <div className="d-grid gap-2">
+      <div className="d-grid gap-2 ms-2">
         <Row>
           <Col md={10} className="d-flex justify-content-start">
             <Form.Label
