@@ -8,7 +8,7 @@ function DisplayEducation() {
   return (
     <Row className="educationField mt-3">
       <Col md={12}>
-        <div className="section-titles">Education</div>
+        <div className="section-titles-education">Education</div>
         <HorizontalLine />
       </Col>
       <Col md={12} className="d-flex">

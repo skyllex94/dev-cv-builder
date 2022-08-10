@@ -1,25 +1,24 @@
-import "../index.css";
+import { Switch } from "antd";
 import React, { useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/esm/Button";
-import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
 import Card from "react-bootstrap/esm/Card";
+import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
-import { Switch } from "antd";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import Row from "react-bootstrap/esm/Row";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { MdDriveFileRenameOutline } from "react-icons/md";
+import "../index.css";
 
-import ModalInfoContent from "./ModalInfoContent";
-import ModalSummary from "./ModalSummary";
-import ModalWork from "./ModalWork";
-import ModalSkills from "./ModalSkills";
+import BeautifulAccordion from "./BeautifulAccordion";
+
 import ModalEducation from "./ModalEducation";
+import ModalInfoContent from "./ModalInfoContent";
 import ModalLanguages from "./ModalLanguages";
 import ModalProjects from "./ModalProjects";
-import RenameModal from "./RenameModal";
-
-import { NavLink } from "react-router-dom";
+import ModalSkills from "./ModalSkills";
+import ModalSummary from "./ModalSummary";
+import ModalWork from "./ModalWork";
 
 function ControlPanel({ handlePrint }) {
   const [modalGenInfo, setModalGenInfo] = useState(false);
@@ -134,6 +133,18 @@ function ControlPanel({ handlePrint }) {
     value: "Skills",
     isInEditMode: false,
   });
+  const [renameEducation, setRenameEducation] = useState({
+    value: "Education",
+    isInEditMode: false,
+  });
+  const [renameLanguages, setRenameLanguages] = useState({
+    value: "Languages",
+    isInEditMode: false,
+  });
+  const [renameProjects, setRenameProjects] = useState({
+    value: "Personal Projects",
+    isInEditMode: false,
+  });
 
   const toggleRenameMode = (state, setState) => {
     setState({ isInEditMode: !state.isInEditMode, value: state.value });
@@ -149,8 +160,11 @@ function ControlPanel({ handlePrint }) {
             setValue({ isInEditMode: true, value: event.target.value })
           }
         />
-        <Button onClick={() => updateRenameValue(value, setValue, UIClassName)}>
-          OK
+        <Button
+          variant="success"
+          onClick={() => updateRenameValue(value, setValue, UIClassName)}
+        >
+          ✓
         </Button>
       </Col>
     );
@@ -163,341 +177,10 @@ function ControlPanel({ handlePrint }) {
 
   return (
     <div className="control-panel">
-      <Accordion className="mb-2 bg-light" defaultActiveKey={["0"]} alwaysOpen>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header className="accordion_header">
-            Sections
-          </Accordion.Header>
-          <Accordion.Body>
-            <div className="d-grid gap-2">
-              <Row>
-                <Col md={10} className="d-flex justify-content-start">
-                  <Form.Label
-                    className="section-styling mt-2"
-                    type="text"
-                    onClick={() => setModalGenInfo(true)}
-                  >
-                    General Information
-                  </Form.Label>
-                </Col>
-
-                <Col md={2} className="d-flex mt-2 justify-content-end">
-                  <Switch
-                    defaultChecked
-                    onClick={() =>
-                      ToggleSwitchButton(showGenInfo, setShowGenInfo)
-                    }
-                  />
-                  {showGenInfo
-                    ? toggleCurrModal(showGenInfo, "general-info")
-                    : toggleCurrModal(showGenInfo, "general-info")}
-                </Col>
-              </Row>
-
-              <Row>
-                <Col md={10} className="d-flex justify-content-start">
-                  <Form.Label
-                    className="section-styling mt-2"
-                    onClick={() => setModalSummary(true)}
-                  >
-                    Summary
-                  </Form.Label>
-                </Col>
-                <Col md={2} className="d-flex mt-2 justify-content-end">
-                  <Switch
-                    defaultChecked
-                    onClick={() =>
-                      ToggleSwitchButton(showSummary, setShowSummary)
-                    }
-                  />
-                  {showSummary
-                    ? toggleCurrModal(showSummary, "summaryField")
-                    : toggleCurrModal(showSummary, "summaryField")}
-                </Col>
-              </Row>
-
-              <Row>
-                <Card>
-                  <Row className="my-3">
-                    <Col md={9} className="d-flex justify-content-start">
-                      <Form.Label className="cp-work-styling ms-2">
-                        {renameWork.isInEditMode
-                          ? renderEditView(
-                              renameWork.value,
-                              setRenameWork,
-                              ".section-titles-work"
-                            )
-                          : renameWork.value}
-                      </Form.Label>
-                    </Col>
-                    <Col md={3} className="d-flex justify-content-end">
-                      <Form.Label
-                        className="section-styling me-2"
-                        onClick={() =>
-                          toggleRenameMode(renameWork, setRenameWork)
-                        }
-                      >
-                        <MdDriveFileRenameOutline />
-                      </Form.Label>
-                      <Switch
-                        defaultChecked
-                        onClick={() =>
-                          ToggleSwitchButton(showWork, setShowWork)
-                        }
-                      />
-                      {showWork
-                        ? toggleCurrModal(showWork, "work")
-                        : toggleCurrModal(showWork, "work")}
-                    </Col>
-                  </Row>
-
-                  <Col>
-                    {workSections.map((section, index) => {
-                      return (
-                        <div key={index}>
-                          <Row className="mb-2">
-                            <Col md={6}>
-                              <Form.Label
-                                className="section-styling my-2"
-                                onClick={() =>
-                                  showModals(index, allSetModalsWork)
-                                }
-                              >
-                                {section.name}
-                              </Form.Label>
-                            </Col>
-
-                            <Col md={6} className="d-flex">
-                              <Form.Label
-                                className="section-styling mt-2 me-3"
-                                onClick={() =>
-                                  handleAddField(
-                                    index,
-                                    "Job ",
-                                    workSections,
-                                    setWorkSections
-                                  )
-                                }
-                              >
-                                <AiOutlinePlus />
-                              </Form.Label>
-                              <Form.Label
-                                className="section-styling mt-2"
-                                onClick={() =>
-                                  handleRemoveField(
-                                    index,
-                                    ".workField",
-                                    workSections,
-                                    setWorkSections
-                                  )
-                                }
-                              >
-                                <AiOutlineMinus />
-                              </Form.Label>
-                            </Col>
-                          </Row>
-                          <ModalWork
-                            show={modalsWork[index]}
-                            onHide={() => allSetModalsWork[index](false)}
-                            jobcount={index}
-                          />
-                        </div>
-                      );
-                    })}
-                  </Col>
-                </Card>
-              </Row>
-              <Row>
-                <Col md={9} className="d-flex justify-content-start">
-                  {renameSkills.isInEditMode ? (
-                    <Form.Label className="section-styling mt-2">
-                      {renderEditView(
-                        renameSkills.value,
-                        setRenameSkills,
-                        ".section-titles-skills"
-                      )}
-                    </Form.Label>
-                  ) : (
-                    <Form.Label
-                      className="section-styling mt-2"
-                      onClick={() => setModalSkills(true)}
-                    >
-                      {renameSkills.value}
-                    </Form.Label>
-                  )}
-                </Col>
-                <Col md={3} className="d-flex mt-2 justify-content-end">
-                  <Form.Label
-                    className="section-styling me-2"
-                    onClick={() =>
-                      toggleRenameMode(renameSkills, setRenameSkills)
-                    }
-                  >
-                    <MdDriveFileRenameOutline />
-                  </Form.Label>
-                  <Switch
-                    defaultChecked
-                    onClick={() =>
-                      ToggleSwitchButton(showSkills, setShowSkills)
-                    }
-                  />
-                  {showSkills
-                    ? toggleCurrModal(showSkills, "skillsField")
-                    : toggleCurrModal(showSkills, "skillsField")}
-                </Col>
-              </Row>
-              <Row>
-                <Col md={10} className="d-flex justify-content-start">
-                  <Form.Label
-                    className="section-styling mt-2"
-                    onClick={() => setModalEducation(true)}
-                  >
-                    Education
-                  </Form.Label>
-                </Col>
-                <Col md={2} className="d-flex mt-2 justify-content-end">
-                  <Switch
-                    defaultChecked
-                    onClick={() =>
-                      ToggleSwitchButton(showEducation, setShowEducation)
-                    }
-                  />
-                  {showEducation
-                    ? toggleCurrModal(showEducation, "educationField")
-                    : toggleCurrModal(showEducation, "educationField")}
-                </Col>
-              </Row>
-              <Row>
-                <Col md={10} className="d-flex justify-content-start">
-                  <Form.Label
-                    className="section-styling mt-2"
-                    onClick={() => setModalLanguages(true)}
-                  >
-                    Languages
-                  </Form.Label>
-                </Col>
-                <Col md={2} className="d-flex mt-2 justify-content-end">
-                  <Switch
-                    defaultChecked
-                    onClick={() =>
-                      ToggleSwitchButton(showLanguages, setShowLanguages)
-                    }
-                  />
-                  {showLanguages
-                    ? toggleCurrModal(showLanguages, "languagesField")
-                    : toggleCurrModal(showLanguages, "languagesField")}
-                </Col>
-              </Row>
-              <Row>
-                <Card>
-                  <Row>
-                    <Col md={10} className="d-flex justify-content-start mt-3">
-                      <Form.Label className="cp-work-styling ms-2">
-                        Personal Projects
-                      </Form.Label>
-                    </Col>
-                    <Col md={2} className="d-flex my-3 justify-content-end">
-                      <Switch
-                        defaultChecked
-                        onClick={() =>
-                          ToggleSwitchButton(showProjects, setShowProjects)
-                        }
-                      />
-                      {showProjects
-                        ? toggleCurrModal(showProjects, "projects")
-                        : toggleCurrModal(showProjects, "projects")}
-                    </Col>
-                  </Row>
-                  <Col>
-                    {projectsSections.map((section, index) => {
-                      return (
-                        <div key={index}>
-                          <Row className="mb-2">
-                            <Col md={6}>
-                              <Form.Label
-                                className="section-styling my-2"
-                                onClick={() =>
-                                  showModals(index, allSetModalsProject)
-                                }
-                              >
-                                {section.name}
-                              </Form.Label>
-                            </Col>
-
-                            <Col md={6} className="d-flex">
-                              <Form.Label
-                                className="section-styling mt-2 me-3"
-                                onClick={() =>
-                                  handleAddField(
-                                    index,
-                                    "Projects ",
-                                    projectsSections,
-                                    setProjectsSections
-                                  )
-                                }
-                              >
-                                <AiOutlinePlus />
-                              </Form.Label>
-                              <Form.Label
-                                className="section-styling mt-2"
-                                onClick={() =>
-                                  handleRemoveField(
-                                    index,
-                                    ".projectField",
-                                    projectsSections,
-                                    setProjectsSections
-                                  )
-                                }
-                              >
-                                <AiOutlineMinus />
-                              </Form.Label>
-                            </Col>
-                          </Row>
-                          <ModalProjects
-                            show={modalsProject[index]}
-                            onHide={() => allSetModalsProject[index](false)}
-                            projectcount={index}
-                          />
-                        </div>
-                      );
-                    })}
-                  </Col>
-                </Card>
-              </Row>
-            </div>
-
-            <ModalInfoContent
-              show={modalGenInfo}
-              onHide={() => setModalGenInfo(false)}
-            />
-            <ModalSummary
-              show={modalSummary}
-              onHide={() => setModalSummary(false)}
-            />
-
-            <ModalSkills
-              show={modalSkills}
-              onHide={() => setModalSkills(false)}
-            />
-            <ModalEducation
-              show={modalEducation}
-              onHide={() => setModalEducation(false)}
-            />
-            <ModalLanguages
-              show={modalLanguages}
-              onHide={() => setModalLanguages(false)}
-            />
-            <ModalProjects
-              show={modalProjects}
-              onHide={() => setModalProjects(false)}
-              uiclasses={UIClassesForDisplayProjects}
-            />
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
+      <BeautifulAccordion />
 
       <div className="d-grid gap-2">
-        <Button variant="outline-dark mt-2" onClick={handlePrint}>
+        <Button variant="outline-dark mt-4" onClick={handlePrint}>
           Download PDF
         </Button>
       </div>
