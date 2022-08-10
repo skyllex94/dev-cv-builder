@@ -4,13 +4,24 @@ import Form from "react-bootstrap/esm/Form";
 
 function ContPanelFonts() {
   const changeFont = (font) => {
-    document.querySelector(".general-info").style = `font-family: ${font};`;
-    document.querySelector(".summary").style = `font-family: ${font};`;
-    document.querySelector(".work").style = `font-family: ${font};`;
-    document.querySelector(".skills").style = `font-family: ${font};`;
-    document.querySelector(".languages").style = `font-family: ${font};`;
-    document.querySelector(".education").style = `font-family: ${font};`;
-    document.querySelector(".projects").style = `font-family: ${font};`;
+    const arrDOMElements = [
+      document.querySelector(".general-info"),
+      document.querySelector(".summary"),
+      document.querySelector(".work"),
+      document.querySelector(".skills"),
+      document.querySelector(".languages"),
+      document.querySelector(".education"),
+      document.querySelector(".projects"),
+    ];
+    if (font === "Inter, sans-serif") {
+      arrDOMElements.forEach((element) => {
+        element.style = { all: "unset" };
+      });
+    } else {
+      arrDOMElements.forEach((element) => {
+        element.style = `font-family: ${font};`;
+      });
+    }
   };
   return (
     <div className="font-section">
@@ -24,6 +35,55 @@ function ContPanelFonts() {
       </Row>
       <Row>
         <Form.Label
+          onClick={() => changeFont("Arial, sans-serif")}
+          className="font-options ms-2 pb-2"
+        >
+          Arial, sans-serif
+        </Form.Label>
+      </Row>
+      <Row>
+        <Form.Label
+          onClick={() => changeFont("Trebuchet MS, sans-serif")}
+          className="font-options ms-2 pb-2"
+        >
+          Trebuchet MS, sans-serif
+        </Form.Label>
+      </Row>
+      <Row>
+        <Form.Label
+          onClick={() => changeFont("Montserrat, sans-serif")}
+          className="font-options ms-2 pb-2"
+        >
+          Montserrat, sans-serif
+        </Form.Label>
+      </Row>
+      <Row>
+        <Form.Label
+          onClick={() => changeFont("Raleway, sans-serif")}
+          className="font-options ms-2 pb-2"
+        >
+          Raleway, sans-serif
+        </Form.Label>
+      </Row>
+      <Row>
+        <Form.Label
+          onClick={() => changeFont("Ubuntu, sans-serif")}
+          className="font-options ms-2 pb-2"
+        >
+          Ubuntu, sans-serif
+        </Form.Label>
+      </Row>
+
+      <Row>
+        <Form.Label
+          onClick={() => changeFont("Times, Times New Roman, serif")}
+          className="font-options ms-2 pb-2"
+        >
+          Times, Times New Roman, serif
+        </Form.Label>
+      </Row>
+      <Row>
+        <Form.Label
           onClick={() => changeFont("Georgia, serif")}
           className="font-options ms-2 pb-2"
         >
@@ -32,10 +92,26 @@ function ContPanelFonts() {
       </Row>
       <Row>
         <Form.Label
-          onClick={() => changeFont("Helvatica, serif")}
+          onClick={() => changeFont("monospace")}
           className="font-options ms-2 pb-2"
         >
-          Helvatica, serif
+          Default, monospace
+        </Form.Label>
+      </Row>
+      <Row>
+        <Form.Label
+          onClick={() => changeFont("Courier New, monospace")}
+          className="font-options ms-2 pb-2"
+        >
+          Courier New, monospace
+        </Form.Label>
+      </Row>
+      <Row>
+        <Form.Label
+          onClick={() => changeFont("Apple Chancery, cursive")}
+          className="font-options ms-2 pb-2"
+        >
+          Apple Chancery, cursive
         </Form.Label>
       </Row>
     </div>
