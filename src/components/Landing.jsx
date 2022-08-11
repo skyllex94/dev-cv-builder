@@ -1,12 +1,16 @@
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
+import ModalTemplates from "./ModalTemplates";
 import cv from "../img/cv-example.png";
 
 function Landing() {
+  const [modalTemplates, setModalTemplates] = useState(false);
+
   return (
     <Container fluid>
       <Row className="align-items-center mt-5">
@@ -20,8 +24,12 @@ function Landing() {
             No more wasting time and money. You can start building your software
             developer "Curriculum Vitae" right away and export it for free.{" "}
           </h4>
-          <Button variant="outline-dark" className="px-3 py-2">
-            Create CV
+          <Button
+            variant="outline-dark"
+            className="px-3 py-2 me-2"
+            onClick={() => setModalTemplates(true)}
+          >
+            Open Modal
           </Button>
           <Link to="/build">
             <Button variant="outline-dark" className="px-3 py-2">
@@ -39,6 +47,10 @@ function Landing() {
           <img className="img-fluid" src={cv} alt="Logo" />
         </Col>
       </Row>
+      <ModalTemplates
+        show={modalTemplates}
+        onHide={() => setModalTemplates(false)}
+      />
     </Container>
   );
 }

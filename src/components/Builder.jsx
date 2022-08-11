@@ -11,6 +11,8 @@ import { ContextProvider } from "../context/Context";
 import { ImPageBreak } from "react-icons/im";
 import { IoMdArrowDropleft } from "react-icons/io";
 
+import { useLocation } from "react-router-dom";
+
 function Builder() {
   const componentRef = React.useRef();
 
@@ -20,6 +22,9 @@ function Builder() {
   });
 
   // node --max_old_space_size=2560 node_modules/.bin/ - add when deploying to Heroku to start and build before react-scripts
+
+  const location = useLocation();
+  const { from } = location.state;
 
   return (
     <ContextProvider>
