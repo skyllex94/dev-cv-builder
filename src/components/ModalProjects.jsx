@@ -38,13 +38,6 @@ function ModalProjects(props) {
     },
   ]);
 
-  const modalValues = [
-    ".modalProjectName",
-    ".modalDesc",
-    ".modalProjectStartDate",
-    ".modalProjectEndDate",
-  ];
-
   const projectsAmount = props.projectcount + 1;
 
   const handleHighlight = (index, event) => {

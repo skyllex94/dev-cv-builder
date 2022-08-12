@@ -18,17 +18,21 @@ const amountOfProjects = [
 function DisplayProjects() {
   return amountOfProjects.map((project, index) => {
     return (
-      <div id="projectSection" key={index}>
+      <Row id="projectSection" key={index}>
         {project.project === 1 ? (
           <Col md={12}>
-            <div className="section-titles-projects mt-3">
+            <div className="section-titles-projects mt-2">
               Personal Projects
             </div>
             <HorizontalLine />
           </Col>
         ) : null}
-        <Row className="align-items-center">
-          <Col className={" col-3 d-none projectField" + project.project}>
+        <Row
+          className={
+            "align-items-center mb-2 d-none projectField" + project.project
+          }
+        >
+          <Col className={"col-3"}>
             <Col className="d-inline d-flex">
               <Form.Label className={"projectName" + project.project} />
               <Nav.Link
@@ -83,7 +87,7 @@ function DisplayProjects() {
             </Row>
           </Col>
         </Row>
-      </div>
+      </Row>
     );
   });
 }
