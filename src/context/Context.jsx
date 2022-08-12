@@ -313,8 +313,6 @@ export const ContextProvider = ({ children }) => {
     const projectWebsite = document.querySelector(".modalProjectLink" + index);
     const projectGithub = document.querySelector(".modalProjectGithub" + index);
 
-    console.log(document.querySelector(".projectLink" + index));
-
     if (projectWebsite.value === "") {
       document.querySelector(".projectLink" + index).classList.add("d-none");
     } else {

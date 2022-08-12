@@ -63,7 +63,9 @@ class AccordionItem extends React.Component {
 
           <div {...{ className: "accordion-item__inner" }}>
             <div {...{ className: "accordion-item__content" }}>
-              <p {...{ className: "accordion-item__paragraph" }}>{content}</p>
+              <div {...{ className: "accordion-item__paragraph" }}>
+                {content}
+              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DisplayGenInfo from "./DisplayGenInfo";
@@ -9,6 +10,8 @@ import DisplaySkills from "./DisplaySkills";
 import DisplayEducation from "./DisplayEducation";
 import DisplayLanguages from "./DisplayLanguages";
 import DisplayProjects from "./DisplayProjects";
+
+import { useLocation } from "react-router-dom";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   const sections = [
@@ -38,6 +41,9 @@ export const CVPreview = React.forwardRef((props, ref) => {
     },
   ];
 
+  const location = useLocation();
+  const { template } = location.state;
+
   const [onDrop, setOnDrop] = useState(sections);
 
   function handleOnDrop(result) {
@@ -49,7 +55,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
     setOnDrop(items);
   }
 
-  return (
+  return template === "earth" ? (
     <DragDropContext onDragEnd={handleOnDrop}>
       <Droppable droppableId="sections" direction="vertical" type="row">
         {(provided) => (
@@ -71,6 +77,39 @@ export const CVPreview = React.forwardRef((props, ref) => {
                     >
                       {curr.content}
                     </Row>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </Row>
+          </div>
+        )}
+      </Droppable>
+      <div className="mb-5" />
+    </DragDropContext>
+  ) : (
+    <DragDropContext onDragEnd={handleOnDrop}>
+      <Droppable droppableId="sections" direction="vertical" type="row">
+        {(provided) => (
+          <div ref={ref}>
+            <Row
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className="ps-5"
+            >
+              <DisplayGenInfo name="general-info" />
+              {onDrop.map((curr, index) => (
+                <Draggable draggableId={curr.id} key={curr.id} index={index}>
+                  {(provided) => (
+                    <Col
+                      md={6}
+                      className={curr.id}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}
+                    >
+                      {curr.content}
+                    </Col>
                   )}
                 </Draggable>
               ))}

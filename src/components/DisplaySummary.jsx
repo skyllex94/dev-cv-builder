@@ -6,7 +6,7 @@ function DisplaySummary() {
   return (
     <Row className="summaryField mt-3">
       <Col md={12}>
-        <p className="textSummary"></p>
+        <p className="textSummary mb-0"></p>
       </Col>
     </Row>
   );

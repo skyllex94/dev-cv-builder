@@ -27,26 +27,24 @@ function ModalTemplates(props) {
         <Container>
           <Row>
             <Col className="d-flex mb-2" md={6} xs={6}>
-              <Card className="template-styling text-center">
-                <Card.Img variant="top" src={template1} />
-                <Card.Body>
-                  <Card.Title>Template "Earth"</Card.Title>
-                  <Link to="/build" state={{ from: "earth" }}>
-                    <Button variant="primary">Choose Template</Button>
-                  </Link>
-                </Card.Body>
-              </Card>
+              <Link to="/build" state={{ template: "earth" }}>
+                <Card className="template-styling text-center">
+                  <Card.Img variant="top" src={template1} />
+                  <Card.Body>
+                    <Card.Title>Template "Earth"</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Link>
             </Col>
             <Col className="d-flex mb-2" md={6} xs={6}>
-              <Card className="template-styling text-center">
-                <Card.Img variant="top" src={template1} />
-                <Card.Body>
-                  <Card.Title>Template "Venus"</Card.Title>
-                  <Link to="/build" state={{ from: "venus" }}>
-                    <Button variant="primary">Choose Template</Button>
-                  </Link>
-                </Card.Body>
-              </Card>
+              <Link to="/build" state={{ template: "venus" }}>
+                <Card className="template-styling text-center">
+                  <Card.Img variant="top" src={template1} />
+                  <Card.Body>
+                    <Card.Title>Template "Venus"</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Link>
             </Col>
           </Row>
         </Container>

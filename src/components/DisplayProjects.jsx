@@ -21,7 +21,7 @@ function DisplayProjects() {
       <Row id="projectSection" key={index}>
         {project.project === 1 ? (
           <Col md={12}>
-            <div className="section-titles-projects mt-2">
+            <div className="section-titles-projects mt-3">
               Personal Projects
             </div>
             <HorizontalLine />

@@ -259,9 +259,9 @@ function ContPanelSections() {
                 return (
                   <div key={index}>
                     <Row className="mb-2">
-                      <Col md={6}>
+                      <Col md={6} className="d-flex justify-content-start">
                         <Form.Label
-                          className="section-styling my-2"
+                          className="section-styling my-2 ms-4"
                           onClick={() => showModals(index, allSetModalsWork)}
                         >
                           {section.name}
@@ -283,7 +283,7 @@ function ContPanelSections() {
                           <AiOutlinePlus />
                         </Form.Label>
                         <Form.Label
-                          className="section-styling mt-2"
+                          className="section-styling mt-2 me-3"
                           onClick={() =>
                             handleRemoveField(
                               index,
@@ -384,8 +384,8 @@ function ContPanelSections() {
               }
             />
             {showEducation
-              ? toggleCurrModal(showEducation, "educationField")
-              : toggleCurrModal(showEducation, "educationField")}
+              ? toggleCurrModal(showEducation, "educationSection")
+              : toggleCurrModal(showEducation, "educationSection")}
           </Col>
         </Row>
         <Row>
@@ -475,16 +475,16 @@ function ContPanelSections() {
                 return (
                   <div key={index}>
                     <Row className="mb-2">
-                      <Col md={6}>
+                      <Col md={6} className="d-flex justify-content-start">
                         <Form.Label
-                          className="section-styling my-2"
+                          className="section-styling my-2 ms-4"
                           onClick={() => showModals(index, allSetModalsProject)}
                         >
                           {section.name}
                         </Form.Label>
                       </Col>
 
-                      <Col md={6} className="d-flex">
+                      <Col md={6} className="d-flex justify-content-end">
                         <Form.Label
                           className="section-styling mt-2 me-3"
                           onClick={() =>
@@ -499,7 +499,7 @@ function ContPanelSections() {
                           <AiOutlinePlus />
                         </Form.Label>
                         <Form.Label
-                          className="section-styling mt-2"
+                          className="section-styling mt-2 me-3"
                           onClick={() =>
                             handleRemoveField(
                               index,

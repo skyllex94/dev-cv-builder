@@ -6,12 +6,12 @@ import { HorizontalLine } from "../utils/Utils";
 
 function DisplayEducation() {
   return (
-    <Row className="educationField mt-3">
+    <Row className="educationSection mt-3">
       <Col md={12}>
         <div className="section-titles-education">Education</div>
         <HorizontalLine />
       </Col>
-      <Col md={12} className="d-flex">
+      <Col md={12} className="d-flex educationField d-none">
         <Form.Label className="textStudyField"></Form.Label>
       </Col>
       <Col md={12} className="edu-university d-flex">
