@@ -21,7 +21,7 @@ function Builder() {
     documentTitle: "Current_CV",
   });
 
-  // node --max_old_space_size=2560 node_modules/.bin/ - add when deploying to Heroku to start and build before react-scripts
+  // node --max_old_space_size=1560 node_modules/.bin/ - add when deploying to Heroku to start and build before react-scripts
 
   const location = useLocation();
   const { from } = location.state;
