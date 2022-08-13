@@ -41,6 +41,45 @@ export const CVPreview = React.forwardRef((props, ref) => {
     },
   ];
 
+  const itemsLeftColumn = [
+    {
+      id: "summary",
+      content: <DisplaySummary />,
+    },
+    {
+      id: "work",
+      content: <DisplayWork />,
+    },
+    {
+      id: "skills",
+      content: <DisplaySkills />,
+    },
+  ];
+  const itemsRightColumn = [
+    {
+      id: "education",
+      content: <DisplayEducation />,
+    },
+    {
+      id: "languages",
+      content: <DisplayLanguages />,
+    },
+    {
+      id: "projects",
+      content: <DisplayProjects />,
+    },
+  ];
+
+  const sectionVenusTemplate = {
+    id: "Column1",
+    sections: itemsLeftColumn,
+  };
+  // {
+  //   id: "Column2",
+  //   sections: itemsRightColumn,
+  // },
+  const [columns, setColumns] = useState(sectionVenusTemplate);
+
   const location = useLocation();
   const { template } = location.state;
 
@@ -89,36 +128,41 @@ export const CVPreview = React.forwardRef((props, ref) => {
     </DragDropContext>
   ) : (
     <DragDropContext onDragEnd={handleOnDrop}>
-      <Droppable droppableId="sections" direction="vertical" type="row">
-        {(provided) => (
-          <div ref={ref}>
-            <Row
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="ps-5"
-            >
-              <DisplayGenInfo name="general-info" />
-              {onDrop.map((curr, index) => (
-                <Draggable draggableId={curr.id} key={curr.id} index={index}>
-                  {(provided) => (
-                    <Col
-                      md={6}
-                      className={curr.id}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
+      {Object.entries(columns).map((id, column) => {
+        return (
+          <Droppable droppableId={id} key={id} direction="vertical" type="row">
+            {(provided) => (
+              <div ref={ref}>
+                <Row
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className="ps-5"
+                >
+                  {column.sections.map((curr, index) => (
+                    <Draggable
+                      draggableId={curr.id}
+                      key={curr.id}
+                      index={index}
                     >
-                      {curr.content}
-                    </Col>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </Row>
-          </div>
-        )}
-      </Droppable>
-      <div className="mb-5" />
+                      {(provided) => (
+                        <Row
+                          className={curr.id}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          {curr.content}
+                        </Row>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </Row>
+              </div>
+            )}
+          </Droppable>
+        );
+      })}
     </DragDropContext>
   );
 });
