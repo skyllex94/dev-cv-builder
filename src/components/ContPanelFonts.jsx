@@ -2,7 +2,12 @@ import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 
+import { useLocation } from "react-router-dom";
+
 function ContPanelFonts() {
+  const location = useLocation();
+  const { template } = location.state;
+
   const changeFont = (font) => {
     const arrDOMElements = [
       document.querySelector(".general-info"),
@@ -13,9 +18,13 @@ function ContPanelFonts() {
       document.querySelector(".education"),
       document.querySelector(".projects"),
     ];
-    if (font === "Inter, sans-serif") {
+    if (font === "Default" && template === "earth") {
       arrDOMElements.forEach((element) => {
         element.style = { all: "unset" };
+      });
+    } else if (font === "Default" && template === "venus") {
+      arrDOMElements.forEach((element) => {
+        element.style = "font-family: Ubuntu, sans-serif";
       });
     } else {
       arrDOMElements.forEach((element) => {
@@ -27,7 +36,7 @@ function ContPanelFonts() {
     <div className="font-section">
       <Row>
         <Form.Label
-          onClick={() => changeFont("Inter, sans-serif")}
+          onClick={() => changeFont("Default", template)}
           className="font-options ms-2 pb-2 section-styling"
         >
           Default

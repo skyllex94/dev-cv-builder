@@ -22,7 +22,7 @@ function DisplayWork() {
             <HorizontalLine />
           </Col>
         ) : null}
-        <Row key={index} className={"d-none pt-2 workField" + job.job}>
+        <Row key={index} className={"d-none m-0 pt-2 workField" + job.job}>
           <Col md={12} className="d-flex">
             <Form.Label className={"textCompany" + job.job}></Form.Label>
           </Col>
@@ -30,7 +30,7 @@ function DisplayWork() {
           <Col className="col-auto work-position d-flex">
             <div className={"me-2 textWorkPosition" + job.job} />
             <div className={"d-none d-flex work-period" + job.job}>
-              | <div className={"ms-2 me-1 textWorkStartDate" + job.job} />
+              | <div className={"ms-2 me-1 textWorkStartDate" + job.job} /> -
               <div className={"me-2 ms-1 textWorkEndDate" + job.job} />
             </div>
             <Col className={"d-flex d-none work-location-group" + job.job}>

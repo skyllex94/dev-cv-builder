@@ -8,8 +8,14 @@ import { BiMailSend } from "react-icons/bi";
 import { FiPhone } from "react-icons/fi";
 import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
+import { useLocation } from "react-router-dom";
+
 function DisplayGenInfo(props) {
-  return (
+  // Template settings
+  const location = useLocation();
+  const { template } = location.state;
+
+  return template === "earth" ? (
     <Row className={props.name}>
       <Col className="name col-12 d-flex pt-1 d-none">
         <Form className="pt-4">
@@ -66,7 +72,56 @@ function DisplayGenInfo(props) {
         </Row>
       </Col>
     </Row>
-  );
+  ) : template === "venus" ? (
+    <Row className={props.name}>
+      <Col className="name col-12 d-flex pt-1 d-none">
+        <Form className="pt-4">
+          <Form.Label className="textName"></Form.Label>
+        </Form>
+      </Col>
+      <Col className="position col-12 d-flex d-none">
+        <Form>
+          <Form.Label className="textPosition"></Form.Label>
+        </Form>
+      </Col>
+      <Col className="col-auto address d-none">
+        <Form>
+          <GrLocation />
+          <Form.Label className="ms-1 mb-0 textAddress"></Form.Label>
+        </Form>
+      </Col>
+      <Col className="col-auto email d-none">
+        <Form>
+          <BiMailSend />
+          <Form.Label className="ms-1 mb-0 textEmail"></Form.Label>
+        </Form>
+      </Col>
+      <Col className="col-auto phone d-none">
+        <Form>
+          <FiPhone />
+          <Form.Label className="ms-1 mb-0 textPhone"></Form.Label>
+        </Form>
+      </Col>
+      <Col className="col-auto website d-none">
+        <Form>
+          <AiOutlineLink />
+          <Form.Label className="col-auto ms-1 mb-0 textWebsite"></Form.Label>
+        </Form>
+      </Col>
+      <Col className="col-auto github d-flex d-none">
+        <Form>
+          <AiFillGithub />
+          <Form.Label className="ms-1 mb-0 textGithub"></Form.Label>
+        </Form>
+      </Col>
+      <Col className="col-auto linkedin d-flex d-none">
+        <Form>
+          <AiFillLinkedin />
+          <Form.Label className="ms-1 mb-0 textLinkedin"></Form.Label>
+        </Form>
+      </Col>
+    </Row>
+  ) : null;
 }
 
 export default DisplayGenInfo;
