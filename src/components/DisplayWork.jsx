@@ -22,7 +22,7 @@ function DisplayWork() {
             <HorizontalLine />
           </Col>
         ) : null}
-        <Row key={index} className={"d-none m-0 pt-2 workField" + job.job}>
+        <div key={index} className={"d-none pt-2 workField" + job.job}>
           <Col md={12} className="d-flex">
             <Form.Label className={"textCompany" + job.job}></Form.Label>
           </Col>
@@ -44,7 +44,7 @@ function DisplayWork() {
           <Col xs={12} className={"work-responsibilities" + job.job}>
             <div className={"textResponsibilities" + job.job}></div>
           </Col>
-        </Row>
+        </div>
       </Row>
     );
   });

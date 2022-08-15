@@ -56,6 +56,7 @@ code {
 }
 
 /* ------------ Fonts Section -------------- */
+
 .general-info {
   font-family: Inter, sans-serif;
 }
@@ -138,6 +139,13 @@ code {
   color: #1b1b1b;
   text-align: left;
   text-transform: capitalize;
+}
+/* Using more of the white space when displaying */
+[id*="workSection"],
+[id*="projectSection"],
+[class*="educationSection"] {
+  margin: 0;
+  padding: 0;
 }
 
 [class*="work-position"],

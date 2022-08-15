@@ -175,8 +175,10 @@ export const CVPreview = React.forwardRef((props, ref) => {
     </DragDropContext>
   ) : template === "venus" ? (
     <div ref={ref}>
-      <div className="ps-5 me-5">
-        <DisplayGenInfo name="general-info" />
+      <div className="px-5 pb-3" style={{ backgroundColor: "#353A45" }}>
+        <div>
+          <DisplayGenInfo name="general-info" />
+        </div>
         <DisplaySummary name="summary" />
       </div>
       <div className="d-flex align-items-start ps-5">
