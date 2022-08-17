@@ -1,8 +1,13 @@
 import { createContext } from "react";
+import { useLocation } from "react-router-dom";
 
 const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
+  // Template Variable
+  const location = useLocation();
+  const { template } = location.state;
+
   const displayGeneralInfo = (hideModal) => {
     const modalName = document.querySelector(".modalName");
     const modalPosition = document.querySelector(".modalPosition");
@@ -49,7 +54,17 @@ export const ContextProvider = ({ children }) => {
     if (modalWebsite.value !== "") {
       const textWebsite = document.querySelector(".textWebsite");
       document.querySelector(".website").classList.remove("d-none");
-      textWebsite.textContent = modalWebsite.value;
+      textWebsite.textContent = "";
+      if (template === "earth") {
+        textWebsite.textContent = modalWebsite.value;
+      } else if (template === "venus") {
+        const link = document.createElement("a");
+        const text = document.createTextNode(truncate(modalWebsite.value));
+        link.setAttribute("href", modalWebsite.value);
+        link.className = "disabled";
+        link.appendChild(text);
+        textWebsite.appendChild(link);
+      }
     } else {
       document.querySelector(".website").classList.add("d-none");
     }
@@ -57,15 +72,39 @@ export const ContextProvider = ({ children }) => {
     if (modalGithub.value !== "") {
       const textGithub = document.querySelector(".textGithub");
       document.querySelector(".github").classList.remove("d-none");
-      textGithub.textContent = modalGithub.value;
+      textGithub.textContent = "";
+      if (template === "earth") {
+        textGithub.textContent = modalGithub.value;
+      } else if (template === "venus") {
+        const link = document.createElement("a");
+        const text = document.createTextNode(truncate(modalGithub.value));
+        link.setAttribute("href", modalGithub.value);
+        link.className = "disabled";
+        link.appendChild(text);
+        textGithub.appendChild(link);
+      }
     } else {
       document.querySelector(".github").classList.add("d-none");
+    }
+
+    function truncate(str) {
+      return str.length > 30 ? str.substring(0, 27) + "..." : str;
     }
 
     if (modalLinkedin.value !== "") {
       const textLinkedin = document.querySelector(".textLinkedin");
       document.querySelector(".linkedin").classList.remove("d-none");
-      textLinkedin.textContent = modalLinkedin.value;
+      textLinkedin.textContent = "";
+      if (template === "earth") {
+        textLinkedin.textContent = modalLinkedin.value;
+      } else if (template === "venus") {
+        const link = document.createElement("a");
+        const text = document.createTextNode(truncate(modalLinkedin.value));
+        link.setAttribute("href", modalLinkedin.value);
+        link.className = "disabled";
+        link.appendChild(text);
+        textLinkedin.appendChild(link);
+      }
     } else {
       document.querySelector(".linkedin").classList.add("d-none");
     }

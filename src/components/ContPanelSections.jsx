@@ -7,10 +7,11 @@ import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { MdDriveFileRenameOutline } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 import "../index.css";
 
 import ModalEducation from "./ModalEducation";
-import ModalInfoContent from "./ModalInfoContent";
+import ModalInfoContent from "./ModalGenInfo";
 import ModalLanguages from "./ModalLanguages";
 import ModalProjects from "./ModalProjects";
 import ModalSkills from "./ModalSkills";
@@ -122,6 +123,8 @@ function ContPanelSections() {
     });
   };
 
+  // Renaming states and functions
+
   const [renameWork, setRenameWork] = useState({
     value: "Work Experience",
     isInEditMode: false,
@@ -172,6 +175,10 @@ function ContPanelSections() {
     document.querySelector(UIClassName).textContent = value;
   };
 
+  // Template display variables
+  const location = useLocation();
+  const { template } = location.state;
+
   return (
     <>
       <div className="d-grid gap-2 ms-2">
@@ -196,7 +203,6 @@ function ContPanelSections() {
               : toggleCurrModal(showGenInfo, "general-info")}
           </Col>
         </Row>
-
         <Row>
           <Col md={10} className="d-flex justify-content-start">
             <Form.Label
@@ -212,8 +218,8 @@ function ContPanelSections() {
               onClick={() => ToggleSwitchButton(showSummary, setShowSummary)}
             />
             {showSummary
-              ? toggleCurrModal(showSummary, "summaryField")
-              : toggleCurrModal(showSummary, "summaryField")}
+              ? toggleCurrModal(showSummary, "summary")
+              : toggleCurrModal(showSummary, "summary")}
           </Col>
         </Row>
 

@@ -9,7 +9,7 @@ import Form from "react-bootstrap/Form";
 import Context from "../context/Context";
 import { AiFillLinkedin } from "react-icons/ai";
 
-function ModalInfoContent(props) {
+function ModalGenInfo(props) {
   const { displayGeneralInfo } = useContext(Context);
 
   const [name, setName] = useState("Kamen Kanchev");
@@ -199,29 +199,4 @@ function ModalInfoContent(props) {
   );
 }
 
-export const Linkedinn = ({ isDisplayed }) => {
-  const [linkedin, setLinkedin] = useState({
-    display: false,
-  });
-
-  function settingStatePlease() {
-    setLinkedin({ ...linkedin, display: true });
-  }
-
-  return (
-    <>
-      {linkedin.display ? (
-        <>
-          <Col className="col-7 d-flex">
-            <Form>
-              <AiFillLinkedin className="linkedinIcon" />
-              <Form.Label className="ms-1 mb-0 previewLinkedin"></Form.Label>
-            </Form>
-          </Col>
-        </>
-      ) : null}
-    </>
-  );
-};
-
-export default ModalInfoContent;
+export default ModalGenInfo;

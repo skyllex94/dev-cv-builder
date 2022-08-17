@@ -91,14 +91,18 @@ code {
 .textEmail,
 .textPhone,
 .textWebsite,
+.textWebsite a,
 .textGithub,
-.textLinkedin {
+.textGithub a,
+.textLinkedin,
+.textLinkedin a {
   font-weight: 300;
   font-size: 13px;
   color: #696969;
+  pointer-events: none;
 }
 
-.summaryField {
+.textSummary {
   font-weight: 300;
   font-size: 14px;
   color: #696969;

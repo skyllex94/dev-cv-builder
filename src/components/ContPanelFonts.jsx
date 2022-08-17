@@ -17,19 +17,32 @@ function ContPanelFonts() {
       document.querySelector(".languages"),
       document.querySelector(".education"),
       document.querySelector(".projects"),
+      document.querySelector(".contact"),
     ];
     if (font === "Default" && template === "earth") {
-      arrDOMElements.forEach((element) => {
-        element.style = { all: "unset" };
-      });
+      try {
+        arrDOMElements.forEach((element) => {
+          element.style = { all: "unset" };
+        });
+      } catch {
+        console.log("caught");
+      }
     } else if (font === "Default" && template === "venus") {
-      arrDOMElements.forEach((element) => {
-        element.style = "font-family: Ubuntu, sans-serif";
-      });
+      try {
+        arrDOMElements.forEach((element) => {
+          element.style = "font-family: Ubuntu, sans-serif";
+        });
+      } catch {
+        console.log("caught");
+      }
     } else {
-      arrDOMElements.forEach((element) => {
-        element.style = `font-family: ${font};`;
-      });
+      try {
+        arrDOMElements.forEach((element) => {
+          element.style = `font-family: ${font};`;
+        });
+      } catch {
+        console.log("caught");
+      }
     }
   };
   return (

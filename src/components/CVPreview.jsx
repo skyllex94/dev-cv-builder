@@ -9,6 +9,7 @@ import DisplaySkills from "./DisplaySkills";
 import DisplayEducation from "./DisplayEducation";
 import DisplayLanguages from "./DisplayLanguages";
 import DisplayProjects from "./DisplayProjects";
+import DisplayContact from "./DisplayContact";
 
 import { useLocation } from "react-router-dom";
 
@@ -33,6 +34,10 @@ export const CVPreview = React.forwardRef((props, ref) => {
     },
   ];
   const venusComponentsRight = [
+    {
+      id: "contact",
+      content: <DisplayContact />,
+    },
     {
       id: "languages",
       content: <DisplayLanguages />,
@@ -175,7 +180,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
     </DragDropContext>
   ) : template === "venus" ? (
     <div ref={ref}>
-      <div className="px-5 pb-3" style={{ backgroundColor: "#353A45" }}>
+      <div className="px-5 pb-4" style={{ backgroundColor: "#353A45" }}>
         <div>
           <DisplayGenInfo name="general-info" />
         </div>
@@ -200,7 +205,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
-                          width: 570,
+                          width: 600,
                         }}
                       >
                         {column.sections.map((curr, index) => (
@@ -228,7 +233,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
-                          width: 300,
+                          width: 270,
                         }}
                       >
                         {column.sections.map((curr, index) => (

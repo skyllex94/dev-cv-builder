@@ -16,7 +16,7 @@ function DisplayGenInfo(props) {
   const { template } = location.state;
 
   return template === "earth" ? (
-    <Row className={props.name}>
+    <Row className={props.name + " text-start"}>
       <Col className="name col-12 d-flex pt-1 d-none">
         <Form className="pt-4">
           <Form.Label className="textName"></Form.Label>
@@ -73,51 +73,15 @@ function DisplayGenInfo(props) {
       </Col>
     </Row>
   ) : template === "venus" ? (
-    <Row className={props.name}>
-      <Col className="name col-12 d-flex pt-1 d-none">
+    <Row cRow className={props.name + " text-start"}>
+      <Col className="name col-12 pt-1 d-none">
         <Form className="pt-4">
-          <Form.Label className="textName"></Form.Label>
+          <Form.Label className="textName text-white"></Form.Label>
         </Form>
       </Col>
-      <Col className="position col-12 d-flex d-none">
+      <Col className="position text-white col-12 d-none">
         <Form>
-          <Form.Label className="textPosition"></Form.Label>
-        </Form>
-      </Col>
-      <Col className="col-auto address d-none">
-        <Form>
-          <GrLocation />
-          <Form.Label className="ms-1 mb-0 textAddress"></Form.Label>
-        </Form>
-      </Col>
-      <Col className="col-auto email d-none">
-        <Form>
-          <BiMailSend />
-          <Form.Label className="ms-1 mb-0 textEmail"></Form.Label>
-        </Form>
-      </Col>
-      <Col className="col-auto phone d-none">
-        <Form>
-          <FiPhone />
-          <Form.Label className="ms-1 mb-0 textPhone"></Form.Label>
-        </Form>
-      </Col>
-      <Col className="col-auto website d-none">
-        <Form>
-          <AiOutlineLink />
-          <Form.Label className="col-auto ms-1 mb-0 textWebsite"></Form.Label>
-        </Form>
-      </Col>
-      <Col className="col-auto github d-flex d-none">
-        <Form>
-          <AiFillGithub />
-          <Form.Label className="ms-1 mb-0 textGithub"></Form.Label>
-        </Form>
-      </Col>
-      <Col className="col-auto linkedin d-flex d-none">
-        <Form>
-          <AiFillLinkedin />
-          <Form.Label className="ms-1 mb-0 textLinkedin"></Form.Label>
+          <Form.Label className="textPosition text-white"></Form.Label>
         </Form>
       </Col>
     </Row>
