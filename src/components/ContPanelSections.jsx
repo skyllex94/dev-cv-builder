@@ -7,7 +7,6 @@ import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { MdDriveFileRenameOutline } from "react-icons/md";
-import { useLocation } from "react-router-dom";
 import "../index.css";
 
 import ModalEducation from "./ModalEducation";
@@ -64,7 +63,6 @@ function ContPanelSections() {
     ".projectAccomplishments",
   ];
 
-  const [showGenInfo, setShowGenInfo] = useState(true);
   const [showSummary, setShowSummary] = useState(true);
   const [showWork, setShowWork] = useState(true);
   const [showSkills, setShowSkills] = useState(true);
@@ -156,9 +154,15 @@ function ContPanelSections() {
         <Form.Control
           type="text"
           defaultValue={value}
+          autoFocus
           onChange={(event) =>
             setValue({ isInEditMode: true, value: event.target.value })
           }
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              updateRenameValue(value, setValue, UIClassName);
+            }
+          }}
         />
         <Button
           variant="success"
@@ -175,38 +179,24 @@ function ContPanelSections() {
     document.querySelector(UIClassName).textContent = value;
   };
 
-  // Template display variables
-  const location = useLocation();
-  const { template } = location.state;
-
   return (
     <>
-      <div className="d-grid gap-2 ms-2">
+      <div className="d-grid gap-2 ms-2 cont-panel-items-styling">
         <Row>
           <Col md={10} className="d-flex justify-content-start">
             <Form.Label
-              className="section-styling mt-2"
+              className="items-styling mt-2"
               type="text"
               onClick={() => setModalGenInfo(true)}
             >
               General Information
             </Form.Label>
           </Col>
-
-          <Col md={2} className="d-flex mt-2 justify-content-end">
-            <Switch
-              defaultChecked
-              onClick={() => ToggleSwitchButton(showGenInfo, setShowGenInfo)}
-            />
-            {showGenInfo
-              ? toggleCurrModal(showGenInfo, "general-info")
-              : toggleCurrModal(showGenInfo, "general-info")}
-          </Col>
         </Row>
         <Row>
           <Col md={10} className="d-flex justify-content-start">
             <Form.Label
-              className="section-styling mt-2"
+              className="items-styling mt-2"
               onClick={() => setModalSummary(true)}
             >
               Summary
@@ -245,7 +235,7 @@ function ContPanelSections() {
                 className="d-flex justify-content-end align-items-center"
               >
                 <Form.Label
-                  className="section-styling me-2"
+                  className="items-styling me-2"
                   onClick={() => toggleRenameMode(renameWork, setRenameWork)}
                 >
                   <MdDriveFileRenameOutline />
@@ -267,7 +257,7 @@ function ContPanelSections() {
                     <Row className="mb-2">
                       <Col md={6} className="d-flex justify-content-start">
                         <Form.Label
-                          className="section-styling my-2 ms-4"
+                          className="items-styling my-2 ms-4"
                           onClick={() => showModals(index, allSetModalsWork)}
                         >
                           {section.name}
@@ -276,7 +266,7 @@ function ContPanelSections() {
 
                       <Col md={6} className="d-flex justify-content-end">
                         <Form.Label
-                          className="section-styling mt-2 me-3"
+                          className="items-styling mt-2 me-3"
                           onClick={() =>
                             handleAddField(
                               index,
@@ -289,7 +279,7 @@ function ContPanelSections() {
                           <AiOutlinePlus />
                         </Form.Label>
                         <Form.Label
-                          className="section-styling mt-2 me-3"
+                          className="items-styling mt-2 me-3"
                           onClick={() =>
                             handleRemoveField(
                               index,
@@ -320,7 +310,7 @@ function ContPanelSections() {
             className="d-flex justify-content-start align-items-center"
           >
             {renameSkills.isInEditMode ? (
-              <Form.Label className="section-styling mt-2">
+              <Form.Label className="items-styling mt-2">
                 {renderEditView(
                   renameSkills.value,
                   setRenameSkills,
@@ -329,7 +319,7 @@ function ContPanelSections() {
               </Form.Label>
             ) : (
               <Form.Label
-                className="section-styling mt-2"
+                className="items-styling mt-2"
                 onClick={() => setModalSkills(true)}
               >
                 {renameSkills.value}
@@ -338,7 +328,7 @@ function ContPanelSections() {
           </Col>
           <Col md={3} className="d-flex justify-content-end align-items-center">
             <Form.Label
-              className="section-styling me-2"
+              className="items-styling me-2"
               onClick={() => toggleRenameMode(renameSkills, setRenameSkills)}
             >
               <MdDriveFileRenameOutline />
@@ -358,7 +348,7 @@ function ContPanelSections() {
             className="d-flex justify-content-start align-items-center"
           >
             {renameEducation.isInEditMode ? (
-              <Form.Label className="section-styling mt-2">
+              <Form.Label className="items-styling mt-2">
                 {renderEditView(
                   renameEducation.value,
                   setRenameEducation,
@@ -367,7 +357,7 @@ function ContPanelSections() {
               </Form.Label>
             ) : (
               <Form.Label
-                className="section-styling mt-2"
+                className="items-styling mt-2"
                 onClick={() => setModalEducation(true)}
               >
                 {renameEducation.value}
@@ -376,7 +366,7 @@ function ContPanelSections() {
           </Col>
           <Col md={3} className="d-flex justify-content-end align-items-center">
             <Form.Label
-              className="section-styling me-2"
+              className="items-styling me-2"
               onClick={() =>
                 toggleRenameMode(renameEducation, setRenameEducation)
               }
@@ -400,7 +390,7 @@ function ContPanelSections() {
             className="d-flex justify-content-start align-items-center"
           >
             {renameLanguages.isInEditMode ? (
-              <Form.Label className="section-styling mt-2">
+              <Form.Label className="items-styling mt-2">
                 {renderEditView(
                   renameLanguages.value,
                   setRenameLanguages,
@@ -409,7 +399,7 @@ function ContPanelSections() {
               </Form.Label>
             ) : (
               <Form.Label
-                className="section-styling mt-2"
+                className="items-styling mt-2"
                 onClick={() => setModalLanguages(true)}
               >
                 {renameLanguages.value}
@@ -418,7 +408,7 @@ function ContPanelSections() {
           </Col>
           <Col md={3} className="d-flex justify-content-end align-items-center">
             <Form.Label
-              className="section-styling me-2"
+              className="items-styling me-2"
               onClick={() =>
                 toggleRenameMode(renameLanguages, setRenameLanguages)
               }
@@ -458,7 +448,7 @@ function ContPanelSections() {
                 className="d-flex my-3 justify-content-end align-items-center"
               >
                 <Form.Label
-                  className="section-styling me-2"
+                  className="items-styling me-2"
                   onClick={() =>
                     toggleRenameMode(renameProjects, setRenameProjects)
                   }
@@ -483,7 +473,7 @@ function ContPanelSections() {
                     <Row className="mb-2">
                       <Col md={6} className="d-flex justify-content-start">
                         <Form.Label
-                          className="section-styling my-2 ms-4"
+                          className="items-styling my-2 ms-4"
                           onClick={() => showModals(index, allSetModalsProject)}
                         >
                           {section.name}
@@ -492,7 +482,7 @@ function ContPanelSections() {
 
                       <Col md={6} className="d-flex justify-content-end">
                         <Form.Label
-                          className="section-styling mt-2 me-3"
+                          className="items-styling mt-2 me-3"
                           onClick={() =>
                             handleAddField(
                               index,
@@ -505,7 +495,7 @@ function ContPanelSections() {
                           <AiOutlinePlus />
                         </Form.Label>
                         <Form.Label
-                          className="section-styling mt-2 me-3"
+                          className="items-styling mt-2 me-3"
                           onClick={() =>
                             handleRemoveField(
                               index,

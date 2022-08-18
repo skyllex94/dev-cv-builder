@@ -55,19 +55,21 @@ code {
   border-bottom: 1px solid black;
 }
 
-/* ------------ Fonts Section -------------- */
+/* ------------ Control Panel Styling -------------- */
 
 .general-info {
   font-family: Inter, sans-serif;
 }
 
-.font-section {
+.cont-panel-items-styling {
   text-align: left;
   color: black;
+  font-weight: 400;
+  font-size: 16px;
 }
 
-.font-options:hover {
-  color: #696969;
+.items-styling:hover {
+  color: #626262;
   cursor: pointer;
 }
 /* ------------ Template Modal Styling -------------- */
@@ -115,17 +117,6 @@ code {
   color: #3c3c3c;
   text-align: left;
   text-transform: uppercase;
-}
-
-/* Control Panel Styling */
-.section-styling {
-  font-weight: 400;
-  font-size: 16px;
-}
-
-.section-styling:hover {
-  color: #696969;
-  cursor: pointer;
 }
 
 .cp-work-styling {

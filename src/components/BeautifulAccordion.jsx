@@ -1,6 +1,7 @@
 import React from "react";
 import ContPanelSections from "./ContPanelSections";
 import ContPanelFonts from "./ContPanelFonts";
+import ContPanelDesign from "./ContPanelDesign";
 
 const data = [
   {
@@ -10,6 +11,10 @@ const data = [
   {
     title: "Fonts",
     content: <ContPanelFonts />,
+  },
+  {
+    title: "Design",
+    content: <ContPanelDesign />,
   },
 ];
 
@@ -33,7 +38,7 @@ class BeautifulAccordion extends React.Component {
 
 class AccordionItem extends React.Component {
   state = {
-    opened: true,
+    opened: false,
   };
 
   render() {

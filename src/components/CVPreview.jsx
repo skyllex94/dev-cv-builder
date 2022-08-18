@@ -94,12 +94,6 @@ export const CVPreview = React.forwardRef((props, ref) => {
   const [tempEarth, setTempEarth] = useState(earthTemplate);
 
   function handleOnDrag(result, columns, setColumns) {
-    // if (!result.destination) return;
-    // let items = onDrop; // perhaps you want it to be const
-    // console.log(result);
-    // const [reorderedItem] = items.splice(result.source.index, 1);
-    // items.splice(result.destination.index, 0, reorderedItem);
-    // setOnDrop(items);
     if (!result.destination) return;
     const { source, destination } = result;
     if (source.droppableId !== destination.droppableId) {
@@ -205,7 +199,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
-                          width: 600,
+                          width: 570,
                         }}
                       >
                         {column.sections.map((curr, index) => (

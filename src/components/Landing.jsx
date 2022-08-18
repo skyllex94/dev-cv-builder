@@ -29,13 +29,9 @@ function Landing() {
             className="px-3 py-2 me-2"
             onClick={() => setModalTemplates(true)}
           >
-            Open Modal
+            Create Your Resume
           </Button>
-          <Link to="/build">
-            <Button variant="outline-dark" className="px-3 py-2">
-              Create CV
-            </Button>
-          </Link>
+
           <Button variant="outline-dark" className="px-3 py-2 ms-2" disabled>
             View Your CV
           </Button>
