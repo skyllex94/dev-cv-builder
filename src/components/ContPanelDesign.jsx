@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
+import Popover from "react-bootstrap/esm/Popover";
+import Button from "react-bootstrap/esm/Button";
+import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 import { SketchPicker } from "react-color";
 
 function ContPanelDesign() {
-  const [showColorOptions, setShowColorOptions] = useState(false);
-
-  const toggleColorOptions = () => {
-    showColorOptions ? setShowColorOptions(false) : setShowColorOptions(true);
-  };
-
   const [color, setColor] = useState({
-    hex: "#fff",
+    displayColorPicker: true,
+    hex: {
+      r: "241",
+      g: "112",
+      b: "19",
+      a: "1",
+    },
   });
 
   const handleColorChange = (color) => {
@@ -22,29 +25,29 @@ function ContPanelDesign() {
     );
 
     sectionTitles.forEach((title) => {
-      console.log(title.style);
       title.style = `color: ${color.hex}`;
     });
   };
 
+  const popover = (
+    <Popover id="popover-contained">
+      <SketchPicker color={color.hex} onChange={handleColorChange} />
+    </Popover>
+  );
+
   return (
-    <div className="cont-panel-items-styling">
-      <Row>
-        <Form.Label
-          onClick={() => toggleColorOptions()}
-          className="items-styling ms-2 pb-2"
-        >
+    <Row>
+      <OverlayTrigger
+        trigger="click"
+        rootClose
+        placement="bottom"
+        overlay={popover}
+      >
+        <Form.Label className="cont-panel-items-styling items-styling">
           Change Color of Titles
         </Form.Label>
-        {showColorOptions ? (
-          <SketchPicker
-            className="ms-3"
-            color={color.hex}
-            onChange={handleColorChange}
-          />
-        ) : null}
-      </Row>
-    </div>
+      </OverlayTrigger>
+    </Row>
   );
 }
 
