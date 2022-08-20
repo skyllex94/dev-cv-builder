@@ -49,31 +49,63 @@ class AccordionItem extends React.Component {
 
     return (
       <>
-        <div
-          {...{
-            className: `accordion-item, ${opened && "accordion-item--opened"}`,
-          }}
-        >
+        {title === "Sections" ? (
           <div
             {...{
-              className: "accordion-item__line",
-              onClick: () => {
-                this.setState({ opened: !opened });
-              },
+              className: `accordion-item, ${
+                !opened && "accordion-item--opened"
+              }`,
             }}
           >
-            <h3 {...{ className: "accordion-item__title" }}>{title}</h3>
-            <span {...{ className: "accordion-item__icon" }} />
-          </div>
+            <div
+              {...{
+                className: "accordion-item__line",
+                onClick: () => {
+                  this.setState({ opened: !opened });
+                },
+              }}
+            >
+              <h3 {...{ className: "accordion-item__title" }}>{title}</h3>
+              <span {...{ className: "accordion-item__icon" }} />
+            </div>
 
-          <div {...{ className: "accordion-item__inner" }}>
-            <div {...{ className: "accordion-item__content" }}>
-              <div {...{ className: "accordion-item__paragraph" }}>
-                {content}
+            <div {...{ className: "accordion-item__inner" }}>
+              <div {...{ className: "accordion-item__content" }}>
+                <div {...{ className: "accordion-item__paragraph" }}>
+                  {content}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div
+            {...{
+              className: `accordion-item, ${
+                opened && "accordion-item--opened"
+              }`,
+            }}
+          >
+            <div
+              {...{
+                className: "accordion-item__line",
+                onClick: () => {
+                  this.setState({ opened: !opened });
+                },
+              }}
+            >
+              <h3 {...{ className: "accordion-item__title" }}>{title}</h3>
+              <span {...{ className: "accordion-item__icon" }} />
+            </div>
+
+            <div {...{ className: "accordion-item__inner" }}>
+              <div {...{ className: "accordion-item__content" }}>
+                <div {...{ className: "accordion-item__paragraph" }}>
+                  {content}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </>
     );
   }

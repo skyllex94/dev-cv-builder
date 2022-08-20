@@ -73,7 +73,7 @@ function DisplayGenInfo(props) {
       </Col>
     </Row>
   ) : template === "venus" ? (
-    <Row cRow className={props.name + " text-start"}>
+    <Row className={props.name + " text-start"}>
       <Col className="name col-12 pt-1 d-none">
         <Form className="pt-4">
           <Form.Label className="textName text-white"></Form.Label>

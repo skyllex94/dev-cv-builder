@@ -68,6 +68,11 @@ code {
   font-size: 16px;
 }
 
+.popper {
+  --bs-popover-border-radius: 0rem !important;
+  border: none;
+}
+
 .items-styling:hover {
   color: #626262;
   cursor: pointer;

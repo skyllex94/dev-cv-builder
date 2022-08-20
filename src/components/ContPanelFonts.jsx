@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 
@@ -19,6 +19,7 @@ function ContPanelFonts() {
       document.querySelector(".projects"),
       document.querySelector(".contact"),
     ];
+
     if (font === "Default" && template === "earth") {
       try {
         arrDOMElements.forEach((element) => {
@@ -45,6 +46,7 @@ function ContPanelFonts() {
       }
     }
   };
+
   return (
     <div className="cont-panel-items-styling">
       <Row>

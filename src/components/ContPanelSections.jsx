@@ -7,7 +7,11 @@ import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { MdDriveFileRenameOutline } from "react-icons/md";
+import { FiMoreHorizontal } from "react-icons/fi";
 import "../index.css";
+
+import Popover from "react-bootstrap/esm/Popover";
+import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 
 import ModalEducation from "./ModalEducation";
 import ModalInfoContent from "./ModalGenInfo";
@@ -179,6 +183,15 @@ function ContPanelSections() {
     document.querySelector(UIClassName).textContent = value;
   };
 
+  const popover = (
+    <Popover>
+      <Switch
+        defaultChecked
+        onClick={() => ToggleSwitchButton(showSummary, setShowSummary)}
+      />
+    </Popover>
+  );
+
   return (
     <>
       <div className="d-grid gap-2 ms-2 cont-panel-items-styling">
@@ -203,10 +216,19 @@ function ContPanelSections() {
             </Form.Label>
           </Col>
           <Col md={2} className="d-flex mt-2 justify-content-end">
-            <Switch
-              defaultChecked
-              onClick={() => ToggleSwitchButton(showSummary, setShowSummary)}
-            />
+            <Row>
+              <OverlayTrigger
+                trigger="click"
+                rootClose
+                placement="bottom"
+                overlay={popover}
+              >
+                <div>
+                  <FiMoreHorizontal />
+                </div>
+              </OverlayTrigger>
+            </Row>
+
             {showSummary
               ? toggleCurrModal(showSummary, "summary")
               : toggleCurrModal(showSummary, "summary")}
