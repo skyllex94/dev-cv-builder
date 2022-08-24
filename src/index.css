@@ -73,6 +73,10 @@ code {
   border: none;
 }
 
+.yes {
+  transform: translate(409px, 289px) !important;
+}
+
 .items-styling:hover {
   color: #626262;
   cursor: pointer;
