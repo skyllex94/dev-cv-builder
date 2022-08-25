@@ -8,6 +8,9 @@ import Row from "react-bootstrap/esm/Row";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { FiMoreVertical } from "react-icons/fi";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
+
 import "../index.css";
 
 // import Popover from "react-bootstrap/esm/Popover";
@@ -82,6 +85,35 @@ function ContPanelSections() {
   const ToggleSwitchButton = (state, setState) => {
     state ? setState(false) : setState(true);
   };
+
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Body>
+        <Row className="me-5">
+          <Col className="col-10">Toggle Section</Col>
+          <Col className="col-2">
+            <Switch
+              defaultChecked
+              onClick={() => ToggleSwitchButton(showSummary, setShowSummary)}
+            />
+          </Col>
+        </Row>
+      </Popover.Body>
+    </Popover>
+  );
+
+  const PopoverContext = () => (
+    <OverlayTrigger
+      trigger="click"
+      rootClose={true}
+      placement="bottom-start"
+      overlay={popover}
+    >
+      <Button variant="white">
+        <FiMoreVertical />
+      </Button>
+    </OverlayTrigger>
+  );
 
   const toggleCurrModal = (showState, UIClassName) => {
     const modal = document.querySelector("." + UIClassName);
@@ -206,7 +238,9 @@ function ContPanelSections() {
             </Form.Label>
           </Col>
           <Col md={2} className="d-flex mt-2 justify-content-end">
-            <Row></Row>
+            <Row>
+              <PopoverContext />
+            </Row>
 
             {showSummary
               ? toggleCurrModal(showSummary, "summary")
