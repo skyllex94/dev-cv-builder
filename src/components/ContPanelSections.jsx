@@ -13,7 +13,7 @@ import Popover from "react-bootstrap/Popover";
 
 import "../index.css";
 
-// import Popover from "react-bootstrap/esm/Popover";
+import OptionsPopover from "./OptionsPopover";
 
 import ModalEducation from "./ModalEducation";
 import ModalInfoContent from "./ModalGenInfo";
@@ -89,7 +89,16 @@ function ContPanelSections() {
   const popover = (
     <Popover id="popover-basic">
       <Popover.Body>
-        <Row className="me-5">
+        <Row className="me-5 mb-2">
+          <Col className="col-10">Toggle Section</Col>
+          <Col className="col-2">
+            <Switch
+              defaultChecked
+              onClick={() => ToggleSwitchButton(showSummary, setShowSummary)}
+            />
+          </Col>
+        </Row>
+        <Row className="me-5 mb-2">
           <Col className="col-10">Toggle Section</Col>
           <Col className="col-2">
             <Switch

@@ -38,7 +38,7 @@ function ContPanelDesign() {
       <OverlayTrigger
         trigger="click"
         rootClose
-        placement="bottom"
+        placement="bottom-end"
         overlay={popover}
       >
         <Form.Label className="cont-panel-items-styling items-styling">
