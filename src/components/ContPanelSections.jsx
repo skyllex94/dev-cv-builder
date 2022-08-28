@@ -10,10 +10,11 @@ import { MdDriveFileRenameOutline } from "react-icons/md";
 import { FiMoreVertical } from "react-icons/fi";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
+import { Portal } from "./portal";
 
 import "../index.css";
 
-import OptionsPopover from "./OptionsPopover";
+import { createPopper } from "@popperjs/core";
 
 import ModalEducation from "./ModalEducation";
 import ModalInfoContent from "./ModalGenInfo";
@@ -85,44 +86,6 @@ function ContPanelSections() {
   const ToggleSwitchButton = (state, setState) => {
     state ? setState(false) : setState(true);
   };
-
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Body>
-        <Row className="me-5 mb-2">
-          <Col className="col-10">Toggle Section</Col>
-          <Col className="col-2">
-            <Switch
-              defaultChecked
-              onClick={() => ToggleSwitchButton(showSummary, setShowSummary)}
-            />
-          </Col>
-        </Row>
-        <Row className="me-5 mb-2">
-          <Col className="col-10">Toggle Section</Col>
-          <Col className="col-2">
-            <Switch
-              defaultChecked
-              onClick={() => ToggleSwitchButton(showSummary, setShowSummary)}
-            />
-          </Col>
-        </Row>
-      </Popover.Body>
-    </Popover>
-  );
-
-  const PopoverContext = () => (
-    <OverlayTrigger
-      trigger="click"
-      rootClose={true}
-      placement="bottom-start"
-      overlay={popover}
-    >
-      <Button variant="white">
-        <FiMoreVertical />
-      </Button>
-    </OverlayTrigger>
-  );
 
   const toggleCurrModal = (showState, UIClassName) => {
     const modal = document.querySelector("." + UIClassName);
@@ -223,6 +186,34 @@ function ContPanelSections() {
     document.querySelector(UIClassName).textContent = value;
   };
 
+  // Options popover modal
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Body></Popover.Body>
+    </Popover>
+  );
+
+  const PopoverContext = () => (
+    <OverlayTrigger
+      trigger="click"
+      rootClose
+      placement="bottom-start"
+      overlay={popover}
+    ></OverlayTrigger>
+  );
+
+  const [showOptions, setShowOptions] = useState(true);
+  const openOptions = () => {
+    showOptions ? setShowOptions(false) : setShowOptions(true);
+  };
+
+  const [popupTrigger, setPopupTrigger] = useState();
+  const [popupContent, setPopupContent] = useState();
+
+  const { styles, attributes } = createPopper(popupTrigger, popupContent, {
+    placement: "bottom-end",
+  });
+
   return (
     <>
       <div className="d-grid gap-2 ms-2 cont-panel-items-styling">
@@ -246,15 +237,42 @@ function ContPanelSections() {
               Summary
             </Form.Label>
           </Col>
-          <Col md={2} className="d-flex mt-2 justify-content-end">
+          <Col md={2} className="d-flex justify-content-end">
             <Row>
-              <PopoverContext />
+              <Button
+                variant="white"
+                onClick={openOptions}
+                ref={setPopupTrigger}
+              >
+                <FiMoreVertical />
+              </Button>
             </Row>
-
-            {showSummary
-              ? toggleCurrModal(showSummary, "summary")
-              : toggleCurrModal(showSummary, "summary")}
           </Col>
+
+          {showOptions ? (
+            <Portal>
+              <Row
+                ref={setPopupContent}
+                className="position-absolute z-20 me-5 my-2"
+                style={styles}
+                {...attributes}
+              >
+                <Col className="col-10">Toggle Section</Col>
+                <Col className="col-2">
+                  <Switch
+                    defaultChecked
+                    onClick={() =>
+                      ToggleSwitchButton(showSummary, setShowSummary)
+                    }
+                  />
+                </Col>
+              </Row>
+            </Portal>
+          ) : null}
+
+          {showSummary
+            ? toggleCurrModal(showSummary, "summary")
+            : toggleCurrModal(showSummary, "summary")}
         </Row>
 
         <Row>

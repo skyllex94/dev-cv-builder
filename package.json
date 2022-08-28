@@ -7,6 +7,7 @@
     "@ckeditor/ckeditor5-react": "^5.0.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@popperjs/core": "^2.11.6",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.x",
     "@testing-library/user-event": "^12.x",
