@@ -39,10 +39,13 @@ code {
 }
 
 .cv-preview {
-  /* font-family: "Georgia", serif; */
   min-height: 50vh;
   -ms-flex: 0 0 860px;
   flex: 0 0 860px;
+}
+
+.popover.bottom .arrow {
+  visibility: hidden !important;
 }
 
 .separatorSection {
@@ -66,15 +69,6 @@ code {
   color: black;
   font-weight: 400;
   font-size: 16px;
-}
-
-.popper {
-  --bs-popover-border-radius: 0rem !important;
-  border: none;
-}
-
-.yes {
-  transform: translate(409px, 289px) !important;
 }
 
 .items-styling:hover {

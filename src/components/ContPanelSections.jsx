@@ -1,5 +1,5 @@
 import { Switch } from "antd";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Col from "react-bootstrap/esm/Col";
@@ -8,10 +8,12 @@ import Row from "react-bootstrap/esm/Row";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { FiMoreVertical } from "react-icons/fi";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import { Portal } from "./portal";
 
+import Overlay from "react-bootstrap/Overlay";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+
+import Popover from "react-bootstrap/Popover";
 import "../index.css";
 
 import { createPopper } from "@popperjs/core";
@@ -187,32 +189,6 @@ function ContPanelSections() {
   };
 
   // Options popover modal
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Body></Popover.Body>
-    </Popover>
-  );
-
-  const PopoverContext = () => (
-    <OverlayTrigger
-      trigger="click"
-      rootClose
-      placement="bottom-start"
-      overlay={popover}
-    ></OverlayTrigger>
-  );
-
-  const [showOptions, setShowOptions] = useState(true);
-  const openOptions = () => {
-    showOptions ? setShowOptions(false) : setShowOptions(true);
-  };
-
-  const [popupTrigger, setPopupTrigger] = useState();
-  const [popupContent, setPopupContent] = useState();
-
-  const { styles, attributes } = createPopper(popupTrigger, popupContent, {
-    placement: "bottom-end",
-  });
 
   return (
     <>
@@ -238,37 +214,29 @@ function ContPanelSections() {
             </Form.Label>
           </Col>
           <Col md={2} className="d-flex justify-content-end">
-            <Row>
-              <Button
-                variant="white"
-                onClick={openOptions}
-                ref={setPopupTrigger}
+            <>
+              <OverlayTrigger
+                trigger="click"
+                key={"bottom-start"}
+                placement={"bottom-start"}
+                overlay={
+                  <Popover id={`popover-positioned-bottom-start`}>
+                    <Popover.Header as="h3">{`Popover`}</Popover.Header>
+                    <Popover.Body>
+                      <Switch
+                        defaultChecked
+                        onClick={() =>
+                          ToggleSwitchButton(showSummary, setShowSummary)
+                        }
+                      />
+                    </Popover.Body>
+                  </Popover>
+                }
               >
-                <FiMoreVertical />
-              </Button>
-            </Row>
+                <Button variant="secondary">More</Button>
+              </OverlayTrigger>
+            </>
           </Col>
-
-          {showOptions ? (
-            <Portal>
-              <Row
-                ref={setPopupContent}
-                className="position-absolute z-20 me-5 my-2"
-                style={styles}
-                {...attributes}
-              >
-                <Col className="col-10">Toggle Section</Col>
-                <Col className="col-2">
-                  <Switch
-                    defaultChecked
-                    onClick={() =>
-                      ToggleSwitchButton(showSummary, setShowSummary)
-                    }
-                  />
-                </Col>
-              </Row>
-            </Portal>
-          ) : null}
 
           {showSummary
             ? toggleCurrModal(showSummary, "summary")
