@@ -1,22 +1,15 @@
 import { Switch } from "antd";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
-import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { MdDriveFileRenameOutline } from "react-icons/md";
-import { FiMoreVertical } from "react-icons/fi";
-
-import Overlay from "react-bootstrap/Overlay";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-
-import Popover from "react-bootstrap/Popover";
 import "../index.css";
 
-import { createPopper } from "@popperjs/core";
+import SummaryOptions from "./OptionsMenu/SummaryOptions";
 
 import ModalEducation from "./ModalEducation";
 import ModalInfoContent from "./ModalGenInfo";
@@ -188,8 +181,6 @@ function ContPanelSections() {
     document.querySelector(UIClassName).textContent = value;
   };
 
-  // Options popover modal
-
   return (
     <>
       <div className="d-grid gap-2 ms-2 cont-panel-items-styling">
@@ -214,28 +205,10 @@ function ContPanelSections() {
             </Form.Label>
           </Col>
           <Col md={2} className="d-flex justify-content-end">
-            <>
-              <OverlayTrigger
-                trigger="click"
-                key={"bottom-start"}
-                placement={"bottom-start"}
-                overlay={
-                  <Popover id={`popover-positioned-bottom-start`}>
-                    <Popover.Header as="h3">{`Popover`}</Popover.Header>
-                    <Popover.Body>
-                      <Switch
-                        defaultChecked
-                        onClick={() =>
-                          ToggleSwitchButton(showSummary, setShowSummary)
-                        }
-                      />
-                    </Popover.Body>
-                  </Popover>
-                }
-              >
-                <Button variant="secondary">More</Button>
-              </OverlayTrigger>
-            </>
+            <SummaryOptions
+              showSummary={showSummary}
+              setShowSummary={setShowSummary}
+            />
           </Col>
 
           {showSummary
