@@ -27,6 +27,7 @@ function ContPanelDesign() {
       title.style = `color: ${color.hex}`;
     });
   };
+
   const popover = (
     <Popover>
       <SketchPicker color={color.hex} onChange={handleColorChange} />

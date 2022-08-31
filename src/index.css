@@ -44,8 +44,22 @@ code {
   flex: 0 0 860px;
 }
 
-.popover.bottom .arrow {
-  visibility: hidden !important;
+/* Options Popover Styling  */
+
+.popover {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+.popover-content {
+  height: 100px;
+  overflow: auto;
+}
+
+.optionsStyle:hover {
+  background-color: rgba(89, 89, 89, 0.2);
+  border-radius: 10px;
 }
 
 .separatorSection {

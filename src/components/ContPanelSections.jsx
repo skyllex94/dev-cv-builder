@@ -12,6 +12,10 @@ import "../index.css";
 import SummaryOptions from "./OptionsMenu/SummaryOptions";
 import WorkOptions from "./OptionsMenu/WorkOptions";
 
+import Popover from "react-bootstrap/esm/Popover";
+import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
+import { FiMoreVertical } from "react-icons/fi";
+
 import ModalEducation from "./ModalEducation";
 import ModalInfoContent from "./ModalGenInfo";
 import ModalLanguages from "./ModalLanguages";
@@ -151,6 +155,17 @@ function ContPanelSections() {
     setState({ isInEditMode: !state.isInEditMode, value: state.value });
   };
 
+  // Popup Options
+  const popover = (
+    <Popover style={{ padding: "15px" }}>
+      <Form.Label className="me-3">Show/Hide Section</Form.Label>
+
+      <Switch
+        onClick={() => ToggleSwitchButton(showSummary, setShowSummary)}
+      ></Switch>
+    </Popover>
+  );
+
   const renderEditView = (value, setValue, UIClassName) => {
     return (
       <Col className="d-flex d-inline">
@@ -206,10 +221,16 @@ function ContPanelSections() {
             </Form.Label>
           </Col>
           <Col md={2} className="d-flex justify-content-end">
-            <SummaryOptions
-              showSummary={showSummary}
-              setShowSummary={setShowSummary}
-            />
+            <OverlayTrigger
+              trigger="click"
+              rootClose
+              placement="bottom-start"
+              overlay={popover}
+            >
+              <Form.Label className="optionsStyle">
+                <FiMoreVertical />
+              </Form.Label>
+            </OverlayTrigger>
           </Col>
 
           {showSummary
