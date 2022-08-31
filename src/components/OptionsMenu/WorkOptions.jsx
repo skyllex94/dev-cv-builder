@@ -5,8 +5,9 @@ import { Switch } from "antd";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
+import { MdDriveFileRenameOutline } from "react-icons/md";
 
-export default class SummaryOptions extends React.Component {
+export default class WorkOptions extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,34 +28,52 @@ export default class SummaryOptions extends React.Component {
       state ? setState(false) : setState(true);
     };
 
+    const toggleRenameMode = (state, setState) => {
+      setState({ isInEditMode: !state.isInEditMode, value: state.value });
+    };
+
     return (
       <div>
-        <Button id="popover" color="white" onClick={this.toggle}>
+        <Button id="popover2" color="white" onClick={this.toggle}>
           <FiMoreVertical />
         </Button>
         <Popover
           placement="right-start"
           isOpen={this.state.popoverOpen}
-          target="popover"
+          target="popover2"
           toggle={this.toggle}
           hideArrow={true}
         >
           <PopoverHeader>Options</PopoverHeader>
           <PopoverBody>
             <Row>
-              <Col md={8} className="d-flex align-items-center">
-                <Form.Label>Display Section</Form.Label>
-              </Col>
-              <Col md={4} className="d-flex align-items-center">
-                <Switch
-                  defaultChecked
+              <Col md={12} className="d-flex align-items-center">
+                <Form.Label
+                  className="items-styling me-2"
                   onClick={() => {
                     ToggleSwitchButton(
-                      this.props.showSummary,
-                      this.props.setShowSummary
+                      this.props.showWork,
+                      this.props.setShowWork
                     );
                   }}
-                />
+                >
+                  Toggle Section
+                </Form.Label>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12} className="d-flex align-items-center">
+                <Form.Label
+                  className="items-styling me-2"
+                  onClick={() =>
+                    toggleRenameMode(
+                      this.props.renameWork,
+                      this.props.setRenameWork
+                    )
+                  }
+                >
+                  Rename Section Title
+                </Form.Label>
               </Col>
             </Row>
           </PopoverBody>

@@ -10,6 +10,7 @@ import { MdDriveFileRenameOutline } from "react-icons/md";
 import "../index.css";
 
 import SummaryOptions from "./OptionsMenu/SummaryOptions";
+import WorkOptions from "./OptionsMenu/WorkOptions";
 
 import ModalEducation from "./ModalEducation";
 import ModalInfoContent from "./ModalGenInfo";
@@ -237,16 +238,13 @@ function ContPanelSections() {
                 md={3}
                 className="d-flex justify-content-end align-items-center"
               >
-                <Form.Label
-                  className="items-styling me-2"
-                  onClick={() => toggleRenameMode(renameWork, setRenameWork)}
-                >
-                  <MdDriveFileRenameOutline />
-                </Form.Label>
-                <Switch
-                  defaultChecked
-                  onClick={() => ToggleSwitchButton(showWork, setShowWork)}
+                <WorkOptions
+                  showWork={showWork}
+                  setShowWork={setShowWork}
+                  renameWork={renameWork}
+                  setRenameWork={setRenameWork}
                 />
+
                 {showWork
                   ? toggleCurrModal(showWork, "work")
                   : toggleCurrModal(showWork, "work")}
