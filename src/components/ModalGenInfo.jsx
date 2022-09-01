@@ -7,7 +7,6 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 
 import Context from "../context/Context";
-import { AiFillLinkedin } from "react-icons/ai";
 
 function ModalGenInfo(props) {
   const { displayGeneralInfo } = useContext(Context);

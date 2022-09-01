@@ -27,8 +27,10 @@ function DisplayProjects() {
             <HorizontalLine />
           </Col>
         ) : null}
-        <Row className="align-items-center">
-          <Col className={" col-3 d-none projectField" + project.project}>
+        <Row
+          className={"align-items-center d-none projectField" + project.project}
+        >
+          <Col className="col-3">
             <Col className="d-inline d-flex">
               <Form.Label className={"projectName" + project.project} />
               <Nav.Link

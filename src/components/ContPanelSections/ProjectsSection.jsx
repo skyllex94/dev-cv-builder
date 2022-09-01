@@ -74,107 +74,104 @@ export default function ProjectsSection() {
     </Popover>
   );
 
-  const UIClassesForDisplayProjects = [
-    ".projectName",
-    ".projectDesc",
-    ".projectStartDate",
-    ".projectEndDate",
-    ".projectAccomplishments",
-  ];
-
   return (
     // The whole section row as displayed in the Control Panel
-    <Card>
-      <Row className="my-3">
-        <Col
-          md={10}
-          className="d-flex justify-content-start align-items-center"
-        >
-          <Form.Label className="cp-work-styling ms-2">
-            {renameProjects.isInEditMode
-              ? renderEditView(
-                  renameProjects.value,
-                  setRenameProjects,
-                  ".section-titles-projects"
-                )
-              : renameProjects.value}
-          </Form.Label>
-        </Col>
-        <Col md={2} className="d-flex justify-content-end align-items-center">
-          <OverlayTrigger
-            trigger="click"
-            rootClose
-            placement="bottom-start"
-            overlay={popover}
+    <Row>
+      <Card>
+        <Row className="my-3">
+          <Col
+            md={10}
+            className="d-flex justify-content-start align-items-center"
           >
-            <Form.Label className="optionsStyle p-1">
-              <FiMoreVertical />
+            <Form.Label className="cp-work-styling ms-2">
+              {renameProjects.isInEditMode
+                ? renderEditView(
+                    renameProjects.value,
+                    setRenameProjects,
+                    ".section-titles-projects"
+                  )
+                : renameProjects.value}
             </Form.Label>
-          </OverlayTrigger>
+          </Col>
+          <Col md={2} className="d-flex justify-content-end align-items-center">
+            <OverlayTrigger
+              trigger="click"
+              rootClose
+              placement="bottom-start"
+              overlay={popover}
+            >
+              <Form.Label className="optionsStyle p-1">
+                <FiMoreVertical />
+              </Form.Label>
+            </OverlayTrigger>
+          </Col>
+
+          {showProjects
+            ? toggleCurrModal(showProjects, "projects")
+            : toggleCurrModal(showProjects, "projects")}
+        </Row>
+
+        <Col>
+          {projectsSections.map((section, index) => {
+            return (
+              <div key={index}>
+                <Row className="mb-2">
+                  <Col md={6} className="d-flex justify-content-start">
+                    <Form.Label
+                      className="items-styling my-2 ms-4"
+                      onClick={() => showModals(index, allSetModalsProject)}
+                    >
+                      {section.name}
+                    </Form.Label>
+                  </Col>
+
+                  <Col md={6} className="d-flex justify-content-end">
+                    <Form.Label
+                      className="items-styling mt-2 me-3"
+                      onClick={() =>
+                        handleAddField(
+                          index,
+                          "Projects ",
+                          projectsSections,
+                          setProjectsSections
+                        )
+                      }
+                    >
+                      <AiOutlinePlus />
+                    </Form.Label>
+                    <Form.Label
+                      className="items-styling mt-2 me-3"
+                      onClick={() =>
+                        handleRemoveField(
+                          index,
+                          ".projectField",
+                          projectsSections,
+                          setProjectsSections
+                        )
+                      }
+                    >
+                      <AiOutlineMinus />
+                    </Form.Label>
+                  </Col>
+                </Row>
+                <ModalProjects
+                  show={modalsProject[index]}
+                  onHide={() => allSetModalsProject[index](false)}
+                  projectcount={index}
+                />
+              </div>
+            );
+          })}
         </Col>
 
-        {showProjects
-          ? toggleCurrModal(showProjects, "projects")
-          : toggleCurrModal(showProjects, "projects")}
-      </Row>
-
-      <Col>
-        {projectsSections.map((section, index) => {
-          return (
-            <div key={index}>
-              <Row className="mb-2">
-                <Col md={6} className="d-flex justify-content-start">
-                  <Form.Label
-                    className="items-styling my-2 ms-4"
-                    onClick={() => showModals(index, allSetModalsProject)}
-                  >
-                    {section.name}
-                  </Form.Label>
-                </Col>
-
-                <Col md={6} className="d-flex justify-content-end">
-                  <Form.Label
-                    className="items-styling mt-2 me-3"
-                    onClick={() =>
-                      handleAddField(
-                        index,
-                        "Projects ",
-                        projectsSections,
-                        setProjectsSections
-                      )
-                    }
-                  >
-                    <AiOutlinePlus />
-                  </Form.Label>
-                  <Form.Label
-                    className="items-styling mt-2 me-3"
-                    onClick={() =>
-                      handleRemoveField(
-                        index,
-                        ".projectField",
-                        projectsSections,
-                        setProjectsSections
-                      )
-                    }
-                  >
-                    <AiOutlineMinus />
-                  </Form.Label>
-                </Col>
-              </Row>
-              <ModalProjects
-                show={modalsProject[index]}
-                onHide={() => allSetModalsProject[index](false)}
-                projectcount={index}
-              />
-            </div>
-          );
-        })}
-      </Col>
-      <ModalProjects
+        {/*<ModalProjects
         show={modalProjects}
         onHide={() => setModalProjects(false)}
         uiclasses={UIClassesForDisplayProjects}
-      />
-    </Card>
+      /> */}
+
+        {/* A JSX comment */}
+      </Card>
+    </Row>
   );
 }
