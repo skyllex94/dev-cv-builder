@@ -62,6 +62,10 @@ code {
   border-radius: 10px;
 }
 
+.optionItems:hover {
+  text-decoration: underline;
+}
+
 .separatorSection {
   -ms-flex: 0 0 75px;
   flex: 0 0 75px;

@@ -1,0 +1,73 @@
+import React, { useState } from "react";
+import { FiMoreVertical } from "react-icons/fi";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
+import Form from "react-bootstrap/esm/Form";
+
+import Popover from "react-bootstrap/esm/Popover";
+import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
+
+import ModalSummary from "../ModalSummary";
+
+export default function SummarySection() {
+  const [modalSummary, setModalSummary] = useState(false);
+  const [showSummary, setShowSummary] = useState(true);
+
+  const ToggleSwitchButton = (state, setState) => {
+    state ? setState(false) : setState(true);
+  };
+
+  const toggleCurrModal = (showState, UIClassName) => {
+    const modal = document.querySelector("." + UIClassName);
+    if (modal === null) {
+      return;
+    }
+    if (showState) {
+      modal.classList.remove("d-none");
+    } else {
+      modal.classList.add("d-none");
+    }
+  };
+
+  const popover = (
+    <Popover style={{ padding: "15px" }}>
+      <Form.Label
+        className="optionItems p-1"
+        onClick={() => ToggleSwitchButton(showSummary, setShowSummary)}
+      >
+        Show/Hide Section
+      </Form.Label>
+    </Popover>
+  );
+
+  return (
+    <Row className="mt-2">
+      <Col md={10} className="d-flex justify-content-start align-items-center">
+        <Form.Label
+          className="items-styling"
+          onClick={() => setModalSummary(true)}
+        >
+          Summary
+        </Form.Label>
+      </Col>
+      <Col md={2} className="d-flex justify-content-end align-items-center">
+        <OverlayTrigger
+          trigger="click"
+          rootClose
+          placement="bottom-start"
+          overlay={popover}
+        >
+          <Form.Label className="optionsStyle p-1">
+            <FiMoreVertical />
+          </Form.Label>
+        </OverlayTrigger>
+      </Col>
+
+      {showSummary
+        ? toggleCurrModal(showSummary, "summary")
+        : toggleCurrModal(showSummary, "summary")}
+
+      <ModalSummary show={modalSummary} onHide={() => setModalSummary(false)} />
+    </Row>
+  );
+}

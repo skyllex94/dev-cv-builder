@@ -9,11 +9,10 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import "../index.css";
 
-import SummaryOptions from "./OptionsMenu/SummaryOptions";
+import SummarySection from "./OptionsMenu/SummarySection";
 import WorkOptions from "./OptionsMenu/WorkOptions";
 
 import Popover from "react-bootstrap/esm/Popover";
-import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 import { FiMoreVertical } from "react-icons/fi";
 
 import ModalEducation from "./ModalEducation";
@@ -211,66 +210,11 @@ function ContPanelSections() {
             </Form.Label>
           </Col>
         </Row>
-        <Row>
-          <Col md={10} className="d-flex justify-content-start">
-            <Form.Label
-              className="items-styling mt-2"
-              onClick={() => setModalSummary(true)}
-            >
-              Summary
-            </Form.Label>
-          </Col>
-          <Col md={2} className="d-flex justify-content-end">
-            <OverlayTrigger
-              trigger="click"
-              rootClose
-              placement="bottom-start"
-              overlay={popover}
-            >
-              <Form.Label className="optionsStyle">
-                <FiMoreVertical />
-              </Form.Label>
-            </OverlayTrigger>
-          </Col>
-
-          {showSummary
-            ? toggleCurrModal(showSummary, "summary")
-            : toggleCurrModal(showSummary, "summary")}
-        </Row>
+        <SummarySection />
 
         <Row>
           <Card>
-            <Row className="my-3">
-              <Col
-                md={9}
-                className="d-flex justify-content-start align-items-center"
-              >
-                <Form.Label className="cp-work-styling ms-2">
-                  {renameWork.isInEditMode
-                    ? renderEditView(
-                        renameWork.value,
-                        setRenameWork,
-                        ".section-titles-work"
-                      )
-                    : renameWork.value}
-                </Form.Label>
-              </Col>
-              <Col
-                md={3}
-                className="d-flex justify-content-end align-items-center"
-              >
-                <WorkOptions
-                  showWork={showWork}
-                  setShowWork={setShowWork}
-                  renameWork={renameWork}
-                  setRenameWork={setRenameWork}
-                />
-
-                {showWork
-                  ? toggleCurrModal(showWork, "work")
-                  : toggleCurrModal(showWork, "work")}
-              </Col>
-            </Row>
+            <WorkOptions />
 
             <Col>
               {workSections.map((section, index) => {
