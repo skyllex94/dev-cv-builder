@@ -7,27 +7,13 @@ import Form from "react-bootstrap/esm/Form";
 import Popover from "react-bootstrap/esm/Popover";
 import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 
+import { ToggleSwitchButton, toggleCurrModal } from "./ContPanelFunctions";
+
 import ModalSummary from "../ModalSummary";
 
 export default function SummarySection() {
   const [modalSummary, setModalSummary] = useState(false);
   const [showSummary, setShowSummary] = useState(true);
-
-  const ToggleSwitchButton = (state, setState) => {
-    state ? setState(false) : setState(true);
-  };
-
-  const toggleCurrModal = (showState, UIClassName) => {
-    const modal = document.querySelector("." + UIClassName);
-    if (modal === null) {
-      return;
-    }
-    if (showState) {
-      modal.classList.remove("d-none");
-    } else {
-      modal.classList.add("d-none");
-    }
-  };
 
   const popover = (
     <Popover style={{ padding: "15px" }}>

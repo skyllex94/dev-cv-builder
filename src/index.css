@@ -64,6 +64,7 @@ code {
 
 .optionItems:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .separatorSection {

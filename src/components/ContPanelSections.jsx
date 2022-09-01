@@ -9,11 +9,8 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import "../index.css";
 
-import SummarySection from "./OptionsMenu/SummarySection";
-import WorkOptions from "./OptionsMenu/WorkOptions";
-
-import Popover from "react-bootstrap/esm/Popover";
-import { FiMoreVertical } from "react-icons/fi";
+import SummarySection from "./ContPanelSections/SummarySection";
+import WorkSection from "./ContPanelSections/WorkSection";
 
 import ModalEducation from "./ModalEducation";
 import ModalInfoContent from "./ModalGenInfo";
@@ -22,6 +19,10 @@ import ModalProjects from "./ModalProjects";
 import ModalSkills from "./ModalSkills";
 import ModalSummary from "./ModalSummary";
 import ModalWork from "./ModalWork";
+import SkillsSection from "./ContPanelSections/SkillsSection";
+import EducationSection from "./ContPanelSections/EducationSection";
+import LanguagesSection from "./ContPanelSections/LanguagesSection";
+import ProjectsSection from "./ContPanelSections/ProjectsSection";
 
 function ContPanelSections() {
   const [modalGenInfo, setModalGenInfo] = useState(false);
@@ -69,8 +70,6 @@ function ContPanelSections() {
     ".projectAccomplishments",
   ];
 
-  const [showSummary, setShowSummary] = useState(true);
-  const [showWork, setShowWork] = useState(true);
   const [showSkills, setShowSkills] = useState(true);
   const [showEducation, setShowEducation] = useState(true);
   const [showLanguages, setShowLanguages] = useState(true);
@@ -154,17 +153,6 @@ function ContPanelSections() {
     setState({ isInEditMode: !state.isInEditMode, value: state.value });
   };
 
-  // Popup Options
-  const popover = (
-    <Popover style={{ padding: "15px" }}>
-      <Form.Label className="me-3">Show/Hide Section</Form.Label>
-
-      <Switch
-        onClick={() => ToggleSwitchButton(showSummary, setShowSummary)}
-      ></Switch>
-    </Popover>
-  );
-
   const renderEditView = (value, setValue, UIClassName) => {
     return (
       <Col className="d-flex d-inline">
@@ -214,7 +202,7 @@ function ContPanelSections() {
 
         <Row>
           <Card>
-            <WorkOptions />
+            <WorkSection />
 
             <Col>
               {workSections.map((section, index) => {
@@ -270,221 +258,15 @@ function ContPanelSections() {
             </Col>
           </Card>
         </Row>
-        <Row>
-          <Col
-            md={9}
-            className="d-flex justify-content-start align-items-center"
-          >
-            {renameSkills.isInEditMode ? (
-              <Form.Label className="items-styling mt-2">
-                {renderEditView(
-                  renameSkills.value,
-                  setRenameSkills,
-                  ".section-titles-skills"
-                )}
-              </Form.Label>
-            ) : (
-              <Form.Label
-                className="items-styling mt-2"
-                onClick={() => setModalSkills(true)}
-              >
-                {renameSkills.value}
-              </Form.Label>
-            )}
-          </Col>
-          <Col md={3} className="d-flex justify-content-end align-items-center">
-            <Form.Label
-              className="items-styling me-2"
-              onClick={() => toggleRenameMode(renameSkills, setRenameSkills)}
-            >
-              <MdDriveFileRenameOutline />
-            </Form.Label>
-            <Switch
-              defaultChecked
-              onClick={() => ToggleSwitchButton(showSkills, setShowSkills)}
-            />
-            {showSkills
-              ? toggleCurrModal(showSkills, "skillsField")
-              : toggleCurrModal(showSkills, "skillsField")}
-          </Col>
-        </Row>
-        <Row>
-          <Col
-            md={9}
-            className="d-flex justify-content-start align-items-center"
-          >
-            {renameEducation.isInEditMode ? (
-              <Form.Label className="items-styling mt-2">
-                {renderEditView(
-                  renameEducation.value,
-                  setRenameEducation,
-                  ".section-titles-education"
-                )}
-              </Form.Label>
-            ) : (
-              <Form.Label
-                className="items-styling mt-2"
-                onClick={() => setModalEducation(true)}
-              >
-                {renameEducation.value}
-              </Form.Label>
-            )}
-          </Col>
-          <Col md={3} className="d-flex justify-content-end align-items-center">
-            <Form.Label
-              className="items-styling me-2"
-              onClick={() =>
-                toggleRenameMode(renameEducation, setRenameEducation)
-              }
-            >
-              <MdDriveFileRenameOutline />
-            </Form.Label>
-            <Switch
-              defaultChecked
-              onClick={() =>
-                ToggleSwitchButton(showEducation, setShowEducation)
-              }
-            />
-            {showEducation
-              ? toggleCurrModal(showEducation, "educationSection")
-              : toggleCurrModal(showEducation, "educationSection")}
-          </Col>
-        </Row>
-        <Row>
-          <Col
-            md={9}
-            className="d-flex justify-content-start align-items-center"
-          >
-            {renameLanguages.isInEditMode ? (
-              <Form.Label className="items-styling mt-2">
-                {renderEditView(
-                  renameLanguages.value,
-                  setRenameLanguages,
-                  ".section-titles-languages"
-                )}
-              </Form.Label>
-            ) : (
-              <Form.Label
-                className="items-styling mt-2"
-                onClick={() => setModalLanguages(true)}
-              >
-                {renameLanguages.value}
-              </Form.Label>
-            )}
-          </Col>
-          <Col md={3} className="d-flex justify-content-end align-items-center">
-            <Form.Label
-              className="items-styling me-2"
-              onClick={() =>
-                toggleRenameMode(renameLanguages, setRenameLanguages)
-              }
-            >
-              <MdDriveFileRenameOutline />
-            </Form.Label>
-            <Switch
-              defaultChecked
-              onClick={() =>
-                ToggleSwitchButton(showLanguages, setShowLanguages)
-              }
-            />
-            {showLanguages
-              ? toggleCurrModal(showLanguages, "languagesField")
-              : toggleCurrModal(showLanguages, "languagesField")}
-          </Col>
-        </Row>
-        <Row>
-          <Card>
-            <Row>
-              <Col
-                md={9}
-                className="d-flex justify-content-start align-items-center mt-3"
-              >
-                <Form.Label className="cp-work-styling ms-2">
-                  {renameProjects.isInEditMode
-                    ? renderEditView(
-                        renameProjects.value,
-                        setRenameProjects,
-                        ".section-titles-projects"
-                      )
-                    : renameProjects.value}
-                </Form.Label>
-              </Col>
-              <Col
-                md={3}
-                className="d-flex my-3 justify-content-end align-items-center"
-              >
-                <Form.Label
-                  className="items-styling me-2"
-                  onClick={() =>
-                    toggleRenameMode(renameProjects, setRenameProjects)
-                  }
-                >
-                  <MdDriveFileRenameOutline />
-                </Form.Label>
-                <Switch
-                  defaultChecked
-                  onClick={() =>
-                    ToggleSwitchButton(showProjects, setShowProjects)
-                  }
-                />
-                {showProjects
-                  ? toggleCurrModal(showProjects, "projects")
-                  : toggleCurrModal(showProjects, "projects")}
-              </Col>
-            </Row>
-            <Col>
-              {projectsSections.map((section, index) => {
-                return (
-                  <div key={index}>
-                    <Row className="mb-2">
-                      <Col md={6} className="d-flex justify-content-start">
-                        <Form.Label
-                          className="items-styling my-2 ms-4"
-                          onClick={() => showModals(index, allSetModalsProject)}
-                        >
-                          {section.name}
-                        </Form.Label>
-                      </Col>
 
-                      <Col md={6} className="d-flex justify-content-end">
-                        <Form.Label
-                          className="items-styling mt-2 me-3"
-                          onClick={() =>
-                            handleAddField(
-                              index,
-                              "Projects ",
-                              projectsSections,
-                              setProjectsSections
-                            )
-                          }
-                        >
-                          <AiOutlinePlus />
-                        </Form.Label>
-                        <Form.Label
-                          className="items-styling mt-2 me-3"
-                          onClick={() =>
-                            handleRemoveField(
-                              index,
-                              ".projectField",
-                              projectsSections,
-                              setProjectsSections
-                            )
-                          }
-                        >
-                          <AiOutlineMinus />
-                        </Form.Label>
-                      </Col>
-                    </Row>
-                    <ModalProjects
-                      show={modalsProject[index]}
-                      onHide={() => allSetModalsProject[index](false)}
-                      projectcount={index}
-                    />
-                  </div>
-                );
-              })}
-            </Col>
-          </Card>
+        <SkillsSection />
+
+        <EducationSection />
+
+        <LanguagesSection />
+
+        <Row>
+          <ProjectsSection />
         </Row>
       </div>
 

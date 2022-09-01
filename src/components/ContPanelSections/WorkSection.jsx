@@ -1,71 +1,29 @@
 import React, { useState } from "react";
 import { FiMoreVertical } from "react-icons/fi";
+import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
-import Form from "react-bootstrap/esm/Form";
-import Button from "react-bootstrap/esm/Button";
 
 import Popover from "react-bootstrap/esm/Popover";
 import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 
-export default function WorkOptions({ props }) {
+import {
+  ToggleSwitchButton,
+  toggleCurrModal,
+  toggleRenameMode,
+  renderEditView,
+} from "./ContPanelFunctions";
+
+export default function WorkSection() {
+  // Show modal state
   const [showWork, setShowWork] = useState(true);
+  // Rename section title state
   const [renameWork, setRenameWork] = useState({
     value: "Work Experience",
     isInEditMode: false,
   });
 
-  const ToggleSwitchButton = (state, setState) => {
-    state ? setState(false) : setState(true);
-  };
-
-  const toggleCurrModal = (showState, UIClassName) => {
-    const modal = document.querySelector("." + UIClassName);
-    if (modal === null) {
-      return;
-    }
-    if (showState) {
-      modal.classList.remove("d-none");
-    } else {
-      modal.classList.add("d-none");
-    }
-  };
-
-  const toggleRenameMode = (state, setState) => {
-    setState({ isInEditMode: !state.isInEditMode, value: state.value });
-  };
-
-  const renderEditView = (value, setValue, UIClassName) => {
-    return (
-      <Col className="d-flex d-inline">
-        <Form.Control
-          type="text"
-          defaultValue={value}
-          autoFocus
-          onChange={(event) =>
-            setValue({ isInEditMode: true, value: event.target.value })
-          }
-          onKeyDown={(event) => {
-            if (event.key === "Enter") {
-              updateRenameValue(value, setValue, UIClassName);
-            }
-          }}
-        />
-        <Button
-          variant="success"
-          onClick={() => updateRenameValue(value, setValue, UIClassName)}
-        >
-          ✓
-        </Button>
-      </Col>
-    );
-  };
-
-  const updateRenameValue = (value, setValue, UIClassName) => {
-    setValue({ isInEditMode: false, value: value });
-    document.querySelector(UIClassName).textContent = value;
-  };
-
+  // Popover Options Dropdown Menu
   const popover = (
     <Popover style={{ padding: "15px" }}>
       <Col md={12}>
@@ -88,6 +46,7 @@ export default function WorkOptions({ props }) {
   );
 
   return (
+    // The whole section row as displayed in the Control Panel
     <Row className="my-3">
       <Col md={10} className="d-flex justify-content-start align-items-center">
         <Form.Label className="cp-work-styling ms-2">
