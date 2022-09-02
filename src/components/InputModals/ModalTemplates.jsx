@@ -5,8 +5,8 @@ import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 
-import earthTemplate from "../img/earthTempThumbnail.png";
-import venusTemplate from "../img/venusTempThumbnail.png";
+import earthTemplate from "../../img/earthTempThumbnail.png";
+import venusTemplate from "../../img/venusTempThumbnail.png";
 
 function ModalTemplates(props) {
   return (

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import Row from "react-bootstrap/esm/Row";
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import DisplayGenInfo from "./DisplayGenInfo";
-import DisplaySummary from "./DisplaySummary";
-import DisplayWork from "./DisplayWork";
-import DisplaySkills from "./DisplaySkills";
-import DisplayEducation from "./DisplayEducation";
-import DisplayLanguages from "./DisplayLanguages";
-import DisplayProjects from "./DisplayProjects";
-import DisplayContact from "./DisplayContact";
+import DisplayGenInfo from "./UIDisplaySections/DisplayGenInfo";
+import DisplaySummary from "./UIDisplaySections/DisplaySummary";
+import DisplayWork from "./UIDisplaySections/DisplayWork";
+import DisplaySkills from "./UIDisplaySections/DisplaySkills";
+import DisplayEducation from "./UIDisplaySections/DisplayEducation";
+import DisplayLanguages from "./UIDisplaySections/DisplayLanguages";
+import DisplayProjects from "./UIDisplaySections/DisplayProjects";
+import DisplayContact from "./UIDisplaySections/DisplayContact";
 
 import { useLocation } from "react-router-dom";
 

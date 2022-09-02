@@ -2,7 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
-import { HorizontalLine } from "../utils/Utils";
+import { HorizontalLine } from "../../utils/Utils";
 
 import { HiLocationMarker } from "react-icons/hi";
 import { BiMailSend } from "react-icons/bi";

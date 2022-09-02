@@ -9,6 +9,7 @@ import Popover from "react-bootstrap/esm/Popover";
 import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import ModalProjects from "../InputModals/ModalProjects";
 
 import {
   ToggleSwitchButton,
@@ -19,7 +20,6 @@ import {
   handleAddField,
   handleRemoveField,
 } from "./ContPanelFunctions";
-import ModalProjects from "../ModalProjects";
 
 export default function ProjectsSection() {
   // Show modal state
@@ -30,7 +30,7 @@ export default function ProjectsSection() {
     isInEditMode: false,
   });
 
-  const [modalProjects, setModalProjects] = useState(false);
+  // const [modalProjects, setModalProjects] = useState(false);
 
   const [projectsSections, setProjectsSections] = useState([
     { name: "Project 1" },

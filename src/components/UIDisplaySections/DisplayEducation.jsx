@@ -2,7 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
-import { HorizontalLine } from "../utils/Utils";
+import { HorizontalLine } from "../../utils/Utils";
 
 function DisplayEducation() {
   return (
@@ -11,7 +11,7 @@ function DisplayEducation() {
         <div className="section-titles-education">Education</div>
         <HorizontalLine />
       </Col>
-      <Col md={12} className="d-flex educationField d-none">
+      <Col md={12} className="d-flex educationField d-none" id="educationField">
         <Form.Label className="textStudyField"></Form.Label>
       </Col>
       <Col md={12} className="edu-university d-flex">

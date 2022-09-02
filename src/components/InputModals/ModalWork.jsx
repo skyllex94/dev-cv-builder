@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
-import Context from "../context/Context";
+import Context from "../../context/Context";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 function ModalWork(props) {

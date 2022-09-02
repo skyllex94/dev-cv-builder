@@ -2,7 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
-import { HorizontalLine } from "../utils/Utils";
+import { HorizontalLine } from "../../utils/Utils";
 
 const amountOfJobs = [
   { job: 1 },
@@ -22,7 +22,11 @@ function DisplayWork() {
             <HorizontalLine />
           </Col>
         ) : null}
-        <div key={index} className={"d-none pt-2 workField" + job.job}>
+        <div
+          key={index}
+          className={"d-none pt-2 workField" + job.job}
+          id="workField"
+        >
           <Col md={12} className="d-flex">
             <Form.Label className={"textCompany" + job.job}></Form.Label>
           </Col>

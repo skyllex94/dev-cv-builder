@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 
-import Context from "../context/Context";
+import Context from "../../context/Context";
 
 function ModalSummary(props) {
   const { displaySummary } = useContext(Context);

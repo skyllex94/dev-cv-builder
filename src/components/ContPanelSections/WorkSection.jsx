@@ -9,7 +9,7 @@ import Popover from "react-bootstrap/esm/Popover";
 import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import ModalWork from "../ModalWork";
+import ModalWork from "../InputModals/ModalWork";
 
 import {
   ToggleSwitchButton,

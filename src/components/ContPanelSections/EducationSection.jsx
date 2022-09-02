@@ -6,7 +6,7 @@ import Col from "react-bootstrap/esm/Col";
 
 import Popover from "react-bootstrap/esm/Popover";
 import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
-import ModalEducation from "../ModalEducation";
+import ModalEducation from "../InputModals/ModalEducation";
 
 import {
   ToggleSwitchButton,

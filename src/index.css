@@ -158,11 +158,11 @@ code {
   text-transform: capitalize;
 }
 /* Using more of the white space when displaying */
-[id*="workSection"],
-[id*="projectSection"],
-[class*="educationSection"] {
-  margin: 0;
-  padding: 0;
+[id*="workField"],
+[id*="projectField"],
+[id*="educationField"] {
+  margin-right: 0;
+  padding-right: 0;
 }
 
 [class*="work-position"],

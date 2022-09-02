@@ -9,7 +9,7 @@ import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 
 import { ToggleSwitchButton, toggleCurrModal } from "./ContPanelFunctions";
 
-import ModalSummary from "../ModalSummary";
+import ModalSummary from "../InputModals/ModalSummary";
 
 export default function SummarySection() {
   const [modalSummary, setModalSummary] = useState(false);

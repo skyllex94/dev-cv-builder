@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
-import ModalTemplates from "./ModalTemplates";
+import ModalTemplates from "./InputModals/ModalTemplates";
 import cv from "../img/cv-example.png";
 
 function Landing() {

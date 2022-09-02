@@ -3,7 +3,7 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
 
-import ModalGenInfo from "../ModalGenInfo";
+import ModalGenInfo from "../InputModals/ModalGenInfo";
 
 function GenInfoSection() {
   const [modalGenInfo, setModalGenInfo] = useState(false);
