@@ -11,23 +11,20 @@ function DisplayEducation() {
         <div className="section-titles-education">Education</div>
         <HorizontalLine />
       </Col>
-      <Col md={12} className="d-flex educationField d-none" id="educationField">
+
+      <Col className="col-auto educationField " id="educationField">
         <Form.Label className="textStudyField"></Form.Label>
       </Col>
-      <Col md={12} className="edu-university d-flex">
-        <div className="textUniversity me-2" />
-        <div className="edu-period d-none">
-          <Col className="d-flex">
-            | <div className="textEduStartDate ms-2 me-1" /> -
-            <div className="textEduEndDate me-2 ms-1" />
-            <Col className="edu-location-group d-flex">
-              | <div className="textEduLocation ms-2" />
-              <div className="textEduLocation me-2" />
-              <div className="textEduLocation me-2" />
-            </Col>
-          </Col>
-        </div>
-      </Col>
+
+      <Row className="edu-university d-none">
+        <Col className="col-auto textUniversity" />
+        | <Col className="col-auto textEduStartDate gx-0 ms-3" />
+        <Col className="col-auto gx-0 mx-1">-</Col>
+        <Col className="col-auto textEduEndDate gx-0" />
+        <Row className="edu-location-group ">
+          <Col className="col-auto textEduLocation" />
+        </Row>
+      </Row>
 
       <Col md={12} className="edu-accomplish">
         <div className="textAccomplish"></div>

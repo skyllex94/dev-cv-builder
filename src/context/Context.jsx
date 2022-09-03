@@ -135,11 +135,11 @@ export const ContextProvider = ({ children }) => {
 
   // Display each piece of data from the given array
   function displayAddress(readFrom, writeTo) {
-    readFrom.forEach((current, key, arr) => {
-      if (Object.is(arr.length - 1, key)) {
+    readFrom.forEach((current, index, arr) => {
+      if (Object.is(arr.length - 1, index)) {
         writeTo.textContent += current.value;
       } else {
-        writeTo.textContent += current.value + ", ";
+        writeTo.textContent += current.value + ",";
       }
     });
   }
@@ -279,13 +279,13 @@ export const ContextProvider = ({ children }) => {
     const educationEndDate = document.querySelector(".educationEndDate");
 
     const textEduLocation = document.querySelector(".textEduLocation");
-    const educationLocation = document.querySelectorAll(".educationLocation");
+    const educationLocation = document.querySelector(".educationLocation");
 
     // Format date string to display only written month and numeric year
     if (startDate.value === "" && endDate.value === "") {
-      document.querySelector(".edu-period").classList.add("d-none");
+      document.querySelector(".edu-university").classList.add("d-none");
     } else {
-      document.querySelector(".edu-period").classList.remove("d-none");
+      document.querySelector(".edu-university").classList.remove("d-none");
       const formatStart = educationStartDate.value.replaceAll("-", " ");
       const formatEnd = educationEndDate.value.replaceAll("-", " ");
       let start = new Date(formatStart);
@@ -298,14 +298,7 @@ export const ContextProvider = ({ children }) => {
       endDate.textContent = `${mo2}, ${ye2}`;
     }
 
-    // Populate the Education Address with commas after each of them
-    textEduLocation.textContent = "";
-    if (!populateFilledFields(educationLocation)) {
-      document.querySelector(".edu-location-group").classList.remove("d-none");
-      displayAddress(educationLocation, textEduLocation);
-    } else {
-      document.querySelector(".edu-location-group").classList.add("d-none");
-    }
+    textEduLocation.textContent = educationLocation.value;
 
     textStudyField.textContent = educationStudy.value;
     textUniversity.textContent = educationGraduated.value;
