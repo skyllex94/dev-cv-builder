@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 
 import Context from "../../context/Context";
+import { VscChromeClose } from "react-icons/vsc";
 
 function ModalSummary(props) {
   const { displaySummary } = useContext(Context);
@@ -26,7 +27,7 @@ function ModalSummary(props) {
 
   const ModalEnterPressed = (e) => {
     if (e.key === "Enter") {
-      displaySummary(props.onHide);
+      displaySummary(props.onHide, paragraphs);
     }
   };
 
@@ -38,6 +39,14 @@ function ModalSummary(props) {
           paragraph: "",
         },
       ]);
+    }
+  };
+
+  const removeParagraph = (index) => {
+    if (paragraphs.length > 1 && paragraphs.length === index + 1) {
+      const values = [...paragraphs];
+      values.splice(index, 1);
+      setParagraphs(values);
     }
   };
 
@@ -59,20 +68,30 @@ function ModalSummary(props) {
               {paragraphs.map((text, index) => {
                 return (
                   <div key={index}>
-                    <Col md={12}>
-                      <Form>
-                        <Form.Group>
-                          <Form.Control
-                            as="textarea"
-                            className="modalSummary mb-2"
-                            name="paragraph"
-                            value={text.paragraph}
-                            onChange={(event) => handleChange(index, event)}
-                            rows={5}
-                          />
-                        </Form.Group>
-                      </Form>
-                    </Col>
+                    <Row>
+                      <Col md="11">
+                        <Form>
+                          <Form.Group>
+                            <Form.Control
+                              as="textarea"
+                              className="modalSummary mb-2"
+                              name="paragraph"
+                              value={text.paragraph}
+                              onChange={(event) => handleChange(index, event)}
+                              rows={3}
+                            />
+                          </Form.Group>
+                        </Form>
+                      </Col>
+                      <Col md="1">
+                        <Button
+                          variant="white"
+                          onClick={() => removeParagraph(index)}
+                        >
+                          <VscChromeClose />
+                        </Button>
+                      </Col>
+                    </Row>
                   </div>
                 );
               })}

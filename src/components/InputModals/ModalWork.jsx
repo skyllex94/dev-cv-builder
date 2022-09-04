@@ -53,7 +53,6 @@ function ModalWork(props) {
       values.splice(index, 1);
       setResponsibilities(values);
     }
-    return;
   };
 
   const ModalEnterPressed = (e) => {
