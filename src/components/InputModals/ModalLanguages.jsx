@@ -42,56 +42,69 @@ function ModalLanguages(props) {
     setLanguages(values);
   };
 
+  const ModalEnterPressed = (e) => {
+    if (e.key === "Enter") {
+      displayInlineText(props.onHide, languages, "languagesGroup");
+    }
+  };
+
   return (
-    <Modal
-      {...props}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      size="lg"
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Languages</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="show-grid">
-        <Container>
-          <Row>
-            {languages.map((language, index) => {
-              return (
-                <Col className="d-flex mb-2 g-1" md={3} xs={6} key={index}>
-                  <Form.Group>
-                    <FloatingLabel label="Language">
-                      <Form.Control
-                        type="text"
-                        name="language"
-                        placeholder="English"
-                        value={language.language}
-                        onChange={(event) => insertLanguages(event, index)}
-                      />
-                    </FloatingLabel>
-                  </Form.Group>
-                  <Button variant="white" onClick={() => removeLanguage(index)}>
-                    <GrClose />
-                  </Button>
-                </Col>
-              );
-            })}
-            <Button className="mb-2" onClick={addLanguages}>
-              Add
-            </Button>
-          </Row>
-        </Container>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button
-          onClick={() =>
-            displayInlineText(props.onHide, languages, "languagesGroup")
-          }
-        >
-          Submit
-        </Button>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
+    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+      <Modal
+        {...props}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        size="lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Languages
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="show-grid">
+          <Container>
+            <Row>
+              {languages.map((language, index) => {
+                return (
+                  <Col className="d-flex mb-2 g-1" md={3} xs={6} key={index}>
+                    <Form.Group>
+                      <FloatingLabel label="Language">
+                        <Form.Control
+                          type="text"
+                          name="language"
+                          placeholder="English"
+                          value={language.language}
+                          onChange={(event) => insertLanguages(event, index)}
+                        />
+                      </FloatingLabel>
+                    </Form.Group>
+                    <Button
+                      variant="white"
+                      onClick={() => removeLanguage(index)}
+                    >
+                      <GrClose />
+                    </Button>
+                  </Col>
+                );
+              })}
+              <Button className="mb-2" onClick={addLanguages}>
+                Add
+              </Button>
+            </Row>
+          </Container>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            onClick={() =>
+              displayInlineText(props.onHide, languages, "languagesGroup")
+            }
+          >
+            Submit
+          </Button>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 }
 

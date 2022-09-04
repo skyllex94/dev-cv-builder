@@ -84,201 +84,216 @@ function ModalProjects(props) {
     setTechUsed(values);
   };
 
+  const ModalEnterPressed = (e) => {
+    if (e.key === "Enter") {
+      displayProjects(props.onHide, techUsed, highlights, projectsAmount);
+    }
+  };
+
   return (
-    <Modal
-      {...props}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      size="lg"
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Personal Projects {projectsAmount}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="show-grid">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <Form>
-                <Form.Group className="mb-3">
-                  <FloatingLabel label="Project Name *">
-                    <Form.Control
-                      type="text"
-                      className={"mb-2 modalProjectName" + projectsAmount}
-                      value={project}
-                      onChange={(event) => {
-                        setProject(event.target.value);
-                      }}
-                    />
-                  </FloatingLabel>
-                  <Form.Group>
-                    <Row>
-                      <Col md={6}>
-                        <FloatingLabel label="Link to Website">
-                          <Form.Control
-                            type="text"
-                            className={"mb-2 modalProjectLink" + projectsAmount}
-                            placeholder="projectWebsite"
-                            value={projectLink}
-                            onChange={(event) => {
-                              setProjectLink(event.target.value);
-                            }}
-                          />
-                        </FloatingLabel>
-                      </Col>
-                      <Col md={6}>
-                        <FloatingLabel label="Github Repo">
-                          <Form.Control
-                            type="text"
-                            className={
-                              "mb-2 modalProjectGithub" + projectsAmount
-                            }
-                            placeholder="projectGithub"
-                            value={projectGithub}
-                            onChange={(event) => {
-                              setProjectGithub(event.target.value);
-                            }}
-                          />
-                        </FloatingLabel>
-                      </Col>
-                    </Row>
-                  </Form.Group>
+    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+      <Modal
+        {...props}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        size="lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Personal Projects {projectsAmount}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="show-grid">
+          <Container>
+            <Row>
+              <Col md={12}>
+                <Form>
+                  <Form.Group className="mb-3">
+                    <FloatingLabel label="Project Name *">
+                      <Form.Control
+                        type="text"
+                        className={"mb-2 modalProjectName" + projectsAmount}
+                        value={project}
+                        onChange={(event) => {
+                          setProject(event.target.value);
+                        }}
+                      />
+                    </FloatingLabel>
+                    <Form.Group>
+                      <Row>
+                        <Col md={6}>
+                          <FloatingLabel label="Link to Website">
+                            <Form.Control
+                              type="text"
+                              className={
+                                "mb-2 modalProjectLink" + projectsAmount
+                              }
+                              placeholder="projectWebsite"
+                              value={projectLink}
+                              onChange={(event) => {
+                                setProjectLink(event.target.value);
+                              }}
+                            />
+                          </FloatingLabel>
+                        </Col>
+                        <Col md={6}>
+                          <FloatingLabel label="Github Repo">
+                            <Form.Control
+                              type="text"
+                              className={
+                                "mb-2 modalProjectGithub" + projectsAmount
+                              }
+                              placeholder="projectGithub"
+                              value={projectGithub}
+                              onChange={(event) => {
+                                setProjectGithub(event.target.value);
+                              }}
+                            />
+                          </FloatingLabel>
+                        </Col>
+                      </Row>
+                    </Form.Group>
 
-                  <FloatingLabel label="Project Description *">
-                    <Form.Control
-                      type="text"
-                      className={"mb-2 modalDesc" + projectsAmount}
-                      placeholder="desc"
-                      value={desc}
-                      onChange={(event) => {
-                        setDesc(event.target.value);
-                      }}
-                    />
-                  </FloatingLabel>
-                  <Form.Group>
-                    <Row>
-                      {techUsed.map((tech, index) => {
-                        return (
-                          <Col
-                            className="d-flex mb-2"
-                            md={3}
-                            xs={6}
-                            key={index}
-                          >
-                            <FloatingLabel label="Technology:">
-                              <Form.Control
-                                type="text"
-                                className={"mb-2 modalTech" + projectsAmount}
-                                placeholder="tech"
-                                name="tech"
-                                value={tech.tech}
-                                onChange={(event) => insertTech(event, index)}
-                              />
-                            </FloatingLabel>
-                            <Button
-                              variant="white"
-                              onClick={() => removeTech(index)}
+                    <FloatingLabel label="Project Description *">
+                      <Form.Control
+                        type="text"
+                        className={"mb-2 modalDesc" + projectsAmount}
+                        placeholder="desc"
+                        value={desc}
+                        onChange={(event) => {
+                          setDesc(event.target.value);
+                        }}
+                      />
+                    </FloatingLabel>
+                    <Form.Group>
+                      <Row>
+                        {techUsed.map((tech, index) => {
+                          return (
+                            <Col
+                              className="d-flex mb-2"
+                              md={3}
+                              xs={6}
+                              key={index}
                             >
-                              <GrClose />
-                            </Button>
-                          </Col>
-                        );
-                      })}
-                      <Col className="d-flex justify-content-end">
-                        <Button onClick={addTech} className="mb-2">
-                          Add
-                        </Button>
-                      </Col>
-                    </Row>
-                  </Form.Group>
-
-                  <Row>
-                    <Col md={6}>
-                      <FloatingLabel label="Start Date">
-                        <Form.Control
-                          type="date"
-                          className={
-                            "mb-2 modalProjectStartDate" + projectsAmount
-                          }
-                          placeholder="02/2022"
-                          value={startDate}
-                          onChange={(event) => {
-                            setStartDate(event.target.value);
-                          }}
-                        />
-                      </FloatingLabel>
-                    </Col>
-                    <Col md={6}>
-                      <FloatingLabel label="End Date">
-                        <Form.Control
-                          type="date"
-                          className={
-                            "mb-2 modalProjectEndDate" + projectsAmount
-                          }
-                          placeholder="12/2022"
-                          value={endDate}
-                          onChange={(event) => {
-                            setEndDate(event.target.value);
-                          }}
-                        />
-                      </FloatingLabel>
-                    </Col>
-                  </Row>
-                  <Row>
-                    {highlights.map((highlight, index) => {
-                      return (
-                        <div key={index}>
-                          <Row className="mb-2">
-                            <Col md={10}>
-                              <FloatingLabel label="Highlights">
+                              <FloatingLabel label="Technology:">
                                 <Form.Control
                                   type="text"
-                                  name="message"
-                                  placeholder="highlights"
-                                  value={highlight.message}
-                                  onChange={(event) =>
-                                    handleHighlight(index, event)
-                                  }
+                                  className={"mb-2 modalTech" + projectsAmount}
+                                  placeholder="tech"
+                                  name="tech"
+                                  value={tech.tech}
+                                  onChange={(event) => insertTech(event, index)}
                                 />
                               </FloatingLabel>
-                            </Col>
-                            <Col md={2} className="mt-2">
                               <Button
                                 variant="white"
-                                onClick={() => handleAddField()}
+                                onClick={() => removeTech(index)}
                               >
-                                <AiOutlinePlus />
-                              </Button>
-                              <Button
-                                variant="white"
-                                onClick={() => handleRemoveField(index)}
-                              >
-                                <AiOutlineMinus />
+                                <GrClose />
                               </Button>
                             </Col>
-                          </Row>
-                        </div>
-                      );
-                    })}
-                  </Row>
-                </Form.Group>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button
-          onClick={() =>
-            displayProjects(props.onHide, techUsed, highlights, projectsAmount)
-          }
-        >
-          Submit
-        </Button>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
+                          );
+                        })}
+                        <Col className="d-flex justify-content-end">
+                          <Button onClick={addTech} className="mb-2">
+                            Add
+                          </Button>
+                        </Col>
+                      </Row>
+                    </Form.Group>
+
+                    <Row>
+                      <Col md={6}>
+                        <FloatingLabel label="Start Date">
+                          <Form.Control
+                            type="date"
+                            className={
+                              "mb-2 modalProjectStartDate" + projectsAmount
+                            }
+                            placeholder="02/2022"
+                            value={startDate}
+                            onChange={(event) => {
+                              setStartDate(event.target.value);
+                            }}
+                          />
+                        </FloatingLabel>
+                      </Col>
+                      <Col md={6}>
+                        <FloatingLabel label="End Date">
+                          <Form.Control
+                            type="date"
+                            className={
+                              "mb-2 modalProjectEndDate" + projectsAmount
+                            }
+                            placeholder="12/2022"
+                            value={endDate}
+                            onChange={(event) => {
+                              setEndDate(event.target.value);
+                            }}
+                          />
+                        </FloatingLabel>
+                      </Col>
+                    </Row>
+                    <Row>
+                      {highlights.map((highlight, index) => {
+                        return (
+                          <div key={index}>
+                            <Row className="mb-2">
+                              <Col md={10}>
+                                <FloatingLabel label="Highlights">
+                                  <Form.Control
+                                    type="text"
+                                    name="message"
+                                    placeholder="highlights"
+                                    value={highlight.message}
+                                    onChange={(event) =>
+                                      handleHighlight(index, event)
+                                    }
+                                  />
+                                </FloatingLabel>
+                              </Col>
+                              <Col md={2} className="mt-2">
+                                <Button
+                                  variant="white"
+                                  onClick={() => handleAddField()}
+                                >
+                                  <AiOutlinePlus />
+                                </Button>
+                                <Button
+                                  variant="white"
+                                  onClick={() => handleRemoveField(index)}
+                                >
+                                  <AiOutlineMinus />
+                                </Button>
+                              </Col>
+                            </Row>
+                          </div>
+                        );
+                      })}
+                    </Row>
+                  </Form.Group>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            onClick={() =>
+              displayProjects(
+                props.onHide,
+                techUsed,
+                highlights,
+                projectsAmount
+              )
+            }
+          >
+            Submit
+          </Button>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 }
 

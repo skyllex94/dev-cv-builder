@@ -54,14 +54,14 @@ function ModalEducation(props) {
     return;
   };
 
-  const onEnterPressed = (e) => {
+  const ModalEnterPressed = (e) => {
     if (e.key === "Enter") {
       displayEducation(props.onHide, accomplishments);
     }
   };
 
   return (
-    <div onKeyPress={(event) => onEnterPressed(event)}>
+    <div onKeyPress={(event) => ModalEnterPressed(event)}>
       <Modal
         {...props}
         aria-labelledby="contained-modal-title-vcenter"

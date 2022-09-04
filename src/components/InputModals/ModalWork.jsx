@@ -56,164 +56,176 @@ function ModalWork(props) {
     return;
   };
 
-  return (
-    <Modal
-      {...props}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      size="lg"
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Work Experience {jobAmount}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="show-grid">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <Form>
-                <Form.Group className="mb-3">
-                  <FloatingLabel label="Company or Organization">
-                    <Form.Control
-                      type="text"
-                      className={"mb-2 workCompany" + jobAmount}
-                      placeholder="Microsoft LLC."
-                      value={company}
-                      onChange={(event) => {
-                        setCompany(event.target.value);
-                      }}
-                    />
-                  </FloatingLabel>
+  const ModalEnterPressed = (e) => {
+    if (e.key === "Enter") {
+      displayWork(props.onHide, responsibilities, jobAmount);
+    }
+  };
 
-                  <FloatingLabel label="Job Title">
-                    <Form.Control
-                      type="text"
-                      className={"mb-2 workPosition" + jobAmount}
-                      placeholder="Senior Software Engineer"
-                      value={position}
-                      onChange={(event) => {
-                        setPosition(event.target.value);
-                      }}
-                    />
-                  </FloatingLabel>
-                  <Row>
-                    <Col md={6}>
-                      <FloatingLabel label="Start Date">
-                        <Form.Control
-                          type="date"
-                          className={"mb-2 workStartDate" + jobAmount}
-                          placeholder="02/2022"
-                          value={startDate}
-                          onChange={(event) => {
-                            setStartDate(event.target.value);
-                          }}
-                        />
-                      </FloatingLabel>
-                    </Col>
-                    <Col md={6}>
-                      <FloatingLabel label="End Date">
-                        <Form.Control
-                          type="date"
-                          className={"mb-2 workEndDate" + jobAmount}
-                          placeholder="12/2022"
-                          value={endDate}
-                          onChange={(event) => {
-                            setEndDate(event.target.value);
-                          }}
-                        />
-                      </FloatingLabel>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={6} md={4}>
-                      <FloatingLabel label="City">
-                        <Form.Control
-                          type="text"
-                          className={"mb-2 workLocation" + jobAmount}
-                          placeholder="Boston"
-                          value={workCity}
-                          onChange={(event) => {
-                            setWorkCity(event.target.value);
-                          }}
-                        />
-                      </FloatingLabel>
-                    </Col>
-                    <Col xs={6} md={4}>
-                      <FloatingLabel label="State">
-                        <Form.Control
-                          type="text"
-                          className={"mb-2 workLocation" + jobAmount}
-                          placeholder="MA"
-                          value={workState}
-                          onChange={(event) => {
-                            setWorkState(event.target.value);
-                          }}
-                        />
-                      </FloatingLabel>
-                    </Col>
-                    <Col xs={6} md={4}>
-                      <FloatingLabel label="Country">
-                        <Form.Control
-                          type="text"
-                          className={"mb-2 workLocation" + jobAmount}
-                          placeholder="USA"
-                          value={workCountry}
-                          onChange={(event) => {
-                            setWorkCountry(event.target.value);
-                          }}
-                        />
-                      </FloatingLabel>
-                    </Col>
-                    {responsibilities.map((resp, index) => {
-                      return (
-                        <div key={index}>
-                          <Row className="mb-2">
-                            <Col md={10}>
-                              <FloatingLabel label="Accomplishments and Responsibilities">
-                                <Form.Control
-                                  type="text"
-                                  name="message"
-                                  placeholder="Resp"
-                                  value={resp.message}
-                                  onChange={(event) => handleResp(index, event)}
-                                />
-                              </FloatingLabel>
-                            </Col>
-                            <Col md={2} className="mt-2">
-                              <Button
-                                variant="white"
-                                onClick={() => handleAddField()}
-                              >
-                                <AiOutlinePlus />
-                              </Button>
-                              <Button
-                                variant="white"
-                                onClick={() => handleRemoveField(index)}
-                              >
-                                <AiOutlineMinus />
-                              </Button>
-                            </Col>
-                          </Row>
-                        </div>
-                      );
-                    })}
-                  </Row>
-                </Form.Group>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button
-          onClick={() => displayWork(props.onHide, responsibilities, jobAmount)}
-        >
-          Submit
-        </Button>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
+  return (
+    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+      <Modal
+        {...props}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        size="lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Work Experience {jobAmount}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="show-grid">
+          <Container>
+            <Row>
+              <Col md={12}>
+                <Form>
+                  <Form.Group className="mb-3">
+                    <FloatingLabel label="Company or Organization">
+                      <Form.Control
+                        type="text"
+                        className={"mb-2 workCompany" + jobAmount}
+                        placeholder="Microsoft LLC."
+                        value={company}
+                        onChange={(event) => {
+                          setCompany(event.target.value);
+                        }}
+                      />
+                    </FloatingLabel>
+
+                    <FloatingLabel label="Job Title">
+                      <Form.Control
+                        type="text"
+                        className={"mb-2 workPosition" + jobAmount}
+                        placeholder="Senior Software Engineer"
+                        value={position}
+                        onChange={(event) => {
+                          setPosition(event.target.value);
+                        }}
+                      />
+                    </FloatingLabel>
+                    <Row>
+                      <Col md={6}>
+                        <FloatingLabel label="Start Date">
+                          <Form.Control
+                            type="date"
+                            className={"mb-2 workStartDate" + jobAmount}
+                            placeholder="02/2022"
+                            value={startDate}
+                            onChange={(event) => {
+                              setStartDate(event.target.value);
+                            }}
+                          />
+                        </FloatingLabel>
+                      </Col>
+                      <Col md={6}>
+                        <FloatingLabel label="End Date">
+                          <Form.Control
+                            type="date"
+                            className={"mb-2 workEndDate" + jobAmount}
+                            placeholder="12/2022"
+                            value={endDate}
+                            onChange={(event) => {
+                              setEndDate(event.target.value);
+                            }}
+                          />
+                        </FloatingLabel>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={6} md={4}>
+                        <FloatingLabel label="City">
+                          <Form.Control
+                            type="text"
+                            className={"mb-2 workLocation" + jobAmount}
+                            placeholder="Boston"
+                            value={workCity}
+                            onChange={(event) => {
+                              setWorkCity(event.target.value);
+                            }}
+                          />
+                        </FloatingLabel>
+                      </Col>
+                      <Col xs={6} md={4}>
+                        <FloatingLabel label="State">
+                          <Form.Control
+                            type="text"
+                            className={"mb-2 workLocation" + jobAmount}
+                            placeholder="MA"
+                            value={workState}
+                            onChange={(event) => {
+                              setWorkState(event.target.value);
+                            }}
+                          />
+                        </FloatingLabel>
+                      </Col>
+                      <Col xs={6} md={4}>
+                        <FloatingLabel label="Country">
+                          <Form.Control
+                            type="text"
+                            className={"mb-2 workLocation" + jobAmount}
+                            placeholder="USA"
+                            value={workCountry}
+                            onChange={(event) => {
+                              setWorkCountry(event.target.value);
+                            }}
+                          />
+                        </FloatingLabel>
+                      </Col>
+                      {responsibilities.map((resp, index) => {
+                        return (
+                          <div key={index}>
+                            <Row className="mb-2">
+                              <Col md={10}>
+                                <FloatingLabel label="Accomplishments and Responsibilities">
+                                  <Form.Control
+                                    type="text"
+                                    name="message"
+                                    placeholder="Resp"
+                                    value={resp.message}
+                                    onChange={(event) =>
+                                      handleResp(index, event)
+                                    }
+                                  />
+                                </FloatingLabel>
+                              </Col>
+                              <Col md={2} className="mt-2">
+                                <Button
+                                  variant="white"
+                                  onClick={() => handleAddField()}
+                                >
+                                  <AiOutlinePlus />
+                                </Button>
+                                <Button
+                                  variant="white"
+                                  onClick={() => handleRemoveField(index)}
+                                >
+                                  <AiOutlineMinus />
+                                </Button>
+                              </Col>
+                            </Row>
+                          </div>
+                        );
+                      })}
+                    </Row>
+                  </Form.Group>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            onClick={() =>
+              displayWork(props.onHide, responsibilities, jobAmount)
+            }
+          >
+            Submit
+          </Button>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 }
 

@@ -12,7 +12,7 @@ function DisplayEducation() {
         <HorizontalLine />
       </Col>
 
-      <Col className="col-auto educationField " id="educationField">
+      <Col className="col-auto eduGroupField d-none" id="educationField">
         <Form.Label className="textStudyField"></Form.Label>
       </Col>
 

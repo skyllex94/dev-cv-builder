@@ -139,20 +139,31 @@ export const ContextProvider = ({ children }) => {
       if (Object.is(arr.length - 1, index)) {
         writeTo.textContent += current.value;
       } else {
-        writeTo.textContent += current.value + ",";
+        writeTo.textContent += current.value + ", ";
       }
     });
   }
 
-  const displaySummary = (hideModal) => {
-    const textSummary = document.querySelector(".textSummary");
-    const modalSummary = document.querySelector(".modalSummary");
-
-    if (modalSummary === "") {
-      return 1;
-    } else {
-      textSummary.textContent = modalSummary.value;
+  function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
     }
+  }
+
+  const displaySummary = (hideModal, paragraphs) => {
+    // Select the paragraph group div
+    const paragraphsGroup = document.querySelector(".paragraphsGroup");
+    // Clear all previous paragraphs, before updating
+    removeAllChildNodes(paragraphsGroup);
+
+    // Populate all the text from the paragraphs
+    paragraphs.map((paragraph) => {
+      const createParagraph = document.createElement("p");
+      createParagraph.className = "textSummary";
+      createParagraph.innerText = paragraph.paragraph;
+      paragraphsGroup.appendChild(createParagraph);
+    });
+
     hideModal();
   };
 
@@ -269,6 +280,8 @@ export const ContextProvider = ({ children }) => {
   const displayEducation = (hideModal, accomplishments) => {
     const textStudyField = document.querySelector(".textStudyField");
     const educationStudy = document.querySelector(".educationStudy");
+    // Display education study, d-none by default
+    const eduGroupField = document.querySelector(".eduGroupField");
 
     const textUniversity = document.querySelector(".textUniversity");
     const educationGraduated = document.querySelector(".educationGraduated");
@@ -299,8 +312,14 @@ export const ContextProvider = ({ children }) => {
     }
 
     textEduLocation.textContent = educationLocation.value;
+    // Display Degree of Study
+    if (educationStudy.value !== "") {
+      eduGroupField.classList.remove("d-none");
+      textStudyField.textContent = educationStudy.value;
+    } else {
+      eduGroupField.classList.add("d-none");
+    }
 
-    textStudyField.textContent = educationStudy.value;
     textUniversity.textContent = educationGraduated.value;
 
     const groupInsert = document.querySelector(".textAccomplish");

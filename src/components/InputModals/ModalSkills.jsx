@@ -63,54 +63,64 @@ function ModalSkills(props) {
     setSkills(values);
   };
 
+  const ModalEnterPressed = (e) => {
+    if (e.key === "Enter") {
+      displayInlineText(props.onHide, skills, "skillsGroup");
+    }
+  };
+
   return (
-    <Modal
-      {...props}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      size="lg"
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Skills</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="show-grid">
-        <Container>
-          <Row>
-            {skills.map((skill, index) => {
-              return (
-                <Col className="d-flex mb-2 g-1" md={3} xs={6} key={index}>
-                  <Form.Group>
-                    <FloatingLabel label="Skill">
-                      <Form.Control
-                        type="text"
-                        name="skill"
-                        placeholder="vanilla JS"
-                        value={skill.skill}
-                        onChange={(event) => insertSkill(event, index)}
-                      />
-                    </FloatingLabel>
-                  </Form.Group>
-                  <Button variant="white" onClick={() => removeSkill(index)}>
-                    <GrClose />
-                  </Button>
-                </Col>
-              );
-            })}
-            <Button className="mb-2" onClick={addSkill}>
-              Add
-            </Button>
-          </Row>
-        </Container>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button
-          onClick={() => displayInlineText(props.onHide, skills, "skillsGroup")}
-        >
-          Submit
-        </Button>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
+    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+      <Modal
+        {...props}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        size="lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Skills</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="show-grid">
+          <Container>
+            <Row>
+              {skills.map((skill, index) => {
+                return (
+                  <Col className="d-flex mb-2 g-1" md={3} xs={6} key={index}>
+                    <Form.Group>
+                      <FloatingLabel label="Skill">
+                        <Form.Control
+                          type="text"
+                          name="skill"
+                          placeholder="vanilla JS"
+                          value={skill.skill}
+                          onChange={(event) => insertSkill(event, index)}
+                        />
+                      </FloatingLabel>
+                    </Form.Group>
+                    <Button variant="white" onClick={() => removeSkill(index)}>
+                      <GrClose />
+                    </Button>
+                  </Col>
+                );
+              })}
+              <Button className="mb-2" onClick={addSkill}>
+                Add
+              </Button>
+            </Row>
+          </Container>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            onClick={() =>
+              displayInlineText(props.onHide, skills, "skillsGroup")
+            }
+          >
+            Submit
+          </Button>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 }
 

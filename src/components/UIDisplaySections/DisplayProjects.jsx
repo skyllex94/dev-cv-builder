@@ -31,27 +31,34 @@ function DisplayProjects() {
           className={"align-items-center d-none projectField" + project.project}
           id="projectField"
         >
-          <Col className="col-3">
-            <Col className="d-inline d-flex">
-              <Form.Label className={"projectName" + project.project} />
+          <Col className="col-3 pe-1 d-flex">
+            <Form.Label className={"projectName" + project.project} />
+
+            <Col className="d-inline d-flex justify-content-start">
               <Nav.Link
                 id={"projectLink" + project.project}
-                className={"ms-1 d-none projectLink" + project.project}
+                className={
+                  "d-flex align-items-center d-none projectLink" +
+                  project.project
+                }
                 href=""
               >
-                <FiExternalLink className="mx-1 mt-1" />
+                <FiExternalLink className="ms-2 me-1" />
               </Nav.Link>
               <Nav.Link
                 id={"prjGithubLink" + project.project}
-                className={"d-none prjGithubLink" + project.project}
+                className={
+                  "d-flex align-items-center d-none prjGithubLink" +
+                  project.project
+                }
                 href=""
               >
-                <AiFillGithub className="mx-1 mt-1" />
+                <AiFillGithub className="ms-2 me-1" />
               </Nav.Link>
             </Col>
           </Col>
 
-          <Col className="col-9">
+          <Col className="col-9 verticalLine">
             <Col className={"d-flex project-info" + project.project}>
               <div className={"me-2 projectDesc" + project.project} />
             </Col>
