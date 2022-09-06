@@ -15,7 +15,11 @@ function ModalSummary(props) {
   const [paragraphs, setParagraphs] = useState([
     {
       paragraph:
-        "Trustworthy, sociable, and willing to go through the hardship of learning any new type of skill set necessary for improved performance and quality standards. Built useful experience in different areas with the main one of them - interest in software engineering. I have been working in the restaurant business as I have obtained my residence in the US, and now ready for a full-scale carrier in programming and computer science. Carrier-switch to Software Engineering officially in 5 months to full-time, currently learning C to understand the lowlevel mechanics of manually creating hash tables, data structures, dynamic memory allocation and freeing, and the infamous pointers.",
+        "Trustworthy, sociable, and willing to go through the hardship of learning any new type of skill set necessary for improved performance and quality standards. Built useful experience in different areas with the main one of them - interest in software engineering. I have been working in the restaurant business as I have obtained my residence in the US, and now ready for a full-scale carrier in programming and computer science.",
+    },
+    {
+      paragraph:
+        "Carrier-switch to Software Engineering officially in 5 months to full-time, currently learning C to understand the lowlevel mechanics of manually creating hash tables, data structures, dynamic memory allocation and freeing, and the infamous pointers.",
     },
   ]);
 

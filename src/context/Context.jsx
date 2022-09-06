@@ -56,14 +56,9 @@ export const ContextProvider = ({ children }) => {
       document.querySelector(".website").classList.remove("d-none");
       textWebsite.textContent = "";
       if (template === "earth") {
-        textWebsite.textContent = modalWebsite.value;
+        createLink(textWebsite, modalWebsite, "earth");
       } else if (template === "venus") {
-        const link = document.createElement("a");
-        const text = document.createTextNode(truncate(modalWebsite.value));
-        link.setAttribute("href", modalWebsite.value);
-        link.className = "disabled";
-        link.appendChild(text);
-        textWebsite.appendChild(link);
+        createLink(textWebsite, modalWebsite, "venus");
       }
     } else {
       document.querySelector(".website").classList.add("d-none");
@@ -74,21 +69,12 @@ export const ContextProvider = ({ children }) => {
       document.querySelector(".github").classList.remove("d-none");
       textGithub.textContent = "";
       if (template === "earth") {
-        textGithub.textContent = modalGithub.value;
+        createLink(textGithub, modalGithub, "earth");
       } else if (template === "venus") {
-        const link = document.createElement("a");
-        const text = document.createTextNode(truncate(modalGithub.value));
-        link.setAttribute("href", modalGithub.value);
-        link.className = "disabled";
-        link.appendChild(text);
-        textGithub.appendChild(link);
+        createLink(textGithub, modalGithub, "venus");
       }
     } else {
       document.querySelector(".github").classList.add("d-none");
-    }
-
-    function truncate(str) {
-      return str.length > 30 ? str.substring(0, 27) + "..." : str;
     }
 
     if (modalLinkedin.value !== "") {
@@ -96,17 +82,33 @@ export const ContextProvider = ({ children }) => {
       document.querySelector(".linkedin").classList.remove("d-none");
       textLinkedin.textContent = "";
       if (template === "earth") {
-        textLinkedin.textContent = modalLinkedin.value;
+        createLink(textLinkedin, modalLinkedin, "earth");
       } else if (template === "venus") {
-        const link = document.createElement("a");
-        const text = document.createTextNode(truncate(modalLinkedin.value));
-        link.setAttribute("href", modalLinkedin.value);
-        link.className = "disabled";
-        link.appendChild(text);
-        textLinkedin.appendChild(link);
+        createLink(textLinkedin, modalLinkedin, "venus");
       }
     } else {
       document.querySelector(".linkedin").classList.add("d-none");
+    }
+
+    // Truncate the label if it has more than 30 characters
+    function truncate(str) {
+      return str.length > 30 ? str.substring(0, 27) + "..." : str;
+    }
+
+    // Take in the Form.Label which need a link insert, and insert
+    //a link to redirect you automatically when clicked
+    function createLink(elementToPlacelink, valueToInput, template) {
+      const element = document.createElement("a");
+      let text;
+      if (template === "earth") {
+        text = document.createTextNode(valueToInput.value);
+      } else if (template === "venus") {
+        text = document.createTextNode(truncate(valueToInput.value));
+      }
+      element.setAttribute("href", valueToInput.value);
+      element.className = "disabled";
+      element.appendChild(text);
+      elementToPlacelink.appendChild(element);
     }
 
     // Display all the address info with a comma after each one

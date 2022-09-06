@@ -136,7 +136,12 @@ export const CVPreview = React.forwardRef((props, ref) => {
     >
       {Object.entries(tempEarth).map(([key, value]) => {
         return (
-          <Droppable droppableId={key} direction="vertical" type="row">
+          <Droppable
+            droppableId={key}
+            direction="vertical"
+            key={value}
+            type="row"
+          >
             {(provided) => (
               <div ref={ref}>
                 <Row

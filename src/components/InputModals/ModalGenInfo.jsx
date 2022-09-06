@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -25,6 +25,15 @@ function ModalGenInfo(props) {
   const [linkedin, setLinkedin] = useState(
     "https://www.linkedin.com/in/kamen-kanchev-73a282175"
   );
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("Name:");
+    setName(JSON.parse(data));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("Name:", JSON.stringify(name));
+  }, [name]);
 
   const persistName = (event) => {
     setName(event.target.value);

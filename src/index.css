@@ -132,10 +132,7 @@ code {
   color: #696969;
   text-align: left;
   text-indent: 10px;
-}
-
-.textSummary p {
-  margin-bottom: 0.2em;
+  margin-bottom: 0.2em !important;
 }
 
 [class*="section-titles"] {

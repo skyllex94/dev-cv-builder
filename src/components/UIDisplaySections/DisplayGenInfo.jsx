@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
@@ -14,6 +14,17 @@ function DisplayGenInfo(props) {
   // Template settings
   const location = useLocation();
   const { template } = location.state;
+
+  useLayoutEffect(() => {
+    let localStorageName = document.querySelector(".textName");
+    let data = window.localStorage.getItem("Name:");
+    console.log(localStorageName, JSON.parse(data));
+    if (data != null) {
+      const nameGroup = document.querySelector(".name");
+      nameGroup.classList.remove("d-none");
+      localStorageName.textContent = JSON.parse(data);
+    }
+  }, []);
 
   return template === "earth" ? (
     <Row className={props.name + " text-start"}>

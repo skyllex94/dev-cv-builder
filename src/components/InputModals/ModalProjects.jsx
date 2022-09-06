@@ -169,29 +169,30 @@ function ModalProjects(props) {
                       <Row>
                         {techUsed.map((tech, index) => {
                           return (
-                            <Col
-                              className="d-flex mb-2"
-                              md={3}
-                              xs={6}
-                              key={index}
-                            >
-                              <FloatingLabel label="Technology:">
-                                <Form.Control
-                                  type="text"
-                                  className={"mb-2 modalTech" + projectsAmount}
-                                  placeholder="tech"
-                                  name="tech"
-                                  value={tech.tech}
-                                  onChange={(event) => insertTech(event, index)}
-                                />
-                              </FloatingLabel>
-                              <Button
-                                variant="white"
-                                onClick={() => removeTech(index)}
-                              >
-                                <GrClose />
-                              </Button>
-                            </Col>
+                            <div key={index}>
+                              <Col className="d-flex mb-2" md={3} xs={6}>
+                                <FloatingLabel label="Technology:">
+                                  <Form.Control
+                                    type="text"
+                                    className={
+                                      "mb-2 modalTech" + projectsAmount
+                                    }
+                                    placeholder="tech"
+                                    name="tech"
+                                    value={tech.tech}
+                                    onChange={(event) =>
+                                      insertTech(event, index)
+                                    }
+                                  />
+                                </FloatingLabel>
+                                <Button
+                                  variant="white"
+                                  onClick={() => removeTech(index)}
+                                >
+                                  <GrClose />
+                                </Button>
+                              </Col>
+                            </div>
                           );
                         })}
                         <Col className="d-flex justify-content-end">
