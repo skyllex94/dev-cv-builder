@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const Context = createContext();
@@ -8,83 +8,94 @@ export const ContextProvider = ({ children }) => {
   const location = useLocation();
   const { template } = location.state;
 
-  const displayGeneralInfo = (hideModal) => {
-    const modalName = document.querySelector(".modalName");
-    const modalPosition = document.querySelector(".modalPosition");
-    const modalAddress = document.querySelectorAll(".modalAddress");
-    let textAddress = document.querySelector(".textAddress");
-    const modalEmail = document.querySelector(".modalEmail");
-    const modalPhone = document.querySelector(".modalPhone");
-    const modalWebsite = document.querySelector(".modalWebsite");
-    const modalGithub = document.querySelector(".modalGithub");
-    const modalLinkedin = document.querySelector(".modalLinkedin");
+  useEffect(() => {
+    let localStorageName = document.querySelector(".textName");
+    let localStoragePosition = document.querySelector(".textPosition");
+    let data = window.localStorage.getItem("GenInfo");
+    const parsedData = JSON.parse(data);
+    if (parsedData !== null) {
+      const nameGroup = document.querySelector(".name");
+      const positionGroup = document.querySelector(".position");
+      nameGroup.classList.remove("d-none");
+      positionGroup.classList.remove("d-none");
+      localStorageName.textContent = parsedData.name;
+      localStoragePosition.textContent = parsedData.position;
+    }
+  }, []);
 
-    if (modalName.value !== "") {
+  const displayGeneralInfo = (hideModal, allValues) => {
+    const arrAddressFields = [
+      allValues.addressCity,
+      allValues.addressState,
+      allValues.addressZIP,
+    ];
+
+    if (allValues.name !== "") {
       const textName = document.querySelector(".textName");
       document.querySelector(".name").classList.remove("d-none");
-      textName.textContent = modalName.value;
+      textName.textContent = allValues.name;
     } else {
       document.querySelector(".name").classList.add("d-none");
     }
 
-    if (modalPosition.value !== "") {
+    if (allValues.position !== "") {
       const textPosition = document.querySelector(".textPosition");
       document.querySelector(".position").classList.remove("d-none");
-      textPosition.textContent = modalPosition.value;
+      textPosition.textContent = allValues.position;
     } else {
       document.querySelector(".position").classList.add("d-none");
     }
 
-    if (modalEmail.value !== "") {
+    if (allValues.email !== "") {
       const textEmail = document.querySelector(".textEmail");
       document.querySelector(".email").classList.remove("d-none");
-      textEmail.textContent = modalEmail.value;
+      textEmail.textContent = allValues.email;
     } else {
       document.querySelector(".email").classList.add("d-none");
     }
 
-    if (modalPhone.value !== "") {
+    if (allValues.phone !== "") {
       const textPhone = document.querySelector(".textPhone");
       document.querySelector(".phone").classList.remove("d-none");
-      textPhone.textContent = modalPhone.value;
+      textPhone.textContent = allValues.phone;
     } else {
       document.querySelector(".phone").classList.add("d-none");
     }
 
-    if (modalWebsite.value !== "") {
+    if (allValues.website !== "") {
       const textWebsite = document.querySelector(".textWebsite");
       document.querySelector(".website").classList.remove("d-none");
       textWebsite.textContent = "";
       if (template === "earth") {
-        createLink(textWebsite, modalWebsite, "earth");
+        createLink(textWebsite, allValues.website, "earth");
       } else if (template === "venus") {
-        createLink(textWebsite, modalWebsite, "venus");
+        createLink(textWebsite, allValues.website, "venus");
       }
     } else {
       document.querySelector(".website").classList.add("d-none");
     }
 
-    if (modalGithub.value !== "") {
+    if (allValues.github !== "") {
       const textGithub = document.querySelector(".textGithub");
       document.querySelector(".github").classList.remove("d-none");
       textGithub.textContent = "";
       if (template === "earth") {
-        createLink(textGithub, modalGithub, "earth");
+        createLink(textGithub, allValues.github, "earth");
       } else if (template === "venus") {
-        createLink(textGithub, modalGithub, "venus");
+        createLink(textGithub, allValues.github, "venus");
       }
     } else {
       document.querySelector(".github").classList.add("d-none");
     }
 
-    if (modalLinkedin.value !== "") {
+    if (allValues.linkedin !== "") {
       const textLinkedin = document.querySelector(".textLinkedin");
       document.querySelector(".linkedin").classList.remove("d-none");
       textLinkedin.textContent = "";
       if (template === "earth") {
-        createLink(textLinkedin, modalLinkedin, "earth");
+        createLink(textLinkedin, allValues.linkedin, "earth");
       } else if (template === "venus") {
-        createLink(textLinkedin, modalLinkedin, "venus");
+        createLink(textLinkedin, allValues.linkedin, "venus");
       }
     } else {
       document.querySelector(".linkedin").classList.add("d-none");
@@ -101,35 +112,36 @@ export const ContextProvider = ({ children }) => {
       const element = document.createElement("a");
       let text;
       if (template === "earth") {
-        text = document.createTextNode(valueToInput.value);
+        text = document.createTextNode(valueToInput);
       } else if (template === "venus") {
-        text = document.createTextNode(truncate(valueToInput.value));
+        text = document.createTextNode(truncate(valueToInput));
       }
-      element.setAttribute("href", valueToInput.value);
+      element.setAttribute("href", valueToInput);
       element.className = "disabled";
       element.appendChild(text);
       elementToPlacelink.appendChild(element);
     }
 
     // Display all the address info with a comma after each one
-    if (!populateFilledFields(modalAddress)) {
-      textAddress.textContent = "";
+    const textAddress = document.querySelector(".textAddress");
+    if (!populateFilledFields(arrAddressFields, textAddress)) {
       document.querySelector(".address").classList.remove("d-none");
-      displayAddress(modalAddress, textAddress);
+      displayAddress(arrAddressFields, textAddress);
     } else {
-      textAddress.textContent = "";
       document.querySelector(".address").classList.add("d-none");
     }
     hideModal();
   };
 
-  // Check if values of (address) fields is empty or not
-  function populateFilledFields(ArrOfValues) {
+  // Check if values of (address) fields are empty or not
+  function populateFilledFields(allValues, textAddress) {
     let isEmpty = true;
-    ArrOfValues.forEach((current) => {
-      if (current.value === "") {
+    allValues.forEach((current) => {
+      if (current === "") {
       } else {
         isEmpty = false;
+        // Delete previous value id any
+        textAddress.textContent = "";
       }
     });
     return isEmpty;
@@ -139,9 +151,9 @@ export const ContextProvider = ({ children }) => {
   function displayAddress(readFrom, writeTo) {
     readFrom.forEach((current, index, arr) => {
       if (Object.is(arr.length - 1, index)) {
-        writeTo.textContent += current.value;
+        writeTo.textContent += current;
       } else {
-        writeTo.textContent += current.value + ", ";
+        writeTo.textContent += current + ", ";
       }
     });
   }
@@ -213,13 +225,23 @@ export const ContextProvider = ({ children }) => {
       textWorkEndDate.textContent = `${mo2}, ${ye2}`;
     }
 
+    function displayWorkAddress(readFrom, writeTo) {
+      readFrom.forEach((current, index, arr) => {
+        if (Object.is(arr.length - 1, index)) {
+          writeTo.textContent += current.value;
+        } else {
+          writeTo.textContent += current.value + ", ";
+        }
+      });
+    }
+
     // Populate the Work Address with commas after each of them
     textWorkLocation.textContent = "";
     if (!populateFilledFields(workLocation)) {
       document
         .querySelector(".work-location-group" + index)
         .classList.remove("d-none");
-      displayAddress(workLocation, textWorkLocation);
+      displayWorkAddress(workLocation, textWorkLocation);
     } else {
       document
         .querySelector(".work-location-group" + index)

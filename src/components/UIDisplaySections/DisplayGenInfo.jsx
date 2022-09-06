@@ -15,16 +15,15 @@ function DisplayGenInfo(props) {
   const location = useLocation();
   const { template } = location.state;
 
-  useLayoutEffect(() => {
-    let localStorageName = document.querySelector(".textName");
-    let data = window.localStorage.getItem("Name:");
-    console.log(localStorageName, JSON.parse(data));
-    if (data != null) {
-      const nameGroup = document.querySelector(".name");
-      nameGroup.classList.remove("d-none");
-      localStorageName.textContent = JSON.parse(data);
-    }
-  }, []);
+  // useLayoutEffect(() => {
+  //   let localStorageName = document.querySelector(".textName");
+  //   let data = window.localStorage.getItem("Name:");
+  //   if (data != null) {
+  //     const nameGroup = document.querySelector(".name");
+  //     nameGroup.classList.remove("d-none");
+  //     localStorageName.textContent = JSON.parse(data);
+  //   }
+  // }, []);
 
   return template === "earth" ? (
     <Row className={props.name + " text-start"}>

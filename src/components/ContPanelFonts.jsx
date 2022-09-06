@@ -41,9 +41,7 @@ function ContPanelFonts() {
         arrDOMElements.forEach((element) => {
           element.style = `font-family: ${font};`;
         });
-      } catch {
-        console.log("caught");
-      }
+      } catch {}
     }
   };
 

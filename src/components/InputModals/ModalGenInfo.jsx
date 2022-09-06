@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -26,53 +26,67 @@ function ModalGenInfo(props) {
     "https://www.linkedin.com/in/kamen-kanchev-73a282175"
   );
 
-  useEffect(() => {
-    const data = window.localStorage.getItem("Name:");
-    setName(JSON.parse(data));
+  const allStateValues = {
+    name,
+    position,
+    addressCity,
+    addressState,
+    addressZIP,
+    email,
+    phone,
+    website,
+    github,
+    linkedin,
+  };
+  const setAllStateValues = [
+    setName,
+    setPosition,
+    setAddressCity,
+    setAddressState,
+    setAddressZIP,
+    setEmail,
+    setPhone,
+    setWebsite,
+    setGithub,
+    setLinkedin,
+  ];
+
+  useLayoutEffect(() => {
+    const data = window.localStorage.getItem("GenInfo");
+    console.log(data);
+    setName(data.name);
+    setPosition(data.position);
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("Name:", JSON.stringify(name));
-  }, [name]);
+    let data = window.localStorage.getItem("GenInfo");
+    data = JSON.parse(data);
+    const name = data.name;
+    window.localStorage.setItem(
+      "GenInfo",
+      JSON.stringify({
+        name,
+        position,
+        addressCity,
+        addressState,
+        addressZIP,
+        email,
+        phone,
+        website,
+        github,
+        linkedin,
+      })
+    );
+  }, [allStateValues]);
 
-  const persistName = (event) => {
-    setName(event.target.value);
-  };
-  const persistPosition = (event) => {
-    setPosition(event.target.value);
-  };
-
-  const persistAddressCity = (event) => {
-    setAddressCity(event.target.value);
-  };
-  const persistAddressState = (event) => {
-    setAddressState(event.target.value);
-  };
-  const persistAddressZIP = (event) => {
-    setAddressZIP(event.target.value);
-  };
-
-  const persistEmail = (event) => {
-    setEmail(event.target.value);
-  };
-  const persistPhone = (event) => {
-    setPhone(event.target.value);
-  };
-  const persistWebsite = (event) => {
-    setWebsite(event.target.value);
-  };
-  const persistGithub = (event) => {
-    setGithub(event.target.value);
-  };
-  const persistLinkedin = (event) => {
-    setLinkedin(event.target.value);
-  };
-
-  const ModalEnterPressed = (e) => {
-    if (e.key === "Enter") {
-      displayGeneralInfo(props.onHide);
+  const ModalEnterPressed = (event) => {
+    if (event.key === "Enter") {
+      displayGeneralInfo(props.onHide, allStateValues);
     }
   };
+
+  let data = window.localStorage.getItem("GenInfo");
+  data = JSON.parse(data);
 
   return (
     <div onKeyPress={(event) => ModalEnterPressed(event)}>
@@ -102,8 +116,8 @@ function ModalGenInfo(props) {
                       placeholder="John Doe"
                       className="modalName mb-2"
                       autoFocus
-                      value={name}
-                      onChange={persistName}
+                      value={data.name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                     <Form.Label>Position</Form.Label>
                     <Form.Control
@@ -111,7 +125,7 @@ function ModalGenInfo(props) {
                       placeholder="Front-end Developer"
                       className="modalPosition mb-2"
                       value={position}
-                      onChange={persistPosition}
+                      onChange={(e) => setPosition(e.target.value)}
                     />
                     <Form.Label>Address</Form.Label>
                     <Form.Control
@@ -119,7 +133,7 @@ function ModalGenInfo(props) {
                       placeholder="City"
                       className="modalAddress mb-2"
                       value={addressCity}
-                      onChange={persistAddressCity}
+                      onChange={(e) => setAddressCity(e.target.value)}
                     />
                     <Row>
                       <Col className="col-6">
@@ -128,7 +142,7 @@ function ModalGenInfo(props) {
                           placeholder="State"
                           className="modalAddress mb-2"
                           value={addressState}
-                          onChange={persistAddressState}
+                          onChange={(e) => setAddressState(e.target.value)}
                         />
                       </Col>
                       <Col className="col-6">
@@ -137,7 +151,7 @@ function ModalGenInfo(props) {
                           placeholder="ZIP Code"
                           className="modalAddress mb-2"
                           value={addressZIP}
-                          onChange={persistAddressZIP}
+                          onChange={(e) => setAddressZIP(e.target.value)}
                         />
                       </Col>
                     </Row>
@@ -147,7 +161,7 @@ function ModalGenInfo(props) {
                       placeholder="name@email.com"
                       className="modalEmail mb-2"
                       value={email}
-                      onChange={persistEmail}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                     <Form.Label>Phone</Form.Label>
                     <Form.Control
@@ -155,7 +169,7 @@ function ModalGenInfo(props) {
                       placeholder="(700)-800-9000"
                       className="modalPhone mb-2"
                       value={phone}
-                      onChange={persistPhone}
+                      onChange={(e) => setPhone(e.target.value)}
                     />
                   </Form.Group>
                 </Form>
@@ -172,7 +186,7 @@ function ModalGenInfo(props) {
                       placeholder="http://myportfolio.com"
                       className="modalWebsite mb-2"
                       value={website}
-                      onChange={persistWebsite}
+                      onChange={(e) => setWebsite(e.target.value)}
                     />
                     <Form.Label>Github</Form.Label>
                     <Form.Control
@@ -180,14 +194,14 @@ function ModalGenInfo(props) {
                       placeholder="http://github.com/username"
                       className="modalGithub mb-2"
                       value={github}
-                      onChange={persistGithub}
+                      onChange={(e) => setGithub(e.target.value)}
                     />
                     <Form.Label>LinkedIn</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="http://linkedin.com/username"
                       value={linkedin}
-                      onChange={persistLinkedin}
+                      onChange={(e) => setLinkedin(e.target.value)}
                       className="modalLinkedin mb-2"
                     />
                   </Form.Group>
@@ -197,7 +211,9 @@ function ModalGenInfo(props) {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => displayGeneralInfo(props.onHide)}>
+          <Button
+            onClick={() => displayGeneralInfo(props.onHide, allStateValues)}
+          >
             Submit
           </Button>
           <Button onClick={props.onHide}>Close</Button>
