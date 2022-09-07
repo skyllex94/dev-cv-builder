@@ -38,30 +38,29 @@ function ModalGenInfo(props) {
     github,
     linkedin,
   };
-  const setAllStateValues = [
-    setName,
-    setPosition,
-    setAddressCity,
-    setAddressState,
-    setAddressZIP,
-    setEmail,
-    setPhone,
-    setWebsite,
-    setGithub,
-    setLinkedin,
-  ];
 
-  useLayoutEffect(() => {
-    const data = window.localStorage.getItem("GenInfo");
-    console.log(data);
-    setName(data.name);
-    setPosition(data.position);
+  // Fetch stored data and populate it in values of the input fields
+  useEffect(() => {
+    const data = JSON.parse(window.localStorage.getItem("GenInfo"));
+
+    if (data != null) {
+      console.log(data.name);
+      setName(data.name);
+      setPosition(data.position);
+      setAddressCity(data.addressCity);
+      setAddressState(data.addressState);
+      setAddressZIP(data.addressZIP);
+      setEmail(data.email);
+      setPhone(data.phone);
+      setWebsite(data.website);
+      setGithub(data.github);
+      setLinkedin(data.linkedin);
+    }
   }, []);
 
+  // When a change is made on any of the input fields, it will automatically
+  // update the localStorage values, so they are persisted if the page reloads
   useEffect(() => {
-    let data = window.localStorage.getItem("GenInfo");
-    data = JSON.parse(data);
-    const name = data.name;
     window.localStorage.setItem(
       "GenInfo",
       JSON.stringify({
@@ -78,15 +77,13 @@ function ModalGenInfo(props) {
       })
     );
   }, [allStateValues]);
+  // TO DO: Try to trigger the useEffect only when the submit button is clicked
 
   const ModalEnterPressed = (event) => {
     if (event.key === "Enter") {
       displayGeneralInfo(props.onHide, allStateValues);
     }
   };
-
-  let data = window.localStorage.getItem("GenInfo");
-  data = JSON.parse(data);
 
   return (
     <div onKeyPress={(event) => ModalEnterPressed(event)}>
@@ -116,7 +113,7 @@ function ModalGenInfo(props) {
                       placeholder="John Doe"
                       className="modalName mb-2"
                       autoFocus
-                      value={data.name}
+                      value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
                     <Form.Label>Position</Form.Label>

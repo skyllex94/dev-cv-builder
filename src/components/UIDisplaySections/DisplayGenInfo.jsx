@@ -15,27 +15,52 @@ function DisplayGenInfo(props) {
   const location = useLocation();
   const { template } = location.state;
 
-  // useLayoutEffect(() => {
-  //   let localStorageName = document.querySelector(".textName");
-  //   let data = window.localStorage.getItem("Name:");
-  //   if (data != null) {
-  //     const nameGroup = document.querySelector(".name");
-  //     nameGroup.classList.remove("d-none");
-  //     localStorageName.textContent = JSON.parse(data);
-  //   }
-  // }, []);
+  // Fetch data from localStorage if any, and display the stored values of it in the DOM
+  useLayoutEffect(() => {
+    // DOM element selectors used to place the data output into
+    const localStorageName = document.querySelector(".textName");
+    const localStoragePosition = document.querySelector(".textPosition");
+    const localStorageAddress = document.querySelector(".textAddress");
+    const localStorageEmail = document.querySelector(".textEmail");
+    const localStoragePhone = document.querySelector(".textPhone");
+    const localStorageWebsite = document.querySelector(".textWebsite");
+    const localStorageGithub = document.querySelector(".textGithub");
+    const localStorageLinkedin = document.querySelector(".textLinkedin");
+
+    // Parse the data before starting to read and use it to populate fields
+    const data = JSON.parse(window.localStorage.getItem("GenInfo"));
+
+    // If any data exists in localStorage, populate it in the DOM
+    if (data != null) {
+      const address =
+        data.addressCity + ", " + data.addressState + ", " + data.addressZIP;
+
+      displayValue(data.name, ".name", localStorageName);
+      displayValue(data.position, ".position", localStoragePosition);
+      displayValue(address, ".address", localStorageAddress);
+      displayValue(data.email, ".email", localStorageEmail);
+      displayValue(data.phone, ".phone", localStoragePhone);
+      displayValue(data.website, ".website", localStorageWebsite);
+      displayValue(data.github, ".github", localStorageGithub);
+      displayValue(data.linkedin, ".linkedin", localStorageLinkedin);
+    }
+  }, []);
+
+  // Take in data needed, UIClass and DOM element to display the value coming from localStorage
+  function displayValue(data, UIClassName, textField) {
+    if (data !== "") {
+      document.querySelector(UIClassName).classList.remove("d-none");
+      textField.textContent = data;
+    }
+  }
 
   return template === "earth" ? (
     <Row className={props.name + " text-start"}>
-      <Col className="name col-12 d-flex pt-1 d-none">
-        <Form className="pt-4">
-          <Form.Label className="textName"></Form.Label>
-        </Form>
+      <Col className="name col-12 d-flex pt-4 d-none">
+        <Form.Label className="textName"></Form.Label>
       </Col>
       <Col className="position col-12 d-flex d-none">
-        <Form>
-          <Form.Label className="textPosition"></Form.Label>
-        </Form>
+        <Form.Label className="textPosition"></Form.Label>
       </Col>
       <Col className="col-5">
         <Row>

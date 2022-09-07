@@ -8,20 +8,20 @@ export const ContextProvider = ({ children }) => {
   const location = useLocation();
   const { template } = location.state;
 
-  useEffect(() => {
-    let localStorageName = document.querySelector(".textName");
-    let localStoragePosition = document.querySelector(".textPosition");
-    let data = window.localStorage.getItem("GenInfo");
-    const parsedData = JSON.parse(data);
-    if (parsedData !== null) {
-      const nameGroup = document.querySelector(".name");
-      const positionGroup = document.querySelector(".position");
-      nameGroup.classList.remove("d-none");
-      positionGroup.classList.remove("d-none");
-      localStorageName.textContent = parsedData.name;
-      localStoragePosition.textContent = parsedData.position;
-    }
-  }, []);
+  // useEffect(() => {
+  //   let localStorageName = document.querySelector(".textName");
+  //   let localStoragePosition = document.querySelector(".textPosition");
+  //   let data = window.localStorage.getItem("GenInfo");
+  //   const parsedData = JSON.parse(data);
+  //   if (parsedData !== null) {
+  //     const nameGroup = document.querySelector(".name");
+  //     const positionGroup = document.querySelector(".position");
+  //     nameGroup.classList.remove("d-none");
+  //     positionGroup.classList.remove("d-none");
+  //     localStorageName.textContent = parsedData.name;
+  //     localStoragePosition.textContent = parsedData.position;
+  //   }
+  // }, []);
 
   const displayGeneralInfo = (hideModal, allValues) => {
     const arrAddressFields = [
