@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -44,7 +44,6 @@ function ModalGenInfo(props) {
     const data = JSON.parse(window.localStorage.getItem("GenInfo"));
 
     if (data != null) {
-      console.log(data.name);
       setName(data.name);
       setPosition(data.position);
       setAddressCity(data.addressCity);

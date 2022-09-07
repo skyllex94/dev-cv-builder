@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -11,7 +11,6 @@ import { VscChromeClose } from "react-icons/vsc";
 
 function ModalSummary(props) {
   const { displaySummary } = useContext(Context);
-
   const [paragraphs, setParagraphs] = useState([
     {
       paragraph:
@@ -23,7 +22,27 @@ function ModalSummary(props) {
     },
   ]);
 
-  const handleChange = (index, event) => {
+  // Fetch stored data and populate it in values of the input fields
+  useEffect(() => {
+    const data = JSON.parse(window.localStorage.getItem("Summary"));
+
+    if (data != null) {
+      setParagraphs(data.paragraphs);
+    }
+  }, []);
+
+  // When a change is made on any of the input fields, it will automatically
+  // update the localStorage values, so they are persisted if the page reloads
+  useEffect(() => {
+    window.localStorage.setItem(
+      "Summary",
+      JSON.stringify({
+        paragraphs,
+      })
+    );
+  }, [paragraphs]);
+
+  const handleValueChange = (index, event) => {
     const values = [...paragraphs];
     values[index][event.target.name] = event.target.value;
     setParagraphs(values);
@@ -81,7 +100,9 @@ function ModalSummary(props) {
                               className="modalSummary mb-2"
                               name="paragraph"
                               value={text.paragraph}
-                              onChange={(event) => handleChange(index, event)}
+                              onChange={(event) =>
+                                handleValueChange(index, event)
+                              }
                               rows={3}
                             />
                           </Form.Group>
