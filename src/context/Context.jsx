@@ -167,7 +167,7 @@ export const ContextProvider = ({ children }) => {
   };
 
   // Displaying on the CVPreview Component all of the inputted fields for the work section
-  const displayWork = (hideModal, responsibilities, index) => {
+  const displayWork = (hideModal, responsibilities, index, allValues) => {
     const displayWholeSection = document.querySelector(".work");
     displayWholeSection.classList.remove("d-none");
     const workDisplay = document.querySelector(".workField" + index);
@@ -191,7 +191,7 @@ export const ContextProvider = ({ children }) => {
     const textWorkLocation = document.querySelector(
       ".textWorkLocation" + index
     );
-    const workLocation = document.querySelectorAll(".workLocation" + index);
+    const workLocation = document.querySelector(".workLocation" + index);
 
     // Format date string to display only written month and numeric year
     if (workStartDate.value === "" && workEndDate.value === "") {
@@ -210,23 +210,13 @@ export const ContextProvider = ({ children }) => {
       textWorkEndDate.textContent = `${mo2}, ${ye2}`;
     }
 
-    function displayWorkAddress(readFrom, writeTo) {
-      readFrom.forEach((current, index, arr) => {
-        if (Object.is(arr.length - 1, index)) {
-          writeTo.textContent += current.value;
-        } else {
-          writeTo.textContent += current.value + ", ";
-        }
-      });
-    }
-
     // Populate the Work Address with commas after each of them
     textWorkLocation.textContent = "";
-    if (!populateFilledFields(workLocation)) {
+    if (workLocation !== "") {
       document
         .querySelector(".work-location-group" + index)
         .classList.remove("d-none");
-      displayWorkAddress(workLocation, textWorkLocation);
+      textWorkLocation.textContent = workLocation.value;
     } else {
       document
         .querySelector(".work-location-group" + index)

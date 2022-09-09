@@ -33,14 +33,9 @@ function ModalSummary(props) {
 
   // When a change is made on any of the input fields, it will automatically
   // update the localStorage values, so they are persisted if the page reloads
-  useEffect(() => {
-    window.localStorage.setItem(
-      "Summary",
-      JSON.stringify({
-        paragraphs,
-      })
-    );
-  }, [paragraphs]);
+  const updateValuesInLocalStorage = () => {
+    window.localStorage.setItem("Summary", JSON.stringify({ paragraphs }));
+  };
 
   const handleValueChange = (index, event) => {
     const values = [...paragraphs];
@@ -48,9 +43,10 @@ function ModalSummary(props) {
     setParagraphs(values);
   };
 
-  const ModalEnterPressed = (e) => {
-    if (e.key === "Enter") {
+  const CommitValues = (e) => {
+    if (e.key === "Enter" || e === "submit") {
       displaySummary(props.onHide, paragraphs);
+      updateValuesInLocalStorage();
     }
   };
 
@@ -74,7 +70,7 @@ function ModalSummary(props) {
   };
 
   return (
-    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+    <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
         {...props}
         aria-labelledby="contained-modal-title-vcenter"
@@ -129,9 +125,7 @@ function ModalSummary(props) {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => displaySummary(props.onHide, paragraphs)}>
-            Submit
-          </Button>
+          <Button onClick={() => CommitValues("submit")}>Submit</Button>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>

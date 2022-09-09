@@ -20,6 +20,7 @@ function Builder() {
   });
 
   // node --max_old_space_size=1560 node_modules/.bin/ - add when deploying to Heroku to start and build before react-scripts
+
   // "dev": "react-scripts start",
   // "start": "serve -s build",
   // "build": "react-scripts build",

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -17,15 +17,36 @@ function ModalWork(props) {
   const [position, setPosition] = useState("Front-End Developer");
   const [startDate, setStartDate] = useState("2019-05-29");
   const [endDate, setEndDate] = useState("2019-09-29");
-  const [workCity, setWorkCity] = useState("Boston");
-  const [workState, setWorkState] = useState("MA");
-  const [workCountry, setWorkCountry] = useState("United States");
+  const [location, setLocation] = useState("Boston, MA, USA");
   const [responsibilities, setResponsibilities] = useState([
     {
       message:
         "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
     },
   ]);
+
+  const allStateValues = {
+    company,
+    position,
+    startDate,
+    endDate,
+    location,
+    responsibilities,
+  };
+
+  // Fetch stored data and populate it in values of the input fields
+  useEffect(() => {
+    const data = JSON.parse(window.localStorage.getItem("Work"));
+
+    if (data != null) {
+      setCompany(data.company);
+      setPosition(data.position);
+      setStartDate(data.startDate);
+      setEndDate(data.endDate);
+      setLocation(data.location);
+      setResponsibilities(data.responsibilities);
+    }
+  }, []);
 
   const jobAmount = props.jobcount + 1;
 
@@ -55,14 +76,29 @@ function ModalWork(props) {
     }
   };
 
-  const ModalEnterPressed = (e) => {
-    if (e.key === "Enter") {
-      displayWork(props.onHide, responsibilities, jobAmount);
+  const CommitValues = (e) => {
+    if (e.key === "Enter" || e === "submit") {
+      displayWork(props.onHide, responsibilities, jobAmount, allStateValues);
+      updateValuesInLocalStorage();
     }
   };
 
+  const updateValuesInLocalStorage = () => {
+    window.localStorage.setItem(
+      "Work",
+      JSON.stringify({
+        company,
+        position,
+        startDate,
+        endDate,
+        location,
+        responsibilities,
+      })
+    );
+  };
+
   return (
-    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+    <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
         {...props}
         aria-labelledby="contained-modal-title-vcenter"
@@ -132,41 +168,15 @@ function ModalWork(props) {
                       </Col>
                     </Row>
                     <Row>
-                      <Col xs={6} md={4}>
-                        <FloatingLabel label="City">
+                      <Col md={12}>
+                        <FloatingLabel label="City, State, Country">
                           <Form.Control
                             type="text"
                             className={"mb-2 workLocation" + jobAmount}
                             placeholder="Boston"
-                            value={workCity}
+                            value={location}
                             onChange={(event) => {
-                              setWorkCity(event.target.value);
-                            }}
-                          />
-                        </FloatingLabel>
-                      </Col>
-                      <Col xs={6} md={4}>
-                        <FloatingLabel label="State">
-                          <Form.Control
-                            type="text"
-                            className={"mb-2 workLocation" + jobAmount}
-                            placeholder="MA"
-                            value={workState}
-                            onChange={(event) => {
-                              setWorkState(event.target.value);
-                            }}
-                          />
-                        </FloatingLabel>
-                      </Col>
-                      <Col xs={6} md={4}>
-                        <FloatingLabel label="Country">
-                          <Form.Control
-                            type="text"
-                            className={"mb-2 workLocation" + jobAmount}
-                            placeholder="USA"
-                            value={workCountry}
-                            onChange={(event) => {
-                              setWorkCountry(event.target.value);
+                              setLocation(event.target.value);
                             }}
                           />
                         </FloatingLabel>
@@ -214,13 +224,7 @@ function ModalWork(props) {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            onClick={() =>
-              displayWork(props.onHide, responsibilities, jobAmount)
-            }
-          >
-            Submit
-          </Button>
+          <Button onClick={() => CommitValues("submit")}>Submit</Button>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>

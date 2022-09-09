@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
@@ -13,6 +13,27 @@ const amountOfJobs = [
 ];
 
 function DisplayWork() {
+  useLayoutEffect(() => {
+    amountOfJobs.map((job) => {
+      const textCompany = document.querySelector(".textCompany" + job.job);
+      const textWorkPosition = document.querySelector(".textWorkPosition");
+
+      const data = JSON.parse(window.localStorage.getItem("Work"));
+
+      if (data != null) {
+        displayData(data.company, textCompany);
+        // displayData(data.position, textWorkPosition);
+      }
+    });
+  }, []);
+
+  function displayData(data, UIElement) {
+    if (data !== "") {
+      console.log(UIElement);
+      UIElement.textContent = data;
+    }
+  }
+
   return amountOfJobs.map((job, index) => {
     return (
       <Row id="workSection" key={index}>
