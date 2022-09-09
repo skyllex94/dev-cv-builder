@@ -1,5 +1,6 @@
 import { createContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import DisplayWork from "../components/UIDisplaySections/DisplayWork";
 
 const Context = createContext();
 
@@ -167,7 +168,9 @@ export const ContextProvider = ({ children }) => {
   };
 
   // Displaying on the CVPreview Component all of the inputted fields for the work section
-  const displayWork = (hideModal, responsibilities, index, allValues) => {
+  const displayWork = (hideModal, responsibilities, index, modals) => {
+    console.log(modals);
+
     const displayWholeSection = document.querySelector(".work");
     displayWholeSection.classList.remove("d-none");
     const workDisplay = document.querySelector(".workField" + index);

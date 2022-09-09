@@ -68,7 +68,19 @@ export const showModals = (index, modalsToAdjustState) => {
   });
 };
 
-// Adding additional job field - maximum of 5
+// Change the state of a Modal in order to display it
+export const showModalz = (index, modals, setModals) => {
+  const values = [...modals];
+  modals.map((modal, indexModal) => {
+    if (index === indexModal) {
+      values[index].job = true;
+      console.log(values[index].job);
+      setModals(values);
+    }
+  });
+};
+
+// Func for beaing removed - maximum of 5
 export const handleAddField = (index, nameTag, sections, setSections) => {
   if (sections.length < 5) {
     const values = [...sections, { name: nameTag + (sections.length + 1) }];
@@ -76,7 +88,12 @@ export const handleAddField = (index, nameTag, sections, setSections) => {
   }
 };
 
-// Removing selected job field based on the index of the job
+// Adding additional job field
+export const addField = (modals, setModals) => {
+  const values = [...modals, { job: false }];
+  setModals(values);
+};
+
 export const handleRemoveField = (index, sectionName, sections, setSection) => {
   // Check if the item being removed is the last one and skip if there is only 1 item left
   if (sections.length > 1 && sections.length === index + 1) {
@@ -87,4 +104,11 @@ export const handleRemoveField = (index, sectionName, sections, setSection) => {
     setSection(values);
   }
   return;
+};
+
+// Removing selected job field based on the index of the job
+export const removeField = (modals, setModals, index) => {
+  let values = [...modals];
+  values.splice(values[index], 1);
+  setModals(values);
 };

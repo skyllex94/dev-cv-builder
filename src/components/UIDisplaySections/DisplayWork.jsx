@@ -1,8 +1,9 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useContext } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
 import { HorizontalLine } from "../../utils/Utils";
+import Context from "../../context/Context";
 
 const amountOfJobs = [
   { job: 1 },
@@ -13,26 +14,28 @@ const amountOfJobs = [
 ];
 
 function DisplayWork() {
-  useLayoutEffect(() => {
-    amountOfJobs.map((job) => {
-      const textCompany = document.querySelector(".textCompany" + job.job);
-      const textWorkPosition = document.querySelector(".textWorkPosition");
+  // useLayoutEffect(() => {
+  //   amountOfJobs.map((job) => {
+  //     const textCompany = document.querySelector(".textCompany" + job.job);
+  //     const textWorkPosition = document.querySelector(".textWorkPosition");
 
-      const data = JSON.parse(window.localStorage.getItem("Work"));
+  //     const data = JSON.parse(window.localStorage.getItem("Work"));
 
-      if (data != null) {
-        displayData(data.company, textCompany);
-        // displayData(data.position, textWorkPosition);
-      }
-    });
-  }, []);
+  //     if (data != null) {
+  //       document
+  //         .querySelector(".workField" + job.job)
+  //         .classList.remove("d-none");
+  //       displayData(data.company, textCompany);
+  //     }
+  //   });
+  // }, []);
 
-  function displayData(data, UIElement) {
-    if (data !== "") {
-      console.log(UIElement);
-      UIElement.textContent = data;
-    }
-  }
+  // function displayData(data, UIElement) {
+  //   if (data !== "") {
+  //     console.log(UIElement);
+  //     UIElement.textContent = data;
+  //   }
+  // }
 
   return amountOfJobs.map((job, index) => {
     return (

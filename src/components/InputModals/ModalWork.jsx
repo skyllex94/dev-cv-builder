@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, createContext } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -78,7 +78,7 @@ function ModalWork(props) {
 
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
-      displayWork(props.onHide, responsibilities, jobAmount, allStateValues);
+      displayWork(props.onHide, responsibilities, jobAmount, props.modals);
       updateValuesInLocalStorage();
     }
   };
