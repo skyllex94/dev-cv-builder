@@ -18,21 +18,14 @@ function ModalWork(props) {
   const [startDate, setStartDate] = useState("2019-05-29");
   const [endDate, setEndDate] = useState("2019-09-29");
   const [location, setLocation] = useState("Boston, MA, USA");
-  const [responsibilities, setResponsibilities] = useState([
+  const [resp, setResp] = useState([
     {
       message:
         "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
     },
   ]);
 
-  const allStateValues = {
-    company,
-    position,
-    startDate,
-    endDate,
-    location,
-    responsibilities,
-  };
+  const allValues = { company, position, startDate, endDate, location, resp };
 
   // Fetch stored data and populate it in values of the input fields
   useEffect(() => {
@@ -44,22 +37,22 @@ function ModalWork(props) {
       setStartDate(data.startDate);
       setEndDate(data.endDate);
       setLocation(data.location);
-      setResponsibilities(data.responsibilities);
+      setResp(data.resp);
     }
   }, []);
 
   const jobAmount = props.jobcount + 1;
 
   const handleResp = (index, event) => {
-    const values = [...responsibilities];
+    const values = [...resp];
     values[index][event.target.name] = event.target.value;
-    setResponsibilities(values);
+    setResp(values);
   };
 
   const handleAddField = () => {
-    if (responsibilities.length < 3) {
-      setResponsibilities([
-        ...responsibilities,
+    if (resp.length < 3) {
+      setResp([
+        ...resp,
         {
           message: "- ",
         },
@@ -69,16 +62,16 @@ function ModalWork(props) {
   };
 
   const handleRemoveField = (index) => {
-    if (responsibilities.length > 1 && responsibilities.length === index + 1) {
-      const values = [...responsibilities];
+    if (resp.length > 1 && resp.length === index + 1) {
+      const values = [...resp];
       values.splice(index, 1);
-      setResponsibilities(values);
+      setResp(values);
     }
   };
 
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
-      displayWork(props.onHide, responsibilities, jobAmount, props.modals);
+      displayWork(props.onHide, jobAmount, props.modals, allValues);
       updateValuesInLocalStorage();
     }
   };
@@ -92,7 +85,7 @@ function ModalWork(props) {
         startDate,
         endDate,
         location,
-        responsibilities,
+        resp,
       })
     );
   };
@@ -181,17 +174,17 @@ function ModalWork(props) {
                           />
                         </FloatingLabel>
                       </Col>
-                      {responsibilities.map((resp, index) => {
+                      {resp.map((curr, index) => {
                         return (
                           <div key={index}>
                             <Row className="mb-2">
                               <Col md={10}>
-                                <FloatingLabel label="Accomplishments and Responsibilities">
+                                <FloatingLabel label="Accomplishments and resp">
                                   <Form.Control
                                     type="text"
                                     name="message"
                                     placeholder="Resp"
-                                    value={resp.message}
+                                    value={curr.message}
                                     onChange={(event) =>
                                       handleResp(index, event)
                                     }

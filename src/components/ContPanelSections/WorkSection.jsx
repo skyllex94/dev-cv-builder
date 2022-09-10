@@ -16,11 +16,12 @@ import {
   toggleCurrModal,
   toggleRenameMode,
   renderEditView,
-  showModals,
   showModalz,
   addField,
   removeField,
 } from "./ContPanelFunctions";
+
+export const JobsContext = createContext();
 
 export default function WorkSection() {
   // Show modal state
@@ -56,10 +57,11 @@ export default function WorkSection() {
     </Popover>
   );
 
+  // TODO: Fix Rename Functionality
+
   function hideCurrModal(index) {
     const values = [...modals];
     values[index].job = false;
-    console.log(values[index].job);
     setModals(values);
   }
 

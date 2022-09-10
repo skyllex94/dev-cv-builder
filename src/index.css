@@ -179,7 +179,7 @@ code {
   text-transform: capitalize;
 }
 
-[class*="work-responsibilities"],
+[class*="work-resp"],
 .edu-accomplish,
 [class*="project-accomplish"] {
   font-weight: 400;

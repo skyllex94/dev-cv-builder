@@ -1,6 +1,6 @@
+import { useContext, useState } from "react";
 import { createContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import DisplayWork from "../components/UIDisplaySections/DisplayWork";
 
 const Context = createContext();
 
@@ -8,6 +8,10 @@ export const ContextProvider = ({ children }) => {
   // Template Variable
   const location = useLocation();
   const { template } = location.state;
+
+  // State for fetching number of jobs from the ContPanel & passing
+  // it to DisplayWork to iterate over each job and display it
+  const [arrOfJobs, setArrOfJobs] = useState([{ job: false }]);
 
   const displayGeneralInfo = (hideModal, allValues) => {
     const arrAddressFields = [
@@ -167,82 +171,18 @@ export const ContextProvider = ({ children }) => {
     hideModal();
   };
 
+  const [workAttributes, setWorkAttributes] = useState([{}]);
+
   // Displaying on the CVPreview Component all of the inputted fields for the work section
-  const displayWork = (hideModal, responsibilities, index, modals) => {
-    console.log(modals);
-
-    const displayWholeSection = document.querySelector(".work");
-    displayWholeSection.classList.remove("d-none");
-    const workDisplay = document.querySelector(".workField" + index);
-    workDisplay.classList.remove("d-none");
-
-    const textCompany = document.querySelector(".textCompany" + index);
-    const workCompany = document.querySelector(".workCompany" + index);
-
-    const textWorkPosition = document.querySelector(
-      ".textWorkPosition" + index
-    );
-    const workPosition = document.querySelector(".workPosition" + index);
-
-    const textWorkStartDate = document.querySelector(
-      ".textWorkStartDate" + index
-    );
-    const workStartDate = document.querySelector(".workStartDate" + index);
-    const textWorkEndDate = document.querySelector(".textWorkEndDate" + index);
-    const workEndDate = document.querySelector(".workEndDate" + index);
-
-    const textWorkLocation = document.querySelector(
-      ".textWorkLocation" + index
-    );
-    const workLocation = document.querySelector(".workLocation" + index);
-
-    // Format date string to display only written month and numeric year
-    if (workStartDate.value === "" && workEndDate.value === "") {
-      document.querySelector(".work-period" + index).classList.add("d-none");
-    } else {
-      document.querySelector(".work-period" + index).classList.remove("d-none");
-      const formatStart = workStartDate.value.replaceAll("-", " ");
-      const formatEnd = workEndDate.value.replaceAll("-", " ");
-      let start = new Date(formatStart);
-      let end = new Date(formatEnd);
-      let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
-      let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
-      let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
-      let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
-      textWorkStartDate.textContent = `${mo}, ${ye}`;
-      textWorkEndDate.textContent = `${mo2}, ${ye2}`;
-    }
-
-    // Populate the Work Address with commas after each of them
-    textWorkLocation.textContent = "";
-    if (workLocation !== "") {
-      document
-        .querySelector(".work-location-group" + index)
-        .classList.remove("d-none");
-      textWorkLocation.textContent = workLocation.value;
-    } else {
-      document
-        .querySelector(".work-location-group" + index)
-        .classList.add("d-none");
-    }
-
+  const displayWork = (hideModal, index, arrOfJobs, allValues) => {
+    console.log(arrOfJobs);
+    const values = [...arrOfJobs];
+    setArrOfJobs(values);
+    console.log(allValues);
+    const arrOfAttr = [{ hideModal, index, allValues }];
+    console.log(arrOfAttr);
+    setWorkAttributes(arrOfAttr);
     hideModal();
-    textCompany.textContent = workCompany.value;
-    textWorkPosition.textContent = workPosition.value;
-
-    const group = document.querySelector(".textResponsibilities" + index);
-    removeAllChildNodes(group);
-
-    responsibilities.map((response) => {
-      const paragraph = document.createElement("p");
-      paragraph.className = "mb-0";
-
-      if (response.message !== "") {
-        paragraph.classList.remove("d-none");
-        paragraph.textContent = response.message;
-        group.appendChild(paragraph);
-      }
-    });
   };
 
   const displayInlineText = (onHide, itemsArray, UIClassName) => {
@@ -272,12 +212,6 @@ export const ContextProvider = ({ children }) => {
     });
     onHide();
   };
-
-  function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-      parent.removeChild(parent.firstChild);
-    }
-  }
 
   const displayEducation = (hideModal, accomplishments) => {
     const textStudyField = document.querySelector(".textStudyField");
@@ -458,6 +392,8 @@ export const ContextProvider = ({ children }) => {
   return (
     <Context.Provider
       value={{
+        arrOfJobs,
+        workAttributes,
         displayGeneralInfo,
         displaySummary,
         displayWork,
