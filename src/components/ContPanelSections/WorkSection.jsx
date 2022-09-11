@@ -20,6 +20,8 @@ import {
   addField,
   removeField,
 } from "./ContPanelFunctions";
+import { useContext, useEffect } from "react";
+import Context from "../../context/Context";
 
 export const JobsContext = createContext();
 

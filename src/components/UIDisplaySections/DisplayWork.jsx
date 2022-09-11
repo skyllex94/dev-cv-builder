@@ -1,10 +1,9 @@
-import React, { useLayoutEffect, useContext } from "react";
+import React, { useContext } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
 import { HorizontalLine } from "../../utils/Utils";
 import Context from "../../context/Context";
-import { Example } from "../../context/ExampleContext";
 
 function DisplayWork() {
   const { arrOfJobs } = useContext(Context);
@@ -97,32 +96,8 @@ function DisplayWork() {
     }
   }
 
-  // useLayoutEffect(() => {
-  //   amountOfJobs.map((job) => {
-  //     const textCompany = document.querySelector(".textCompany" + (index + 1));
-  //     const textWorkPosition = document.querySelector(".textWorkPosition");
-
-  //     const data = JSON.parse(window.localStorage.getItem("Work"));
-
-  //     if (data != null) {
-  //       document
-  //         .querySelector(".workField" + (index + 1))
-  //         .classList.remove("d-none");
-  //       displayData(data.company, textCompany);
-  //     }
-  //   });
-  // }, []);
-
-  // function displayData(data, UIElement) {
-  //   if (data !== "") {
-  //     console.log(UIElement);
-  //     UIElement.textContent = data;
-  //   }
-  // }
-
   const display = (att) => {
-    console.log(arrOfJobs);
-    displayWork(att);
+    console.log(att);
   };
 
   return arrOfJobs.map((job, index) => {
@@ -134,7 +109,7 @@ function DisplayWork() {
             <HorizontalLine />
           </Col>
         ) : null}
-        <button onClick={() => displayWork(workAttributes[index])}>
+        <button onClick={() => display(workAttributes[index].allValues)}>
           DisplayWork
         </button>
         <div
@@ -171,3 +146,26 @@ function DisplayWork() {
 }
 
 export default DisplayWork;
+
+// useLayoutEffect(() => {
+//   amountOfJobs.map((job) => {
+//     const textCompany = document.querySelector(".textCompany" + (index + 1));
+//     const textWorkPosition = document.querySelector(".textWorkPosition");
+
+//     const data = JSON.parse(window.localStorage.getItem("Work"));
+
+//     if (data != null) {
+//       document
+//         .querySelector(".workField" + (index + 1))
+//         .classList.remove("d-none");
+//       displayData(data.company, textCompany);
+//     }
+//   });
+// }, []);
+
+// function displayData(data, UIElement) {
+//   if (data !== "") {
+//     console.log(UIElement);
+//     UIElement.textContent = data;
+//   }
+// }
