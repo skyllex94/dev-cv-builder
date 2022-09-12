@@ -173,6 +173,11 @@ export const ContextProvider = ({ children }) => {
 
   const [workAttributes, setWorkAttributes] = useState([{}]);
 
+  const addJob = (arrOfJobs) => {
+    const values = [...arrOfJobs];
+    setArrOfJobs(values);
+  };
+
   // Displaying on the CVPreview Component all of the inputted fields for the work section
   const displayWork = (hideModal, index, arrOfJobs, allValues) => {
     console.log(arrOfJobs);
@@ -401,6 +406,7 @@ export const ContextProvider = ({ children }) => {
         displayEducation,
         displayLanguages,
         displayProjects,
+        addJob,
       }}
     >
       {children}

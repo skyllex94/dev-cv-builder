@@ -1,6 +1,8 @@
 import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
+import { useContext } from "react";
+import Context from "../../context/Context";
 
 // Toggle the visibility of the whole section in the CVPreview
 export const ToggleSwitchButton = (state, setState) => {

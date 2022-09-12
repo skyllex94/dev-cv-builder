@@ -109,7 +109,7 @@ function DisplayWork() {
             <HorizontalLine />
           </Col>
         ) : null}
-        <button onClick={() => display(workAttributes[index].allValues)}>
+        <button onClick={() => displayWork(workAttributes[index])}>
           DisplayWork
         </button>
         <div

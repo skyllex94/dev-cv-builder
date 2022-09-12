@@ -20,10 +20,8 @@ import {
   addField,
   removeField,
 } from "./ContPanelFunctions";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import Context from "../../context/Context";
-
-export const JobsContext = createContext();
 
 export default function WorkSection() {
   // Show modal state
@@ -33,6 +31,8 @@ export default function WorkSection() {
     value: "Work Experience",
     isInEditMode: false,
   });
+
+  const { addJob } = useContext(Context);
 
   // Array of all the jobs
   const [modals, setModals] = useState([{ job: false }]);
@@ -66,6 +66,11 @@ export default function WorkSection() {
     values[index].job = false;
     setModals(values);
   }
+
+  const handleNewJob = () => {
+    addField(modals, setModals);
+    addJob(modals);
+  };
 
   return (
     // The whole section row as displayed in the Control Panel
@@ -120,7 +125,7 @@ export default function WorkSection() {
                   <Col md={6} className="d-flex justify-content-end">
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() => addField(modals, setModals)}
+                      onClick={() => handleNewJob(modals, setModals)}
                     >
                       <AiOutlinePlus />
                     </Form.Label>
