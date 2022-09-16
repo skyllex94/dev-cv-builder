@@ -19,7 +19,6 @@ function DisplayWork() {
             <HorizontalLine />
           </Col>
         ) : null}
-        <button>DisplayWork</button>
         <div
           key={index}
           className={"d-none pt-2 workField" + (index + 1)}

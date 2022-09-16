@@ -32,10 +32,10 @@ export default function WorkSection() {
     isInEditMode: false,
   });
 
-  const { addJob } = useContext(Context);
-
   // Array of all the jobs
   const [modals, setModals] = useState([{ job: false }]);
+
+  const { addJob } = useContext(Context);
 
   // Popover Options Dropdown Menu
   const popover = (
@@ -67,7 +67,7 @@ export default function WorkSection() {
     setModals(values);
   }
 
-  const handleNewJob = () => {
+  const handleNewJob = (modals, setModals) => {
     addField(modals, setModals);
     addJob(modals);
   };

@@ -171,10 +171,9 @@ export const ContextProvider = ({ children }) => {
     hideModal();
   };
 
-  const [workAttributes, setWorkAttributes] = useState([{}]);
-
   const addJob = (arrOfJobs) => {
-    const values = [...arrOfJobs];
+    const values = [...arrOfJobs, { job: "false" }];
+    console.log(arrOfJobs);
     setArrOfJobs(values);
   };
 
@@ -474,7 +473,6 @@ export const ContextProvider = ({ children }) => {
     <Context.Provider
       value={{
         arrOfJobs,
-        workAttributes,
         displayGeneralInfo,
         displaySummary,
         displayWork,

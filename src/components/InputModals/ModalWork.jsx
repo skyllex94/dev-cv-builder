@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, createContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -25,53 +25,65 @@ function ModalWork(props) {
     },
   ]);
 
+  const [values, setValues] = useState([
+    {
+      company: "DXC Technology Inn!",
+      position: "Front-End Developer",
+      startDate: "2019-05-29",
+      endDate: "2019-09-29",
+      location: "Boston, MA, USA",
+      resp: [
+        {
+          message:
+            "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
+        },
+      ],
+    },
+  ]);
+
   const allValues = { company, position, startDate, endDate, location, resp };
 
-  // Fetch stored data and populate it in values of the input fields
-  useEffect(() => {
-    const data = JSON.parse(window.localStorage.getItem("Work"));
+  // // Fetch stored data and populate it in values of the input fields
+  // useEffect(() => {
+  //   const data = JSON.parse(window.localStorage.getItem("Work"));
 
-    if (data != null) {
-      setCompany(data.company);
-      setPosition(data.position);
-      setStartDate(data.startDate);
-      setEndDate(data.endDate);
-      setLocation(data.location);
-      setResp(data.resp);
-    }
-  }, []);
+  //   if (data != null) {
+  //     setCompany(data.company);
+  //     setPosition(data.position);
+  //     setStartDate(data.startDate);
+  //     setEndDate(data.endDate);
+  //     setLocation(data.location);
+  //     setResp(data.resp);
+  //   }
+  // }, []);
 
   const jobAmount = props.jobcount + 1;
+  const count = props.jobcount;
 
-  const handleResp = (index, event) => {
-    const values = [...resp];
-    values[index][event.target.name] = event.target.value;
-    setResp(values);
-  };
-
-  const handleAddField = () => {
-    if (resp.length < 3) {
-      setResp([
-        ...resp,
+  const handleAddField = (values) => {
+    if (values[0].resp.length < 3) {
+      const currValues = [...values];
+      currValues[0].resp = [
+        ...currValues[0].resp,
         {
           message: "- ",
         },
-      ]);
+      ];
+      setValues(currValues);
     }
-    return;
   };
 
-  const handleRemoveField = (index) => {
-    if (resp.length > 1 && resp.length === index + 1) {
-      const values = [...resp];
-      values.splice(index, 1);
-      setResp(values);
+  const handleRemoveField = (values, index) => {
+    if (values[0].resp.length > 1 && values[0].resp.length === index + 1) {
+      const currValues = [...values];
+      currValues[0].resp.splice(index, 1);
+      setValues(currValues);
     }
   };
 
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
-      displayWork(props.onHide, jobAmount, props.modals, allValues);
+      displayWork(props.onHide, jobAmount, props.modals, values);
       updateValuesInLocalStorage();
     }
   };
@@ -88,6 +100,18 @@ function ModalWork(props) {
         resp,
       })
     );
+  };
+
+  const updateValues = (event, index) => {
+    const currValues = [...values];
+    currValues[index][event.target.name] = event.target.value;
+    setValues(currValues);
+  };
+
+  const updateResp = (event, count, index) => {
+    const currValues = [...values];
+    currValues[count].resp[index].message = event.target.value;
+    setValues(currValues);
   };
 
   return (
@@ -112,11 +136,12 @@ function ModalWork(props) {
                     <FloatingLabel label="Company or Organization">
                       <Form.Control
                         type="text"
+                        name="company"
                         className={"mb-2 workCompany" + jobAmount}
                         placeholder="Microsoft LLC."
-                        value={company}
+                        value={values[count].company}
                         onChange={(event) => {
-                          setCompany(event.target.value);
+                          updateValues(event, count);
                         }}
                       />
                     </FloatingLabel>
@@ -124,11 +149,12 @@ function ModalWork(props) {
                     <FloatingLabel label="Job Title">
                       <Form.Control
                         type="text"
+                        name="position"
                         className={"mb-2 workPosition" + jobAmount}
                         placeholder="Senior Software Engineer"
-                        value={position}
+                        value={values[count].position}
                         onChange={(event) => {
-                          setPosition(event.target.value);
+                          updateValues(event, count);
                         }}
                       />
                     </FloatingLabel>
@@ -137,11 +163,12 @@ function ModalWork(props) {
                         <FloatingLabel label="Start Date">
                           <Form.Control
                             type="date"
+                            name="startDate"
                             className={"mb-2 workStartDate" + jobAmount}
                             placeholder="02/2022"
-                            value={startDate}
+                            value={values[count].startDate}
                             onChange={(event) => {
-                              setStartDate(event.target.value);
+                              updateValues(event, count);
                             }}
                           />
                         </FloatingLabel>
@@ -150,11 +177,12 @@ function ModalWork(props) {
                         <FloatingLabel label="End Date">
                           <Form.Control
                             type="date"
+                            name="endDate"
                             className={"mb-2 workEndDate" + jobAmount}
                             placeholder="12/2022"
-                            value={endDate}
+                            value={values[count].endDate}
                             onChange={(event) => {
-                              setEndDate(event.target.value);
+                              updateValues(event, count);
                             }}
                           />
                         </FloatingLabel>
@@ -165,16 +193,17 @@ function ModalWork(props) {
                         <FloatingLabel label="City, State, Country">
                           <Form.Control
                             type="text"
+                            name="location"
                             className={"mb-2 workLocation" + jobAmount}
                             placeholder="Boston"
-                            value={location}
+                            value={values[count].location}
                             onChange={(event) => {
-                              setLocation(event.target.value);
+                              updateValues(event, count);
                             }}
                           />
                         </FloatingLabel>
                       </Col>
-                      {resp.map((curr, index) => {
+                      {values[count].resp.map((curr, index) => {
                         return (
                           <div key={index}>
                             <Row className="mb-2">
@@ -185,22 +214,26 @@ function ModalWork(props) {
                                     name="message"
                                     placeholder="Resp"
                                     value={curr.message}
-                                    onChange={(event) =>
-                                      handleResp(index, event)
-                                    }
+                                    onChange={(event) => {
+                                      updateResp(event, count, index);
+                                    }}
                                   />
                                 </FloatingLabel>
                               </Col>
                               <Col md={2} className="mt-2">
                                 <Button
                                   variant="white"
-                                  onClick={() => handleAddField()}
+                                  onClick={() =>
+                                    handleAddField([values[count]])
+                                  }
                                 >
                                   <AiOutlinePlus />
                                 </Button>
                                 <Button
                                   variant="white"
-                                  onClick={() => handleRemoveField(index)}
+                                  onClick={() =>
+                                    handleRemoveField([values[count]], index)
+                                  }
                                 >
                                   <AiOutlineMinus />
                                 </Button>
