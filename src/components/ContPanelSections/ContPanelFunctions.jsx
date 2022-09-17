@@ -90,12 +90,6 @@ export const handleAddField = (index, nameTag, sections, setSections) => {
   }
 };
 
-// Adding additional job field
-export const addField = (modals, setModals) => {
-  const values = [...modals, { job: false }];
-  setModals(values);
-};
-
 export const handleRemoveField = (index, sectionName, sections, setSection) => {
   // Check if the item being removed is the last one and skip if there is only 1 item left
   if (sections.length > 1 && sections.length === index + 1) {

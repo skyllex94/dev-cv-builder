@@ -17,7 +17,6 @@ import {
   toggleRenameMode,
   renderEditView,
   showModalz,
-  addField,
   removeField,
 } from "./ContPanelFunctions";
 import { useContext } from "react";
@@ -36,6 +35,22 @@ export default function WorkSection() {
   const [modals, setModals] = useState([{ job: false }]);
 
   const { addJob } = useContext(Context);
+
+  const [values, setValues] = useState([
+    {
+      company: "DXC Technology Inn!",
+      position: "Front-End Developer",
+      startDate: "2019-05-29",
+      endDate: "2019-09-29",
+      location: "Boston, MA, USA",
+      resp: [
+        {
+          message:
+            "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
+        },
+      ],
+    },
+  ]);
 
   // Popover Options Dropdown Menu
   const popover = (
@@ -67,9 +82,26 @@ export default function WorkSection() {
     setModals(values);
   }
 
-  const handleNewJob = (modals, setModals) => {
-    addField(modals, setModals);
+  const handleNewJob = (index) => {
+    addField(index);
     addJob(modals);
+  };
+
+  // Adding additional job field
+  const addField = (index) => {
+    const jobs = [...modals, { job: false }];
+    setModals(jobs);
+    setValues([
+      ...values,
+      {
+        company: values[index + 1].company,
+        position: values[index + 1].position,
+        startDate: values[index + 1].startDate,
+        endDate: values[index + 1].endDate,
+        location: values[index + 1].location,
+        resp: values[index + 1].resp,
+      },
+    ]);
   };
 
   return (
@@ -125,7 +157,7 @@ export default function WorkSection() {
                   <Col md={6} className="d-flex justify-content-end">
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() => handleNewJob(modals, setModals)}
+                      onClick={() => handleNewJob(index)}
                     >
                       <AiOutlinePlus />
                     </Form.Label>
@@ -142,6 +174,9 @@ export default function WorkSection() {
                   onHide={() => hideCurrModal(index)}
                   jobcount={index}
                   modals={modals}
+                  values={values}
+                  setValues={setValues}
+                  i={index}
                 />
               </div>
             );

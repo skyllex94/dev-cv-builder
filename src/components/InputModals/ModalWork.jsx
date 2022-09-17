@@ -25,23 +25,25 @@ function ModalWork(props) {
     },
   ]);
 
-  const [values, setValues] = useState([
-    {
-      company: "DXC Technology Inn!",
-      position: "Front-End Developer",
-      startDate: "2019-05-29",
-      endDate: "2019-09-29",
-      location: "Boston, MA, USA",
-      resp: [
-        {
-          message:
-            "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
-        },
-      ],
-    },
-  ]);
+  // useEffect(() => {
+  //   values.forEach((curr, index) => {
+  //     if (props.jobcount < values.length) {
+  //       setValues([
+  //         ...values,
+  //         {
+  //           company: values[index].company,
+  //           position: values[index].position,
+  //           startDate: values[index].startDate,
+  //           endDate: values[index].endDate,
+  //           location: values[index].location,
+  //           resp: values[index].resp,
+  //         },
+  //       ]);
+  //     }
+  //   });
+  // }, [props.jobcount]);
 
-  const allValues = { company, position, startDate, endDate, location, resp };
+  // const allValues = { company, position, startDate, endDate, location, resp };
 
   // // Fetch stored data and populate it in values of the input fields
   // useEffect(() => {
@@ -59,8 +61,9 @@ function ModalWork(props) {
 
   const jobAmount = props.jobcount + 1;
   const count = props.jobcount;
+  let i = props.i;
 
-  const handleAddField = (values) => {
+  const addResp = (values) => {
     if (values[0].resp.length < 3) {
       const currValues = [...values];
       currValues[0].resp = [
@@ -69,49 +72,44 @@ function ModalWork(props) {
           message: "- ",
         },
       ];
-      setValues(currValues);
+      props.setValues(currValues);
     }
   };
 
-  const handleRemoveField = (values, index) => {
+  const removeResp = (values, index) => {
     if (values[0].resp.length > 1 && values[0].resp.length === index + 1) {
       const currValues = [...values];
       currValues[0].resp.splice(index, 1);
-      setValues(currValues);
+      props.setValues(currValues);
     }
   };
 
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
-      displayWork(props.onHide, jobAmount, props.modals, values);
+      displayWork(props.onHide, jobAmount, props.modals, props.values);
       updateValuesInLocalStorage();
     }
   };
 
   const updateValuesInLocalStorage = () => {
-    window.localStorage.setItem(
-      "Work",
-      JSON.stringify({
-        company,
-        position,
-        startDate,
-        endDate,
-        location,
-        resp,
-      })
-    );
+    // window.localStorage.setItem(
+    //   "Work",
+    //   JSON.stringify({
+    //     values,
+    //   })
+    // );
   };
 
   const updateValues = (event, index) => {
-    const currValues = [...values];
-    currValues[index][event.target.name] = event.target.value;
-    setValues(currValues);
+    const currValues = [...props.values];
+    currValues[0][event.target.name] = event.target.value;
+    props.setValues(currValues);
   };
 
   const updateResp = (event, count, index) => {
-    const currValues = [...values];
-    currValues[count].resp[index].message = event.target.value;
-    setValues(currValues);
+    const currValues = [...props.values];
+    currValues[0].resp[index].message = event.target.value;
+    props.setValues(currValues);
   };
 
   return (
@@ -134,12 +132,13 @@ function ModalWork(props) {
                 <Form>
                   <Form.Group className="mb-3">
                     <FloatingLabel label="Company or Organization">
+                      {props.values[i].company}
                       <Form.Control
                         type="text"
                         name="company"
                         className={"mb-2 workCompany" + jobAmount}
                         placeholder="Microsoft LLC."
-                        value={values[count].company}
+                        value={props.values[i].company}
                         onChange={(event) => {
                           updateValues(event, count);
                         }}
@@ -152,7 +151,7 @@ function ModalWork(props) {
                         name="position"
                         className={"mb-2 workPosition" + jobAmount}
                         placeholder="Senior Software Engineer"
-                        value={values[count].position}
+                        value={props.values[i].position}
                         onChange={(event) => {
                           updateValues(event, count);
                         }}
@@ -166,7 +165,7 @@ function ModalWork(props) {
                             name="startDate"
                             className={"mb-2 workStartDate" + jobAmount}
                             placeholder="02/2022"
-                            value={values[count].startDate}
+                            value={props.values[i].startDate}
                             onChange={(event) => {
                               updateValues(event, count);
                             }}
@@ -180,7 +179,7 @@ function ModalWork(props) {
                             name="endDate"
                             className={"mb-2 workEndDate" + jobAmount}
                             placeholder="12/2022"
-                            value={values[count].endDate}
+                            value={props.values[i].endDate}
                             onChange={(event) => {
                               updateValues(event, count);
                             }}
@@ -196,14 +195,14 @@ function ModalWork(props) {
                             name="location"
                             className={"mb-2 workLocation" + jobAmount}
                             placeholder="Boston"
-                            value={values[count].location}
+                            value={props.values[i].location}
                             onChange={(event) => {
                               updateValues(event, count);
                             }}
                           />
                         </FloatingLabel>
                       </Col>
-                      {values[count].resp.map((curr, index) => {
+                      {props.values[i].resp.map((curr, index) => {
                         return (
                           <div key={index}>
                             <Row className="mb-2">
@@ -223,16 +222,14 @@ function ModalWork(props) {
                               <Col md={2} className="mt-2">
                                 <Button
                                   variant="white"
-                                  onClick={() =>
-                                    handleAddField([values[count]])
-                                  }
+                                  onClick={() => addResp([props.values])}
                                 >
                                   <AiOutlinePlus />
                                 </Button>
                                 <Button
                                   variant="white"
                                   onClick={() =>
-                                    handleRemoveField([values[count]], index)
+                                    removeResp([props.values], index)
                                   }
                                 >
                                   <AiOutlineMinus />
