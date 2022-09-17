@@ -221,7 +221,6 @@ export const ContextProvider = ({ children }) => {
         document.querySelector(".work-period" + num).classList.remove("d-none");
         const formatStart = startDate.replaceAll("-", " ");
         const formatEnd = endDate.replaceAll("-", " ");
-        console.log(formatEnd);
         let start = new Date(formatStart);
         let end = new Date(formatEnd);
         let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(

@@ -49,6 +49,7 @@ export default function WorkSection() {
             "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
         },
       ],
+      display: false,
     },
   ]);
 
@@ -94,14 +95,25 @@ export default function WorkSection() {
     setValues([
       ...values,
       {
-        company: values[index + 1].company,
-        position: values[index + 1].position,
-        startDate: values[index + 1].startDate,
-        endDate: values[index + 1].endDate,
-        location: values[index + 1].location,
-        resp: values[index + 1].resp,
+        company: values[index].company,
+        position: values[index].position,
+        startDate: values[index].startDate,
+        endDate: values[index].endDate,
+        location: values[index].location,
+        resp: values[index].resp,
       },
     ]);
+  };
+
+  // Removing selected job field based on the index of the job
+  const removeField = (modals, setModals, index) => {
+    const val = [...modals];
+    val.splice(val[index], 1);
+    setModals(val);
+
+    const currValues = [...values];
+    currValues.splice(currValues[index], 1);
+    setValues(currValues);
   };
 
   return (
@@ -172,10 +184,9 @@ export default function WorkSection() {
                 <ModalWork
                   show={modals[index].job}
                   onHide={() => hideCurrModal(index)}
-                  jobcount={index}
                   modals={modals}
                   values={values}
-                  setValues={setValues}
+                  setvalues={setValues}
                   i={index}
                 />
               </div>

@@ -101,10 +101,3 @@ export const handleRemoveField = (index, sectionName, sections, setSection) => {
   }
   return;
 };
-
-// Removing selected job field based on the index of the job
-export const removeField = (modals, setModals, index) => {
-  let values = [...modals];
-  values.splice(values[index], 1);
-  setModals(values);
-};
