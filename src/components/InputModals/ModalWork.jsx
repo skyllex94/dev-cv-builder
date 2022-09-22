@@ -205,7 +205,7 @@ function ModalWork(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => CommitValues("submit")}>Submit</Button>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button onClick={onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     </div>
