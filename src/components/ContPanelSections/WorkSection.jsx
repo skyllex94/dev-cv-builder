@@ -17,7 +17,6 @@ import {
   toggleRenameMode,
   renderEditView,
   showModalz,
-  removeField,
 } from "./ContPanelFunctions";
 import { useContext } from "react";
 import Context from "../../context/Context";
@@ -34,7 +33,7 @@ export default function WorkSection() {
   // Array of all the jobs
   const [modals, setModals] = useState([{ job: false }]);
 
-  const { addJob } = useContext(Context);
+  const { addJob, removeJob } = useContext(Context);
 
   const [values, setValues] = useState([
     {
@@ -75,45 +74,54 @@ export default function WorkSection() {
     </Popover>
   );
 
-  // TODO: Fix Rename Functionality
-
+  // Hide the currently opened modal - when it's open, object value changes to true
   function hideCurrModal(index) {
     const values = [...modals];
     values[index].job = false;
     setModals(values);
   }
 
-  const handleNewJob = (index) => {
-    addField(index);
-    addJob(modals);
-  };
-
   // Adding additional job field
-  const addField = (index) => {
+  const addNewJob = (index) => {
     const jobs = [...modals, { job: false }];
     setModals(jobs);
+    // Pass data to the ContextAPI with the amount of jobs so it can iterate over the all of them
+    addJob(modals);
+
+    // Add additional object for values for the new job
     setValues([
       ...values,
       {
-        company: values[index].company,
-        position: values[index].position,
-        startDate: values[index].startDate,
-        endDate: values[index].endDate,
-        location: values[index].location,
+        company: "DXC Tech",
+        position: "Front-end Dev",
+        startDate: "2019-09-09",
+        endDate: "2020-08-02",
+        location: "Sofia, Bulgaria",
         resp: values[index].resp,
+        display: false,
       },
     ]);
   };
 
   // Removing selected job field based on the index of the job
-  const removeField = (modals, setModals, index) => {
-    const val = [...modals];
-    val.splice(val[index], 1);
-    setModals(val);
+  const removeSelectedJob = (modals, setModals, index) => {
+    if (values.length > 1 && values.length - 1 === index) {
+      const val = [...modals];
+      val.splice(val[index], 1);
+      setModals(val);
 
-    const currValues = [...values];
-    currValues.splice(currValues[index], 1);
-    setValues(currValues);
+      const currValues = [...values];
+      currValues.splice(currValues[index], 1);
+      setValues(currValues);
+
+      removeJob(modals, index);
+      updateValuesInLocalStorage(currValues);
+    }
+  };
+
+  // Update the data set to include this current modal's data
+  const updateValuesInLocalStorage = (values) => {
+    window.localStorage.setItem("Work", JSON.stringify(values));
   };
 
   return (
@@ -169,13 +177,15 @@ export default function WorkSection() {
                   <Col md={6} className="d-flex justify-content-end">
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() => handleNewJob(index)}
+                      onClick={() => addNewJob(index)}
                     >
                       <AiOutlinePlus />
                     </Form.Label>
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() => removeField(modals, setModals, index)}
+                      onClick={() =>
+                        removeSelectedJob(modals, setModals, index)
+                      }
                     >
                       <AiOutlineMinus />
                     </Form.Label>
@@ -186,7 +196,7 @@ export default function WorkSection() {
                   onHide={() => hideCurrModal(index)}
                   modals={modals}
                   values={values}
-                  setvalues={setValues}
+                  setValues={setValues}
                   i={index}
                 />
               </div>

@@ -154,6 +154,7 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  // Display Summary function, and create paragraphs for each addition
   const displaySummary = (hideModal, paragraphs) => {
     // Select the paragraph group div
     const paragraphsGroup = document.querySelector(".paragraphsGroup");
@@ -172,21 +173,20 @@ export const ContextProvider = ({ children }) => {
   };
 
   const addJob = (arrOfJobs) => {
-    console.log(arrOfJobs);
-    let values = [...arrOfJobs, { job: "false" }];
-    console.log(arrOfJobs);
+    const values = [...arrOfJobs, { job: false }];
+    setArrOfJobs(values);
+  };
+
+  const removeJob = (arrOfJobs, index) => {
+    const values = [...arrOfJobs];
+    values.splice(values[index], 1);
     setArrOfJobs(values);
   };
 
   // Displaying on the CVPreview Component all of the inputted fields for the work section
-  const displayWork = (hideModal, index, arrOfJobs, allValues) => {
-    console.log(arrOfJobs);
+  const displayWork = (hideModal, arrOfJobs, allValues) => {
     const values = [...arrOfJobs, { job: "false" }];
     setArrOfJobs(values);
-    console.log(allValues);
-    // const arrOfAttr = [{ hideModal, index, allValues }];
-    // console.log(arrOfAttr);
-    // setWorkAttributes(arrOfAttr);
 
     allValues.map((values, index) => {
       const { company, position, startDate, endDate, location, resp } = values;
@@ -209,7 +209,6 @@ export const ContextProvider = ({ children }) => {
         ".textWorkStartDate" + num
       );
       const textWorkEndDate = document.querySelector(".textWorkEndDate" + num);
-
       const textWorkLocation = document.querySelector(
         ".textWorkLocation" + num
       );
@@ -484,6 +483,7 @@ export const ContextProvider = ({ children }) => {
         displayLanguages,
         displayProjects,
         addJob,
+        removeJob,
       }}
     >
       {children}

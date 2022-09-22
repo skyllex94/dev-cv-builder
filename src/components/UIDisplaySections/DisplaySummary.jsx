@@ -37,6 +37,7 @@ function DisplaySummary(props) {
     }
   }
 
+  // Conditional template displaying
   return template === "earth" ? (
     <Row className={props.name + " mt-3 text-start"}>
       <Col md={12} className="paragraphsGroup"></Col>

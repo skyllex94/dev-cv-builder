@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -13,44 +13,8 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 function ModalWork(props) {
   const { displayWork } = useContext(Context);
 
-  // useEffect(() => {
-  //   values.forEach((curr, index) => {
-  //     if (props.jobcount < values.length) {
-  //       setValues([
-  //         ...values,
-  //         {
-  //           company: values[index].company,
-  //           position: values[index].position,
-  //           startDate: values[index].startDate,
-  //           endDate: values[index].endDate,
-  //           location: values[index].location,
-  //           resp: values[index].resp,
-  //         },
-  //       ]);
-  //     }
-  //   });
-  // }, [props.jobcount]);
-
-  // const allValues = { company, position, startDate, endDate, location, resp };
-
-  // // Fetch stored data and populate it in values of the input fields
-  // useEffect(() => {
-  //   const data = JSON.parse(window.localStorage.getItem("Work"));
-
-  //   if (data != null) {
-  //     setCompany(data.company);
-  //     setPosition(data.position);
-  //     setStartDate(data.startDate);
-  //     setEndDate(data.endDate);
-  //     setLocation(data.location);
-  //     setResp(data.resp);
-  //   }
-  // }, []);
-
   // Destructure values, and setValues to use it the modal for each added job
-  // setvalues is lower-case since triggering prop warning
-  const { values, setvalues, i } = props;
-  const jobCount = props.i + 1;
+  const { show, onHide, modals, values, setValues, i } = props;
 
   // Add additional responsibility for the given job
   const addResp = (values, index) => {
@@ -63,7 +27,7 @@ function ModalWork(props) {
           message: "- ",
         },
       ];
-      setvalues(currValues);
+      setValues(currValues);
     }
   };
 
@@ -75,14 +39,14 @@ function ModalWork(props) {
     ) {
       const currValues = [...values];
       currValues[index].resp.splice(index, 1);
-      setvalues(currValues);
+      setValues(currValues);
     }
   };
 
   // Commit all values and send them to the Context API to display and store the data
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
-      displayWork(props.onHide, jobCount, props.modals, values);
+      displayWork(onHide, modals, values);
       updateValuesInLocalStorage();
     }
   };
@@ -96,27 +60,29 @@ function ModalWork(props) {
   const updateValues = (event, index) => {
     const currValues = [...values];
     currValues[index][event.target.name] = event.target.value;
-    setvalues(currValues);
+    setValues(currValues);
   };
 
   // Update the responsibilities for the specific job and the specific amount
   const updateResp = (event, count, index) => {
     const currValues = [...values];
     currValues[count].resp[index].message = event.target.value;
-    setvalues(currValues);
+    setValues(currValues);
   };
 
   return (
     <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
-        {...props}
+        show={show}
+        onHide={onHide}
+        keyboard={props.keyboard}
         aria-labelledby="contained-modal-title-vcenter"
         centered
         size="lg"
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Work Experience {jobCount}
+            Work Experience {i + 1}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="show-grid">
@@ -129,7 +95,7 @@ function ModalWork(props) {
                       <Form.Control
                         type="text"
                         name="company"
-                        className={"mb-2 workCompany" + jobCount}
+                        className={"mb-2"}
                         placeholder="Microsoft LLC."
                         value={values[i].company}
                         onChange={(event) => {
@@ -142,7 +108,7 @@ function ModalWork(props) {
                       <Form.Control
                         type="text"
                         name="position"
-                        className={"mb-2 workPosition" + jobCount}
+                        className={"mb-2"}
                         placeholder="Senior Software Engineer"
                         value={values[i].position}
                         onChange={(event) => {
@@ -156,7 +122,7 @@ function ModalWork(props) {
                           <Form.Control
                             type="date"
                             name="startDate"
-                            className={"mb-2 workStartDate" + jobCount}
+                            className={"mb-2"}
                             placeholder="02/2022"
                             value={values[i].startDate}
                             onChange={(event) => {
@@ -170,7 +136,7 @@ function ModalWork(props) {
                           <Form.Control
                             type="date"
                             name="endDate"
-                            className={"mb-2 workEndDate" + jobCount}
+                            className={"mb-2"}
                             placeholder="12/2022"
                             value={values[i].endDate}
                             onChange={(event) => {
@@ -186,7 +152,7 @@ function ModalWork(props) {
                           <Form.Control
                             type="text"
                             name="location"
-                            className={"mb-2 workLocation" + jobCount}
+                            className={"mb-2"}
                             placeholder="Boston"
                             value={values[i].location}
                             onChange={(event) => {
