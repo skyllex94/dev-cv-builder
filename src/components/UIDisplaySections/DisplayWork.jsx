@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
@@ -6,72 +6,22 @@ import { HorizontalLine } from "../../utils/Utils";
 import Context from "../../context/Context";
 
 function DisplayWork() {
-  const { arrOfJobs } = useContext(Context);
+  const { numOfJobs } = useContext(Context);
 
-  useEffect(() => {
-    const data = JSON.parse(window.localStorage.getItem("Work"));
+  // Format date string to display only written month and numeric year
+  function formatDate(dateToFormat) {
+    if (dateToFormat !== undefined) {
+      const formatStart = dateToFormat.replaceAll("-", " ");
+      let start = new Date(formatStart);
+      let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
+      let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
 
-    if (data != null) {
-      displayJobs(data);
+      dateToFormat = `${mo}, ${ye}`;
     }
-  }, [arrOfJobs]);
+    return dateToFormat;
+  }
 
-  const displayJobs = (data) => {
-    data.map((dataSet, index) => {
-      return (
-        <>
-          <Form.Label>{dataSet.company}</Form.Label>
-          <Row id="workSection" key={index}>
-            {index + 1 === 1 ? (
-              <Col md={12}>
-                <div className="section-titles-work mt-3">Work Experience</div>
-                <HorizontalLine />
-              </Col>
-            ) : null}
-
-            <div
-              key={index}
-              className={"pt-2 workField" + (index + 1)}
-              id="workField"
-            >
-              <Col md={12} className="d-flex">
-                <Form.Label className={"textCompany" + (index + 1)}>
-                  {dataSet.company}
-                </Form.Label>
-              </Col>
-
-              <Col className="col-auto work-position d-flex">
-                <div className={"me-2 textWorkPosition" + (index + 1)} />
-                <div className={"d-none d-flex work-period" + (index + 1)}>
-                  |{" "}
-                  <div
-                    className={"ms-2 me-1 textWorkStartDate" + (index + 1)}
-                  />{" "}
-                  -
-                  <div className={"me-2 ms-1 textWorkEndDate" + (index + 1)} />
-                </div>
-                <Col
-                  className={"d-flex d-none work-location-group" + (index + 1)}
-                >
-                  |
-                  <div className={"ms-2 textWorkLocation" + (index + 1)} />
-                  <div className={"ms-2 textWorkLocation" + (index + 1)} />
-                  <div className={"ms-2 textWorkLocation" + (index + 1)} />
-                </Col>
-              </Col>
-
-              <Col xs={12} className={"work-resp" + (index + 1)}>
-                <div className={"textResponsibilities" + (index + 1)}></div>
-              </Col>
-            </div>
-          </Row>
-          );
-        </>
-      );
-    });
-  };
-
-  return arrOfJobs.map((job, index) => {
+  return numOfJobs.map((job, index) => {
     return (
       <Row id="workSection" key={index}>
         {index + 1 === 1 ? (
@@ -80,32 +30,43 @@ function DisplayWork() {
             <HorizontalLine />
           </Col>
         ) : null}
-        <div
-          key={index}
-          className={"d-none pt-2 workField" + (index + 1)}
-          id="workField"
-        >
+        <div key={index} className={"pt-2 workField" + index} id="workField">
           <Col md={12} className="d-flex">
-            <Form.Label className={"textCompany" + (index + 1)}></Form.Label>
+            <Form.Label className={"textCompany" + index}>
+              {job.company}
+            </Form.Label>
           </Col>
-
           <Col className="col-auto work-position d-flex">
-            <div className={"me-2 textWorkPosition" + (index + 1)} />
-            <div className={"d-none d-flex work-period" + (index + 1)}>
-              | <div className={"ms-2 me-1 textWorkStartDate" + (index + 1)} />{" "}
-              -
-              <div className={"me-2 ms-1 textWorkEndDate" + (index + 1)} />
+            <div className={"me-2 textWorkPosition" + index}>
+              {job.position}
             </div>
-            <Col className={"d-flex d-none work-location-group" + (index + 1)}>
+            <div className={"d-flex work-period" + index}>
+              |{" "}
+              <div className={"ms-2 me-1 textWorkStartDate" + index}>
+                {formatDate(job.startDate)}
+              </div>
+              -
+              <div className={"me-2 ms-1 textWorkEndDate" + index}>
+                {formatDate(job.endDate)}
+              </div>
+            </div>
+            <Col className={"d-flex work-location-group" + index}>
               |
-              <div className={"ms-2 textWorkLocation" + (index + 1)} />
-              <div className={"ms-2 textWorkLocation" + (index + 1)} />
-              <div className={"ms-2 textWorkLocation" + (index + 1)} />
+              <div className={"ms-2 textWorkLocation" + index}>
+                {job.location}
+              </div>
             </Col>
           </Col>
-
-          <Col xs={12} className={"work-resp" + (index + 1)}>
-            <div className={"textResponsibilities" + (index + 1)}></div>
+          <Col xs={12} className={"work-resp" + index}>
+            {job.resp !== undefined
+              ? job.resp.map((res, index) => {
+                  return (
+                    <div key={index} className={"textResponsibilities" + index}>
+                      {res.message}
+                    </div>
+                  );
+                })
+              : null}
           </Col>
         </div>
       </Row>
@@ -114,26 +75,3 @@ function DisplayWork() {
 }
 
 export default DisplayWork;
-
-// useLayoutEffect(() => {
-//   amountOfJobs.map((job) => {
-//     const textCompany = document.querySelector(".textCompany" + (index + 1));
-//     const textWorkPosition = document.querySelector(".textWorkPosition");
-
-//     const data = JSON.parse(window.localStorage.getItem("Work"));
-
-//     if (data != null) {
-//       document
-//         .querySelector(".workField" + (index + 1))
-//         .classList.remove("d-none");
-//       displayData(data.company, textCompany);
-//     }
-//   });
-// }, []);
-
-// function displayData(data, UIElement) {
-//   if (data !== "") {
-//     console.log(UIElement);
-//     UIElement.textContent = data;
-//   }
-// }

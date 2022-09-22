@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, useEffect } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
@@ -52,6 +52,15 @@ export default function WorkSection() {
     },
   ]);
 
+  // useEffect(() => {
+  //   const data = JSON.parse(window.localStorage.getItem("Work"));
+
+  //   data.forEach((dataSet) => {
+  //     const addModals = [...modals, { job: false }];
+  //     setModals(addModals);
+  //   });
+  // }, [modals]);
+
   // Popover Options Dropdown Menu
   const popover = (
     <Popover style={{ padding: "15px" }}>
@@ -86,7 +95,7 @@ export default function WorkSection() {
     const jobs = [...modals, { job: false }];
     setModals(jobs);
     // Pass data to the ContextAPI with the amount of jobs so it can iterate over the all of them
-    addJob(modals);
+    addJob(values);
 
     // Add additional object for values for the new job
     setValues([
@@ -98,7 +107,6 @@ export default function WorkSection() {
         endDate: "2020-08-02",
         location: "Sofia, Bulgaria",
         resp: values[index].resp,
-        display: false,
       },
     ]);
   };
@@ -114,7 +122,7 @@ export default function WorkSection() {
       currValues.splice(currValues[index], 1);
       setValues(currValues);
 
-      removeJob(modals, index);
+      removeJob(values, index);
       updateValuesInLocalStorage(currValues);
     }
   };
@@ -194,7 +202,6 @@ export default function WorkSection() {
                 <ModalWork
                   show={modals[index].job}
                   onHide={() => hideCurrModal(index)}
-                  modals={modals}
                   values={values}
                   setValues={setValues}
                   i={index}

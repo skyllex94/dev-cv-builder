@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import { createContext, useEffect } from "react";
+import { createContext, useState, useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const Context = createContext();
@@ -11,7 +10,7 @@ export const ContextProvider = ({ children }) => {
 
   // State for fetching number of jobs from the ContPanel & passing
   // it to DisplayWork to iterate over each job and display it
-  const [arrOfJobs, setArrOfJobs] = useState([{ job: false }]);
+  const [numOfJobs, setNumOfJobs] = useState([{ job: false }]);
 
   const displayGeneralInfo = (hideModal, allValues) => {
     const arrAddressFields = [
@@ -172,99 +171,43 @@ export const ContextProvider = ({ children }) => {
     hideModal();
   };
 
-  const addJob = (arrOfJobs) => {
-    const values = [...arrOfJobs, { job: false }];
-    setArrOfJobs(values);
+  const addJob = (numOfJobs) => {
+    const values = [
+      ...numOfJobs,
+      {
+        company: "DXC Tech",
+        position: "Front-end Dev",
+        startDate: "2019-09-09",
+        endDate: "2020-08-02",
+        location: "Sofia, Bulgaria",
+        resp: [
+          {
+            message: "",
+          },
+        ],
+      },
+    ];
+    setNumOfJobs(values);
   };
 
-  const removeJob = (arrOfJobs, index) => {
-    const values = [...arrOfJobs];
+  const removeJob = (numOfJobs, index) => {
+    const values = [...numOfJobs];
     values.splice(values[index], 1);
-    setArrOfJobs(values);
+    setNumOfJobs(values);
   };
+
+  useLayoutEffect(() => {
+    const data = JSON.parse(window.localStorage.getItem("Work"));
+
+    if (data != null) {
+      console.log(data);
+      displayWork(data);
+    }
+  }, []);
 
   // Displaying on the CVPreview Component all of the inputted fields for the work section
-  const displayWork = (hideModal, arrOfJobs, allValues) => {
-    const values = [...arrOfJobs, { job: "false" }];
-    setArrOfJobs(values);
-
-    allValues.map((values, index) => {
-      const { company, position, startDate, endDate, location, resp } = values;
-      const num = index + 1;
-      const displayWholeSection = document.querySelector(".work");
-      displayWholeSection.classList.remove("d-none");
-      const workDisplay = document.querySelector(".workField" + num);
-
-      workDisplay.classList.remove("d-none");
-
-      const textCompany = document.querySelector(".textCompany" + num);
-      const textWorkPosition = document.querySelector(
-        ".textWorkPosition" + num
-      );
-
-      textCompany.textContent = company;
-      textWorkPosition.textContent = position;
-
-      const textWorkStartDate = document.querySelector(
-        ".textWorkStartDate" + num
-      );
-      const textWorkEndDate = document.querySelector(".textWorkEndDate" + num);
-      const textWorkLocation = document.querySelector(
-        ".textWorkLocation" + num
-      );
-
-      // Format date string to display only written month and numeric year
-      if (startDate === "" && endDate === "") {
-        document.querySelector(".work-period" + num).classList.add("d-none");
-      } else {
-        document.querySelector(".work-period" + num).classList.remove("d-none");
-        const formatStart = startDate.replaceAll("-", " ");
-        const formatEnd = endDate.replaceAll("-", " ");
-        let start = new Date(formatStart);
-        let end = new Date(formatEnd);
-        let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
-          start
-        );
-        let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(
-          start
-        );
-        let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
-          end
-        );
-        let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
-        textWorkStartDate.textContent = `${mo}, ${ye}`;
-        textWorkEndDate.textContent = `${mo2}, ${ye2}`;
-      }
-
-      // Populate the Work Address with commas after each of them
-      textWorkLocation.textContent = "";
-      if (location !== "") {
-        document
-          .querySelector(".work-location-group" + num)
-          .classList.remove("d-none");
-        textWorkLocation.textContent = location;
-      } else {
-        document
-          .querySelector(".work-location-group" + num)
-          .classList.add("d-none");
-      }
-
-      hideModal();
-
-      const group = document.querySelector(".work-resp" + num);
-      removeAllChildNodes(group);
-
-      resp.map((response) => {
-        const paragraph = document.createElement("p");
-        paragraph.className = "mb-0";
-
-        if (response.message !== "") {
-          paragraph.classList.remove("d-none");
-          paragraph.textContent = response.message;
-          group.appendChild(paragraph);
-        }
-      });
-    });
+  const displayWork = (allValues) => {
+    setNumOfJobs(allValues);
   };
 
   const displayInlineText = (onHide, itemsArray, UIClassName) => {
@@ -474,7 +417,7 @@ export const ContextProvider = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        arrOfJobs,
+        numOfJobs,
         displayGeneralInfo,
         displaySummary,
         displayWork,

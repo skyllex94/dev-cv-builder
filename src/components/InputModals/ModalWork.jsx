@@ -14,7 +14,7 @@ function ModalWork(props) {
   const { displayWork } = useContext(Context);
 
   // Destructure values, and setValues to use it the modal for each added job
-  const { show, onHide, modals, values, setValues, i } = props;
+  const { show, onHide, values, setValues, i } = props;
 
   // Add additional responsibility for the given job
   const addResp = (values, index) => {
@@ -46,8 +46,9 @@ function ModalWork(props) {
   // Commit all values and send them to the Context API to display and store the data
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
-      displayWork(onHide, modals, values);
+      displayWork(values);
       updateValuesInLocalStorage();
+      onHide();
     }
   };
 
