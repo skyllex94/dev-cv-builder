@@ -35,31 +35,18 @@ export default function WorkSection() {
 
   const { addJob, removeJob } = useContext(Context);
 
-  const [values, setValues] = useState([
-    {
-      company: "DXC Technology Inn!",
-      position: "Front-End Developer",
-      startDate: "2019-05-29",
-      endDate: "2019-09-29",
-      location: "Boston, MA, USA",
-      resp: [
-        {
-          message:
-            "- I was responsible to taking care of the software archithecture and rectruting people that can manage it better for me.",
-        },
-      ],
-      display: false,
-    },
-  ]);
+  // Fetching localStorage data if there is any
+  const data = JSON.parse(window.localStorage.getItem("Work"));
 
-  // useEffect(() => {
-  //   const data = JSON.parse(window.localStorage.getItem("Work"));
+  const [values, setValues] = useState(data);
 
-  //   data.forEach((dataSet) => {
-  //     const addModals = [...modals, { job: false }];
-  //     setModals(addModals);
-  //   });
-  // }, [modals]);
+  // UseEffect will iterate until the array of values is equal to the array of objects
+  // in the modals so it populates all of the modals that are stored in the localStorage
+  useEffect(() => {
+    if (values.length !== modals.length) {
+      setModals([...modals, { job: false }]);
+    }
+  }, [modals]);
 
   // Popover Options Dropdown Menu
   const popover = (

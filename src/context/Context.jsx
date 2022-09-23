@@ -200,7 +200,6 @@ export const ContextProvider = ({ children }) => {
     const data = JSON.parse(window.localStorage.getItem("Work"));
 
     if (data != null) {
-      console.log(data);
       displayWork(data);
     }
   }, []);
