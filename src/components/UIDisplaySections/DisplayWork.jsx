@@ -9,14 +9,20 @@ function DisplayWork() {
   const { numOfJobs } = useContext(Context);
 
   // Format date string to display only written month and numeric year
-  function formatDate(dateToFormat) {
+  function formatDate(dateToFormat, index) {
     if (dateToFormat !== undefined) {
       const formatStart = dateToFormat.replaceAll("-", " ");
       let start = new Date(formatStart);
-      let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
-      let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
+      const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
+        start
+      );
+      const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(
+        start
+      );
 
       dateToFormat = `${mo}, ${ye}`;
+      console.log("work-period" + index);
+      // document.querySelector(".work-period" + index).classList.remove("d-none");
     }
     return dateToFormat;
   }
@@ -24,7 +30,7 @@ function DisplayWork() {
   return numOfJobs.map((job, index) => {
     return (
       <Row id="workSection" key={index}>
-        {index + 1 === 1 ? (
+        {index === 0 ? (
           <Col md={12}>
             <div className="section-titles-work mt-3">Work Experience</div>
             <HorizontalLine />
@@ -40,18 +46,18 @@ function DisplayWork() {
             <div className={"me-2 textWorkPosition" + index}>
               {job.position}
             </div>
-            <div className={"d-flex work-period" + index}>
-              |{" "}
+            <div className={"d-flex d-none work-period" + index}>
+              |
               <div className={"ms-2 me-1 textWorkStartDate" + index}>
-                {formatDate(job.startDate)}
+                {formatDate(job.startDate, index)}
               </div>
               -
               <div className={"me-2 ms-1 textWorkEndDate" + index}>
-                {formatDate(job.endDate)}
+                {formatDate(job.endDate, index)}
               </div>
+              |
             </div>
             <Col className={"d-flex work-location-group" + index}>
-              |
               <div className={"ms-2 textWorkLocation" + index}>
                 {job.location}
               </div>

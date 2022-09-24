@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
@@ -30,19 +30,45 @@ export default function WorkSection() {
     isInEditMode: false,
   });
 
-  // Array of all the jobs
+  // Array of all the jobs and its modals
   const [modals, setModals] = useState([{ job: false }]);
 
+  // Updating Context State value when adding/removing job so it can be passed to DisplayWork Component
   const { addJob, removeJob } = useContext(Context);
 
   // Fetching localStorage data if there is any
   const data = JSON.parse(window.localStorage.getItem("Work"));
 
-  const [values, setValues] = useState(data);
+  // All values from the inputted fields in the Work Modals, or stored in localStorage
+  const [values, setValues] = useState(valueFetching);
+
+  function valueFetching() {
+    if (data !== null) {
+      return data;
+    } else {
+      return [
+        {
+          company: "DXC Tech",
+          position: "Front-end Dev",
+          startDate: "2019-09-09",
+          endDate: "2020-08-02",
+          location: "Sofia, Bulgaria",
+          resp: [
+            {
+              message: "- ",
+            },
+          ],
+        },
+      ];
+    }
+  }
 
   // UseEffect will iterate until the array of values is equal to the array of objects
   // in the modals so it populates all of the modals that are stored in the localStorage
   useEffect(() => {
+    console.log(
+      "values: " + values.length + " | " + "modals: " + modals.length
+    );
     if (values.length !== modals.length) {
       setModals([...modals, { job: false }]);
     }
@@ -101,12 +127,13 @@ export default function WorkSection() {
   // Removing selected job field based on the index of the job
   const removeSelectedJob = (modals, setModals, index) => {
     if (values.length > 1 && values.length - 1 === index) {
-      const val = [...modals];
-      val.splice(val[index], 1);
-      setModals(val);
+      const updatedModals = [...modals];
+      console.log(index);
+      updatedModals.splice(index, 1);
+      setModals(updatedModals);
 
       const currValues = [...values];
-      currValues.splice(currValues[index], 1);
+      currValues.splice(index, 1);
       setValues(currValues);
 
       removeJob(values, index);
@@ -121,6 +148,7 @@ export default function WorkSection() {
 
   return (
     // The whole section row as displayed in the Control Panel
+
     <Row>
       <Card>
         <Row className="my-3">

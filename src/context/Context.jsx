@@ -192,7 +192,7 @@ export const ContextProvider = ({ children }) => {
 
   const removeJob = (numOfJobs, index) => {
     const values = [...numOfJobs];
-    values.splice(values[index], 1);
+    values.splice(index, 1);
     setNumOfJobs(values);
   };
 
