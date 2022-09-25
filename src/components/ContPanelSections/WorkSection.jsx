@@ -20,6 +20,7 @@ import {
 } from "./ContPanelFunctions";
 import { useContext } from "react";
 import Context from "../../context/Context";
+import { message } from "antd";
 
 export default function WorkSection() {
   // Show modal state
@@ -55,7 +56,8 @@ export default function WorkSection() {
           location: "Sofia, Bulgaria",
           resp: [
             {
-              message: "- ",
+              message:
+                "- I was responsible for increasing revenue amounts by 2% monthly for a period of half an year with my job title.",
             },
           ],
         },
@@ -63,12 +65,9 @@ export default function WorkSection() {
     }
   }
 
-  // UseEffect will iterate until the array of values is equal to the array of objects
-  // in the modals so it populates all of the modals that are stored in the localStorage
+  // UseEffect will iterate until the array of values is equal to the array of modals
+  // so it populates same amount of modals as array of values in localStorage
   useEffect(() => {
-    console.log(
-      "values: " + values.length + " | " + "modals: " + modals.length
-    );
     if (values.length !== modals.length) {
       setModals([...modals, { job: false }]);
     }
@@ -119,7 +118,12 @@ export default function WorkSection() {
         startDate: "2019-09-09",
         endDate: "2020-08-02",
         location: "Sofia, Bulgaria",
-        resp: values[index].resp,
+        resp: [
+          {
+            message:
+              "- I was responsible for increasing revenue amounts by 2% monthly for a period of half an year with my job title.",
+          },
+        ],
       },
     ]);
   };
@@ -148,7 +152,6 @@ export default function WorkSection() {
 
   return (
     // The whole section row as displayed in the Control Panel
-
     <Row>
       <Card>
         <Row className="my-3">

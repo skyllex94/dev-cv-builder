@@ -9,22 +9,35 @@ function DisplayWork() {
   const { numOfJobs } = useContext(Context);
 
   // Format date string to display only written month and numeric year
-  function formatDate(dateToFormat, index) {
-    if (dateToFormat !== undefined) {
-      const formatStart = dateToFormat.replaceAll("-", " ");
-      let start = new Date(formatStart);
-      const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
-        start
-      );
-      const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(
-        start
-      );
+  function formatDate(startDate, endDate) {
+    const formattedDates = [{ date: "" }, { date: "" }];
 
-      dateToFormat = `${mo}, ${ye}`;
-      console.log("work-period" + index);
-      // document.querySelector(".work-period" + index).classList.remove("d-none");
+    if (startDate && endDate !== "") {
+      [startDate, endDate].forEach((date, index) => {
+        date = date.replaceAll("-", " ");
+        let newDate = new Date(date);
+        const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
+          newDate
+        );
+        const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(
+          newDate
+        );
+        formattedDates[index].date = `${mo}, ${ye}`;
+      });
+    } else {
+      return null;
     }
-    return dateToFormat;
+
+    // Formatted output passed from the array of values and populating it on the page with proper formatting
+    const formattedOutputtingDates = (
+      <div className="d-flex">
+        <div>|</div>
+        <div className="ms-2 me-1">{formattedDates[0].date}</div>-
+        <div className="me-2 ms-1">{formattedDates[1].date}</div>
+        <div>|</div>
+      </div>
+    );
+    return formattedOutputtingDates;
   }
 
   return numOfJobs.map((job, index) => {
@@ -36,6 +49,7 @@ function DisplayWork() {
             <HorizontalLine />
           </Col>
         ) : null}
+
         <div key={index} className={"pt-2 workField" + index} id="workField">
           <Col md={12} className="d-flex">
             <Form.Label className={"textCompany" + index}>
@@ -46,16 +60,8 @@ function DisplayWork() {
             <div className={"me-2 textWorkPosition" + index}>
               {job.position}
             </div>
-            <div className={"d-flex d-none work-period" + index}>
-              |
-              <div className={"ms-2 me-1 textWorkStartDate" + index}>
-                {formatDate(job.startDate, index)}
-              </div>
-              -
-              <div className={"me-2 ms-1 textWorkEndDate" + index}>
-                {formatDate(job.endDate, index)}
-              </div>
-              |
+            <div className={"d-flex work-period" + index}>
+              {formatDate(job.startDate, job.endDate)}
             </div>
             <Col className={"d-flex work-location-group" + index}>
               <div className={"ms-2 textWorkLocation" + index}>
