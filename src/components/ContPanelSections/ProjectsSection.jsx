@@ -17,8 +17,6 @@ import {
   toggleRenameMode,
   renderEditView,
   showModals,
-  handleAddField,
-  handleRemoveField,
 } from "./ContPanelFunctions";
 
 export default function ProjectsSection() {
@@ -29,28 +27,46 @@ export default function ProjectsSection() {
     value: "Personal Projects",
     isInEditMode: false,
   });
+  // Fetch data from localStorage if any
+  const data = JSON.parse(window.localStorage.getItem("Projects"));
 
-  // const [modalProjects, setModalProjects] = useState(false);
+  // Amount of modals each one being a different project
+  const [modals, setModals] = useState([{ display: false }]);
 
-  const [projectsSections, setProjectsSections] = useState([
-    { name: "Project 1" },
-  ]);
+  // Single values object used to start or add new values to the array
+  const valuesForPopulating = {
+    project: "Dev-CV-Builder",
+    link: "https://dev-cv-builder.herokuapp.com",
+    github: "https://github.com/skyllex94/dev-cv-builder",
+    desc: "A React.js based Free CV builder.",
+    techUsed: [
+      {
+        message: "Javascript",
+      },
+      {
+        message: "React.js",
+      },
+    ],
+    startDate: "2019-05-29",
+    endDate: "2019-09-29",
+    highlights: [
+      {
+        message: "- Improved skillset by 200% with this last project I did.",
+      },
+    ],
+  };
 
-  // Project states each on for generating a state for a modal to fill-in the data for the specific job
-  const [modalPrj0, setModalPrj0] = useState(false);
-  const [modalPrj1, setModalPrj1] = useState(false);
-  const [modalPrj2, setModalPrj2] = useState(false);
-  const [modalPrj3, setModalPrj3] = useState(false);
-  const [modalPrj4, setModalPrj4] = useState(false);
+  // Fetching values from localStorage if any there, if not default to insert one.
+  const [values, setValues] = useState(dataRetrieval);
 
-  let modalsProject = [modalPrj0, modalPrj1, modalPrj2, modalPrj3, modalPrj4];
-  let allSetModalsProject = [
-    setModalPrj0,
-    setModalPrj1,
-    setModalPrj2,
-    setModalPrj3,
-    setModalPrj4,
-  ];
+  // Populating values either from localStorage, or creating a single objects of values
+  function dataRetrieval() {
+    if (data !== null) {
+      return data;
+    } else {
+      return [valuesForPopulating];
+    }
+  }
 
   // Popover Options Dropdown Menu
   const popover = (
@@ -73,6 +89,39 @@ export default function ProjectsSection() {
       </Col>
     </Popover>
   );
+
+  function hideOpenedModal(index) {
+    const updatedModals = [...modals];
+    updatedModals[index].display = false;
+    setModals(updatedModals);
+  }
+
+  // Add additional job and update states and localStorage
+  function addNewJob() {
+    const updatedModals = [...modals, { job: false }];
+    setModals(updatedModals);
+
+    const updatedValues = [...values, valuesForPopulating];
+    setValues(updatedValues);
+    updateValuesinLocalStorage(updatedValues);
+  }
+
+  // Remove selected last job from modals and values states, and localStorage
+  function removeSelectedJob(index) {
+    const updatedModals = [...modals];
+    updatedModals.splice(index, 1);
+    setModals(updatedModals);
+
+    const updatedValues = [...values];
+    updatedValues.splice(index, 1);
+    setValues(updatedValues);
+    updateValuesinLocalStorage(updatedValues);
+  }
+
+  // Update the data set to include this current modal's  inputted values
+  function updateValuesinLocalStorage(updatedValues) {
+    window.localStorage.setItems("Projects", JSON.stringify(updatedValues));
+  }
 
   return (
     // The whole section row as displayed in the Control Panel
@@ -112,65 +161,45 @@ export default function ProjectsSection() {
         </Row>
 
         <Col>
-          {projectsSections.map((section, index) => {
+          {modals.map((section, index) => {
             return (
               <div key={index}>
                 <Row className="mb-2">
                   <Col md={6} className="d-flex justify-content-start">
                     <Form.Label
                       className="items-styling my-2 ms-4"
-                      onClick={() => showModals(index, allSetModalsProject)}
+                      onClick={() => showModals(index, modals, setModals)}
                     >
-                      {section.name}
+                      Project {index + 1}
                     </Form.Label>
                   </Col>
 
                   <Col md={6} className="d-flex justify-content-end">
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() =>
-                        handleAddField(
-                          index,
-                          "Projects ",
-                          projectsSections,
-                          setProjectsSections
-                        )
-                      }
+                      onClick={() => addNewJob()}
                     >
                       <AiOutlinePlus />
                     </Form.Label>
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() =>
-                        handleRemoveField(
-                          index,
-                          ".projectField",
-                          projectsSections,
-                          setProjectsSections
-                        )
-                      }
+                      onClick={() => removeSelectedJob(index)}
                     >
                       <AiOutlineMinus />
                     </Form.Label>
                   </Col>
                 </Row>
                 <ModalProjects
-                  show={modalsProject[index]}
-                  onHide={() => allSetModalsProject[index](false)}
-                  projectcount={index}
+                  show={modals[index].display}
+                  onHide={() => hideOpenedModal(index)}
+                  values={values}
+                  setValues={setValues}
+                  i={index}
                 />
               </div>
             );
           })}
         </Col>
-
-        {/*<ModalProjects
-        show={modalProjects}
-        onHide={() => setModalProjects(false)}
-        uiclasses={UIClassesForDisplayProjects}
-      /> */}
-
-        {/* A JSX comment */}
       </Card>
     </Row>
   );

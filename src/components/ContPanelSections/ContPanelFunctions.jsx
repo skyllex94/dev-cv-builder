@@ -62,27 +62,18 @@ export const updateRenameValue = (value, setValue, UIClassName) => {
 };
 
 // Change the state of a Modal in order to display it
-export const showModals = (index, modalsToAdjustState) => {
-  modalsToAdjustState.map((modal, indexModal) => {
-    if (index === indexModal) {
-      modal(true);
-    }
-  });
-};
-
-// Change the state of a Modal in order to display it
-export const showModalz = (index, modals, setModals) => {
+export const showModals = (index, modals, setModals) => {
   const values = [...modals];
   modals.map((modal, indexModal) => {
     if (index === indexModal) {
-      values[index].job = true;
-      console.log(values[index].job);
+      values[index].display = true;
+      console.log(values[index].display);
       setModals(values);
     }
   });
 };
 
-// Func for beaing removed - maximum of 5
+// Func for being removed - maximum of 5
 export const handleAddField = (index, nameTag, sections, setSections) => {
   if (sections.length < 5) {
     const values = [...sections, { name: nameTag + (sections.length + 1) }];

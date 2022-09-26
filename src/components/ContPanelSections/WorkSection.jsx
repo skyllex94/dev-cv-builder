@@ -16,11 +16,10 @@ import {
   toggleCurrModal,
   toggleRenameMode,
   renderEditView,
-  showModalz,
+  showModals,
 } from "./ContPanelFunctions";
 import { useContext } from "react";
 import Context from "../../context/Context";
-import { message } from "antd";
 
 export default function WorkSection() {
   // Show modal state
@@ -32,7 +31,7 @@ export default function WorkSection() {
   });
 
   // Array of all the jobs and its modals
-  const [modals, setModals] = useState([{ job: false }]);
+  const [modals, setModals] = useState([{ display: false }]);
 
   // Updating Context State value when adding/removing job so it can be passed to DisplayWork Component
   const { addJob, removeJob } = useContext(Context);
@@ -43,25 +42,25 @@ export default function WorkSection() {
   // All values from the inputted fields in the Work Modals, or stored in localStorage
   const [values, setValues] = useState(valueFetching);
 
+  const valuesInstance = {
+    company: "DXC Tech",
+    position: "Front-end Dev",
+    startDate: "2019-09-09",
+    endDate: "2020-08-02",
+    location: "Sofia, Bulgaria",
+    resp: [
+      {
+        message:
+          "- I was responsible for increasing revenue amounts by 2% monthly for a period of half an year with my job title.",
+      },
+    ],
+  };
+
   function valueFetching() {
     if (data !== null) {
       return data;
     } else {
-      return [
-        {
-          company: "DXC Tech",
-          position: "Front-end Dev",
-          startDate: "2019-09-09",
-          endDate: "2020-08-02",
-          location: "Sofia, Bulgaria",
-          resp: [
-            {
-              message:
-                "- I was responsible for increasing revenue amounts by 2% monthly for a period of half an year with my job title.",
-            },
-          ],
-        },
-      ];
+      return [valuesInstance];
     }
   }
 
@@ -69,7 +68,7 @@ export default function WorkSection() {
   // so it populates same amount of modals as array of values in localStorage
   useEffect(() => {
     if (values.length !== modals.length) {
-      setModals([...modals, { job: false }]);
+      setModals([...modals, { display: false }]);
     }
   }, [modals]);
 
@@ -98,41 +97,27 @@ export default function WorkSection() {
   // Hide the currently opened modal - when it's open, object value changes to true
   function hideCurrModal(index) {
     const values = [...modals];
-    values[index].job = false;
+    values[index].display = false;
     setModals(values);
   }
 
   // Adding additional job field
-  const addNewJob = (index) => {
-    const jobs = [...modals, { job: false }];
+  const addNewJob = () => {
+    const jobs = [...modals, { display: false }];
     setModals(jobs);
     // Pass data to the ContextAPI with the amount of jobs so it can iterate over the all of them
     addJob(values);
 
     // Add additional object for values for the new job
-    setValues([
-      ...values,
-      {
-        company: "DXC Tech",
-        position: "Front-end Dev",
-        startDate: "2019-09-09",
-        endDate: "2020-08-02",
-        location: "Sofia, Bulgaria",
-        resp: [
-          {
-            message:
-              "- I was responsible for increasing revenue amounts by 2% monthly for a period of half an year with my job title.",
-          },
-        ],
-      },
-    ]);
+    const updatedValues = [...values, valuesInstance];
+    setValues(updatedValues);
+    updateValuesInLocalStorage(updatedValues);
   };
 
   // Removing selected job field based on the index of the job
   const removeSelectedJob = (modals, setModals, index) => {
     if (values.length > 1 && values.length - 1 === index) {
       const updatedModals = [...modals];
-      console.log(index);
       updatedModals.splice(index, 1);
       setModals(updatedModals);
 
@@ -194,7 +179,7 @@ export default function WorkSection() {
                   <Col md={6} className="d-flex justify-content-start">
                     <Form.Label
                       className="items-styling my-2 ms-4"
-                      onClick={() => showModalz(index, modals, setModals)}
+                      onClick={() => showModals(index, modals, setModals)}
                     >
                       Job {index + 1}
                     </Form.Label>
@@ -203,7 +188,7 @@ export default function WorkSection() {
                   <Col md={6} className="d-flex justify-content-end">
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() => addNewJob(index)}
+                      onClick={() => addNewJob()}
                     >
                       <AiOutlinePlus />
                     </Form.Label>
@@ -218,7 +203,7 @@ export default function WorkSection() {
                   </Col>
                 </Row>
                 <ModalWork
-                  show={modals[index].job}
+                  show={modals[index].display}
                   onHide={() => hideCurrModal(index)}
                   values={values}
                   setValues={setValues}

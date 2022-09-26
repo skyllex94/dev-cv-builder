@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -13,94 +13,76 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 function ModalProjects(props) {
   const { displayProjects } = useContext(Context);
+  const { show, onHide, values, setValues, i } = props;
+  const count = i + 1;
 
-  const [project, setProject] = useState("Dev-CV-Builder");
-  const [projectLink, setProjectLink] = useState(
-    "https://dev-cv-builder.herokuapp.com"
-  );
-  const [projectGithub, setProjectGithub] = useState(
-    "https://github.com/skyllex94/dev-cv-builder"
-  );
-  const [desc, setDesc] = useState("A React.js based Free CV builder.");
-  const [techUsed, setTechUsed] = useState([
-    {
-      tech: "Javascript",
-    },
-    {
-      tech: "React.js",
-    },
-  ]);
-  const [startDate, setStartDate] = useState("2019-05-29");
-  const [endDate, setEndDate] = useState("2019-09-29");
-  const [highlights, setHighlights] = useState([
-    {
-      message: "- Improved skillset by 200% with this last project I did.",
-    },
-  ]);
-
-  const projectsAmount = props.projectcount + 1;
-
-  const handleHighlight = (index, event) => {
-    const values = [...highlights];
-    values[index][event.target.name] = event.target.value;
-    setHighlights(values);
-  };
-
-  const handleAddField = () => {
-    if (highlights.length < 3) {
-      setHighlights([
-        ...highlights,
+  // Add additional value to the selected array of objects
+  const addValue = (keyName, valuesIndex) => {
+    const updatingValues = [...values];
+    if (keyName === "techUsed") {
+      updatingValues[valuesIndex][keyName] = [
+        ...updatingValues[valuesIndex][keyName],
+        {
+          message: "",
+        },
+      ];
+    }
+    if (keyName === "highlights" && values[valuesIndex][keyName].length < 3) {
+      updatingValues[valuesIndex][keyName] = [
+        ...updatingValues[valuesIndex][keyName],
         {
           message: "- ",
         },
-      ]);
+      ];
     }
-    return;
+    setValues(updatingValues);
   };
 
-  const handleRemoveField = (index) => {
-    if (highlights.length > 1 && highlights.length === index + 1) {
-      const values = [...highlights];
-      values.splice(index, 1);
-      setHighlights(values);
-    }
-    return;
-  };
-
-  const insertTech = (event, index) => {
-    const values = [...techUsed];
-    values[index][event.target.name] = event.target.value;
-    setTechUsed(values);
-  };
-
-  const removeTech = (index) => {
-    const values = [...techUsed];
-    values.splice(index, 1);
-    setTechUsed(values);
-  };
-
-  const addTech = () => {
-    const values = [...techUsed, { tech: "" }];
-    setTechUsed(values);
-  };
-
-  const ModalEnterPressed = (e) => {
-    if (e.key === "Enter") {
-      displayProjects(props.onHide, techUsed, highlights, projectsAmount);
+  // Remove selected unit from the values and update displaying it
+  const removeSelectedValue = (keyName, valuesIndex, secondaryIndex) => {
+    if (values[valuesIndex][keyName].length > 1) {
+      const updatingValues = [...values];
+      updatingValues[valuesIndex][keyName].splice(secondaryIndex, 1);
+      setValues(updatingValues);
     }
   };
+
+  // Commit inputted values and pass them to the Context API so they can be passed to the DisplayProjects Component
+  const CommitValues = (e) => {
+    if (e.key === "Enter" || e === "submit") {
+      displayProjects(values);
+      onHide();
+    }
+  };
+
+  // Updating the value to match the inputted value
+  function updateValues(event, index) {
+    const updatedValues = [...values];
+    updatedValues[index][event.target.name] = event.target.value;
+    setValues(updatedValues);
+  }
+
+  // Updating values in the objects which have an additional arrays of objects
+  function updateArrOfValues(event, valuesIndex, secondaryIndex) {
+    const updatingValues = [...values];
+    updatingValues[valuesIndex][event.target.name][secondaryIndex].message =
+      event.target.value;
+    setValues(updatingValues);
+  }
 
   return (
-    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+    <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
-        {...props}
+        show={show}
+        onHide={onHide}
+        keyboard={props.keyboard}
         aria-labelledby="contained-modal-title-vcenter"
         centered
         size="lg"
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Personal Projects {projectsAmount}
+            Personal Projects {count}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="show-grid">
@@ -109,13 +91,14 @@ function ModalProjects(props) {
               <Col md={12}>
                 <Form>
                   <Form.Group className="mb-3">
-                    <FloatingLabel label="Project Name *">
+                    <FloatingLabel label="Project Name">
                       <Form.Control
                         type="text"
-                        className={"mb-2 modalProjectName" + projectsAmount}
-                        value={project}
+                        name="project"
+                        className={"mb-2 modalProjectName" + count}
+                        value={values[i].project}
                         onChange={(event) => {
-                          setProject(event.target.value);
+                          updateValues(event, i);
                         }}
                       />
                     </FloatingLabel>
@@ -125,13 +108,12 @@ function ModalProjects(props) {
                           <FloatingLabel label="Link to Website">
                             <Form.Control
                               type="text"
-                              className={
-                                "mb-2 modalProjectLink" + projectsAmount
-                              }
+                              name="link"
+                              className={"mb-2 modalProjectLink" + count}
                               placeholder="projectWebsite"
-                              value={projectLink}
+                              value={values[i].link}
                               onChange={(event) => {
-                                setProjectLink(event.target.value);
+                                updateValues(event, i);
                               }}
                             />
                           </FloatingLabel>
@@ -140,13 +122,12 @@ function ModalProjects(props) {
                           <FloatingLabel label="Github Repo">
                             <Form.Control
                               type="text"
-                              className={
-                                "mb-2 modalProjectGithub" + projectsAmount
-                              }
+                              name="github"
+                              className={"mb-2 modalProjectGithub" + count}
                               placeholder="projectGithub"
-                              value={projectGithub}
+                              value={values[i].github}
                               onChange={(event) => {
-                                setProjectGithub(event.target.value);
+                                updateValues(event, i);
                               }}
                             />
                           </FloatingLabel>
@@ -157,64 +138,71 @@ function ModalProjects(props) {
                     <FloatingLabel label="Project Description *">
                       <Form.Control
                         type="text"
-                        className={"mb-2 modalDesc" + projectsAmount}
+                        name="desc"
+                        className={"mb-2 modalDesc" + count}
                         placeholder="desc"
-                        value={desc}
+                        value={values[i].desc}
                         onChange={(event) => {
-                          setDesc(event.target.value);
+                          updateValues(event, i);
                         }}
                       />
                     </FloatingLabel>
-                    <Form.Group>
-                      <Row>
-                        {techUsed.map((tech, index) => {
-                          return (
-                            <div key={index}>
-                              <Col className="d-flex mb-2" md={3} xs={6}>
-                                <FloatingLabel label="Technology:">
-                                  <Form.Control
-                                    type="text"
-                                    className={
-                                      "mb-2 modalTech" + projectsAmount
-                                    }
-                                    placeholder="tech"
-                                    name="tech"
-                                    value={tech.tech}
-                                    onChange={(event) =>
-                                      insertTech(event, index)
-                                    }
-                                  />
-                                </FloatingLabel>
-                                <Button
-                                  variant="white"
-                                  onClick={() => removeTech(index)}
-                                >
-                                  <GrClose />
-                                </Button>
-                              </Col>
-                            </div>
-                          );
-                        })}
-                        <Col className="d-flex justify-content-end">
-                          <Button onClick={addTech} className="mb-2">
-                            Add
-                          </Button>
-                        </Col>
-                      </Row>
-                    </Form.Group>
+                    <Row>
+                      {values[i].techUsed.map((tech, index) => {
+                        return (
+                          <Col
+                            className="d-flex mb-2"
+                            md={3}
+                            xs={6}
+                            key={index}
+                          >
+                            <Form.Group>
+                              <FloatingLabel label="Technology:">
+                                <Form.Control
+                                  type="text"
+                                  name="techUsed"
+                                  className={"mb-2 modalTech" + count}
+                                  placeholder="tech"
+                                  value={tech.message}
+                                  onChange={(event) =>
+                                    updateArrOfValues(event, i, index)
+                                  }
+                                />
+                              </FloatingLabel>
+                            </Form.Group>
+                            <Button
+                              variant="white"
+                              onClick={() =>
+                                removeSelectedValue("techUsed", i, index)
+                              }
+                            >
+                              <GrClose />
+                            </Button>
+                          </Col>
+                        );
+                      })}
+                    </Row>
+
+                    <Col className="d-flex justify-content-end">
+                      <Button
+                        className="mb-2"
+                        onClick={() => addValue("techUsed", i)}
+                      >
+                        Add
+                      </Button>
+                    </Col>
 
                     <Row>
                       <Col md={6}>
                         <FloatingLabel label="Start Date">
                           <Form.Control
                             type="date"
-                            className={
-                              "mb-2 modalProjectStartDate" + projectsAmount
-                            }
+                            name="startDate"
+                            className={"mb-2 modalProjectStartDate" + count}
                             placeholder="02/2022"
-                            value={startDate}
+                            value={values[i].startDate}
                             onChange={(event) => {
-                              setStartDate(event.target.value);
+                              updateValues(event, i);
                             }}
                           />
                         </FloatingLabel>
@@ -223,20 +211,19 @@ function ModalProjects(props) {
                         <FloatingLabel label="End Date">
                           <Form.Control
                             type="date"
-                            className={
-                              "mb-2 modalProjectEndDate" + projectsAmount
-                            }
+                            name="endDate"
+                            className={"mb-2 modalProjectEndDate" + count}
                             placeholder="12/2022"
-                            value={endDate}
+                            value={values[i].endDate}
                             onChange={(event) => {
-                              setEndDate(event.target.value);
+                              updateValues(event, i);
                             }}
                           />
                         </FloatingLabel>
                       </Col>
                     </Row>
                     <Row>
-                      {highlights.map((highlight, index) => {
+                      {values[i].highlights.map((highlight, index) => {
                         return (
                           <div key={index}>
                             <Row className="mb-2">
@@ -244,11 +231,11 @@ function ModalProjects(props) {
                                 <FloatingLabel label="Highlights">
                                   <Form.Control
                                     type="text"
-                                    name="message"
+                                    name="highlights"
                                     placeholder="highlights"
                                     value={highlight.message}
                                     onChange={(event) =>
-                                      handleHighlight(index, event)
+                                      updateArrOfValues(event, i, index)
                                     }
                                   />
                                 </FloatingLabel>
@@ -256,13 +243,15 @@ function ModalProjects(props) {
                               <Col md={2} className="mt-2">
                                 <Button
                                   variant="white"
-                                  onClick={() => handleAddField()}
+                                  onClick={() => addValue("highlights", i)}
                                 >
                                   <AiOutlinePlus />
                                 </Button>
                                 <Button
                                   variant="white"
-                                  onClick={() => handleRemoveField(index)}
+                                  onClick={() =>
+                                    removeSelectedValue("highlights", i, index)
+                                  }
                                 >
                                   <AiOutlineMinus />
                                 </Button>
@@ -279,23 +268,11 @@ function ModalProjects(props) {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            onClick={() =>
-              displayProjects(
-                props.onHide,
-                techUsed,
-                highlights,
-                projectsAmount
-              )
-            }
-          >
-            Submit
-          </Button>
+          <Button onClick={() => CommitValues("submit")}>Submit</Button>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     </div>
   );
 }
-
 export default ModalProjects;

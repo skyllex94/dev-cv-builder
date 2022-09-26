@@ -10,7 +10,16 @@ export const ContextProvider = ({ children }) => {
 
   // State for fetching number of jobs from the ContPanel & passing
   // it to DisplayWork to iterate over each job and display it
-  const [numOfJobs, setNumOfJobs] = useState([{ job: false }]);
+  const [numOfJobs, setNumOfJobs] = useState([]);
+  const [numOfProjects, setNumOfProjects] = useState([]);
+
+  useLayoutEffect(() => {
+    const data = JSON.parse(window.localStorage.getItem("Work"));
+
+    if (data != null) {
+      displayWork(data);
+    }
+  }, []);
 
   const displayGeneralInfo = (hideModal, allValues) => {
     const arrAddressFields = [
@@ -136,6 +145,12 @@ export const ContextProvider = ({ children }) => {
     return isEmpty;
   }
 
+  function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
+  }
+
   // Display each piece of data from the given array
   function displayAddress(readFrom, writeTo) {
     readFrom.forEach((current, index, arr) => {
@@ -145,12 +160,6 @@ export const ContextProvider = ({ children }) => {
         writeTo.textContent += current + ", ";
       }
     });
-  }
-
-  function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-      parent.removeChild(parent.firstChild);
-    }
   }
 
   // Display Summary function, and create paragraphs for each addition
@@ -195,14 +204,6 @@ export const ContextProvider = ({ children }) => {
     values.splice(index, 1);
     setNumOfJobs(values);
   };
-
-  useLayoutEffect(() => {
-    const data = JSON.parse(window.localStorage.getItem("Work"));
-
-    if (data != null) {
-      displayWork(data);
-    }
-  }, []);
 
   // Displaying on the CVPreview Component all of the inputted fields for the work section
   const displayWork = (allValues) => {
@@ -299,117 +300,103 @@ export const ContextProvider = ({ children }) => {
     hideModal();
   };
 
-  const displayProjects = (hideModal, techUsed, highlights, index) => {
-    const prjDisplay = document.querySelector(".projectField" + index);
-    prjDisplay.classList.remove("d-none");
-
-    const previewProjectName = document.querySelector(".projectName" + index);
-    const modalProjectName = document.querySelector(
-      ".modalProjectName" + index
-    );
-
-    const previewDesc = document.querySelector(".projectDesc" + index);
-    const modalDesc = document.querySelector(".modalDesc" + index);
-
-    const previewStartDate = document.querySelector(
-      ".projectStartDate" + index
-    );
-    const modalStartDate = document.querySelector(
-      ".modalProjectStartDate" + index
-    );
-
-    const previewEndDate = document.querySelector(".projectEndDate" + index);
-    const modalEndDate = document.querySelector(".modalProjectEndDate" + index);
-
-    const projectWebsite = document.querySelector(".modalProjectLink" + index);
-    const projectGithub = document.querySelector(".modalProjectGithub" + index);
-
-    if (projectWebsite.value === "") {
-      document.querySelector(".projectLink" + index).classList.add("d-none");
-    } else {
-      document.querySelector(".projectLink" + index).classList.remove("d-none");
-      document.getElementById("projectLink" + index).href =
-        projectWebsite.value;
-    }
-    if (projectGithub.value === "") {
-      document.querySelector(".prjGithubLink" + index).classList.add("d-none");
-      console.log(document.querySelector(".prjGithubLink" + index));
-    } else {
-      document
-        .querySelector(".prjGithubLink" + index)
-        .classList.remove("d-none");
-      document.getElementById("prjGithubLink" + index).href =
-        projectGithub.value;
-    }
-
-    // Fetch primary information
-    previewProjectName.textContent = modalProjectName.value;
-    previewDesc.textContent = modalDesc.value;
-
-    // Format date string to display only written month and numeric year
-    if (modalStartDate.value === "" && modalEndDate.value === "") {
-      document.querySelector(".project-period" + index).classList.add("d-none");
-    } else {
-      document
-        .querySelector(".project-period" + index)
-        .classList.remove("d-none");
-      const formatStart = modalStartDate.value.replaceAll("-", " ");
-      const formatEnd = modalEndDate.value.replaceAll("-", " ");
-      let start = new Date(formatStart);
-      let end = new Date(formatEnd);
-      let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
-      let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
-      let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
-      let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
-      previewStartDate.textContent = `${mo}, ${ye}`;
-      previewEndDate.textContent = `${mo2}, ${ye2}`;
-    }
-
-    const groupInsert = document.querySelector(
-      ".projectAccomplishments" + index
-    );
-    removeAllChildNodes(groupInsert);
-
-    highlights.map((curr) => {
-      const paragraph = document.createElement("p");
-      paragraph.className = "mb-0";
-
-      if (curr.message !== "") {
-        paragraph.classList.remove("d-none");
-        paragraph.textContent = curr.message;
-        groupInsert.appendChild(paragraph);
-      }
-    });
-
-    // Remove all prior elements before iterating over array
-    const group = document.querySelector(".techGroup" + index);
-    removeAllChildNodes(group);
-
-    // Create a li for each skill and display it
-    const techTitle = document.querySelector(".techTitle" + index);
-    techUsed.map((curr, index) => {
-      const element = document.createElement("div");
-
-      // Append the element to the the column and to the row
-      if (techUsed.length - 1 === index) {
-        element.textContent = curr.tech;
-      } else {
-        element.textContent = curr.tech + ",";
-      }
-      element.className = "techUsedItem d-inline mx-2";
-      group.appendChild(element);
-    });
-    // Check if you have any elements in in the array, if not hide the title
-    if (techUsed.length === 0) {
-      techTitle.classList.add("d-none");
-    } else {
-      techTitle.classList.remove("d-none");
-    }
-
-    hideModal();
+  const displayProjects = (allValues) => {
+    setNumOfProjects(allValues);
+    // const prjDisplay = document.querySelector(".projectField" + index);
+    // prjDisplay.classList.remove("d-none");
+    // const previewProjectName = document.querySelector(".projectName" + index);
+    // const modalProjectName = document.querySelector(
+    //   ".modalProjectName" + index
+    // );
+    // const previewDesc = document.querySelector(".projectDesc" + index);
+    // const modalDesc = document.querySelector(".modalDesc" + index);
+    // const previewStartDate = document.querySelector(
+    //   ".projectStartDate" + index
+    // );
+    // const modalStartDate = document.querySelector(
+    //   ".modalProjectStartDate" + index
+    // );
+    // const previewEndDate = document.querySelector(".projectEndDate" + index);
+    // const modalEndDate = document.querySelector(".modalProjectEndDate" + index);
+    // const projectWebsite = document.querySelector(".modalProjectLink" + index);
+    // const projectGithub = document.querySelector(".modalProjectGithub" + index);
+    // if (projectWebsite.value === "") {
+    //   document.querySelector(".projectLink" + index).classList.add("d-none");
+    // } else {
+    //   document.querySelector(".projectLink" + index).classList.remove("d-none");
+    //   document.getElementById("projectLink" + index).href =
+    //     projectWebsite.value;
+    // }
+    // if (projectGithub.value === "") {
+    //   document.querySelector(".prjGithubLink" + index).classList.add("d-none");
+    //   console.log(document.querySelector(".prjGithubLink" + index));
+    // } else {
+    //   document
+    //     .querySelector(".prjGithubLink" + index)
+    //     .classList.remove("d-none");
+    //   document.getElementById("prjGithubLink" + index).href =
+    //     projectGithub.value;
+    // }
+    // // Fetch primary information
+    // previewProjectName.textContent = modalProjectName.value;
+    // previewDesc.textContent = modalDesc.value;
+    // // Format date string to display only written month and numeric year
+    // if (modalStartDate.value === "" && modalEndDate.value === "") {
+    //   document.querySelector(".project-period" + index).classList.add("d-none");
+    // } else {
+    //   document
+    //     .querySelector(".project-period" + index)
+    //     .classList.remove("d-none");
+    //   const formatStart = modalStartDate.value.replaceAll("-", " ");
+    //   const formatEnd = modalEndDate.value.replaceAll("-", " ");
+    //   let start = new Date(formatStart);
+    //   let end = new Date(formatEnd);
+    //   let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
+    //   let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
+    //   let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
+    //   let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
+    //   previewStartDate.textContent = `${mo}, ${ye}`;
+    //   previewEndDate.textContent = `${mo2}, ${ye2}`;
+    // }
+    // const groupInsert = document.querySelector(
+    //   ".projectAccomplishments" + index
+    // );
+    // removeAllChildNodes(groupInsert);
+    // highlights.map((curr) => {
+    //   const paragraph = document.createElement("p");
+    //   paragraph.className = "mb-0";
+    //   if (curr.message !== "") {
+    //     paragraph.classList.remove("d-none");
+    //     paragraph.textContent = curr.message;
+    //     groupInsert.appendChild(paragraph);
+    //   }
+    // });
+    // // Remove all prior elements before iterating over array
+    // const group = document.querySelector(".techGroup" + index);
+    // removeAllChildNodes(group);
+    // // Create a li for each skill and display it
+    // const techTitle = document.querySelector(".techTitle" + index);
+    // techUsed.map((curr, index) => {
+    //   const element = document.createElement("div");
+    //   // Append the element to the the column and to the row
+    //   if (techUsed.length - 1 === index) {
+    //     element.textContent = curr.tech;
+    //   } else {
+    //     element.textContent = curr.tech + ",";
+    //   }
+    //   element.className = "techUsedItem d-inline mx-2";
+    //   group.appendChild(element);
+    // });
+    // // Check if you have any elements in in the array, if not hide the title
+    // if (techUsed.length === 0) {
+    //   techTitle.classList.add("d-none");
+    // } else {
+    //   techTitle.classList.remove("d-none");
+    // }
+    // hideModal();
   };
 
-  const displayLanguages = (hideModal, accomplishments) => {
+  const displayLanguages = (hideModal) => {
     hideModal();
   };
 
@@ -417,6 +404,7 @@ export const ContextProvider = ({ children }) => {
     <Context.Provider
       value={{
         numOfJobs,
+        numOfProjects,
         displayGeneralInfo,
         displaySummary,
         displayWork,

@@ -17,8 +17,7 @@ function ModalWork(props) {
   const { show, onHide, values, setValues, i } = props;
 
   // Add additional responsibility for the given job
-  const addResp = (values, index) => {
-    console.log(values[index].resp);
+  const addResp = (index) => {
     if (values[index].resp.length < 3) {
       const currValues = [...values];
       currValues[index].resp = [
@@ -182,7 +181,7 @@ function ModalWork(props) {
                               <Col md={2} className="mt-2">
                                 <Button
                                   variant="white"
-                                  onClick={() => addResp(values, i)}
+                                  onClick={() => addResp(i)}
                                 >
                                   <AiOutlinePlus />
                                 </Button>
