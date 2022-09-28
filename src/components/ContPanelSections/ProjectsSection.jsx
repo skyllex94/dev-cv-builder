@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
@@ -10,6 +10,7 @@ import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import ModalProjects from "../InputModals/ModalProjects";
+import Context from "../../context/Context";
 
 import {
   ToggleSwitchButton,
@@ -32,6 +33,8 @@ export default function ProjectsSection() {
 
   // Amount of modals each one being a different project
   const [modals, setModals] = useState([{ display: false }]);
+
+  const { addProject, removeProject, displayProjects } = useContext(Context);
 
   // Single values object used to start or add new values to the array
   const valuesForPopulating = {
@@ -68,6 +71,20 @@ export default function ProjectsSection() {
     }
   }
 
+  // If there's local data, display the content of it as the page loads
+  useEffect(() => {
+    if (data !== null) {
+      displayProjects(data);
+    }
+  }, []);
+
+  // Match the amount of values objects there are with the modals amount on loading the page
+  useEffect(() => {
+    if (values.length !== modals.length) {
+      setModals([...modals, { display: false }]);
+    }
+  }, [modals]);
+
   // Popover Options Dropdown Menu
   const popover = (
     <Popover style={{ padding: "15px" }}>
@@ -97,17 +114,20 @@ export default function ProjectsSection() {
   }
 
   // Add additional job and update states and localStorage
-  function addNewJob() {
+  function addNewProject() {
     const updatedModals = [...modals, { job: false }];
     setModals(updatedModals);
 
     const updatedValues = [...values, valuesForPopulating];
     setValues(updatedValues);
-    updateValuesinLocalStorage(updatedValues);
+
+    // Pass the data to Context API and add project
+    addProject(valuesForPopulating);
+    updateValuesInLocalStorage(updatedValues);
   }
 
   // Remove selected last job from modals and values states, and localStorage
-  function removeSelectedJob(index) {
+  function removeSelectedProject(index) {
     const updatedModals = [...modals];
     updatedModals.splice(index, 1);
     setModals(updatedModals);
@@ -115,12 +135,15 @@ export default function ProjectsSection() {
     const updatedValues = [...values];
     updatedValues.splice(index, 1);
     setValues(updatedValues);
-    updateValuesinLocalStorage(updatedValues);
+
+    // Pass data to ContextAPI so it can be updated at passed to DisplayProjects to update the view
+    removeProject(index);
+    updateValuesInLocalStorage(updatedValues);
   }
 
   // Update the data set to include this current modal's  inputted values
-  function updateValuesinLocalStorage(updatedValues) {
-    window.localStorage.setItems("Projects", JSON.stringify(updatedValues));
+  function updateValuesInLocalStorage(updatedValues) {
+    window.localStorage.setItem("Projects", JSON.stringify(updatedValues));
   }
 
   return (
@@ -177,13 +200,13 @@ export default function ProjectsSection() {
                   <Col md={6} className="d-flex justify-content-end">
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() => addNewJob()}
+                      onClick={() => addNewProject()}
                     >
                       <AiOutlinePlus />
                     </Form.Label>
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() => removeSelectedJob(index)}
+                      onClick={() => removeSelectedProject(index)}
                     >
                       <AiOutlineMinus />
                     </Form.Label>

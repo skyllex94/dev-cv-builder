@@ -51,6 +51,7 @@ function ModalProjects(props) {
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
       displayProjects(values);
+      updateValuesInLocalStorage();
       onHide();
     }
   };
@@ -69,6 +70,11 @@ function ModalProjects(props) {
       event.target.value;
     setValues(updatingValues);
   }
+
+  // Update the data set to include this current modal's data
+  const updateValuesInLocalStorage = () => {
+    window.localStorage.setItem("Projects", JSON.stringify(values));
+  };
 
   return (
     <div onKeyPress={(event) => CommitValues(event)}>

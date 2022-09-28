@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
@@ -18,7 +18,6 @@ import {
   renderEditView,
   showModals,
 } from "./ContPanelFunctions";
-import { useContext } from "react";
 import Context from "../../context/Context";
 
 export default function WorkSection() {
@@ -34,7 +33,7 @@ export default function WorkSection() {
   const [modals, setModals] = useState([{ display: false }]);
 
   // Updating Context State value when adding/removing job so it can be passed to DisplayWork Component
-  const { addJob, removeJob } = useContext(Context);
+  const { addJob, removeJob, displayWork } = useContext(Context);
 
   // Fetching localStorage data if there is any
   const data = JSON.parse(window.localStorage.getItem("Work"));
@@ -63,6 +62,13 @@ export default function WorkSection() {
       return [valuesInstance];
     }
   }
+
+  // If there's local data, display the content of it as the page loads
+  useEffect(() => {
+    if (data !== null) {
+      displayWork(data);
+    }
+  });
 
   // UseEffect will iterate until the array of values is equal to the array of modals
   // so it populates same amount of modals as array of values in localStorage
@@ -106,7 +112,7 @@ export default function WorkSection() {
     const jobs = [...modals, { display: false }];
     setModals(jobs);
     // Pass data to the ContextAPI with the amount of jobs so it can iterate over the all of them
-    addJob(values);
+    addJob(valuesInstance);
 
     // Add additional object for values for the new job
     const updatedValues = [...values, valuesInstance];
@@ -125,7 +131,7 @@ export default function WorkSection() {
       currValues.splice(index, 1);
       setValues(currValues);
 
-      removeJob(values, index);
+      removeJob(index);
       updateValuesInLocalStorage(currValues);
     }
   };

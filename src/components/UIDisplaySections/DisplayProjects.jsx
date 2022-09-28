@@ -9,6 +9,7 @@ import { AiFillGithub } from "react-icons/ai";
 import Context from "../../context/Context";
 
 function DisplayProjects() {
+  // Array with all the values inputted from the modal, a modal is a single object with all the info
   const { numOfProjects } = useContext(Context);
 
   // Format date string to display only written month and numeric year
@@ -36,28 +37,21 @@ function DisplayProjects() {
       <div className="d-flex">
         <div className="me-1">{formattedDates[0].date}</div>-
         <div className="me-2 ms-1">{formattedDates[1].date}</div>
-        <div>|</div>
       </div>
     );
     return formattedOutputtingDates;
   }
 
-  function displayTechnologies(arrOfTechValues, index) {
-    const parentClass = document.querySelector(".techGroup" + index);
-    removeAllChildNodes(parentClass);
-    // Create a li for each tech and append it to the parent element to display in a group
-    arrOfTechValues.forEach((curr) => {
-      const li = document.createElement("li");
-      li.className = "techUsedItem d-inline mx-2";
-      li.textContent = curr.message;
-      parentClass.appendChild(li);
+  // Map out all tech values present, and output them in it's own li elements
+  function displayElements(arrOfValues, UIClassName) {
+    const output = arrOfValues.map((tech, index) => {
+      return (
+        <li key={index} className={UIClassName}>
+          {tech.message}
+        </li>
+      );
     });
-  }
-
-  function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-      parent.removeChild(parent.firstChild);
-    }
+    return output;
   }
 
   return numOfProjects.map((project, index) => {
@@ -109,16 +103,18 @@ function DisplayProjects() {
             <Row className={"techAlign" + index}>
               <div className={"d-inline techTitle" + index}>
                 Technologies Used:
-                <div className={"d-inline techGroup" + index}>
-                  {displayTechnologies(project.techUsed, index)}
-                </div>
+                {displayElements(
+                  project.techUsed,
+                  "techUsedItem d-inline mx-2"
+                )}
               </div>
             </Row>
 
             <Row className="mb-2">
-              <div className={"d-flex project-accomplish" + index}>
-                <div className={"projectAccomplishments" + index}></div>
-              </div>
+              {displayElements(
+                project.highlights,
+                "d-inline project-accomplish"
+              )}
             </Row>
           </Col>
         </Row>
