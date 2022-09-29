@@ -68,7 +68,7 @@ export default function WorkSection() {
     if (data !== null) {
       displayWork(data);
     }
-  });
+  }, []);
 
   // UseEffect will iterate until the array of values is equal to the array of modals
   // so it populates same amount of modals as array of values in localStorage
@@ -121,8 +121,8 @@ export default function WorkSection() {
   };
 
   // Removing selected job field based on the index of the job
-  const removeSelectedJob = (modals, setModals, index) => {
-    if (values.length > 1 && values.length - 1 === index) {
+  const removeSelectedJob = (index) => {
+    if (values.length > 1) {
       const updatedModals = [...modals];
       updatedModals.splice(index, 1);
       setModals(updatedModals);
@@ -200,9 +200,7 @@ export default function WorkSection() {
                     </Form.Label>
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() =>
-                        removeSelectedJob(modals, setModals, index)
-                      }
+                      onClick={() => removeSelectedJob(index)}
                     >
                       <AiOutlineMinus />
                     </Form.Label>

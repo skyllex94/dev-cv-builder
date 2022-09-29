@@ -1,4 +1,4 @@
-import { createContext, useState, useLayoutEffect } from "react";
+import { createContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const Context = createContext();
@@ -12,18 +12,7 @@ export const ContextProvider = ({ children }) => {
   // it to DisplayWork to iterate over each job and display it
   const [numOfJobs, setNumOfJobs] = useState([]);
   const [numOfProjects, setNumOfProjects] = useState([]);
-
-  useLayoutEffect(() => {
-    const dataWork = JSON.parse(window.localStorage.getItem("Work"));
-    const dataProjects = JSON.parse(window.localStorage.getItem("Projects"));
-
-    if (dataWork != null) {
-      displayWork(dataWork);
-    }
-    if (dataProjects != null) {
-      displayProjects(dataProjects);
-    }
-  }, []);
+  const [skills, setSkills] = useState([]);
 
   const displayGeneralInfo = (hideModal, allValues) => {
     const arrAddressFields = [
@@ -200,32 +189,29 @@ export const ContextProvider = ({ children }) => {
     setNumOfJobs(allValues);
   };
 
-  const displayInlineText = (onHide, itemsArray, UIClassName) => {
-    // Remove all prior elements before iterating over array
-    const group = document.querySelector("." + UIClassName);
-    removeAllChildNodes(group);
-
-    // Create a li for each skill and display it
-    itemsArray.map((curr, index) => {
-      const element = document.createElement("div");
-      if (UIClassName.includes("language")) {
-        if (itemsArray.length === index + 1) {
-          element.textContent = curr.language;
-        } else {
-          element.textContent = curr.language + ",";
-        }
-      } else {
-        element.textContent = curr.skill;
-      }
-
-      const col = document.createElement("div");
-      col.className = "col-auto mb-2";
-
-      // Append the element to the flexible column and append the column to the row
-      col.appendChild(element);
-      group.appendChild(col);
-    });
-    onHide();
+  const displayInlineText = (arrOfValues) => {
+    setSkills(arrOfValues);
+    // // Remove all prior elements before iterating over array
+    // const group = document.querySelector("." + UIClassName);
+    // removeAllChildNodes(group);
+    // // Create a li for each skill and display it
+    // itemsArray.map((curr, index) => {
+    //   const element = document.createElement("div");
+    //   if (UIClassName.includes("language")) {
+    //     if (itemsArray.length === index + 1) {
+    //       element.textContent = curr.language;
+    //     } else {
+    //       element.textContent = curr.language + ",";
+    //     }
+    //   } else {
+    //     element.textContent = curr.skill;
+    //   }
+    //   const col = document.createElement("div");
+    //   col.className = "col-auto mb-2";
+    //   // Append the element to the flexible column and append the column to the row
+    //   col.appendChild(element);
+    //   group.appendChild(col);
+    // });
   };
 
   const displayEducation = (hideModal, accomplishments) => {
@@ -317,6 +303,7 @@ export const ContextProvider = ({ children }) => {
       value={{
         numOfJobs,
         numOfProjects,
+        skills,
         displayGeneralInfo,
         displaySummary,
         displayWork,

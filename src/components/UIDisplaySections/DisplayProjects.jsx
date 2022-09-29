@@ -65,26 +65,19 @@ function DisplayProjects() {
             <HorizontalLine />
           </Col>
         ) : null}
-        <Row
-          className={"align-items-center projectField" + index}
-          id="projectField"
-        >
+        <Row className={"align-items-center projectField"}>
           <Col className="col-3 pe-1 d-flex">
-            <Form.Label className={"projectName" + index}>
-              {project.project}
-            </Form.Label>
+            <Form.Label className={"projectName"}>{project.project}</Form.Label>
 
             <Col className="d-inline d-flex justify-content-start">
               <Nav.Link
-                id={"projectLink" + index}
-                className={"d-flex align-items-center projectLink" + index}
+                className={"d-flex align-items-center"}
                 href={project.link}
               >
                 <FiExternalLink className="ms-2 me-1" />
               </Nav.Link>
               <Nav.Link
-                id={"prjGithubLink" + index}
-                className={"d-flex align-items-center rjGithubLink" + index}
+                className={"d-flex align-items-center"}
                 href={project.github}
               >
                 <AiFillGithub className="ms-2 me-1" />
@@ -93,15 +86,15 @@ function DisplayProjects() {
           </Col>
 
           <Col className="col-9 verticalLine">
-            <Col className={"d-flex project-info" + index}>
-              <div className={"me-2 projectDesc" + index}>{project.desc}</div>
+            <Col className={"d-flex project-info"}>
+              <div className={"me-2 projectDesc"}>{project.desc}</div>
             </Col>
-            <Row className={"project-period" + index}>
+            <Row className={"project-period"}>
               {formatDate(project.startDate, project.endDate)}
             </Row>
 
-            <Row className={"techAlign" + index}>
-              <div className={"d-inline techTitle" + index}>
+            <Row className={"techAlign"}>
+              <div className={"d-inline techTitle"}>
                 Technologies Used:
                 {displayElements(
                   project.techUsed,

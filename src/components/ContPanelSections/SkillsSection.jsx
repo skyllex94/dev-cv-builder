@@ -17,14 +17,14 @@ import {
 
 export default function SkillsSection() {
   // Show modal state
-  const [showSkills, setShowSkill] = useState(true);
+  const [showSkills, setShowSkills] = useState(true);
   // Rename section title state
   const [renameSkills, setRenameSkills] = useState({
     value: "Skills",
     isInEditMode: false,
   });
 
-  const [modalSkills, setModalSkills] = useState(false);
+  const [modal, setModal] = useState(false);
 
   // Popover Options Dropdown Menu
   const popover = (
@@ -32,7 +32,7 @@ export default function SkillsSection() {
       <Col md={12}>
         <Form.Label
           className="optionItems p-1"
-          onClick={() => ToggleSwitchButton(showSkills, setShowSkill)}
+          onClick={() => ToggleSwitchButton(showSkills, setShowSkills)}
         >
           Show/Hide Section
         </Form.Label>
@@ -63,7 +63,7 @@ export default function SkillsSection() {
         ) : (
           <Form.Label
             className="items-styling mt-2"
-            onClick={() => setModalSkills(true)}
+            onClick={() => setModal(true)}
           >
             {renameSkills.value}
           </Form.Label>
@@ -86,7 +86,7 @@ export default function SkillsSection() {
         ? toggleCurrModal(showSkills, "skills")
         : toggleCurrModal(showSkills, "skills")}
 
-      <ModalSkills show={modalSkills} onHide={() => setModalSkills(false)} />
+      <ModalSkills show={modal} onHide={() => setModal(false)} />
     </Row>
   );
 }

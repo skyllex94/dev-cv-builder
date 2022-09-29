@@ -46,7 +46,7 @@ function ModalSkills(props) {
     },
   ]);
 
-  const insertSkill = (event, index) => {
+  const updateSkill = (event, index) => {
     const values = [...skills];
     values[index][event.target.name] = event.target.value;
     setSkills(values);
@@ -58,19 +58,22 @@ function ModalSkills(props) {
   }
 
   const removeSkill = (index) => {
-    const values = [...skills];
-    values.splice(index, 1);
-    setSkills(values);
+    if (skills.length > 1) {
+      const values = [...skills];
+      values.splice(index, 1);
+      setSkills(values);
+    }
   };
 
-  const ModalEnterPressed = (e) => {
-    if (e.key === "Enter") {
-      displayInlineText(props.onHide, skills, "skillsGroup");
+  const CommitValues = (e) => {
+    if (e.key === "Enter" || e === "submit") {
+      displayInlineText(skills, "skillsGroup");
+      props.onHide();
     }
   };
 
   return (
-    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+    <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
         {...props}
         aria-labelledby="contained-modal-title-vcenter"
@@ -91,9 +94,10 @@ function ModalSkills(props) {
                         <Form.Control
                           type="text"
                           name="skill"
+                          autoFocus
                           placeholder="vanilla JS"
                           value={skill.skill}
-                          onChange={(event) => insertSkill(event, index)}
+                          onChange={(event) => updateSkill(event, index)}
                         />
                       </FloatingLabel>
                     </Form.Group>
@@ -103,21 +107,17 @@ function ModalSkills(props) {
                   </Col>
                 );
               })}
-              <Button className="mb-2" onClick={addSkill}>
-                Add
-              </Button>
             </Row>
           </Container>
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            onClick={() =>
-              displayInlineText(props.onHide, skills, "skillsGroup")
-            }
-          >
-            Submit
-          </Button>
-          <Button onClick={props.onHide}>Close</Button>
+        <Modal.Footer className="justify-content-between">
+          <Button onClick={addSkill}>Add Skill</Button>
+          <div>
+            <Button className="me-2" onClick={() => CommitValues("submit")}>
+              Submit
+            </Button>
+            <Button onClick={props.onHide}>Close</Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </div>

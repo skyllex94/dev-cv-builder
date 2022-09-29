@@ -31,13 +31,10 @@ function ModalWork(props) {
   };
 
   // Remove current responsibility from the array
-  const removeResp = (values, index) => {
-    if (
-      values[index].resp.length > 1 &&
-      values[index].resp.length === index + 1
-    ) {
+  const removeResp = (valuesIndex, index) => {
+    if (values[valuesIndex].resp.length > 1) {
       const currValues = [...values];
-      currValues[index].resp.splice(index, 1);
+      currValues[valuesIndex].resp.splice(index, 1);
       setValues(currValues);
     }
   };
@@ -187,7 +184,7 @@ function ModalWork(props) {
                                 </Button>
                                 <Button
                                   variant="white"
-                                  onClick={() => removeResp(values, index)}
+                                  onClick={() => removeResp(i, index)}
                                 >
                                   <AiOutlineMinus />
                                 </Button>
