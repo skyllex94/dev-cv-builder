@@ -1,8 +1,6 @@
 import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
-import { useContext } from "react";
-import Context from "../../context/Context";
 
 // Toggle the visibility of the whole section in the CVPreview
 export const ToggleSwitchButton = (state, setState) => {
@@ -73,14 +71,6 @@ export const showModals = (index, modals, setModals) => {
   });
 };
 
-// Func for being removed - maximum of 5
-export const handleAddField = (index, nameTag, sections, setSections) => {
-  if (sections.length < 5) {
-    const values = [...sections, { name: nameTag + (sections.length + 1) }];
-    setSections(values);
-  }
-};
-
 export const handleRemoveField = (index, sectionName, sections, setSection) => {
   // Check if the item being removed is the last one and skip if there is only 1 item left
   if (sections.length > 1 && sections.length === index + 1) {
@@ -91,4 +81,8 @@ export const handleRemoveField = (index, sectionName, sections, setSection) => {
     setSection(values);
   }
   return;
+};
+
+export const updateValuesInLocalStorage = (values, keyName) => {
+  return window.localStorage.setItem(keyName, JSON.stringify(values));
 };

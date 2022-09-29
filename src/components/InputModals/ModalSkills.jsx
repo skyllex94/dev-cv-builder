@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -6,14 +6,28 @@ import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { updateValuesInLocalStorage } from "../ContPanelSections/ContPanelFunctions";
 
 import Context from "../../context/Context";
 import { GrClose } from "react-icons/gr";
 
 function ModalSkills(props) {
   const { displayInlineText } = useContext(Context);
+  const data = JSON.parse(window.localStorage.getItem("Skills"));
 
-  const [skills, setSkills] = useState([
+  const [skills, setSkills] = useState(retrieveData);
+
+  // Retrieve data either from localStorage, or taking a value starter
+  function retrieveData() {
+    if (data !== null) {
+      return data;
+    } else {
+      return valueInstance;
+    }
+  }
+
+  // Value starter to initialize some begining skills
+  const valueInstance = [
     {
       skill: "Javascript",
     },
@@ -44,30 +58,45 @@ function ModalSkills(props) {
     {
       skill: "Flask",
     },
-  ]);
+  ];
+
+  // Check if there's anything it localStorage and pass the data to be display on window loaded
+  useEffect(() => {
+    if (data !== null) {
+      displayInlineText(data);
+    }
+  }, []);
 
   const updateSkill = (event, index) => {
     const values = [...skills];
     values[index][event.target.name] = event.target.value;
-    setSkills(values);
+    updateValues(values);
   };
 
   function addSkill() {
     const values = [...skills, { skill: "" }];
-    setSkills(values);
+    updateValues(values);
   }
 
   const removeSkill = (index) => {
     if (skills.length > 1) {
       const values = [...skills];
       values.splice(index, 1);
-      setSkills(values);
+      updateValues(values);
     }
   };
 
+  // Update values in the state and in the localStorage
+  function updateValues(newValueSet) {
+    setSkills(newValueSet);
+    updateValuesInLocalStorage(newValueSet, "Skills");
+  }
+
+  // On Submit being clicked, pass data to ContextAPI and update it in localStorage
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
-      displayInlineText(skills, "skillsGroup");
+      displayInlineText(skills);
+      updateValuesInLocalStorage(skills, "Skills");
       props.onHide();
     }
   };

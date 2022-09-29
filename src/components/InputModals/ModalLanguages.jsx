@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -9,47 +9,63 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Context from "../../context/Context";
 import { GrClose } from "react-icons/gr";
+import { updateValuesInLocalStorage } from "../ContPanelSections/ContPanelFunctions";
 
 function ModalLanguages(props) {
   const { displayInlineText } = useContext(Context);
+  const data = JSON.parse(window.localStorage.getItem("Languages"));
 
-  const [languages, setLanguages] = useState([
-    {
-      language: "English",
-    },
-    {
-      language: "Bulgarian",
-    },
-    {
-      language: "Spanish",
-    },
-  ]);
+  const [languages, setLanguages] = useState(dataRetrieval);
 
-  const insertLanguages = (event, index) => {
+  // If no localStorage data, return an empty array to populate the state
+  function dataRetrieval() {
+    if (data !== null) {
+      return data;
+    } else {
+      return [];
+    }
+  }
+
+  useEffect(() => {
+    if (data !== null) {
+      displayInlineText(data, "languages");
+    }
+  }, []);
+
+  // On input change, update the value and pass in to state and localStorage update
+  const updateLanguage = (event, index) => {
     const values = [...languages];
     values[index][event.target.name] = event.target.value;
-    setLanguages(values);
+    updateValues(values);
   };
 
-  function addLanguages() {
+  function addLanguage() {
     const values = [...languages, { language: "" }];
-    setLanguages(values);
+    updateValues(values);
   }
 
   const removeLanguage = (index) => {
     const values = [...languages];
     values.splice(index, 1);
-    setLanguages(values);
+    updateValues(values);
   };
 
-  const ModalEnterPressed = (e) => {
-    if (e.key === "Enter") {
-      displayInlineText(props.onHide, languages, "languagesGroup");
+  // Update the setState and the values in localStorage
+  function updateValues(values) {
+    setLanguages(values);
+    updateValuesInLocalStorage(values, "Languages");
+  }
+
+  // Submit the data and pass it to Context to further use as it displays the info
+  const CommitValues = (e) => {
+    if (e.key === "Enter" || e === "submit") {
+      displayInlineText(languages, "languages");
+      props.onHide();
     }
   };
 
   return (
-    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+    <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
         {...props}
         aria-labelledby="contained-modal-title-vcenter"
@@ -74,7 +90,7 @@ function ModalLanguages(props) {
                           name="language"
                           placeholder="English"
                           value={language.language}
-                          onChange={(event) => insertLanguages(event, index)}
+                          onChange={(event) => updateLanguage(event, index)}
                         />
                       </FloatingLabel>
                     </Form.Group>
@@ -87,21 +103,19 @@ function ModalLanguages(props) {
                   </Col>
                 );
               })}
-              <Button className="mb-2" onClick={addLanguages}>
-                Add
-              </Button>
             </Row>
           </Container>
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            onClick={() =>
-              displayInlineText(props.onHide, languages, "languagesGroup")
-            }
-          >
-            Submit
+        <Modal.Footer className="justify-content-between">
+          <Button className="mb-2" onClick={addLanguage}>
+            Add Language
           </Button>
-          <Button onClick={props.onHide}>Close</Button>
+          <div>
+            <Button className="me-2" onClick={() => CommitValues("submit")}>
+              Submit
+            </Button>
+            <Button onClick={props.onHide}>Close</Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </div>

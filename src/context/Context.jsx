@@ -13,6 +13,7 @@ export const ContextProvider = ({ children }) => {
   const [numOfJobs, setNumOfJobs] = useState([]);
   const [numOfProjects, setNumOfProjects] = useState([]);
   const [skills, setSkills] = useState([]);
+  const [languages, setLanguages] = useState([]);
 
   const displayGeneralInfo = (hideModal, allValues) => {
     const arrAddressFields = [
@@ -189,8 +190,12 @@ export const ContextProvider = ({ children }) => {
     setNumOfJobs(allValues);
   };
 
-  const displayInlineText = (arrOfValues) => {
-    setSkills(arrOfValues);
+  const displayInlineText = (arrOfValues, UIClassName) => {
+    if (UIClassName === "languages") {
+      setLanguages(arrOfValues);
+    } else {
+      setSkills(arrOfValues);
+    }
     // // Remove all prior elements before iterating over array
     // const group = document.querySelector("." + UIClassName);
     // removeAllChildNodes(group);
@@ -304,6 +309,7 @@ export const ContextProvider = ({ children }) => {
         numOfJobs,
         numOfProjects,
         skills,
+        languages,
         displayGeneralInfo,
         displaySummary,
         displayWork,
