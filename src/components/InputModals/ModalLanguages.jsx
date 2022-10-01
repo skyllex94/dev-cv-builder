@@ -22,7 +22,7 @@ function ModalLanguages(props) {
     if (data !== null) {
       return data;
     } else {
-      return [];
+      return [{ language: "English" }];
     }
   }
 

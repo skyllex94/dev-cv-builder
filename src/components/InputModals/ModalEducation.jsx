@@ -12,65 +12,61 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 function ModalEducation(props) {
   const { displayEducation } = useContext(Context);
+  const { show, onHide, values, setValues, i } = props;
 
-  const [degree, setDegree] = useState("Bachelor in Computer Science");
-  const [university, setUniversity] = useState("Economic University - Varna");
-  const [startDate, setStartDate] = useState("2014-05-29");
-  const [endDate, setEndDate] = useState("2019-09-29");
-  const [city, setCity] = useState("Varna, Bulgaria");
-  const [accomplishments, setAccomplishments] = useState([
-    {
-      message:
-        "- Got a GPA of 3.4 in my stay at the university and took additional courses of statistics",
-    },
-  ]);
-
-  const handleAccomplishments = (index, event) => {
-    const values = [...accomplishments];
-    values[index][event.target.name] = event.target.value;
-    setAccomplishments(values);
+  const updateArrInput = (valuesIndex, secondaryIndex, event, keyName) => {
+    const updateValues = [...values];
+    updateValues[valuesIndex][keyName][secondaryIndex] = event.target.value;
+    setValues(updateValues);
   };
 
-  const handleAddField = () => {
-    if (accomplishments.length < 3) {
-      setAccomplishments([
-        ...accomplishments,
+  const addAccomplishment = (valuesIndex) => {
+    const updatingValues = [...values];
+    if (values[valuesIndex].accomplishments.length < 3) {
+      updatingValues[valuesIndex].accomplishments = [
+        ...updatingValues[valuesIndex].accomplishments,
         {
           message: "- ",
         },
-      ]);
+      ];
     }
     return;
   };
 
-  const handleRemoveField = (index) => {
-    if (accomplishments.length > 1 && accomplishments.length === index + 1) {
-      const values = [...accomplishments];
-      const paragraph = document.querySelector(`.text` + index);
-      paragraph.classList.add("d-none");
-      values.splice(index, 1);
-      setAccomplishments(values);
+  const removeAccomplishment = (valuesIndex, secondaryIndex) => {
+    if (values[valuesIndex].accomplishments.length > 1) {
+      const updatingValues = [...values];
+      updatingValues[valuesIndex].accomplishments.splice(secondaryIndex, 1);
+      setValues(updatingValues);
     }
-    return;
   };
 
-  const ModalEnterPressed = (e) => {
-    if (e.key === "Enter") {
-      displayEducation(props.onHide, accomplishments);
+  const CommitValues = (e) => {
+    if (e.key === "Enter" || e === "submit") {
+      displayEducation(values);
+      onHide();
     }
   };
+
+  function updateValues(targetValue, keyName, index) {
+    const updatedValues = [...values];
+    updatedValues[index][keyName] = targetValue;
+    setValues(updatedValues);
+  }
 
   return (
-    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+    <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
-        {...props}
+        show={show}
+        onHide={onHide}
+        keyboard={props.keyboard}
         aria-labelledby="contained-modal-title-vcenter"
         centered
         size="lg"
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Education
+            Education {i + 1}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="show-grid">
@@ -84,9 +80,9 @@ function ModalEducation(props) {
                         type="text"
                         className="educationStudy mb-2"
                         placeholder="Bachelor of Computer Science"
-                        value={degree}
+                        value={values[i].degree}
                         onChange={(event) => {
-                          setDegree(event.target.value);
+                          updateValues(event.target.value, "degree", i);
                         }}
                       />
                     </FloatingLabel>
@@ -96,9 +92,9 @@ function ModalEducation(props) {
                         type="text"
                         className="educationGraduated mb-2"
                         placeholder="Senior Software Engineer"
-                        value={university}
+                        value={values[i].university}
                         onChange={(event) => {
-                          setUniversity(event.target.value);
+                          updateValues(event.target.value, "university", i);
                         }}
                       />
                     </FloatingLabel>
@@ -110,9 +106,9 @@ function ModalEducation(props) {
                             type="date"
                             className="educationStartDate mb-2"
                             placeholder="02/2022"
-                            value={startDate}
+                            value={values[i].startDate}
                             onChange={(event) => {
-                              setStartDate(event.target.value);
+                              updateValues(event.target.value, "startDate", i);
                             }}
                           />
                         </FloatingLabel>
@@ -123,9 +119,9 @@ function ModalEducation(props) {
                             type="date"
                             className="educationEndDate mb-2"
                             placeholder="12/2022"
-                            value={endDate}
+                            value={values[i].endDate}
                             onChange={(event) => {
-                              setEndDate(event.target.value);
+                              updateValues(event.target.value, "endDate", i);
                             }}
                           />
                         </FloatingLabel>
@@ -138,15 +134,15 @@ function ModalEducation(props) {
                             type="text"
                             className="educationLocation mb-2"
                             placeholder="Boston"
-                            value={city}
+                            value={values[i].location}
                             onChange={(event) => {
-                              setCity(event.target.value);
+                              updateValues(event.target.value, "location", i);
                             }}
                           />
                         </FloatingLabel>
                       </Col>
 
-                      {accomplishments.map((acc, index) => {
+                      {values[i].accomplishments.map((acc, index) => {
                         return (
                           <div key={index}>
                             <Row className="mb-2">
@@ -154,11 +150,10 @@ function ModalEducation(props) {
                                 <FloatingLabel label="Accomplishments">
                                   <Form.Control
                                     type="text"
-                                    name="message"
                                     placeholder="accomplishment"
                                     value={acc.message}
                                     onChange={(event) =>
-                                      handleAccomplishments(index, event)
+                                      updateArrInput(i, index, event, "message")
                                     }
                                   />
                                 </FloatingLabel>
@@ -166,13 +161,13 @@ function ModalEducation(props) {
                               <Col md={2} className="mt-2">
                                 <Button
                                   variant="white"
-                                  onClick={() => handleAddField()}
+                                  onClick={() => addAccomplishment(i)}
                                 >
                                   <AiOutlinePlus />
                                 </Button>
                                 <Button
                                   variant="white"
-                                  onClick={() => handleRemoveField(index)}
+                                  onClick={() => removeAccomplishment(i, index)}
                                 >
                                   <AiOutlineMinus />
                                 </Button>
@@ -189,11 +184,7 @@ function ModalEducation(props) {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            onClick={() => displayEducation(props.onHide, accomplishments)}
-          >
-            Submit
-          </Button>
+          <Button onClick={() => CommitValues("submit")}>Submit</Button>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>

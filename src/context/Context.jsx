@@ -14,6 +14,7 @@ export const ContextProvider = ({ children }) => {
   const [numOfProjects, setNumOfProjects] = useState([]);
   const [skills, setSkills] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [education, setEducation] = useState([]);
 
   const displayGeneralInfo = (hideModal, allValues) => {
     const arrAddressFields = [
@@ -196,89 +197,59 @@ export const ContextProvider = ({ children }) => {
     } else {
       setSkills(arrOfValues);
     }
-    // // Remove all prior elements before iterating over array
-    // const group = document.querySelector("." + UIClassName);
-    // removeAllChildNodes(group);
-    // // Create a li for each skill and display it
-    // itemsArray.map((curr, index) => {
-    //   const element = document.createElement("div");
-    //   if (UIClassName.includes("language")) {
-    //     if (itemsArray.length === index + 1) {
-    //       element.textContent = curr.language;
-    //     } else {
-    //       element.textContent = curr.language + ",";
-    //     }
-    //   } else {
-    //     element.textContent = curr.skill;
-    //   }
-    //   const col = document.createElement("div");
-    //   col.className = "col-auto mb-2";
-    //   // Append the element to the flexible column and append the column to the row
-    //   col.appendChild(element);
-    //   group.appendChild(col);
-    // });
   };
 
-  const displayEducation = (hideModal, accomplishments) => {
-    const textStudyField = document.querySelector(".textStudyField");
-    const educationStudy = document.querySelector(".educationStudy");
-    // Display education study, d-none by default
-    const eduGroupField = document.querySelector(".eduGroupField");
+  const displayEducation = (arrOfValues) => {
+    setEducation(arrOfValues);
 
-    const textUniversity = document.querySelector(".textUniversity");
-    const educationGraduated = document.querySelector(".educationGraduated");
-
-    const startDate = document.querySelector(".textEduStartDate");
-    const educationStartDate = document.querySelector(".educationStartDate");
-    const endDate = document.querySelector(".textEduEndDate");
-    const educationEndDate = document.querySelector(".educationEndDate");
-
-    const textEduLocation = document.querySelector(".textEduLocation");
-    const educationLocation = document.querySelector(".educationLocation");
-
-    // Format date string to display only written month and numeric year
-    if (startDate.value === "" && endDate.value === "") {
-      document.querySelector(".edu-university").classList.add("d-none");
-    } else {
-      document.querySelector(".edu-university").classList.remove("d-none");
-      const formatStart = educationStartDate.value.replaceAll("-", " ");
-      const formatEnd = educationEndDate.value.replaceAll("-", " ");
-      let start = new Date(formatStart);
-      let end = new Date(formatEnd);
-      let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
-      let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
-      let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
-      let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
-      startDate.textContent = `${mo}, ${ye}`;
-      endDate.textContent = `${mo2}, ${ye2}`;
-    }
-
-    textEduLocation.textContent = educationLocation.value;
-    // Display Degree of Study
-    if (educationStudy.value !== "") {
-      eduGroupField.classList.remove("d-none");
-      textStudyField.textContent = educationStudy.value;
-    } else {
-      eduGroupField.classList.add("d-none");
-    }
-
-    textUniversity.textContent = educationGraduated.value;
-
-    const groupInsert = document.querySelector(".textAccomplish");
-    removeAllChildNodes(groupInsert);
-
-    accomplishments.map((curr) => {
-      const paragraph = document.createElement("p");
-      paragraph.className = "mb-0";
-
-      if (curr.message !== "") {
-        paragraph.classList.remove("d-none");
-        paragraph.textContent = curr.message;
-        groupInsert.appendChild(paragraph);
-      }
-    });
-
-    hideModal();
+    // const textStudyField = document.querySelector(".textStudyField");
+    // const educationStudy = document.querySelector(".educationStudy");
+    // // Display education study, d-none by default
+    // const eduGroupField = document.querySelector(".eduGroupField");
+    // const textUniversity = document.querySelector(".textUniversity");
+    // const educationGraduated = document.querySelector(".educationGraduated");
+    // const startDate = document.querySelector(".textEduStartDate");
+    // const educationStartDate = document.querySelector(".educationStartDate");
+    // const endDate = document.querySelector(".textEduEndDate");
+    // const educationEndDate = document.querySelector(".educationEndDate");
+    // const textEduLocation = document.querySelector(".textEduLocation");
+    // const educationLocation = document.querySelector(".educationLocation");
+    // // Format date string to display only written month and numeric year
+    // if (startDate.value === "" && endDate.value === "") {
+    //   document.querySelector(".edu-university").classList.add("d-none");
+    // } else {
+    //   document.querySelector(".edu-university").classList.remove("d-none");
+    //   const formatStart = educationStartDate.value.replaceAll("-", " ");
+    //   const formatEnd = educationEndDate.value.replaceAll("-", " ");
+    //   let start = new Date(formatStart);
+    //   let end = new Date(formatEnd);
+    //   let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
+    //   let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
+    //   let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
+    //   let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
+    //   startDate.textContent = `${mo}, ${ye}`;
+    //   endDate.textContent = `${mo2}, ${ye2}`;
+    // }
+    // textEduLocation.textContent = educationLocation.value;
+    // // Display Degree of Study
+    // if (educationStudy.value !== "") {
+    //   eduGroupField.classList.remove("d-none");
+    //   textStudyField.textContent = educationStudy.value;
+    // } else {
+    //   eduGroupField.classList.add("d-none");
+    // }
+    // textUniversity.textContent = educationGraduated.value;
+    // const groupInsert = document.querySelector(".textAccomplish");
+    // removeAllChildNodes(groupInsert);
+    // accomplishments.map((curr) => {
+    //   const paragraph = document.createElement("p");
+    //   paragraph.className = "mb-0";
+    //   if (curr.message !== "") {
+    //     paragraph.classList.remove("d-none");
+    //     paragraph.textContent = curr.message;
+    //     groupInsert.appendChild(paragraph);
+    //   }
+    // });
   };
 
   // Displaying all inputted info from the project modals
@@ -310,6 +281,7 @@ export const ContextProvider = ({ children }) => {
         numOfProjects,
         skills,
         languages,
+        education,
         displayGeneralInfo,
         displaySummary,
         displayWork,
