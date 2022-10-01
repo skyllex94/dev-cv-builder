@@ -9,6 +9,36 @@ function DisplayEducation() {
   // Imported from the passed data from the modals in a array of objects' structure
   const { education } = useContext(Context);
 
+  function formatDate(startDate, endDate) {
+    const formattedDates = [{ date: "" }, { date: "" }];
+
+    if (startDate && endDate !== "") {
+      [startDate, endDate].forEach((date, index) => {
+        date = date.replaceAll("-", " ");
+        let newDate = new Date(date);
+        const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
+          newDate
+        );
+        const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(
+          newDate
+        );
+        formattedDates[index].date = `${mo}, ${ye}`;
+      });
+    } else {
+      return null;
+    }
+
+    // Formatted output passed from the array of values and populating it on the page with proper formatting
+    const formattedOutputtingDates = (
+      <div className="d-flex">
+        |<Col className="col-auto ms-3">{formattedDates[0].date}</Col>
+        <Col className="col-auto mx-1">-</Col>
+        <Col className="col-auto me-3">{formattedDates[1].date}</Col>|
+      </div>
+    );
+    return formattedOutputtingDates;
+  }
+
   return (
     <Row className="educationSection mt-3">
       <Col md={12}>
@@ -23,15 +53,11 @@ function DisplayEducation() {
             </Col>
 
             <Row className="edu-university">
-              <Col className="col-auto textUniversity">{curr.university}</Col>
-              <Col className="col-auto textEduStartDate gx-0 ms-3">
-                {curr.startDate}
+              <Col className="col-auto">{curr.university}</Col>
+              <Col className="col-auto">
+                {formatDate(curr.startDate, curr.endDate)}
               </Col>
-              <Col className="col-auto gx-0 mx-1">-</Col>
-              <Col className="col-auto textEduEndDate gx-0">{curr.endDate}</Col>
-              <Row className="edu-location-group ">
-                <Col className="col-auto textEduLocation">{curr.location}</Col>
-              </Row>
+              <Col className="col-auto">{curr.location}</Col>
             </Row>
 
             <Col md={12} className="edu-accomplish">

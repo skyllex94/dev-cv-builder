@@ -14,9 +14,10 @@ function ModalEducation(props) {
   const { displayEducation } = useContext(Context);
   const { show, onHide, values, setValues, i } = props;
 
-  const updateArrInput = (valuesIndex, secondaryIndex, event, keyName) => {
+  const updateArrInput = (valuesIndex, secondaryIndex, event) => {
     const updateValues = [...values];
-    updateValues[valuesIndex][keyName][secondaryIndex] = event.target.value;
+    updateValues[valuesIndex].accomplishments[secondaryIndex].message =
+      event.target.value;
     setValues(updateValues);
   };
 
@@ -30,7 +31,7 @@ function ModalEducation(props) {
         },
       ];
     }
-    return;
+    setValues(updatingValues);
   };
 
   const removeAccomplishment = (valuesIndex, secondaryIndex) => {
@@ -153,7 +154,7 @@ function ModalEducation(props) {
                                     placeholder="accomplishment"
                                     value={acc.message}
                                     onChange={(event) =>
-                                      updateArrInput(i, index, event, "message")
+                                      updateArrInput(i, index, event)
                                     }
                                   />
                                 </FloatingLabel>
