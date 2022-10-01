@@ -111,13 +111,10 @@ export default function WorkSection() {
   const addNewJob = () => {
     const jobs = [...modals, { display: false }];
     setModals(jobs);
-    // Pass data to the ContextAPI with the amount of jobs so it can iterate over the all of them
-    addJob(valuesInstance);
 
     // Add additional object for values for the new job
     const updatedValues = [...values, valuesInstance];
-    setValues(updatedValues);
-    updateValuesInLocalStorage(updatedValues);
+    updateDisplayingValues(updatedValues);
   };
 
   // Removing selected job field based on the index of the job
@@ -131,10 +128,16 @@ export default function WorkSection() {
       currValues.splice(index, 1);
       setValues(currValues);
 
-      removeJob(index);
-      updateValuesInLocalStorage(currValues);
+      updateDisplayingValues(currValues);
     }
   };
+
+  // Update values state, pass values to Context and update it in localStorage
+  function updateDisplayingValues(values) {
+    setValues(values);
+    displayWork(values);
+    updateValuesInLocalStorage(values);
+  }
 
   // Update the data set to include this current modal's data
   const updateValuesInLocalStorage = (values) => {

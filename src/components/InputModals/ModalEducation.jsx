@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -9,6 +9,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Context from "../../context/Context";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { updateValuesInLocalStorage } from "../ContPanelSections/ContPanelFunctions";
 
 function ModalEducation(props) {
   const { displayEducation } = useContext(Context);
@@ -45,6 +46,7 @@ function ModalEducation(props) {
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
       displayEducation(values);
+      updateValuesInLocalStorage(values, "Education");
       onHide();
     }
   };

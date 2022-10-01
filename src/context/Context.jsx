@@ -175,17 +175,6 @@ export const ContextProvider = ({ children }) => {
     hideModal();
   };
 
-  const addJob = (newValueObj) => {
-    const values = [...numOfJobs, newValueObj];
-    setNumOfJobs(values);
-  };
-
-  const removeJob = (index) => {
-    const values = [...numOfJobs];
-    values.splice(index, 1);
-    setNumOfJobs(values);
-  };
-
   // Displaying all the inputted fields from the work modals, passing it to the DisplayWork Component
   const displayWork = (allValues) => {
     setNumOfJobs(allValues);
@@ -199,79 +188,14 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
+  // Displaying all inputted info from the education modals
   const displayEducation = (arrOfValues) => {
     setEducation(arrOfValues);
-
-    // const textStudyField = document.querySelector(".textStudyField");
-    // const educationStudy = document.querySelector(".educationStudy");
-    // // Display education study, d-none by default
-    // const eduGroupField = document.querySelector(".eduGroupField");
-    // const textUniversity = document.querySelector(".textUniversity");
-    // const educationGraduated = document.querySelector(".educationGraduated");
-    // const startDate = document.querySelector(".textEduStartDate");
-    // const educationStartDate = document.querySelector(".educationStartDate");
-    // const endDate = document.querySelector(".textEduEndDate");
-    // const educationEndDate = document.querySelector(".educationEndDate");
-    // const textEduLocation = document.querySelector(".textEduLocation");
-    // const educationLocation = document.querySelector(".educationLocation");
-    // // Format date string to display only written month and numeric year
-    // if (startDate.value === "" && endDate.value === "") {
-    //   document.querySelector(".edu-university").classList.add("d-none");
-    // } else {
-    //   document.querySelector(".edu-university").classList.remove("d-none");
-    //   const formatStart = educationStartDate.value.replaceAll("-", " ");
-    //   const formatEnd = educationEndDate.value.replaceAll("-", " ");
-    //   let start = new Date(formatStart);
-    //   let end = new Date(formatEnd);
-    //   let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(start);
-    //   let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(start);
-    //   let ye2 = new Intl.DateTimeFormat("en", { year: "numeric" }).format(end);
-    //   let mo2 = new Intl.DateTimeFormat("en", { month: "short" }).format(end);
-    //   startDate.textContent = `${mo}, ${ye}`;
-    //   endDate.textContent = `${mo2}, ${ye2}`;
-    // }
-    // textEduLocation.textContent = educationLocation.value;
-    // // Display Degree of Study
-    // if (educationStudy.value !== "") {
-    //   eduGroupField.classList.remove("d-none");
-    //   textStudyField.textContent = educationStudy.value;
-    // } else {
-    //   eduGroupField.classList.add("d-none");
-    // }
-    // textUniversity.textContent = educationGraduated.value;
-    // const groupInsert = document.querySelector(".textAccomplish");
-    // removeAllChildNodes(groupInsert);
-    // accomplishments.map((curr) => {
-    //   const paragraph = document.createElement("p");
-    //   paragraph.className = "mb-0";
-    //   if (curr.message !== "") {
-    //     paragraph.classList.remove("d-none");
-    //     paragraph.textContent = curr.message;
-    //     groupInsert.appendChild(paragraph);
-    //   }
-    // });
   };
 
   // Displaying all inputted info from the project modals
   const displayProjects = (allValues) => {
     setNumOfProjects(allValues);
-  };
-
-  // Add additional project and update the state so it will be passed to DisplayProjects and add a project
-  const addProject = (newValueForPopulating) => {
-    const values = [...numOfProjects, newValueForPopulating];
-    setNumOfProjects(values);
-  };
-
-  // Remove currently selected project and update the state, so it will be removed from the DisplayProjects
-  const removeProject = (index) => {
-    const values = [...numOfProjects];
-    values.splice(index, 1);
-    setNumOfProjects(values);
-  };
-
-  const displayLanguages = (hideModal) => {
-    hideModal();
   };
 
   return (
@@ -287,12 +211,7 @@ export const ContextProvider = ({ children }) => {
         displayWork,
         displayInlineText,
         displayEducation,
-        displayLanguages,
         displayProjects,
-        addJob,
-        removeJob,
-        addProject,
-        removeProject,
       }}
     >
       {children}

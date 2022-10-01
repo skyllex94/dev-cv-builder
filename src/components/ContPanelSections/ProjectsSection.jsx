@@ -121,9 +121,7 @@ export default function ProjectsSection() {
     const updatedValues = [...values, valuesForPopulating];
     setValues(updatedValues);
 
-    // Pass the data to Context API and add project
-    addProject(valuesForPopulating);
-    updateValuesInLocalStorage(updatedValues);
+    updateDisplayingValues(updatedValues);
   }
 
   // Remove selected last job from modals and values states, and localStorage
@@ -136,9 +134,14 @@ export default function ProjectsSection() {
     updatedValues.splice(index, 1);
     setValues(updatedValues);
 
-    // Pass data to ContextAPI so it can be updated at passed to DisplayProjects to update the view
-    removeProject(index);
-    updateValuesInLocalStorage(updatedValues);
+    updateDisplayingValues(updatedValues);
+  }
+
+  // Update values state, pass values to Context and update it in localStorage
+  function updateDisplayingValues(values) {
+    setValues(values);
+    displayProjects(values);
+    updateValuesInLocalStorage(values);
   }
 
   // Update the data set to include this current modal's  inputted values

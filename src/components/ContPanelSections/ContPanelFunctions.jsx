@@ -65,7 +65,6 @@ export const showModals = (index, modals, setModals) => {
   modals.map((modal, indexModal) => {
     if (index === indexModal) {
       values[index].display = true;
-      console.log(values[index].display);
       setModals(values);
     }
   });

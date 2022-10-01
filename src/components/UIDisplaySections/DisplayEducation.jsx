@@ -48,16 +48,26 @@ function DisplayEducation() {
       {education.map((curr, index) => {
         return (
           <div key={index}>
-            <Col className="col-auto eduGroupField">
-              <Form.Label className="textStudyField">{curr.degree}</Form.Label>
-            </Col>
+            {index !== 0 ? (
+              <Col className="col-auto d-flex mt-3">
+                <Form.Label className="textStudyField">
+                  {curr.degree}
+                </Form.Label>
+              </Col>
+            ) : (
+              <Col className="col-auto d-flex">
+                <Form.Label className="textStudyField">
+                  {curr.degree}
+                </Form.Label>
+              </Col>
+            )}
 
             <Row className="edu-university">
-              <Col className="col-auto">{curr.university}</Col>
+              <Col className="col-auto pe-0">{curr.university}</Col>
               <Col className="col-auto">
                 {formatDate(curr.startDate, curr.endDate)}
               </Col>
-              <Col className="col-auto">{curr.location}</Col>
+              <Col className="col-auto ps-0">{curr.location}</Col>
             </Row>
 
             <Col md={12} className="edu-accomplish">
