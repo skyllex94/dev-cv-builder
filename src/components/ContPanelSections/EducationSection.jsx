@@ -187,7 +187,7 @@ export default function EducationSection() {
                       className="items-styling my-2 ms-4"
                       onClick={() => showModals(index, modals, setModals)}
                     >
-                      Education {index + 1}
+                      University {index + 1}
                     </Form.Label>
                   </Col>
 

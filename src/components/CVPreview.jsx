@@ -56,6 +56,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
       sections: venusComponentsRight,
     },
   };
+
   // Template "Earth" Component Arrangement
   const earthComponentArrangement = [
     {
@@ -84,6 +85,31 @@ export const CVPreview = React.forwardRef((props, ref) => {
     },
   ];
 
+  const copy = {
+    Group1: {
+      sections: [
+        {
+          id: "0summary",
+        },
+        {
+          id: "1work",
+        },
+        {
+          id: "2skills",
+        },
+        {
+          id: "3education",
+        },
+        {
+          id: "4languages",
+        },
+        {
+          id: "5projects",
+        },
+      ],
+    },
+  };
+
   const earthTemplate = {
     Group1: {
       sections: earthComponentArrangement,
@@ -93,9 +119,11 @@ export const CVPreview = React.forwardRef((props, ref) => {
   const [tempVenus, setTempVenus] = useState(venusTemplate);
   const [tempEarth, setTempEarth] = useState(earthTemplate);
 
-  function handleOnDrag(result, columns, setColumns) {
-    if (!result.destination) return;
-    const { source, destination } = result;
+  const [lsTempEarth, setLSTempEarth] = useState(copy);
+
+  function handleOnDrag(elToMove, columns, setColumns) {
+    if (!elToMove.destination) return;
+    const { source, destination } = elToMove;
     if (source.droppableId !== destination.droppableId) {
       // const sourceColumn = columns[source.droppableId];
       // const destColumn = columns[destination.droppableId];
@@ -116,18 +144,28 @@ export const CVPreview = React.forwardRef((props, ref) => {
       // });
       return;
     } else {
-      const column = columns[source.droppableId];
-      const copiedItems = [...column.sections];
-      const [removed] = copiedItems.splice(source.index, 1);
-      copiedItems.splice(destination.index, 0, removed);
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...column,
-          sections: copiedItems,
-        },
-      });
+      rearrangeArray(elToMove, columns, setColumns);
     }
+  }
+
+  function rearrangeArray(elementToBeMoved, array, setArray) {
+    const { source, destination } = elementToBeMoved;
+    const column = array[source.droppableId];
+
+    const copiedItems = [...column.sections];
+
+    const [itemBeingRearranged] = copiedItems.splice(source.index, 1);
+
+    copiedItems.splice(destination.index, 0, itemBeingRearranged);
+    console.log(destination.index);
+
+    setArray({
+      ...array,
+      [source.droppableId]: {
+        ...column,
+        sections: copiedItems,
+      },
+    });
   }
 
   return template === "earth" ? (
