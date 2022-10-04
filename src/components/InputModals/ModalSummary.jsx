@@ -117,16 +117,19 @@ function ModalSummary(props) {
                 );
               })}
             </Row>
-            <Row className="mt-2 px-2 d-flex">
-              <Button className="d-inline" onClick={addParagraph}>
-                Add Paragraph
-              </Button>
-            </Row>
+            <Row className="mt-2 px-2 d-flex"></Row>
           </Container>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => CommitValues("submit")}>Submit</Button>
-          <Button onClick={props.onHide}>Close</Button>
+        <Modal.Footer className="justify-content-between">
+          <Button className="d-inline" onClick={addParagraph}>
+            Add Paragraph
+          </Button>
+          <div>
+            <Button className="me-2" onClick={() => CommitValues("submit")}>
+              Submit
+            </Button>
+            <Button onClick={props.onHide}>Close</Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </div>

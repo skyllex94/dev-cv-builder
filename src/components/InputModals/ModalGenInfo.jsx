@@ -76,7 +76,6 @@ function ModalGenInfo(props) {
       })
     );
   }, [allStateValues]);
-  // TO DO: Try to trigger the useEffect only when the submit button is clicked
 
   const ModalEnterPressed = (event) => {
     if (event.key === "Enter") {

@@ -12,11 +12,14 @@ import DisplayProjects from "./UIDisplaySections/DisplayProjects";
 import DisplayContact from "./UIDisplaySections/DisplayContact";
 
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   // Template Variables
   const location = useLocation();
   const { template } = location.state;
+
+  const data = JSON.parse(window.localStorage.getItem("CVLayout"));
 
   // Template "Venus" Component Arrangement
   const venusComponentsLeft = [
@@ -57,8 +60,29 @@ export const CVPreview = React.forwardRef((props, ref) => {
     },
   };
 
+  const sections = [
+    {
+      id: "summary",
+    },
+    {
+      id: "work",
+    },
+    {
+      id: "skills",
+    },
+    {
+      id: "education",
+    },
+    {
+      id: "languages",
+    },
+    {
+      id: "projects",
+    },
+  ];
+
   // Template "Earth" Component Arrangement
-  const earthComponentArrangement = [
+  const components = [
     {
       id: "summary",
       content: <DisplaySummary />,
@@ -85,43 +109,49 @@ export const CVPreview = React.forwardRef((props, ref) => {
     },
   ];
 
-  const copy = {
-    Group1: {
-      sections: [
-        {
-          id: "0summary",
-        },
-        {
-          id: "1work",
-        },
-        {
-          id: "2skills",
-        },
-        {
-          id: "3education",
-        },
-        {
-          id: "4languages",
-        },
-        {
-          id: "5projects",
-        },
-      ],
-    },
-  };
-
-  const earthTemplate = {
-    Group1: {
-      sections: earthComponentArrangement,
-    },
-  };
-
   const [tempVenus, setTempVenus] = useState(venusTemplate);
-  const [tempEarth, setTempEarth] = useState(earthTemplate);
+  const [tempEarth, setTempEarth] = useState({
+    Group1: {
+      components,
+      sections,
+    },
+  });
 
-  const [lsTempEarth, setLSTempEarth] = useState(copy);
+  function loadData() {
+    if (data === null) {
+      return {
+        Group1: {
+          components,
+          sections,
+        },
+      };
+    } else {
+      return fetchComponentFromLocalStorage(data);
+    }
+  }
 
-  function handleOnDrag(elToMove, columns, setColumns) {
+  function fetchComponentFromLocalStorage(data) {
+    data.map((curr, index) => {
+      if (curr.id === components[index].id) {
+        console.log("Continue");
+      } else {
+        rearrange(curr, index);
+      }
+    });
+  }
+
+  // Recurssion unsuccessful tryout
+  function rearrange(curr, index) {
+    if (curr.id === components[index].id) {
+      return;
+    }
+    const comps = [...components];
+    const [pushItemDown] = comps.splice(index, 1);
+    comps.splice(index + 1, 0, pushItemDown);
+    rearrange(curr, index + 1);
+  }
+
+  function handleOnDrag(elToMove) {
     if (!elToMove.destination) return;
     const { source, destination } = elToMove;
     if (source.droppableId !== destination.droppableId) {
@@ -144,40 +174,70 @@ export const CVPreview = React.forwardRef((props, ref) => {
       // });
       return;
     } else {
-      rearrangeArray(elToMove, columns, setColumns);
+      rearrangeArray(elToMove);
     }
+    // console.log(tempEarth);
   }
 
-  function rearrangeArray(elementToBeMoved, array, setArray) {
+  const rearrangeArray = (elementToBeMoved) => {
     const { source, destination } = elementToBeMoved;
-    const column = array[source.droppableId];
+    const droppedItemId = tempEarth[source.droppableId];
 
-    const copiedItems = [...column.sections];
+    const copiedItems = [...droppedItemId.components];
+    const copiedItemNames = [...droppedItemId.sections];
 
     const [itemBeingRearranged] = copiedItems.splice(source.index, 1);
+    const [namesBeingRearranged] = copiedItemNames.splice(source.index, 1);
 
     copiedItems.splice(destination.index, 0, itemBeingRearranged);
-    console.log(destination.index);
+    copiedItemNames.splice(destination.index, 0, namesBeingRearranged);
 
-    setArray({
-      ...array,
-      [source.droppableId]: {
-        ...column,
-        sections: copiedItems,
+    setTempEarth({
+      Group1: {
+        components: copiedItems,
+        sections: copiedItemNames,
       },
     });
-  }
+    updateColumnArrangementInLocalStorage(copiedItemNames);
+  };
+
+  const updateColumnArrangementInLocalStorage = (copiedItemNames) => {
+    window.localStorage.setItem("CVLayout", JSON.stringify(copiedItemNames));
+  };
+
+  const populateSections = (objKeyName) =>
+    objKeyName.components.map((curr, index) => {
+      const sectionName = sections[index];
+      return (
+        <Draggable
+          draggableId={sectionName.id}
+          key={sectionName.id}
+          index={index}
+        >
+          {(provided) => (
+            <Row
+              className={curr.id}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
+            >
+              {curr.content}
+            </Row>
+          )}
+        </Draggable>
+      );
+    });
 
   return template === "earth" ? (
     <DragDropContext
       onDragEnd={(result) => handleOnDrag(result, tempEarth, setTempEarth)}
     >
-      {Object.entries(tempEarth).map(([key, value]) => {
+      {Object.entries(tempEarth).map(([key, objKeyName]) => {
         return (
           <Droppable
             droppableId={key}
             direction="vertical"
-            key={value}
+            key={objKeyName}
             type="row"
           >
             {(provided) => (
@@ -188,24 +248,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
                   className="ps-5"
                 >
                   <DisplayGenInfo name="general-info" />
-                  {value.sections.map((curr, index) => (
-                    <Draggable
-                      draggableId={curr.id}
-                      key={curr.id}
-                      index={index}
-                    >
-                      {(provided) => (
-                        <Row
-                          className={curr.id}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          ref={provided.innerRef}
-                        >
-                          {curr.content}
-                        </Row>
-                      )}
-                    </Draggable>
-                  ))}
+                  {populateSections(objKeyName)}
                   {provided.placeholder}
                 </Row>
               </div>
