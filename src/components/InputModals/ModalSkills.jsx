@@ -15,17 +15,6 @@ function ModalSkills(props) {
   const { displayInlineText } = useContext(Context);
   const data = JSON.parse(window.localStorage.getItem("Skills"));
 
-  const [skills, setSkills] = useState(retrieveData);
-
-  // Retrieve data either from localStorage, or taking a value starter
-  function retrieveData() {
-    if (data !== null) {
-      return data;
-    } else {
-      return valueInstance;
-    }
-  }
-
   // Value starter to initialize some begining skills
   const valueInstance = [
     {
@@ -59,6 +48,17 @@ function ModalSkills(props) {
       skill: "Flask",
     },
   ];
+
+  const [skills, setSkills] = useState(retrieveData);
+
+  // Retrieve data either from localStorage, or taking a value starter
+  function retrieveData() {
+    if (data !== null) {
+      return data;
+    } else {
+      return valueInstance;
+    }
+  }
 
   // Check if there's anything it localStorage and pass the data to be display on window loaded
   useEffect(() => {
