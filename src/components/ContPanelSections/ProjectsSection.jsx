@@ -34,7 +34,7 @@ export default function ProjectsSection() {
   // Amount of modals each one being a different project
   const [modals, setModals] = useState([{ display: false }]);
 
-  const { addProject, removeProject, displayProjects } = useContext(Context);
+  const { displayProjects } = useContext(Context);
 
   // Single values object used to start or add new values to the array
   const valuesForPopulating = {

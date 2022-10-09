@@ -33,13 +33,10 @@ export default function WorkSection() {
   const [modals, setModals] = useState([{ display: false }]);
 
   // Updating Context State value when adding/removing job so it can be passed to DisplayWork Component
-  const { addJob, removeJob, displayWork } = useContext(Context);
+  const { displayWork } = useContext(Context);
 
   // Fetching localStorage data if there is any
   const data = JSON.parse(window.localStorage.getItem("Work"));
-
-  // All values from the inputted fields in the Work Modals, or stored in localStorage
-  const [values, setValues] = useState(valueFetching);
 
   const valuesInstance = {
     company: "DXC Tech",
@@ -54,6 +51,9 @@ export default function WorkSection() {
       },
     ],
   };
+
+  // All values from the inputted fields in the Work Modals, or stored in localStorage
+  const [values, setValues] = useState(valueFetching);
 
   function valueFetching() {
     if (data !== null) {
