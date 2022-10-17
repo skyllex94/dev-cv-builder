@@ -18,6 +18,9 @@ code {
 
 .left_side {
   font-family: "Inter", sans-serif;
+}
+
+.landing_title {
   font-weight: 700;
   font-size: 4.5rem;
 }

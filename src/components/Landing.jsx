@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,6 +10,11 @@ import cv from "../img/cv-example.png";
 
 function Landing() {
   const [modalTemplates, setModalTemplates] = useState(false);
+  const navigate = useNavigate();
+
+  const navigateToSignIn = () => {
+    navigate("/signin");
+  };
 
   return (
     <Container fluid>
@@ -19,7 +25,7 @@ function Landing() {
         >
           <img src="/logo.png" alt="" />
           <p className="landing_title px-4">Free Developer CV Builder</p>
-          <h4 className="landing_text">
+          <h4 className="landing_text mb-4">
             No more wasting time and money. You can start building your software
             developer "Curriculum Vitae" right away and export it for free.{" "}
           </h4>
@@ -28,13 +34,21 @@ function Landing() {
             className="px-3 py-2 me-2"
             onClick={() => setModalTemplates(true)}
           >
-            Create Your Resume
+            Start Your Resume
           </Button>
 
-          <Button variant="outline-dark" className="px-3 py-2 ms-2" disabled>
-            View Your CV
+          <Button
+            variant="outline-dark"
+            className="px-3 py-2 ms-2"
+            onClick={navigateToSignIn}
+          >
+            Create an Account
           </Button>
+          <p className="mt-3">
+            *No need for creating an account to save and export your resume
+          </p>
         </Col>
+
         <Col
           md={5}
           className="d-flex justify-content-center align-items-center"
