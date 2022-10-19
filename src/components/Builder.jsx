@@ -11,6 +11,8 @@ import { ContextProvider } from "../context/Context";
 import { ImPageBreak } from "react-icons/im";
 import { IoMdArrowDropleft } from "react-icons/io";
 
+import { getAuth } from "firebase/auth";
+
 function Builder() {
   const componentRef = useRef();
 
@@ -18,6 +20,9 @@ function Builder() {
     content: () => componentRef.current,
     documentTitle: "Current_CV",
   });
+
+  const auth = getAuth();
+  const user = auth.currentUser.displayName;
 
   // node --max_old_space_size=1560 node_modules/.bin/ - add when deploying to Heroku to start and build before react-scripts
 
@@ -55,7 +60,7 @@ function Builder() {
 
   return (
     <ContextProvider>
-      <Header />
+      <Header username={user} />
       <Container fluid className="p-4 bg-light">
         <Row className="d-flex justify-content-lg-center">
           <Col className="control-panel">

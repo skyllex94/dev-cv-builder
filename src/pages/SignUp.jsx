@@ -3,14 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 // Bootstrap imports
 import Header from "../components/Header";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import { Container, Form, Row, Col, Card, Button } from "react-bootstrap";
 // Image-based import
 import { MDBCardImage } from "mdb-react-ui-kit";
+import GoogleOAuth from "../components/GoogleOAuth";
 
 // Google Firebase Auth & Firestore imports
 import {
@@ -20,6 +16,7 @@ import {
 } from "firebase/auth";
 import { db } from "../firebase.config";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -29,7 +26,6 @@ function SignUp() {
   });
   const { name, email, password } = formData;
   const [repeatPass, setRepeatPass] = useState("");
-  const [passToggle, setPassToggle] = useState(false);
 
   const navigate = useNavigate();
 
@@ -40,29 +36,37 @@ function SignUp() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const auth = getAuth();
-      const newUser = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = newUser.user;
-      updateProfile(auth.currentUser, {
-        displayName: name,
-      });
+    if (name && email && password && repeatPass !== null) {
+      if (password === repeatPass) {
+        try {
+          const auth = getAuth();
+          const newUser = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          const user = newUser.user;
+          updateProfile(auth.currentUser, {
+            displayName: name,
+          });
 
-      // Storing the data in the the Firestore Database
-      const formDataCopy = { ...formData };
-      delete formDataCopy.password;
-      formDataCopy.timestamp = serverTimestamp();
+          // Storting the data in the the Firestore Database
+          const formDataCopy = { ...formData };
+          delete formDataCopy.password;
+          formDataCopy.timestamp = serverTimestamp();
 
-      // Create a new document in the "users" collection and adding the data for the user
-      await setDoc(doc(db, "users", user.uid), formDataCopy);
+          // Create a new document in the "users" collection and adding the data for the user
+          await setDoc(doc(db, "users", user.uid), formDataCopy);
 
-      navigate("/");
-    } catch (error) {
-      alert(error.message);
+          navigate("/");
+        } catch (error) {
+          alert(error.message);
+        }
+      } else {
+        toast.error("Password fields do not match");
+      }
+    } else {
+      toast.warning("Please fill-in all fields");
     }
   };
 
@@ -122,9 +126,12 @@ function SignUp() {
                       />
                     </Form.Group>
 
-                    <Button className="mb-3" variant="primary" type="submit">
+                    <Button className="mb-2" variant="primary" type="submit">
                       Create an Account
                     </Button>
+
+                    <p className="mb-2">or Sign up with Google</p>
+                    <GoogleOAuth />
                   </Form>
                 </Container>
               </Col>

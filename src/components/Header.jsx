@@ -1,8 +1,22 @@
 import "../index.css";
-import { Container, Nav, Navbar } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { Container, Nav, Navbar, Button } from "react-bootstrap";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
-function Header() {
+import { getAuth } from "firebase/auth";
+
+function Header({ username }) {
+  const auth = getAuth();
+
+  const logOut = () => {
+    auth.signOut();
+    console.log("sad");
+  };
+
+  const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   return (
     <div>
       <Navbar bg="white" variant="light">
@@ -24,11 +38,38 @@ function Header() {
             </NavLink>
             <NavLink
               to="#pricing"
-              className="px-2"
+              className="ps-2 pe-4"
               style={{ textDecoration: "none" }}
             >
               About us
             </NavLink>
+            {username ? (
+              <React.Fragment>
+                <div className="verticalLine"></div>
+                <NavLink
+                  to="#pricing"
+                  className="px-2"
+                  style={{ textDecoration: "none" }}
+                >
+                  {capitalize(username)}
+                </NavLink>
+
+                <Link className="px-2" to="/" onClick={() => logOut()}>
+                  <Button className="badge">Log out</Button>
+                </Link>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <div className="verticalLine"></div>
+                <NavLink
+                  to="/signin"
+                  className="px-2"
+                  style={{ textDecoration: "none" }}
+                >
+                  <Button className="badge">Login</Button>
+                </NavLink>
+              </React.Fragment>
+            )}
           </Nav>
         </Container>
       </Navbar>

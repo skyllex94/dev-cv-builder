@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 // DOM imports from Bootstrap
 import Header from "../components/Header";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import { Container, Form, Row, Col, Card, Button } from "react-bootstrap";
 import { BsPersonBoundingBox } from "react-icons/bs";
 
 import { useNavigate } from "react-router-dom";
+
+// Firebase, Firestore dependencies
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import GoogleOAuth from "../components/GoogleOAuth";
+import { toast } from "react-toastify";
 
 function SignIn() {
   const [formData, setFormData] = useState({
@@ -25,8 +25,23 @@ function SignIn() {
     setFormData({ ...formData, [keyName]: event.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const signingUser = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      if (signingUser.user) {
+        navigate("/templates");
+      }
+    } catch (error) {
+      toast.error("Wrong or non-existent credentials, please try again");
+    }
   };
 
   return (
@@ -80,6 +95,9 @@ function SignIn() {
                       >
                         Log in
                       </Button>
+                    </Col>
+                    <Col className="col-auto">
+                      <GoogleOAuth />
                     </Col>
                     <Col className="col-auto">
                       <p className="ms-3" onClick={() => navigate("/signup")}>
