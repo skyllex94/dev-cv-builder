@@ -10,7 +10,6 @@ function Header({ username }) {
 
   const logOut = () => {
     auth.signOut();
-    console.log("sad");
   };
 
   const capitalize = (string) => {

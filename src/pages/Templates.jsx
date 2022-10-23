@@ -8,20 +8,42 @@ import { getAuth } from "firebase/auth";
 import Header from "../components/Header";
 import earthTemplate from "../img/earthTempThumbnail.png";
 import venusTemplate from "../img/venusTempThumbnail.png";
+import { useEffect } from "react";
 
 function Templates() {
   const auth = getAuth();
+
+  const data = JSON.parse(window.localStorage.getItem("UserData"));
+
+  const fetchUserData = () => {
+    if (data && !data === {}) {
+      return {
+        name: data.name,
+        email: data.email,
+      };
+    } else {
+      return {
+        name: auth.currentUser.displayName,
+        email: auth.currentUser.email,
+      };
+    }
+  };
+
   const [formData, setFormData] = useState({
-    name: auth.currentUser.displayName,
-    email: auth.currentUser.email,
+    name: data.name,
+    email: data.email,
   });
   const { name, email } = formData;
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.localStorage.setItem("UserData", JSON.stringify(formData));
+  }, []);
 
   const logOut = () => {
     auth.signOut();
-    navigate("/");
+    window.localStorage.removeItem("UserData");
+    navigate("/signin");
   };
 
   return (

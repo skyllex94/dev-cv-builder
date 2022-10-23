@@ -45,7 +45,7 @@ function Landing() {
             Create an Account
           </Button>
           <p className="mt-3">
-            *No need for creating an account to export your resume
+            *No need for creating an account to save and export your resume
           </p>
         </Col>
 

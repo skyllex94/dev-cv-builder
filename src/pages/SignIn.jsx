@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // DOM imports from Bootstrap
 import Header from "../components/Header";
 import { Container, Form, Row, Col, Card, Button } from "react-bootstrap";
@@ -12,14 +12,21 @@ import GoogleOAuth from "../components/GoogleOAuth";
 import { toast } from "react-toastify";
 
 function SignIn() {
+  // Check if user is already logged-in
+  const navigate = useNavigate();
+  const data = JSON.parse(window.localStorage.getItem("UserData"));
+  useEffect(() => {
+    if (data) {
+      navigate("/templates");
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const { email, password } = formData;
   const [passToggle, setPassToggle] = useState(false);
-
-  const navigate = useNavigate();
 
   const onChange = (event, keyName) => {
     setFormData({ ...formData, [keyName]: event.target.value });
@@ -37,6 +44,18 @@ function SignIn() {
       );
 
       if (signingUser.user) {
+        console.log(signingUser.user);
+        const credentialsToStore = {
+          name: signingUser.user.displayName,
+          email: signingUser.user.email,
+        };
+
+        // Store data in localStorage
+        window.localStorage.setItem(
+          "UserData",
+          JSON.stringify(credentialsToStore)
+        );
+
         navigate("/templates");
       }
     } catch (error) {

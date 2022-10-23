@@ -17,7 +17,11 @@ import { useEffect } from "react";
 export const CVPreview = React.forwardRef((props, ref) => {
   // Template Variables
   const location = useLocation();
-  const { template } = location.state;
+  let { template } = location.state;
+
+  if (!template) {
+    template = "earth";
+  }
 
   const data = JSON.parse(window.localStorage.getItem("CVLayout"));
 
