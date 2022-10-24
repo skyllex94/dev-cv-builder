@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 // DOM imports from Bootstrap
 import Header from "../components/Header";
-import { Container, Form, Row, Col, Card, Button } from "react-bootstrap";
-import { BsPersonBoundingBox } from "react-icons/bs";
+import {
+  Container,
+  Form,
+  Row,
+  Col,
+  Card,
+  Button,
+  FloatingLabel,
+} from "react-bootstrap";
+import { AiFillEye } from "react-icons/ai";
+import { HorizontalLineWtLabel } from "../utils/Utils";
 
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +35,7 @@ function SignIn() {
     password: "",
   });
   const { email, password } = formData;
-  const [passToggle, setPassToggle] = useState(false);
+  const [passVisible, setPassVisible] = useState(false);
 
   const onChange = (event, keyName) => {
     setFormData({ ...formData, [keyName]: event.target.value });
@@ -68,43 +77,60 @@ function SignIn() {
       <Header />
       <Container>
         <Row className="d-flex justify-content-center align-items-center">
-          <Col md={6} className="justify-content-center">
+          <Col md={6}>
             <Card>
-              <span className="mt-4">
-                <BsPersonBoundingBox size={40} />
-              </span>
-
               <p className="text-center h3 fw-bold mb-2 mx-1 mx-md-4 mt-4">
                 Log in
               </p>
               <Container className="px-5">
                 <Form onSubmit={onSubmit}>
-                  <Form.Group className="mb-3">
-                    <Form.Label className="d-flex">Email address</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="Enter email"
-                      value={email}
-                      onChange={(e) => onChange(e, "email")}
-                    />
-                  </Form.Group>
+                  <div className="d-grid gap-2">
+                    <GoogleOAuth />
+                  </div>
 
-                  <Form.Group className="mb-4">
-                    <Form.Label className="d-flex">Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => onChange(e, "password")}
-                    />
-                    <p
-                      className="ms-4"
-                      onClick={() => setPassToggle((prevState) => !prevState)}
-                    >
-                      Show Password
-                    </p>
-                  </Form.Group>
-                  {passToggle && email}
+                  <HorizontalLineWtLabel label="or" />
+
+                  <Row className="mb-4">
+                    <Col>
+                      <FloatingLabel
+                        label="Email address"
+                        className="text-start mb-3"
+                      >
+                        <Form.Control
+                          type="email"
+                          placeholder="Enter email"
+                          value={email}
+                          onChange={(e) => onChange(e, "email")}
+                        />
+                      </FloatingLabel>
+                    </Col>
+
+                    <Row>
+                      <Col md={11} className="me-0 pe-3 ">
+                        <FloatingLabel label="Password" className="text-start">
+                          <Form.Control
+                            type={passVisible ? "text" : "password"}
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => onChange(e, "password")}
+                          />
+                        </FloatingLabel>
+                      </Col>
+                      <Col
+                        md="auto"
+                        className="d-flex m-0 p-0 align-items-center"
+                      >
+                        <AiFillEye
+                          onClick={() =>
+                            setPassVisible((prevState) => !prevState)
+                          }
+                          size="26px"
+                        />
+                      </Col>
+                    </Row>
+                  </Row>
+
+                  {passVisible && email}
                   <Row className="justify-content-center align-items-center">
                     <Col className="col-auto">
                       <Button
@@ -112,21 +138,21 @@ function SignIn() {
                         variant="primary"
                         type="submit"
                       >
-                        Log in
+                        Sign-in
                       </Button>
-                    </Col>
-                    <Col className="col-auto">
-                      <GoogleOAuth />
-                    </Col>
-                    <Col className="col-auto">
-                      <p className="ms-3" onClick={() => navigate("/signup")}>
-                        Sign up Instead
-                      </p>
                     </Col>
                   </Row>
                 </Form>
               </Container>
             </Card>
+
+            <label
+              style={{ cursor: "pointer" }}
+              className="mt-3"
+              onClick={() => navigate("/signup")}
+            >
+              Sign up Instead
+            </label>
           </Col>
         </Row>
       </Container>

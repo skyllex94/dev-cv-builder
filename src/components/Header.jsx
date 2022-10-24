@@ -1,7 +1,7 @@
 import "../index.css";
 import React from "react";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { getAuth } from "firebase/auth";
 
@@ -10,6 +10,7 @@ function Header({ username }) {
 
   const logOut = () => {
     auth.signOut();
+    window.localStorage.removeItem("UserData");
   };
 
   const capitalize = (string) => {
@@ -28,19 +29,15 @@ function Header({ username }) {
             <NavLink to="/" className="px-2" style={{ textDecoration: "none" }}>
               Home
             </NavLink>
-            <NavLink
-              to="#features"
-              className="px-2"
-              style={{ textDecoration: "none" }}
-            >
+            <NavLink to="/" className="px-2" style={{ textDecoration: "none" }}>
               Create your CV
             </NavLink>
             <NavLink
-              to="#pricing"
+              to="/about"
               className="ps-2 pe-4"
               style={{ textDecoration: "none" }}
             >
-              About us
+              About
             </NavLink>
             {username ? (
               <React.Fragment>

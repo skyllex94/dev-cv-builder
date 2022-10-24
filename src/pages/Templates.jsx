@@ -11,34 +11,27 @@ import venusTemplate from "../img/venusTempThumbnail.png";
 import { useEffect } from "react";
 
 function Templates() {
-  const auth = getAuth();
-
+  // Check if user is already logged-in
+  const navigate = useNavigate();
   const data = JSON.parse(window.localStorage.getItem("UserData"));
 
-  const fetchUserData = () => {
-    if (data && !data === {}) {
-      return {
-        name: data.name,
-        email: data.email,
-      };
+  function fetchUserData() {
+    if (data) {
+      return JSON.parse(JSON.stringify(data));
     } else {
-      return {
-        name: auth.currentUser.displayName,
-        email: auth.currentUser.email,
-      };
+      return { name: "", email: "" };
     }
-  };
-
-  const [formData, setFormData] = useState({
-    name: data.name,
-    email: data.email,
-  });
-  const { name, email } = formData;
-  const navigate = useNavigate();
+  }
 
   useEffect(() => {
-    window.localStorage.setItem("UserData", JSON.stringify(formData));
-  }, []);
+    if (formData.name === "" && formData.email === "") {
+      navigate("/signup");
+    }
+  });
+
+  const [formData, setFormData] = useState(fetchUserData);
+  const { name, email } = formData;
+  const auth = getAuth();
 
   const logOut = () => {
     auth.signOut();

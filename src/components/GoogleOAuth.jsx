@@ -18,6 +18,7 @@ function GoogleOAuth() {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+      console.log(user);
 
       // Check for user
       const docRef = doc(db, "users", user.uid);
@@ -31,6 +32,12 @@ function GoogleOAuth() {
           timestamp: serverTimestamp(),
         });
       }
+
+      const credentialsToStore = { name: user.displayName, email: user.email };
+      window.localStorage.setItem(
+        "UserData",
+        JSON.stringify(credentialsToStore)
+      );
       navigate("/templates");
     } catch (error) {
       toast.error(
@@ -40,9 +47,15 @@ function GoogleOAuth() {
   };
 
   return (
-    <div>
-      <Button onClick={onGoogleClick} variant="outline-dark" className="mb-3">
-        <FcGoogle /> Sign {location.pathname === "/signup" ? "up" : "in"}
+    <div className="mt-4 d-grid gap-2">
+      <Button
+        onClick={onGoogleClick}
+        variant="outline-dark"
+        size="lg"
+        className="mb-3"
+      >
+        <FcGoogle /> Sign {location.pathname === "/signup" ? "up" : "in"} with
+        Google
       </Button>
     </div>
   );

@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Bootstrap imports
 import Header from "../components/Header";
-import { Container, Form, Row, Col, Card, Button } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Row,
+  Col,
+  Card,
+  Button,
+  FloatingLabel,
+} from "react-bootstrap";
 // Image-based import
 import { MDBCardImage } from "mdb-react-ui-kit";
 import GoogleOAuth from "../components/GoogleOAuth";
+
+import { AiFillEye } from "react-icons/ai";
+import { HorizontalLineWtLabel } from "../utils/Utils";
 
 // Google Firebase Auth & Firestore imports
 import {
@@ -19,6 +30,15 @@ import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 function SignUp() {
+  // Check if user is already logged-in
+  const navigate = useNavigate();
+  const data = JSON.parse(window.localStorage.getItem("UserData"));
+  useEffect(() => {
+    if (data) {
+      navigate("/templates");
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,8 +46,8 @@ function SignUp() {
   });
   const { name, email, password } = formData;
   const [repeatPass, setRepeatPass] = useState("");
-
-  const navigate = useNavigate();
+  const [passVisible, setPassVisible] = useState(false);
+  const [passVisible2, setPassVisible2] = useState(false);
 
   const onChange = (event, keyName) => {
     setFormData({ ...formData, [keyName]: event.target.value });
@@ -58,7 +78,17 @@ function SignUp() {
           // Create a new document in the "users" collection and adding the data for the user
           await setDoc(doc(db, "users", user.uid), formDataCopy);
 
-          navigate("/");
+          console.log(user);
+          const credentialsToStore = {
+            name: user.displayName,
+            email: user.email,
+          };
+          window.localStorage.setItem(
+            "UserData",
+            JSON.stringify(credentialsToStore)
+          );
+
+          navigate("/templates");
         } catch (error) {
           alert(error.message);
         }
@@ -81,57 +111,116 @@ function SignUp() {
                 <p className="text-center h3 fw-bold mb-2 mx-1 mx-md-4 mt-4">
                   Sign up
                 </p>
+
                 <Container className="px-5">
                   <Form onSubmit={onSubmit}>
+                    <Row>
+                      <GoogleOAuth />
+                    </Row>
+
+                    <HorizontalLineWtLabel label="or" />
+
                     <Form.Group className="mb-3">
-                      <Form.Label className="d-flex">Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter Name"
-                        value={name}
-                        onChange={(e) => onChange(e, "name")}
-                      />
+                      <FloatingLabel
+                        label="Full Name"
+                        className="text-start mb-3"
+                      >
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter Name"
+                          value={name}
+                          onChange={(e) => onChange(e, "name")}
+                        />
+                      </FloatingLabel>
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                      <Form.Label className="d-flex">Email address</Form.Label>
-                      <Form.Control
-                        type="email"
-                        placeholder="Enter email"
-                        value={email}
-                        onChange={(e) => onChange(e, "email")}
-                      />
+                      <FloatingLabel
+                        label="Email Address"
+                        className="text-start mb-3"
+                      >
+                        <Form.Control
+                          type="email"
+                          placeholder="Enter email"
+                          value={email}
+                          onChange={(e) => onChange(e, "email")}
+                        />
+                      </FloatingLabel>
                     </Form.Group>
 
-                    <Form.Group className="mb-3">
-                      <Form.Label className="d-flex">Password</Form.Label>
-                      <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => onChange(e, "password")}
-                      />
-                    </Form.Group>
+                    <Row className="d-flex align-items-center">
+                      <Col md={11} className="me-0 pe-3">
+                        <Form.Group>
+                          <FloatingLabel
+                            label="Password"
+                            className="text-start"
+                          >
+                            <Form.Control
+                              type={passVisible ? "text" : "password"}
+                              placeholder="Password"
+                              value={password}
+                              onChange={(e) => onChange(e, "password")}
+                            />
+                          </FloatingLabel>
+                        </Form.Group>
+                      </Col>
+                      <Col md="auto" className="m-0 p-0 ">
+                        <AiFillEye
+                          onClick={() =>
+                            setPassVisible((prevState) => !prevState)
+                          }
+                          size="26px"
+                        />
+                      </Col>
+                    </Row>
 
-                    <Form.Group className="mb-3">
-                      <Form.Label className="d-flex">
-                        Repeat Password
-                      </Form.Label>
-                      <Form.Control
-                        className="mb-3"
-                        type="password"
-                        placeholder="Password"
-                        value={repeatPass}
-                        onChange={(e) => setRepeatPass(e.target.value)}
-                      />
-                    </Form.Group>
+                    <div className="mb-3" />
 
-                    <Button className="mb-2" variant="primary" type="submit">
-                      Create an Account
-                    </Button>
+                    <Row className="d-flex align-items-center">
+                      <Col md="11" className="me-0 pe-3">
+                        <Form.Group>
+                          <FloatingLabel
+                            label="Repeat Password"
+                            className="text-start"
+                          >
+                            <Form.Control
+                              type={passVisible2 ? "text" : "password"}
+                              placeholder="Password"
+                              value={repeatPass}
+                              onChange={(e) => setRepeatPass(e.target.value)}
+                            />
+                          </FloatingLabel>
+                        </Form.Group>
+                      </Col>
+                      <Col md="auto" className="m-0 p-0 ">
+                        <AiFillEye
+                          onClick={() =>
+                            setPassVisible2((prevState) => !prevState)
+                          }
+                          size="26px"
+                        />
+                      </Col>
+                    </Row>
 
-                    <p className="mb-2">or Sign up with Google</p>
-                    <GoogleOAuth />
+                    <div className="mb-3" />
+
+                    <Row className="d-flex justify-content-center align-items-center">
+                      <Col md="auto">
+                        <Button variant="primary" type="submit">
+                          Create an Account
+                        </Button>
+                      </Col>
+                      <Col md="auto">
+                        <label
+                          style={{ cursor: "pointer" }}
+                          onClick={() => navigate("/signin")}
+                        >
+                          Log in Instead
+                        </label>
+                      </Col>
+                    </Row>
+
+                    <div className="mb-3" />
                   </Form>
                 </Container>
               </Col>
