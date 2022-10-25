@@ -5,9 +5,9 @@ import Col from "react-bootstrap/esm/Col";
 import { HorizontalLine } from "../../utils/Utils";
 import Context from "../../context/Context";
 
-function DisplayEducation() {
+function DisplayCertification() {
   // Imported from the passed data from the modals in a array of objects' structure
-  const { education, name } = useContext(Context);
+  const { certification } = useContext(Context);
 
   function formatDate(startDate, endDate) {
     const formattedDates = [{ date: "" }, { date: "" }];
@@ -33,44 +33,42 @@ function DisplayEducation() {
       <div className="d-flex">
         |<Col className="col-auto ms-3">{formattedDates[0].date}</Col>
         <Col className="col-auto mx-1">-</Col>
-        <Col className="col-auto me-3">{formattedDates[1].date}</Col>|
+        <Col className="col-auto me-3">{formattedDates[1].date}</Col>
       </div>
     );
     return formattedOutputtingDates;
   }
 
   return (
-    <Row className="educationSection mt-3">
+    <Row className="certificationSection mt-3">
       <Col md={12}>
-        <div className="section-titles-education">
-          {name ? name : "Education"}
+        <div className="section-titles-certification">
+          Certification & Licenses
         </div>
         <HorizontalLine />
       </Col>
-
-      {education.map((curr, index) => {
+      {certification.map((curr, index) => {
         return (
           <div key={index}>
             {index !== 0 ? (
               <Col className="col-auto d-flex mt-3">
                 <Form.Label className="textStudyField">
-                  {curr.degree}
+                  {curr.certification}
                 </Form.Label>
               </Col>
             ) : (
               <Col className="col-auto d-flex">
                 <Form.Label className="textStudyField">
-                  {curr.degree}
+                  {curr.certification}
                 </Form.Label>
               </Col>
             )}
 
             <Row className="edu-university">
-              <Col className="col-auto pe-0">{curr.university}</Col>
+              <Col className="col-auto pe-1">{curr.issuedBy}</Col>
               <Col className="col-auto">
                 {formatDate(curr.startDate, curr.endDate)}
               </Col>
-              <Col className="col-auto ps-0">{curr.location}</Col>
             </Row>
 
             <Col md={12} className="edu-accomplish">
@@ -89,4 +87,4 @@ function DisplayEducation() {
   );
 }
 
-export default DisplayEducation;
+export default DisplayCertification;

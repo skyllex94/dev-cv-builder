@@ -149,7 +149,7 @@ function SignUp() {
                     </Form.Group>
 
                     <Row className="d-flex align-items-center">
-                      <Col md={11} className="me-0 pe-3">
+                      <Col md={11} sm={11} xs={11} className="me-0 pe-3">
                         <Form.Group>
                           <FloatingLabel
                             label="Password"
@@ -164,7 +164,7 @@ function SignUp() {
                           </FloatingLabel>
                         </Form.Group>
                       </Col>
-                      <Col md="auto" className="m-0 p-0 ">
+                      <Col md={1} sm={1} xs={1} className="m-0 p-0 ">
                         <AiFillEye
                           onClick={() =>
                             setPassVisible((prevState) => !prevState)
@@ -177,7 +177,7 @@ function SignUp() {
                     <div className="mb-3" />
 
                     <Row className="d-flex align-items-center">
-                      <Col md="11" className="me-0 pe-3">
+                      <Col md={11} sm={11} xs={11} className="me-0 pe-3">
                         <Form.Group>
                           <FloatingLabel
                             label="Repeat Password"
@@ -192,7 +192,7 @@ function SignUp() {
                           </FloatingLabel>
                         </Form.Group>
                       </Col>
-                      <Col md="auto" className="m-0 p-0 ">
+                      <Col md={1} sm={1} xs={1} className="m-0 p-0 ">
                         <AiFillEye
                           onClick={() =>
                             setPassVisible2((prevState) => !prevState)

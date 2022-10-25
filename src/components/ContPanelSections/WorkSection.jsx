@@ -148,7 +148,7 @@ export default function WorkSection() {
     // The whole section row as displayed in the Control Panel
     <Row>
       <Card>
-        <Row className="my-3">
+        <Row className="mt-3">
           <Col
             md={10}
             className="d-flex justify-content-start align-items-center"

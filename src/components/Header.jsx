@@ -29,9 +29,15 @@ function Header({ username }) {
             <NavLink to="/" className="px-2" style={{ textDecoration: "none" }}>
               Home
             </NavLink>
-            <NavLink to="/" className="px-2" style={{ textDecoration: "none" }}>
-              Create your CV
-            </NavLink>
+            {window.location.pathname === "/build" && (
+              <NavLink
+                to="/templates"
+                className="px-2"
+                style={{ textDecoration: "none" }}
+              >
+                Change Template
+              </NavLink>
+            )}
             <NavLink
               to="/about"
               className="ps-2 pe-4"

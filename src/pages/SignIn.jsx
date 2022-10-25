@@ -106,7 +106,7 @@ function SignIn() {
                     </Col>
 
                     <Row>
-                      <Col md={11} className="me-0 pe-3 ">
+                      <Col xs={11} sm={11} md={11} className="me-0 pe-3 ">
                         <FloatingLabel label="Password" className="text-start">
                           <Form.Control
                             type={passVisible ? "text" : "password"}
@@ -117,7 +117,9 @@ function SignIn() {
                         </FloatingLabel>
                       </Col>
                       <Col
-                        md="auto"
+                        md={1}
+                        sm={1}
+                        xs={1}
                         className="d-flex m-0 p-0 align-items-center"
                       >
                         <AiFillEye

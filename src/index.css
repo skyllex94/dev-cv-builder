@@ -209,7 +209,7 @@ code {
   border-radius: 5px;
 }
 
-.languagesGroup div {
+.languagesGroup {
   font-weight: 400;
   font-size: 14px;
   text-transform: capitalize;

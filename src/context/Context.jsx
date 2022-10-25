@@ -8,13 +8,15 @@ export const ContextProvider = ({ children }) => {
   const location = useLocation();
   const { template } = location.state;
 
-  // State for fetching number of jobs from the ContPanel & passing
-  // it to DisplayWork to iterate over each job and display it
+  // All states for passing all the values for displaying
   const [numOfJobs, setNumOfJobs] = useState([]);
   const [numOfProjects, setNumOfProjects] = useState([]);
   const [skills, setSkills] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [education, setEducation] = useState([]);
+  const [certification, setCertification] = useState([]);
+
+  const [name, setName] = useState(null);
 
   const displayGeneralInfo = (hideModal, allValues) => {
     const arrAddressFields = [
@@ -189,13 +191,22 @@ export const ContextProvider = ({ children }) => {
   };
 
   // Displaying all inputted info from the education modals
-  const displayEducation = (arrOfValues) => {
+  const displayEducation = (arrOfValues, sectionName) => {
     setEducation(arrOfValues);
   };
 
   // Displaying all inputted info from the project modals
   const displayProjects = (allValues) => {
     setNumOfProjects(allValues);
+  };
+
+  // Displaying all inputted info from the certification modals
+  const displayCertification = (allValues) => {
+    setCertification(allValues);
+  };
+
+  const renameSection = (sectionName) => {
+    setName(sectionName);
   };
 
   return (
@@ -206,12 +217,16 @@ export const ContextProvider = ({ children }) => {
         skills,
         languages,
         education,
+        certification,
+        name,
         displayGeneralInfo,
         displaySummary,
         displayWork,
         displayInlineText,
         displayEducation,
         displayProjects,
+        displayCertification,
+        renameSection,
       }}
     >
       {children}

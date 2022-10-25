@@ -1,3 +1,5 @@
+import "../index.css";
+
 import SummarySection from "./ContPanelSections/SummarySection";
 import WorkSection from "./ContPanelSections/WorkSection";
 import SkillsSection from "./ContPanelSections/SkillsSection";
@@ -5,8 +7,7 @@ import EducationSection from "./ContPanelSections/EducationSection";
 import LanguagesSection from "./ContPanelSections/LanguagesSection";
 import ProjectsSection from "./ContPanelSections/ProjectsSection";
 import GenInfoSection from "./ContPanelSections/GenInfoSection";
-
-import "../index.css";
+import CertificationSection from "./ContPanelSections/CertificationSection";
 
 function ContPanelSections() {
   return (
@@ -24,6 +25,8 @@ function ContPanelSections() {
       <LanguagesSection />
 
       <ProjectsSection />
+
+      <CertificationSection />
     </div>
   );
 }

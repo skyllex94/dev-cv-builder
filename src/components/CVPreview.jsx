@@ -10,15 +10,16 @@ import DisplayEducation from "./UIDisplaySections/DisplayEducation";
 import DisplayLanguages from "./UIDisplaySections/DisplayLanguages";
 import DisplayProjects from "./UIDisplaySections/DisplayProjects";
 import DisplayContact from "./UIDisplaySections/DisplayContact";
+import DisplayCertification from "./UIDisplaySections/DisplayCertification";
 
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   // Template Variables
   const location = useLocation();
   let { template } = location.state;
 
+  // If there isn't any template assigned, assign it to the default one
   if (!template) {
     template = "earth";
   }
@@ -38,6 +39,10 @@ export const CVPreview = React.forwardRef((props, ref) => {
     {
       id: "education",
       content: <DisplayEducation />,
+    },
+    {
+      id: "certification",
+      content: <DisplayCertification />,
     },
   ];
   const venusComponentsRight = [
@@ -83,6 +88,9 @@ export const CVPreview = React.forwardRef((props, ref) => {
     {
       id: "projects",
     },
+    {
+      id: "certification",
+    },
   ];
 
   // Template "Earth" Component Arrangement
@@ -110,6 +118,10 @@ export const CVPreview = React.forwardRef((props, ref) => {
     {
       id: "projects",
       content: <DisplayProjects />,
+    },
+    {
+      id: "certification",
+      content: <DisplayCertification />,
     },
   ];
 
@@ -144,7 +156,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
     });
   }
 
-  // Recurssion unsuccessful tryout
+  // Recursion unsuccessful tryout
   function rearrange(curr, index) {
     if (curr.id === components[index].id) {
       return;

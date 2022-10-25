@@ -7,7 +7,7 @@ import Card from "react-bootstrap/esm/Card";
 
 import Popover from "react-bootstrap/esm/Popover";
 import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
-import ModalEducation from "../InputModals/ModalEducation";
+import ModalCertification from "../InputModals/ModalCertification";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 import {
@@ -20,38 +20,37 @@ import {
 } from "./ContPanelFunctions";
 import Context from "../../context/Context";
 
-export default function EducationSection() {
+export default function CertificationSection() {
   // Show modal state
-  const [showEducation, setShowEducation] = useState(true);
+  const [showCertification, setShowCertification] = useState(true);
   // Rename section title state
-  const [renameEducation, setRenameEducation] = useState({
-    value: "Education",
+  const [renameCertification, setRenameCertification] = useState({
+    value: "Certifications & Licenses",
     isInEditMode: false,
   });
 
   // Fetch data from localStorage
-  const data = JSON.parse(window.localStorage.getItem("Education"));
-  const { displayEducation, renameSection } = useContext(Context);
+  const data = JSON.parse(window.localStorage.getItem("Certification"));
+  const { displayCertification } = useContext(Context);
 
-  // Array of all education modals
+  // Array of all certification modals
   const [modals, setModals] = useState([{ display: false }]);
 
   // A simple value instance to be used when adding new values of populating the first value
   const valueInstance = {
-    degree: "Bachelor in Computer Science",
-    university: "Economic University - Varna",
+    certification: "Harvard CS50 Certification",
+    issuedBy: "EdX Harvard Courses",
     startDate: "2014-05-29",
     endDate: "2019-09-29",
-    location: "Varna, Bulgaria",
     accomplishments: [
       {
         message:
-          "- Got a GPA of 3.4 in my stay at the university and took additional courses of statistics",
+          "- Took the course with a completion rate of less than 2%, and completed it in less than the designated time period.",
       },
     ],
   };
 
-  // Array of all education values that is passed in Context, fetched in localStorage and used to display all the info
+  // Array of all certification values that is passed in Context, fetched in localStorage and used to display all the info
   const [values, setValues] = useState(fetchValues);
 
   // Fetch valueInstance or data from localStorage if any
@@ -66,7 +65,7 @@ export default function EducationSection() {
   // Load data from localStorage if any, and passed it after the page renders to the ContextAPI
   useEffect(() => {
     if (data !== null) {
-      displayEducation(data);
+      displayCertification(data);
     }
   }, []);
 
@@ -85,21 +84,21 @@ export default function EducationSection() {
     setModals(updatedModals);
   };
 
-  // Add new Education valueSet and modal
-  const addNewEducation = () => {
+  // Add new certification valueSet and modal
+  const addNewCertification = () => {
     const addedValue = [...values, valueInstance];
-    updateDisplayingEducation(addedValue);
+    updateDisplayingCertification(addedValue);
 
     const addModal = [...modals, { display: false }];
     setModals(addModal);
   };
 
-  // Remove selected education
-  const removeEducation = (index) => {
+  // Remove selected certification
+  const removeCertification = (index) => {
     if (values.length > 1) {
       const updatedValues = [...values];
       updatedValues.splice(index, 1);
-      updateDisplayingEducation(updatedValues);
+      updateDisplayingCertification(updatedValues);
 
       const updatedModals = [...modals];
       updatedModals.splice(index, 1);
@@ -108,15 +107,11 @@ export default function EducationSection() {
   };
 
   // Update the values state, pass data to Context API and update it in localStorage
-  function updateDisplayingEducation(updatedValues) {
+  function updateDisplayingCertification(updatedValues) {
     setValues(updatedValues);
-    displayEducation(updatedValues, renameEducation.value);
-    updateValuesInLocalStorage(updatedValues, "Education");
+    displayCertification(updatedValues);
+    updateValuesInLocalStorage(updatedValues, "Certification");
   }
-
-  const passNameToContext = (value) => {
-    renameSection(value);
-  };
 
   // Popover Options Dropdown Menu
   const popover = (
@@ -124,7 +119,9 @@ export default function EducationSection() {
       <Col md={12}>
         <Form.Label
           className="optionItems p-1"
-          onClick={() => ToggleSwitchButton(showEducation, setShowEducation)}
+          onClick={() =>
+            ToggleSwitchButton(showCertification, setShowCertification)
+          }
         >
           Show/Hide Section
         </Form.Label>
@@ -132,7 +129,9 @@ export default function EducationSection() {
       <Col md={12}>
         <Form.Label
           className="optionItems p-1"
-          onClick={() => toggleRenameMode(renameEducation, setRenameEducation)}
+          onClick={() =>
+            toggleRenameMode(renameCertification, setRenameCertification)
+          }
         >
           Rename Section Title
         </Form.Label>
@@ -148,20 +147,17 @@ export default function EducationSection() {
             md={10}
             className="d-flex justify-content-start align-items-center mt-3"
           >
-            {renameEducation.isInEditMode ? (
-              <div>
-                <Form.Label className="items-styling ms-2">
-                  {renderEditView(
-                    renameEducation.value,
-                    setRenameEducation,
-                    ".section-titles-education"
-                  )}
-                </Form.Label>
-                {passNameToContext(renameEducation.value)}
-              </div>
+            {renameCertification.isInEditMode ? (
+              <Form.Label className="items-styling ms-2">
+                {renderEditView(
+                  renameCertification.value,
+                  setRenameCertification,
+                  ".section-titles-certification"
+                )}
+              </Form.Label>
             ) : (
               <Form.Label className="items-styling ms-2">
-                {renameEducation.value}
+                {renameCertification.value}
               </Form.Label>
             )}
           </Col>
@@ -180,9 +176,9 @@ export default function EducationSection() {
               </Form.Label>
             </OverlayTrigger>
           </Col>
-          {showEducation
-            ? toggleCurrModal(showEducation, "education")
-            : toggleCurrModal(showEducation, "education")}
+          {showCertification
+            ? toggleCurrModal(showCertification, "certification")
+            : toggleCurrModal(showCertification, "certification")}
         </Row>
         <Col>
           {modals.map((section, index) => {
@@ -194,26 +190,26 @@ export default function EducationSection() {
                       className="items-styling my-2 ms-4"
                       onClick={() => showModals(index, modals, setModals)}
                     >
-                      University {index + 1}
+                      Certification {index + 1}
                     </Form.Label>
                   </Col>
 
                   <Col md={6} className="d-flex justify-content-end">
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() => addNewEducation()}
+                      onClick={() => addNewCertification()}
                     >
                       <AiOutlinePlus />
                     </Form.Label>
                     <Form.Label
                       className="items-styling mt-2 me-3"
-                      onClick={() => removeEducation(index)}
+                      onClick={() => removeCertification(index)}
                     >
                       <AiOutlineMinus />
                     </Form.Label>
                   </Col>
                 </Row>
-                <ModalEducation
+                <ModalCertification
                   show={modals[index].display}
                   onHide={() => hideCurrentModal(index)}
                   values={values}
