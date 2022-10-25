@@ -132,7 +132,6 @@ function SignIn() {
                     </Row>
                   </Row>
 
-                  {passVisible && email}
                   <Row className="justify-content-center align-items-center">
                     <Col className="col-auto">
                       <Button
