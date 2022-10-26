@@ -43,7 +43,7 @@ function DisplayEducation() {
     <Row className="educationSection mt-3">
       <Col md={12}>
         <div className="section-titles-education">
-          {name ? name : "Education"}
+          {name.education ? name.education : "Education"}
         </div>
         <HorizontalLine />
       </Col>

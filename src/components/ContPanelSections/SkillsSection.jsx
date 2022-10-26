@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
@@ -14,6 +14,7 @@ import {
   toggleRenameMode,
   renderEditView,
 } from "./ContPanelFunctions";
+import Context from "../../context/Context";
 
 export default function SkillsSection() {
   // Show modal state
@@ -24,6 +25,7 @@ export default function SkillsSection() {
     isInEditMode: false,
   });
 
+  const { renameSection } = useContext(Context);
   const [modal, setModal] = useState(false);
 
   // Popover Options Dropdown Menu
@@ -53,7 +55,10 @@ export default function SkillsSection() {
     <Row>
       <Col md={10} className="d-flex justify-content-start align-items-center">
         {renameSkills.isInEditMode ? (
-          <Form.Label className="items-styling mt-2">
+          <Form.Label
+            className="items-styling mt-2"
+            onClick={() => renameSection("skills", renameSkills.value)}
+          >
             {renderEditView(
               renameSkills.value,
               setRenameSkills,

@@ -33,7 +33,7 @@ export default function WorkSection() {
   const [modals, setModals] = useState([{ display: false }]);
 
   // Updating Context State value when adding/removing job so it can be passed to DisplayWork Component
-  const { displayWork } = useContext(Context);
+  const { displayWork, renameSection } = useContext(Context);
 
   // Fetching localStorage data if there is any
   const data = JSON.parse(window.localStorage.getItem("Work"));
@@ -153,7 +153,10 @@ export default function WorkSection() {
             md={10}
             className="d-flex justify-content-start align-items-center"
           >
-            <Form.Label className="cp-work-styling ms-2">
+            <Form.Label
+              className="cp-work-styling ms-2"
+              onClick={() => renameSection("work", renameWork.value)}
+            >
               {renameWork.isInEditMode
                 ? renderEditView(
                     renameWork.value,

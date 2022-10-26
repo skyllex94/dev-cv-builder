@@ -16,7 +16,7 @@ export const ContextProvider = ({ children }) => {
   const [education, setEducation] = useState([]);
   const [certification, setCertification] = useState([]);
 
-  const [name, setName] = useState(null);
+  const [name, setName] = useState([]);
 
   const displayGeneralInfo = (hideModal, allValues) => {
     const arrAddressFields = [
@@ -191,7 +191,7 @@ export const ContextProvider = ({ children }) => {
   };
 
   // Displaying all inputted info from the education modals
-  const displayEducation = (arrOfValues, sectionName) => {
+  const displayEducation = (arrOfValues) => {
     setEducation(arrOfValues);
   };
 
@@ -205,8 +205,9 @@ export const ContextProvider = ({ children }) => {
     setCertification(allValues);
   };
 
-  const renameSection = (sectionName) => {
-    setName(sectionName);
+  const renameSection = (keyName, sectionName) => {
+    // To push an object use a wrapping object and spread operator as such
+    setName({ ...name, ...{ [keyName]: sectionName } });
   };
 
   return (

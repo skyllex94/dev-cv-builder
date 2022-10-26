@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
@@ -14,6 +14,7 @@ import {
   toggleRenameMode,
   renderEditView,
 } from "./ContPanelFunctions";
+import Context from "../../context/Context";
 
 export default function LanguagesSection() {
   // Show modal state
@@ -23,6 +24,8 @@ export default function LanguagesSection() {
     value: "Languages",
     isInEditMode: false,
   });
+
+  const { renameSection } = useContext(Context);
 
   const [modalLanguages, setModalLanguages] = useState(false);
 
@@ -53,7 +56,10 @@ export default function LanguagesSection() {
     <Row>
       <Col md={10} className="d-flex justify-content-start align-items-center">
         {renameLanguages.isInEditMode ? (
-          <Form.Label className="items-styling mt-2">
+          <Form.Label
+            className="items-styling mt-2"
+            onClick={() => renameSection("language", renameLanguages.value)}
+          >
             {renderEditView(
               renameLanguages.value,
               setRenameLanguages,

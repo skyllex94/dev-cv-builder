@@ -1,6 +1,4 @@
-import React, { useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
+import React, { useRef } from "react";
 import Header from "./Header";
 import ControlPanel from "./ControlPanel";
 import Editor from "./Editor";
@@ -9,24 +7,15 @@ import { Col, Row, Container } from "react-bootstrap";
 
 import { useReactToPrint } from "react-to-print";
 import { ContextProvider } from "../context/Context";
-import { ImPageBreak } from "react-icons/im";
-import { IoMdArrowDropleft } from "react-icons/io";
 
 function Builder() {
   // Check if user is already logged-in
-  const navigate = useNavigate();
   const data = JSON.parse(window.localStorage.getItem("UserData"));
-
-  useEffect(() => {
-    if (!data) {
-      navigate("/signin");
-    }
-  }, []);
 
   const componentRef = useRef();
 
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
+    content: () => componentRef.current ?? null,
     documentTitle: "Current_CV",
   });
 
@@ -74,13 +63,6 @@ function Builder() {
           </Col>
           <Col className="cv-preview">
             <Editor ref={componentRef} />
-          </Col>
-
-          <Col className="separatorSection">
-            <div>
-              <IoMdArrowDropleft />
-              <ImPageBreak className="separator" />
-            </div>
           </Col>
         </Row>
       </Container>

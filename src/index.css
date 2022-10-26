@@ -30,7 +30,8 @@ code {
   color: #7e7e7e;
 }
 
-.nav-style .NavLink {
+.nav-links a {
+  color: black;
   text-decoration: none;
 }
 

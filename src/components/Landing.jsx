@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -29,13 +29,11 @@ function Landing() {
             No more wasting time and money. You can start building your software
             developer "Curriculum Vitae" right away and export it for free.{" "}
           </h4>
-          <Button
-            variant="outline-dark"
-            className="px-3 py-2 me-2"
-            onClick={() => setModalTemplates(true)}
-          >
-            Start Your Resume
-          </Button>
+          <Link to="/build" state={{ template: "earth" }}>
+            <Button variant="outline-dark" className="px-3 py-2 me-2">
+              Start Your Resume
+            </Button>
+          </Link>
 
           <Button
             variant="outline-dark"

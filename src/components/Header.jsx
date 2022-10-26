@@ -1,9 +1,11 @@
 import "../index.css";
-import React from "react";
+import React, { useState } from "react";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { getAuth } from "firebase/auth";
+import ModalTemplates from "./InputModals/ModalTemplates";
 
 function Header({ username }) {
   const auth = getAuth();
@@ -13,8 +15,18 @@ function Header({ username }) {
     window.localStorage.removeItem("UserData");
   };
 
+  const [modalTemplates, setModalTemplates] = useState(false);
+
   const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  const showTemplates = () => {
+    if (username) {
+      setModalTemplates((prev) => !prev);
+    } else {
+      toast.warning("Please Log-in or Register to access more templates.");
+    }
   };
 
   return (
@@ -25,36 +37,28 @@ function Header({ username }) {
             <Navbar.Brand>Developer CV Builder</Navbar.Brand>
           </NavLink>
 
-          <Nav className="ms-auto">
-            <NavLink to="/" className="px-2" style={{ textDecoration: "none" }}>
+          <Nav className="nav-links ms-auto">
+            <Link to="/" className="px-2">
               Home
-            </NavLink>
-            {window.location.pathname === "/build" && (
-              <NavLink
-                to="/templates"
-                className="px-2"
-                style={{ textDecoration: "none" }}
-              >
-                Change Template
-              </NavLink>
-            )}
-            <NavLink
-              to="/about"
-              className="ps-2 pe-4"
-              style={{ textDecoration: "none" }}
-            >
+            </Link>
+
+            <a className="px-2" onClick={showTemplates}>
+              Change Template
+            </a>
+
+            <Link to="/about" className="ps-2 pe-4">
               About
-            </NavLink>
+            </Link>
             {username ? (
               <React.Fragment>
                 <div className="verticalLine"></div>
-                <NavLink
+                <Link
                   to="#pricing"
                   className="px-2"
                   style={{ textDecoration: "none" }}
                 >
                   {capitalize(username)}
-                </NavLink>
+                </Link>
 
                 <Link className="px-2" to="/" onClick={() => logOut()}>
                   <Button className="badge">Log out</Button>
@@ -62,17 +66,21 @@ function Header({ username }) {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <div className="verticalLine"></div>
-                <NavLink
+                <div className="verticalLine" />
+                <Link
                   to="/signin"
                   className="px-2"
                   style={{ textDecoration: "none" }}
                 >
                   <Button className="badge">Login</Button>
-                </NavLink>
+                </Link>
               </React.Fragment>
             )}
           </Nav>
+          <ModalTemplates
+            show={modalTemplates}
+            onHide={() => setModalTemplates(false)}
+          />
         </Container>
       </Navbar>
     </div>

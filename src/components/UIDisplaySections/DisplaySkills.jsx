@@ -5,12 +5,14 @@ import { HorizontalLine } from "../../utils/Utils";
 import Context from "../../context/Context";
 
 function DisplaySkills() {
-  const { skills } = useContext(Context);
+  const { skills, name } = useContext(Context);
 
   return (
     <Row className="skillsField mt-3">
       <Col md={12}>
-        <div className="section-titles-skills">Skills</div>
+        <div className="section-titles-skills">
+          {name.skills ? name.skills : "Skills"}
+        </div>
         <HorizontalLine />
       </Col>
       <Col md={12}>

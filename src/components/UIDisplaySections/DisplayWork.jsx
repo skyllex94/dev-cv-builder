@@ -6,7 +6,7 @@ import { HorizontalLine } from "../../utils/Utils";
 import Context from "../../context/Context";
 
 function DisplayWork() {
-  const { numOfJobs } = useContext(Context);
+  const { numOfJobs, name } = useContext(Context);
 
   // Format date string to display only written month and numeric year
   function formatDate(startDate, endDate) {
@@ -45,7 +45,9 @@ function DisplayWork() {
       <Row id="workSection" key={index}>
         {index === 0 ? (
           <Col md={12}>
-            <div className="section-titles-work mt-3">Work Experience</div>
+            <div className="section-titles-work mt-3">
+              {name.work ? name.work : "Work Experience"}
+            </div>
             <HorizontalLine />
           </Col>
         ) : null}

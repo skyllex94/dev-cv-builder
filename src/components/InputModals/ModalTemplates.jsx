@@ -15,27 +15,36 @@ function ModalTemplates(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       size="lg"
+      fullscreen
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">Templates</Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
         <Container>
-          <Row>
-            <Col className="d-flex mb-2" md={6} xs={6}>
+          <Row className="justify-content-center">
+            <Col className="d-flex mb-2" md={4} xs={6}>
               <Link to="/build" state={{ template: "earth" }}>
                 <Card className="template-styling text-center">
-                  <Card.Img variant="top" src={earthTemplate} />
+                  <Card.Img
+                    variant="top"
+                    src={earthTemplate}
+                    onClick={() => props.onHide()}
+                  />
                   <Card.Body>
                     <Card.Title>Template "Earth"</Card.Title>
                   </Card.Body>
                 </Card>
               </Link>
             </Col>
-            <Col className="d-flex mb-2" md={6} xs={6}>
+            <Col className="d-flex mb-2" md={4} xs={6}>
               <Link to="/build" state={{ template: "venus" }}>
                 <Card className="template-styling text-center">
-                  <Card.Img variant="top" src={venusTemplate} />
+                  <Card.Img
+                    variant="top"
+                    src={venusTemplate}
+                    onClick={() => props.onHide()}
+                  />
                   <Card.Body>
                     <Card.Title>Template "Venus"</Card.Title>
                   </Card.Body>

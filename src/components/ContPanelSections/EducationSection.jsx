@@ -110,13 +110,9 @@ export default function EducationSection() {
   // Update the values state, pass data to Context API and update it in localStorage
   function updateDisplayingEducation(updatedValues) {
     setValues(updatedValues);
-    displayEducation(updatedValues, renameEducation.value);
+    displayEducation(updatedValues);
     updateValuesInLocalStorage(updatedValues, "Education");
   }
-
-  const passNameToContext = (value) => {
-    renameSection(value);
-  };
 
   // Popover Options Dropdown Menu
   const popover = (
@@ -150,14 +146,18 @@ export default function EducationSection() {
           >
             {renameEducation.isInEditMode ? (
               <div>
-                <Form.Label className="items-styling ms-2">
+                <Form.Label
+                  className="items-styling ms-2"
+                  onClick={() =>
+                    renameSection("education", renameEducation.value)
+                  }
+                >
                   {renderEditView(
                     renameEducation.value,
                     setRenameEducation,
                     ".section-titles-education"
                   )}
                 </Form.Label>
-                {passNameToContext(renameEducation.value)}
               </div>
             ) : (
               <Form.Label className="items-styling ms-2">

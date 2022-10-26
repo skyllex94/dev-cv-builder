@@ -31,7 +31,7 @@ export default function CertificationSection() {
 
   // Fetch data from localStorage
   const data = JSON.parse(window.localStorage.getItem("Certification"));
-  const { displayCertification } = useContext(Context);
+  const { displayCertification, renameSection } = useContext(Context);
 
   // Array of all certification modals
   const [modals, setModals] = useState([{ display: false }]);
@@ -148,7 +148,12 @@ export default function CertificationSection() {
             className="d-flex justify-content-start align-items-center mt-3"
           >
             {renameCertification.isInEditMode ? (
-              <Form.Label className="items-styling ms-2">
+              <Form.Label
+                className="items-styling ms-2"
+                onClick={() =>
+                  renameSection("certification", renameCertification.value)
+                }
+              >
                 {renderEditView(
                   renameCertification.value,
                   setRenameCertification,

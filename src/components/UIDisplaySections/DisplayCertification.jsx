@@ -7,7 +7,7 @@ import Context from "../../context/Context";
 
 function DisplayCertification() {
   // Imported from the passed data from the modals in a array of objects' structure
-  const { certification } = useContext(Context);
+  const { certification, name } = useContext(Context);
 
   function formatDate(startDate, endDate) {
     const formattedDates = [{ date: "" }, { date: "" }];
@@ -43,7 +43,7 @@ function DisplayCertification() {
     <Row className="certificationSection mt-3">
       <Col md={12}>
         <div className="section-titles-certification">
-          Certification & Licenses
+          {name.certification ? name.certification : "Certification & Licenses"}
         </div>
         <HorizontalLine />
       </Col>

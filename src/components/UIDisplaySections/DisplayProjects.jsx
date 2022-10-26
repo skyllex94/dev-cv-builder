@@ -10,7 +10,7 @@ import Context from "../../context/Context";
 
 function DisplayProjects() {
   // Array with all the values inputted from the modal, a modal is a single object with all the info
-  const { numOfProjects } = useContext(Context);
+  const { numOfProjects, name } = useContext(Context);
 
   // Format date string to display only written month and numeric year
   function formatDate(startDate, endDate) {
@@ -60,7 +60,7 @@ function DisplayProjects() {
         {index === 0 ? (
           <Col md={12}>
             <div className="section-titles-projects mt-3">
-              Personal Projects
+              {name.projects ? name.projects : "Personal Projects"}
             </div>
             <HorizontalLine />
           </Col>

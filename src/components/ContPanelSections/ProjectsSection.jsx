@@ -34,7 +34,7 @@ export default function ProjectsSection() {
   // Amount of modals each one being a different project
   const [modals, setModals] = useState([{ display: false }]);
 
-  const { displayProjects } = useContext(Context);
+  const { displayProjects, renameSection } = useContext(Context);
 
   // Single values object used to start or add new values to the array
   const valuesForPopulating = {
@@ -158,7 +158,10 @@ export default function ProjectsSection() {
             md={10}
             className="d-flex justify-content-start align-items-center"
           >
-            <Form.Label className="cp-work-styling ms-2">
+            <Form.Label
+              className="cp-work-styling ms-2"
+              onClick={() => renameSection("projects", renameProjects.value)}
+            >
               {renameProjects.isInEditMode
                 ? renderEditView(
                     renameProjects.value,
