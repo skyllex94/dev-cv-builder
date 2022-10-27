@@ -43,6 +43,7 @@ export default function WorkSection() {
     position: "Front-end Dev",
     startDate: "2019-09-09",
     endDate: "2020-08-02",
+    currentJob: false,
     location: "Sofia, Bulgaria",
     resp: [
       {

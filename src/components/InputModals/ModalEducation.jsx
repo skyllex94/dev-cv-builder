@@ -57,6 +57,12 @@ function ModalEducation(props) {
     setValues(updatedValues);
   }
 
+  const updateCurrentEducation = (index) => {
+    const currValues = [...values];
+    currValues[index].ongoing = !currValues[index].ongoing;
+    setValues(currValues);
+  };
+
   return (
     <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
@@ -102,6 +108,16 @@ function ModalEducation(props) {
                       />
                     </FloatingLabel>
 
+                    <div className="ms-2 my-3">
+                      <input
+                        type="checkbox"
+                        checked={values[i].ongoing}
+                        label="I'm currently working on this position"
+                        onChange={() => updateCurrentEducation(i)}
+                      />
+                      <label className="ms-2">Currently in progress</label>
+                    </div>
+
                     <Row>
                       <Col md={6}>
                         <FloatingLabel label="Start Date">
@@ -119,13 +135,24 @@ function ModalEducation(props) {
                       <Col md={6}>
                         <FloatingLabel label="End Date">
                           <Form.Control
-                            type="date"
+                            type={values[i].ongoing ? "text" : "date"}
                             className="educationEndDate mb-2"
+                            disabled={values[i].ongoing}
                             placeholder="12/2022"
-                            value={values[i].endDate}
-                            onChange={(event) => {
-                              updateValues(event.target.value, "endDate", i);
-                            }}
+                            value={
+                              values[i].ongoing ? "Present" : values[i].endDate
+                            }
+                            onChange={
+                              !values[i].ongoing
+                                ? (event) => {
+                                    updateValues(
+                                      event.target.value,
+                                      "endDate",
+                                      i
+                                    );
+                                  }
+                                : undefined
+                            }
                           />
                         </FloatingLabel>
                       </Col>

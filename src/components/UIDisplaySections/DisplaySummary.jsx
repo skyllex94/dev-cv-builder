@@ -40,7 +40,11 @@ function DisplaySummary(props) {
   // Conditional template displaying
   return template === "earth" ? (
     <Row className={props.name + " mt-3 text-start"}>
-      <Col md={12} className="paragraphsGroup"></Col>
+      <Col
+        md={12}
+        className="paragraphsGroup"
+        style={{ color: "#696969" }}
+      ></Col>
     </Row>
   ) : template === "venus" ? (
     <Row className={props.name + " mt-3 text-start"}>
@@ -49,8 +53,7 @@ function DisplaySummary(props) {
         className="paragraphsGroup text-white mb-0"
         style={{
           fontStyle: "italic",
-          fontSize: 14,
-          fontWeight: 300,
+          color: "white",
         }}
       ></Col>
     </Row>

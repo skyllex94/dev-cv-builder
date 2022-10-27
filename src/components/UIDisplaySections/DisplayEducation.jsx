@@ -4,40 +4,11 @@ import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
 import { HorizontalLine } from "../../utils/Utils";
 import Context from "../../context/Context";
+import { formatDate } from "../UIDisplaySections/DisplayFunctions";
 
 function DisplayEducation() {
-  // Imported from the passed data from the modals in a array of objects' structure
+  // Imported from Context, passed data from the modals in a array of objects' structure
   const { education, name } = useContext(Context);
-
-  function formatDate(startDate, endDate) {
-    const formattedDates = [{ date: "" }, { date: "" }];
-
-    if (startDate && endDate !== "") {
-      [startDate, endDate].forEach((date, index) => {
-        date = date.replaceAll("-", " ");
-        let newDate = new Date(date);
-        const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
-          newDate
-        );
-        const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(
-          newDate
-        );
-        formattedDates[index].date = `${mo}, ${ye}`;
-      });
-    } else {
-      return null;
-    }
-
-    // Formatted output passed from the array of values and populating it on the page with proper formatting
-    const formattedOutputtingDates = (
-      <div className="d-flex">
-        |<Col className="col-auto ms-3">{formattedDates[0].date}</Col>
-        <Col className="col-auto mx-1">-</Col>
-        <Col className="col-auto me-3">{formattedDates[1].date}</Col>|
-      </div>
-    );
-    return formattedOutputtingDates;
-  }
 
   return (
     <Row className="educationSection mt-3">
@@ -68,7 +39,9 @@ function DisplayEducation() {
             <Row className="edu-university">
               <Col className="col-auto pe-0">{curr.university}</Col>
               <Col className="col-auto">
-                {formatDate(curr.startDate, curr.endDate)}
+                {curr.ongoing
+                  ? formatDate(curr.startDate, "Present")
+                  : formatDate(curr.startDate, curr.endDate)}
               </Col>
               <Col className="col-auto ps-0">{curr.location}</Col>
             </Row>

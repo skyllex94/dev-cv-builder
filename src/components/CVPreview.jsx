@@ -94,7 +94,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
   ];
 
   // Template "Earth" Component Arrangement
-  const components = [
+  const earthComponentArrangement = [
     {
       id: "summary",
       content: <DisplaySummary />,
@@ -126,13 +126,15 @@ export const CVPreview = React.forwardRef((props, ref) => {
   ];
 
   const [tempVenus, setTempVenus] = useState(venusTemplate);
+
   const [tempEarth, setTempEarth] = useState({
     Group1: {
-      components,
-      sections,
+      sections: earthComponentArrangement,
     },
   });
 
+  // Functions for storing the arrangement of the sections, but not currently used
+  /*
   function loadData() {
     if (data === null) {
       return {
@@ -167,35 +169,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
     rearrange(curr, index + 1);
   }
 
-  function handleOnDrag(elToMove) {
-    if (!elToMove.destination) return;
-    const { source, destination } = elToMove;
-    if (source.droppableId !== destination.droppableId) {
-      // const sourceColumn = columns[source.droppableId];
-      // const destColumn = columns[destination.droppableId];
-      // const sourceItems = [...sourceColumn.sections];
-      // const destItems = [...destColumn.sections];
-      // const [removed] = sourceItems.splice(source.index, 1);
-      // destItems.splice(destination.index, 0, removed);
-      // setColumns({
-      //   ...columns,
-      //   [source.droppableId]: {
-      //     ...sourceColumn,
-      //     sections: sourceItems,
-      //   },
-      //   [destination.droppableId]: {
-      //     ...destColumn,
-      //     sections: destItems,
-      //   },
-      // });
-      return;
-    } else {
-      rearrangeArray(elToMove);
-    }
-    // console.log(tempEarth);
-  }
-
-  const rearrangeArray = (elementToBeMoved) => {
+    const rearrangeArray = (elementToBeMoved) => {
     const { source, destination } = elementToBeMoved;
     const droppedItemId = tempEarth[source.droppableId];
 
@@ -215,10 +189,6 @@ export const CVPreview = React.forwardRef((props, ref) => {
       },
     });
     updateColumnArrangementInLocalStorage(copiedItemNames);
-  };
-
-  const updateColumnArrangementInLocalStorage = (copiedItemNames) => {
-    window.localStorage.setItem("CVLayout", JSON.stringify(copiedItemNames));
   };
 
   const populateSections = (objKeyName) =>
@@ -244,16 +214,59 @@ export const CVPreview = React.forwardRef((props, ref) => {
       );
     });
 
+      const updateColumnArrangementInLocalStorage = (copiedItemNames) => {
+    window.localStorage.setItem("CVLayout", JSON.stringify(copiedItemNames));
+  };
+  */
+
+  function handleOnDrag(result, columns, setColumns) {
+    if (!result.destination) return;
+    const { source, destination } = result;
+    if (source.droppableId !== destination.droppableId) {
+      // Functionality for dropping items in a different column other than their own
+      // const sourceColumn = columns[source.droppableId];
+      // const destColumn = columns[destination.droppableId];
+      // const sourceItems = [...sourceColumn.sections];
+      // const destItems = [...destColumn.sections];
+      // const [removed] = sourceItems.splice(source.index, 1);
+      // destItems.splice(destination.index, 0, removed);
+      // setColumns({
+      //   ...columns,
+      //   [source.droppableId]: {
+      //     ...sourceColumn,
+      //     sections: sourceItems,
+      //   },
+      //   [destination.droppableId]: {
+      //     ...destColumn,
+      //     sections: destItems,
+      //   },
+      // });
+      return;
+    } else {
+      const column = columns[source.droppableId];
+      const copiedItems = [...column.sections];
+      const [removed] = copiedItems.splice(source.index, 1);
+      copiedItems.splice(destination.index, 0, removed);
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...column,
+          sections: copiedItems,
+        },
+      });
+    }
+  }
+
   return template === "earth" ? (
     <DragDropContext
       onDragEnd={(result) => handleOnDrag(result, tempEarth, setTempEarth)}
     >
-      {Object.entries(tempEarth).map(([key, objKeyName]) => {
+      {Object.entries(tempEarth).map(([id, columns]) => {
         return (
           <Droppable
-            droppableId={key}
+            droppableId={id}
             direction="vertical"
-            key={objKeyName}
+            key={columns}
             type="row"
           >
             {(provided) => (
@@ -264,7 +277,24 @@ export const CVPreview = React.forwardRef((props, ref) => {
                   className="ps-5"
                 >
                   <DisplayGenInfo name="general-info" />
-                  {populateSections(objKeyName)}
+                  {columns.sections.map((curr, index) => (
+                    <Draggable
+                      draggableId={curr.id}
+                      key={curr.id}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <Row
+                          className={curr.id}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          {curr.content}
+                        </Row>
+                      )}
+                    </Draggable>
+                  ))}
                   {provided.placeholder}
                 </Row>
               </div>

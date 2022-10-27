@@ -67,6 +67,12 @@ function ModalWork(props) {
     setValues(currValues);
   };
 
+  const updateCurrentlyWorking = (index) => {
+    const currValues = [...values];
+    currValues[index].currentJob = !currValues[index].currentJob;
+    setValues(currValues);
+  };
+
   return (
     <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
@@ -113,6 +119,19 @@ function ModalWork(props) {
                         }}
                       />
                     </FloatingLabel>
+
+                    <div className="ms-2 my-3">
+                      <input
+                        type="checkbox"
+                        checked={values[i].currentJob}
+                        label="I'm currently working on this position"
+                        onChange={() => updateCurrentlyWorking(i)}
+                      />
+                      <label className="ms-2">
+                        I'm currently working this job
+                      </label>
+                    </div>
+
                     <Row>
                       <Col md={6}>
                         <FloatingLabel label="Start Date">
@@ -131,11 +150,18 @@ function ModalWork(props) {
                       <Col md={6}>
                         <FloatingLabel label="End Date">
                           <Form.Control
-                            type="date"
-                            name="endDate"
+                            type={values[i].currentJob ? "text" : "date"}
+                            name={
+                              values[i].currentJob ? "currentJob" : "endDate"
+                            }
+                            disabled={values[i].currentJob}
                             className={"mb-2"}
                             placeholder="12/2022"
-                            value={values[i].endDate}
+                            value={
+                              values[i].currentJob
+                                ? "Present"
+                                : values[i].endDate
+                            }
                             onChange={(event) => {
                               updateValues(event, i);
                             }}

@@ -40,6 +40,7 @@ export default function EducationSection() {
   const valueInstance = {
     degree: "Bachelor in Computer Science",
     university: "Economic University - Varna",
+    ongoing: false,
     startDate: "2014-05-29",
     endDate: "2019-09-29",
     location: "Varna, Bulgaria",
