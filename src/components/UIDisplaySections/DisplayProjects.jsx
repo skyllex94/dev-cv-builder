@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 import Col from "react-bootstrap/esm/Col";
@@ -7,113 +7,120 @@ import { HorizontalLine } from "../../utils/Utils";
 import { FiExternalLink } from "react-icons/fi";
 import { AiFillGithub } from "react-icons/ai";
 import Context from "../../context/Context";
+import {
+  formatDate,
+  handleDragNDrop,
+  displayElements,
+} from "../UIDisplaySections/DisplayFunctions";
+
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 function DisplayProjects() {
   // Array with all the values inputted from the modal, a modal is a single object with all the info
   const { numOfProjects, name } = useContext(Context);
+  const [dragNDrop, setDragNDrop] = useState([]);
 
-  // Format date string to display only written month and numeric year
-  function formatDate(startDate, endDate) {
-    const formattedDates = [{ date: "" }, { date: "" }];
+  // In order to set the initial state, you need useEffect,
+  // because you cannot fetch init state from a destructured prop/useContext
+  useEffect(() => {
+    setDragNDrop(numOfProjects);
+  }, [numOfProjects]);
 
-    if (startDate && endDate !== "") {
-      [startDate, endDate].forEach((date, index) => {
-        date = date.replaceAll("-", " ");
-        let newDate = new Date(date);
-        const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
-          newDate
-        );
-        const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(
-          newDate
-        );
-        formattedDates[index].date = `${mo}, ${ye}`;
-      });
-    } else {
-      return null;
-    }
+  return (
+    <DragDropContext
+      onDragEnd={(item) => handleDragNDrop(item, dragNDrop, setDragNDrop)}
+    >
+      <Row className="projectSection justify-content-center">
+        <div className="section-titles-projects mt-3">
+          {name.projects ? name.projects : "Personal Projects"}
+          <HorizontalLine />
+        </div>
 
-    // Formatted output passed from the array of values and populating it on the page with proper formatting
-    const formattedOutputtingDates = (
-      <div className="d-flex">
-        <div className="me-1">{formattedDates[0].date}</div>-
-        <div className="me-2 ms-1">{formattedDates[1].date}</div>
-      </div>
-    );
-    return formattedOutputtingDates;
-  }
+        <Droppable droppableId="projectSection" direction="vertical" type="row">
+          {(provided) => (
+            <Row
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className="projectSection mb-2"
+            >
+              {dragNDrop.map((project, index) => (
+                <Draggable
+                  draggableId={`item${index}`}
+                  key={index}
+                  index={index}
+                >
+                  {(provided) => (
+                    <div
+                      className={index !== 0 ? "ps-0" : "mt-2 ps-0"}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}
+                    >
+                      <Row className="align-items-center">
+                        <Col className="d-flex">
+                          <Form.Label className={"projectName"}>
+                            {project.project}
+                          </Form.Label>
 
-  // Map out all tech values present, and output them in it's own li elements
-  function displayElements(arrOfValues, UIClassName) {
-    const output = arrOfValues.map((tech, index) => {
-      return (
-        <li key={index} className={UIClassName}>
-          {tech.message}
-        </li>
-      );
-    });
-    return output;
-  }
+                          <Col className="d-inline col-auto d-flex mb-1">
+                            <Nav.Link
+                              className={"d-flex align-items-center"}
+                              href={project.link}
+                            >
+                              <FiExternalLink className="ms-2 me-1" />
+                            </Nav.Link>
+                            <Nav.Link
+                              className={"d-flex align-items-center"}
+                              href={project.github}
+                            >
+                              <AiFillGithub className="mx-2" />
+                            </Nav.Link>
+                          </Col>
+                          <Col className="d-inline d-flex mt-1 project-period">
+                            {formatDate(
+                              project.startDate,
+                              project.endDate,
+                              true
+                            )}
+                          </Col>
+                        </Col>
+                      </Row>
 
-  return numOfProjects.map((project, index) => {
-    return (
-      <Row id="projectSection" key={index}>
-        {index === 0 ? (
-          <Col md={12}>
-            <div className="section-titles-projects mt-3">
-              {name.projects ? name.projects : "Personal Projects"}
-            </div>
-            <HorizontalLine />
-          </Col>
-        ) : null}
-        <Row className={"align-items-center projectField"}>
-          <Col className="col-3 pe-1 d-flex">
-            <Form.Label className={"projectName"}>{project.project}</Form.Label>
+                      <Col className="col-12  verticalLine">
+                        <Col className={"d-flex project-info"}>
+                          <div className={"me-2 projectDesc"}>
+                            {project.desc}
+                          </div>
+                        </Col>
 
-            <Col className="d-inline d-flex justify-content-start">
-              <Nav.Link
-                className={"d-flex align-items-center"}
-                href={project.link}
-              >
-                <FiExternalLink className="ms-2 me-1" />
-              </Nav.Link>
-              <Nav.Link
-                className={"d-flex align-items-center"}
-                href={project.github}
-              >
-                <AiFillGithub className="ms-2 me-1" />
-              </Nav.Link>
-            </Col>
-          </Col>
+                        <Row className={"techAlign"}>
+                          <div className={"d-inline techTitle"}>
+                            Technologies Used:
+                            {displayElements(
+                              project.techUsed,
+                              "techUsedItem d-inline mx-2"
+                            )}
+                          </div>
+                        </Row>
 
-          <Col className="col-9 verticalLine">
-            <Col className={"d-flex project-info"}>
-              <div className={"me-2 projectDesc"}>{project.desc}</div>
-            </Col>
-            <Row className={"project-period"}>
-              {formatDate(project.startDate, project.endDate)}
+                        <Row>
+                          {displayElements(
+                            project.highlights,
+                            "d-inline project-accomplish"
+                          )}
+                        </Row>
+                      </Col>
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
             </Row>
-
-            <Row className={"techAlign"}>
-              <div className={"d-inline techTitle"}>
-                Technologies Used:
-                {displayElements(
-                  project.techUsed,
-                  "techUsedItem d-inline mx-2"
-                )}
-              </div>
-            </Row>
-
-            <Row className="mb-2">
-              {displayElements(
-                project.highlights,
-                "d-inline project-accomplish"
-              )}
-            </Row>
-          </Col>
-        </Row>
+          )}
+        </Droppable>
       </Row>
-    );
-  });
+    </DragDropContext>
+  );
 }
 
 export default DisplayProjects;

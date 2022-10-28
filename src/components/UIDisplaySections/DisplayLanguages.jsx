@@ -8,7 +8,7 @@ function DisplayLanguages() {
   const { languages, name } = useContext(Context);
 
   return (
-    <Row className="languagesField mt-3">
+    <Row className="languagesField languagesSection pt-3">
       <Col md={12}>
         <div className="section-titles-languages">
           {name.language ? name.language : "Languages"}

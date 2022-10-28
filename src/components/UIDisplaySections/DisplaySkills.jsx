@@ -8,7 +8,7 @@ function DisplaySkills() {
   const { skills, name } = useContext(Context);
 
   return (
-    <Row className="skillsField mt-3">
+    <Row className="skillsField skillsSection pt-3">
       <Col md={12}>
         <div className="section-titles-skills">
           {name.skills ? name.skills : "Skills"}

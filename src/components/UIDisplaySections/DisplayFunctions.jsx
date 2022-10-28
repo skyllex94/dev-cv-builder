@@ -1,5 +1,5 @@
 // Format date string to display only written month and numeric year, and display Present if currentJob is true
-export const formatDate = (startDate, endDate) => {
+export const formatDate = (startDate, endDate, disableSeparators) => {
   const formattedDates = [{ date: "" }, { date: "" }];
 
   if (endDate === "Present") {
@@ -38,8 +38,31 @@ export const formatDate = (startDate, endDate) => {
       <div className="me-2 ms-1">
         {endDate === "Present" ? "Present" : formattedDates[1].date}
       </div>
-      <div>|</div>
+      {!disableSeparators && <div>|</div>}
     </div>
   );
   return formattedOutputtingDates;
+};
+
+// Handle the currently picked item, rearracge array of items and place appropriately
+export const handleDragNDrop = (pickedItem, state, setState) => {
+  if (!pickedItem.destination) return;
+
+  const items = [...state];
+  const [reorderedItem] = items.splice(pickedItem.source.index, 1);
+  items.splice(pickedItem.destination.index, 0, reorderedItem);
+
+  setState(items);
+};
+
+// Map out all tech values present, and output them in it's own li elements
+export const displayElements = (arrOfValues, UIClassName) => {
+  const output = arrOfValues.map((tech, index) => {
+    return (
+      <li key={index} className={UIClassName}>
+        {tech.message}
+      </li>
+    );
+  });
+  return output;
 };

@@ -24,8 +24,6 @@ export const CVPreview = React.forwardRef((props, ref) => {
     template = "earth";
   }
 
-  const data = JSON.parse(window.localStorage.getItem("CVLayout"));
-
   // Template "Venus" Component Arrangement
   const venusComponentsLeft = [
     {
@@ -68,30 +66,6 @@ export const CVPreview = React.forwardRef((props, ref) => {
       sections: venusComponentsRight,
     },
   };
-
-  const sections = [
-    {
-      id: "summary",
-    },
-    {
-      id: "work",
-    },
-    {
-      id: "skills",
-    },
-    {
-      id: "education",
-    },
-    {
-      id: "languages",
-    },
-    {
-      id: "projects",
-    },
-    {
-      id: "certification",
-    },
-  ];
 
   // Template "Earth" Component Arrangement
   const earthComponentArrangement = [
