@@ -53,7 +53,11 @@ export default function SkillsSection() {
   return (
     // The whole section row as displayed in the Control Panel
     <Row>
-      <Col md={10} className="d-flex justify-content-start align-items-center">
+      <Col
+        xs={10}
+        md={10}
+        className="d-flex justify-content-start align-items-center"
+      >
         {renameSkills.isInEditMode ? (
           <Form.Label
             className="items-styling mt-2"
@@ -74,7 +78,11 @@ export default function SkillsSection() {
           </Form.Label>
         )}
       </Col>
-      <Col md={2} className="d-flex justify-content-end align-items-center">
+      <Col
+        xs={2}
+        md={2}
+        className="d-flex justify-content-end align-items-center"
+      >
         <OverlayTrigger
           trigger="click"
           rootClose

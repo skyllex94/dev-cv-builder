@@ -88,7 +88,7 @@ function ModalProjects(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Personal Projects {count}
+            Project {count}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="show-grid">
@@ -167,7 +167,7 @@ function ModalProjects(props) {
                                 <Form.Control
                                   type="text"
                                   name="techUsed"
-                                  className={"mb-2 modalTech" + count}
+                                  className={"modalTech" + count}
                                   placeholder="tech"
                                   value={tech.message}
                                   onChange={(event) =>
@@ -188,15 +188,6 @@ function ModalProjects(props) {
                         );
                       })}
                     </Row>
-
-                    <Col className="d-flex justify-content-end">
-                      <Button
-                        className="mb-2"
-                        onClick={() => addValue("techUsed", i)}
-                      >
-                        Add
-                      </Button>
-                    </Col>
 
                     <Row>
                       <Col md={6}>
@@ -273,9 +264,16 @@ function ModalProjects(props) {
             </Row>
           </Container>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => CommitValues("submit")}>Submit</Button>
-          <Button onClick={props.onHide}>Close</Button>
+        <Modal.Footer className="justify-content-between">
+          <Button onClick={() => addValue("techUsed", i)}>
+            Add Technology
+          </Button>
+          <div>
+            <Button onClick={() => CommitValues("submit")} className="me-2">
+              Submit
+            </Button>
+            <Button onClick={props.onHide}>Close</Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </div>

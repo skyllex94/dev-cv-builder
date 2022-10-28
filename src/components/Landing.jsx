@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
 import ModalTemplates from "./InputModals/ModalTemplates";
-import cv from "../img/cv-example.png";
+import cv from "../img/cv-landing.png";
 
 function Landing() {
   const [modalTemplates, setModalTemplates] = useState(false);
@@ -51,7 +51,7 @@ function Landing() {
           md={5}
           className="d-flex justify-content-center align-items-center"
         >
-          <img className="img-fluid" src={cv} alt="Logo" />
+          <img className="img-fluid landing-image mx-5 " src={cv} alt="Logo" />
         </Col>
       </Row>
       <ModalTemplates

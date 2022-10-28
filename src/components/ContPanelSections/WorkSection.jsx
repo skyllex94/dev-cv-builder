@@ -151,6 +151,7 @@ export default function WorkSection() {
       <Card>
         <Row className="mt-3">
           <Col
+            xs={10}
             md={10}
             className="d-flex justify-content-start align-items-center"
           >
@@ -167,7 +168,11 @@ export default function WorkSection() {
                 : renameWork.value}
             </Form.Label>
           </Col>
-          <Col md={2} className="d-flex justify-content-end align-items-center">
+          <Col
+            xs={2}
+            md={2}
+            className="d-flex justify-content-end align-items-center"
+          >
             <OverlayTrigger
               trigger="click"
               rootClose
@@ -188,17 +193,19 @@ export default function WorkSection() {
           {modals.map((section, index) => {
             return (
               <div key={index}>
-                <Row className="mb-2">
-                  <Col md={6} className="d-flex justify-content-start">
+                <Row className="mb-2 align-items-center">
+                  <Col xs={9} md={9} className="d-flex justify-content-start">
                     <Form.Label
                       className="items-styling my-2 ms-4"
                       onClick={() => showModals(index, modals, setModals)}
                     >
-                      Job {index + 1}
+                      {values[index].company
+                        ? values[index].company
+                        : "Job " + index}
                     </Form.Label>
                   </Col>
 
-                  <Col md={6} className="d-flex justify-content-end">
+                  <Col xs={3} md={3} className="d-flex justify-content-end">
                     <Form.Label
                       className="items-styling mt-2 me-3"
                       onClick={() => addNewJob()}

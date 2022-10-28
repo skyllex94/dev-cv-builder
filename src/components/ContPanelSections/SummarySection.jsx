@@ -28,7 +28,11 @@ export default function SummarySection() {
 
   return (
     <Row className="mt-2">
-      <Col md={10} className="d-flex justify-content-start align-items-center">
+      <Col
+        xs={10}
+        md={10}
+        className="d-flex justify-content-start align-items-center"
+      >
         <Form.Label
           className="items-styling"
           onClick={() => setModalSummary(true)}
@@ -36,7 +40,11 @@ export default function SummarySection() {
           Summary
         </Form.Label>
       </Col>
-      <Col md={2} className="d-flex justify-content-end align-items-center">
+      <Col
+        xs={2}
+        md={2}
+        className="d-flex justify-content-end align-items-center"
+      >
         <OverlayTrigger
           trigger="click"
           rootClose
