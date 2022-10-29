@@ -15,7 +15,7 @@ function DisplaySummary(props) {
     const data = JSON.parse(window.localStorage.getItem("Summary"));
 
     // If any data exists in localStorage, populate it in the DOM
-    if (data != null) {
+    if (data) {
       displayParagraphs(data.paragraphs);
     }
   }, []);

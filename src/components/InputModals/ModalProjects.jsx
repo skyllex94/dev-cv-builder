@@ -27,7 +27,7 @@ function ModalProjects(props) {
         },
       ];
     }
-    if (keyName === "highlights" && values[valuesIndex][keyName].length < 3) {
+    if (keyName === "highlights" && values[valuesIndex][keyName].length < 5) {
       updatingValues[valuesIndex][keyName] = [
         ...updatingValues[valuesIndex][keyName],
         {
@@ -141,7 +141,7 @@ function ModalProjects(props) {
                       </Row>
                     </Form.Group>
 
-                    <FloatingLabel label="Project Description *">
+                    <FloatingLabel label="Project Description">
                       <Form.Control
                         type="text"
                         name="desc"

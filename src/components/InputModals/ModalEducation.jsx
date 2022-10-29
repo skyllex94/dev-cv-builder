@@ -24,7 +24,7 @@ function ModalEducation(props) {
 
   const addAccomplishment = (valuesIndex) => {
     const updatingValues = [...values];
-    if (values[valuesIndex].accomplishments.length < 3) {
+    if (values[valuesIndex].accomplishments.length < 5) {
       updatingValues[valuesIndex].accomplishments = [
         ...updatingValues[valuesIndex].accomplishments,
         {

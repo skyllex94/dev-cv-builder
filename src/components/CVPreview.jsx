@@ -30,10 +30,7 @@ export const CVPreview = React.forwardRef((props, ref) => {
       id: "work",
       content: <DisplayWork />,
     },
-    {
-      id: "projects",
-      content: <DisplayProjects />,
-    },
+
     {
       id: "education",
       content: <DisplayEducation />,
@@ -55,6 +52,10 @@ export const CVPreview = React.forwardRef((props, ref) => {
     {
       id: "skills",
       content: <DisplaySkills />,
+    },
+    {
+      id: "projects",
+      content: <DisplayProjects />,
     },
   ];
 
@@ -198,23 +199,23 @@ export const CVPreview = React.forwardRef((props, ref) => {
     const { source, destination } = result;
     if (source.droppableId !== destination.droppableId) {
       // Functionality for dropping items in a different column other than their own
-      // const sourceColumn = columns[source.droppableId];
-      // const destColumn = columns[destination.droppableId];
-      // const sourceItems = [...sourceColumn.sections];
-      // const destItems = [...destColumn.sections];
-      // const [removed] = sourceItems.splice(source.index, 1);
-      // destItems.splice(destination.index, 0, removed);
-      // setColumns({
-      //   ...columns,
-      //   [source.droppableId]: {
-      //     ...sourceColumn,
-      //     sections: sourceItems,
-      //   },
-      //   [destination.droppableId]: {
-      //     ...destColumn,
-      //     sections: destItems,
-      //   },
-      // });
+      const sourceColumn = columns[source.droppableId];
+      const destColumn = columns[destination.droppableId];
+      const sourceItems = [...sourceColumn.sections];
+      const destItems = [...destColumn.sections];
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...sourceColumn,
+          sections: sourceItems,
+        },
+        [destination.droppableId]: {
+          ...destColumn,
+          sections: destItems,
+        },
+      });
       return;
     } else {
       const column = columns[source.droppableId];

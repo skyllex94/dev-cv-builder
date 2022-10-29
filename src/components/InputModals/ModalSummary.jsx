@@ -51,7 +51,7 @@ function ModalSummary(props) {
   };
 
   const addParagraph = () => {
-    if (paragraphs.length < 3) {
+    if (paragraphs.length < 5) {
       setParagraphs([
         ...paragraphs,
         {

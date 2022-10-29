@@ -53,9 +53,6 @@ export default function WorkSection() {
     ],
   };
 
-  // All values from the inputted fields in the Work Modals, or stored in localStorage
-  const [values, setValues] = useState(valueFetching);
-
   function valueFetching() {
     if (data !== null) {
       return data;
@@ -63,6 +60,9 @@ export default function WorkSection() {
       return [valuesInstance];
     }
   }
+
+  // All values from the inputted fields in the Work Modals, or stored in localStorage
+  const [values, setValues] = useState(valueFetching);
 
   // If there's local data, display the content of it as the page loads
   useEffect(() => {

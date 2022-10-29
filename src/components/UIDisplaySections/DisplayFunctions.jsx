@@ -66,3 +66,23 @@ export const displayElements = (arrOfValues, UIClassName) => {
   });
   return output;
 };
+
+// Truncate the label if it has more than 30 characters
+export const truncate = (str) => {
+  return str.length > 30 ? str.substring(0, 27) + "..." : str;
+};
+
+// Take a label and insert a link to redirect you automatically when clicked
+export const createLink = (parentElement, valueToInput, template) => {
+  const element = document.createElement("a");
+  let text;
+  if (template === "earth") {
+    text = document.createTextNode(valueToInput);
+  } else if (template === "venus") {
+    text = document.createTextNode(truncate(valueToInput));
+  }
+  element.setAttribute("href", valueToInput);
+  element.className = "disabled";
+  element.appendChild(text);
+  parentElement.appendChild(element);
+};

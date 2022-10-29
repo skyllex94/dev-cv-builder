@@ -49,7 +49,7 @@ function Landing() {
 
         <Col
           md={5}
-          className="d-flex justify-content-center align-items-center"
+          className="d-flex justify-content-center px-5 align-items-center"
         >
           <img className="img-fluid landing-image mx-5 " src={cv} alt="Logo" />
         </Col>

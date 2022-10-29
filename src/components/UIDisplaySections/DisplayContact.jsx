@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
@@ -9,64 +9,76 @@ import { BiMailSend } from "react-icons/bi";
 import { FiPhone } from "react-icons/fi";
 import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
+import Context from "../../context/Context";
+import { truncate, createLink } from "./DisplayFunctions";
+
 function DisplayContact() {
+  const { genInfo } = useContext(Context);
+
+  const {
+    email,
+    addressCity,
+    addressState,
+    addressZIP,
+    phone,
+    website,
+    github,
+    linkedin,
+  } = genInfo;
+
   return (
-    <Row className="mt-3">
+    <Row className="pt-3 contactSection">
       <Col md={12}>
         <div className="section-titles-contact">Contact</div>
         <HorizontalLine />
       </Col>
 
       <Col md={12}>
-        <Row className="text-start justify-content-start">
-          <Row className="address d-none">
-            <Col className="col-1">
-              <HiLocationMarker />
+        <Row className="text-start justify-content-start ">
+          {(addressCity || addressState || addressZIP) && (
+            <Col className="col-auto">
+              <HiLocationMarker className="me-2" />
+              <Form.Label className="gen-info-style">
+                {addressCity}, {addressState}, {addressZIP}
+              </Form.Label>
             </Col>
-            <Col className="col-10">
-              <Form.Label className="textAddress" />
+          )}
+          {email && (
+            <Col className="col-auto">
+              <BiMailSend className="me-2" />
+              <Form.Label className="gen-info-style">{email}</Form.Label>
             </Col>
-          </Row>
-          <Row className="email d-none">
-            <Col className="col-1">
-              <BiMailSend />
+          )}
+          {phone && (
+            <Col className="col-auto">
+              <FiPhone className="me-2" />
+              <Form.Label className="gen-info-style">{phone}</Form.Label>
             </Col>
-            <Col className="col-10">
-              <Form.Label className="textEmail" />
+          )}
+          {website && (
+            <Col className="col-auto">
+              <AiOutlineLink className="me-2" />
+              <Form.Label className="gen-info-style">
+                {truncate(website)}
+              </Form.Label>
             </Col>
-          </Row>
-          <Row className="phone d-none">
-            <Col className="col-1">
-              <FiPhone />
+          )}
+          {github && (
+            <Col className="col-auto">
+              <AiFillGithub className="me-2" />
+              <Form.Label className="gen-info-style">
+                {truncate(github)}
+              </Form.Label>
             </Col>
-            <Col className="col-10">
-              <Form.Label className="textPhone" />
+          )}
+          {linkedin && (
+            <Col className="col-auto">
+              <AiFillLinkedin className="me-2" />
+              <Form.Label className="gen-info-style">
+                {truncate(linkedin)}
+              </Form.Label>
             </Col>
-          </Row>
-          <Row className="website d-none">
-            <Col className="col-1">
-              <AiOutlineLink />
-            </Col>
-            <Col className="col-10">
-              <Form.Label className="textWebsite" />
-            </Col>
-          </Row>
-          <Row className="github d-none">
-            <Col className="col-1">
-              <AiFillGithub />
-            </Col>
-            <Col className="col-10">
-              <Form.Label className="textGithub" />
-            </Col>
-          </Row>
-          <Row className="linkedin d-none">
-            <Col className="col-1">
-              <AiFillLinkedin />
-            </Col>
-            <Col className="col-10">
-              <Form.Label className="textLinkedin" />
-            </Col>
-          </Row>
+          )}
         </Row>
       </Col>
     </Row>

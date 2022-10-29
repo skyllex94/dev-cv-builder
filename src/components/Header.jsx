@@ -1,6 +1,6 @@
 import "../index.css";
 import React, { useState } from "react";
-import { Container, Nav, Navbar, Button } from "react-bootstrap";
+import { Container, Nav, Navbar, Badge, Form } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -37,7 +37,7 @@ function Header({ username }) {
             <Navbar.Brand>Developer CV Builder</Navbar.Brand>
           </NavLink>
 
-          <Nav className="nav-links ms-auto">
+          <Nav className="nav-links ms-auto align-content-center">
             <Link to="/" className="px-2">
               Home
             </Link>
@@ -51,17 +51,19 @@ function Header({ username }) {
             </Link>
             {username ? (
               <React.Fragment>
-                <div className="verticalLine"></div>
-                <Link
+                <div className="verticalLine" />
+                <Form.Label
                   to="#pricing"
                   className="px-2"
                   style={{ textDecoration: "none" }}
                 >
                   {capitalize(username)}
-                </Link>
+                </Form.Label>
 
                 <Link className="px-2" to="/" onClick={() => logOut()}>
-                  <Button className="badge">Log out</Button>
+                  <Badge className="badge" bg="dark">
+                    Log out
+                  </Badge>
                 </Link>
               </React.Fragment>
             ) : (
@@ -72,7 +74,9 @@ function Header({ username }) {
                   className="px-2"
                   style={{ textDecoration: "none" }}
                 >
-                  <Button className="badge">Login</Button>
+                  <Badge className="badge" bg="dark">
+                    Login
+                  </Badge>
                 </Link>
               </React.Fragment>
             )}

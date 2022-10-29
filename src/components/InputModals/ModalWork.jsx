@@ -18,7 +18,7 @@ function ModalWork(props) {
 
   // Add additional responsibility for the given job
   const addResp = (index) => {
-    if (values[index].resp.length < 3) {
+    if (values[index].resp.length < 5) {
       const currValues = [...values];
       currValues[index].resp = [
         ...currValues[index].resp,

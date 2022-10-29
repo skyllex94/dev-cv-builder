@@ -57,12 +57,12 @@ function DisplayProjects() {
                       ref={provided.innerRef}
                     >
                       <Row className="align-items-center">
-                        <Col className="d-flex">
-                          <Form.Label className={"projectName"}>
+                        <Col className="d-flex col-auto pe-0">
+                          <Form.Label className="projectName mt-2">
                             {project.project}
                           </Form.Label>
 
-                          <Col className="d-inline col-auto d-flex mb-1">
+                          <Col className="d-inline col-auto d-flex ">
                             <Nav.Link
                               className={"d-flex align-items-center"}
                               href={project.link}
@@ -73,16 +73,12 @@ function DisplayProjects() {
                               className={"d-flex align-items-center"}
                               href={project.github}
                             >
-                              <AiFillGithub className="mx-2" />
+                              <AiFillGithub className="ms-2" />
                             </Nav.Link>
                           </Col>
-                          <Col className="d-inline d-flex mt-1 project-period">
-                            {formatDate(
-                              project.startDate,
-                              project.endDate,
-                              true
-                            )}
-                          </Col>
+                        </Col>
+                        <Col className="d-inline col-auto d-flex  project-period">
+                          {formatDate(project.startDate, project.endDate, true)}
                         </Col>
                       </Row>
 

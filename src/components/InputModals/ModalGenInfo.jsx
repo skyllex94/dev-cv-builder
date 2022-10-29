@@ -7,84 +7,68 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 
 import Context from "../../context/Context";
+import { FloatingLabel } from "react-bootstrap";
 
 function ModalGenInfo(props) {
   const { displayGeneralInfo } = useContext(Context);
 
-  const [name, setName] = useState("Kamen Kanchev");
-  const [position, setPosition] = useState("Front-end Developer");
+  // Fetching localStorage data if there is any
+  const data = JSON.parse(window.localStorage.getItem("GenInfo"));
 
-  const [addressCity, setAddressCity] = useState("Boston");
-  const [addressState, setAddressState] = useState("MA");
-  const [addressZIP, setAddressZIP] = useState("02130");
+  function valueFetching() {
+    if (data) {
+      return data;
+    } else {
+      return [valuesInstance];
+    }
+  }
 
-  const [email, setEmail] = useState("kkanchev94@gmail.com");
-  const [phone, setPhone] = useState("619-817-5266");
-  const [website, setWebsite] = useState("https://kkanchev.netlify.app");
-  const [github, setGithub] = useState("https://github.com/skyllex94");
-  const [linkedin, setLinkedin] = useState(
-    "https://www.linkedin.com/in/kamen-kanchev-73a282175"
-  );
-
-  const allStateValues = {
-    name,
-    position,
-    addressCity,
-    addressState,
-    addressZIP,
-    email,
-    phone,
-    website,
-    github,
-    linkedin,
+  const valuesInstance = {
+    name: "Kamen Kanchev",
+    position: "Front-end Developer",
+    address: "Boston, MA",
+    email: "kkanchev94@gmail.com",
+    phone: "619-817-5266",
+    website: "https://kkanchev.netlify.app",
+    github: "https://github.com/skyllex94",
+    linkedin: "https://www.linkedin.com/in/kamen-kanchev-73a282175",
   };
 
-  // Fetch stored data and populate it in values of the input fields
-  useEffect(() => {
-    const data = JSON.parse(window.localStorage.getItem("GenInfo"));
+  const [values, setValues] = useState(valueFetching);
 
-    if (data != null) {
-      setName(data.name);
-      setPosition(data.position);
-      setAddressCity(data.addressCity);
-      setAddressState(data.addressState);
-      setAddressZIP(data.addressZIP);
-      setEmail(data.email);
-      setPhone(data.phone);
-      setWebsite(data.website);
-      setGithub(data.github);
-      setLinkedin(data.linkedin);
+  // If there's local data, display the content of it as the page loads
+  useEffect(() => {
+    if (data) {
+      displayGeneralInfo(props.onHide, data);
+      updateLocalStorage();
     }
   }, []);
 
+  function updateLocalStorage() {
+    window.localStorage.setItem("GenInfo", JSON.stringify(values));
+  }
+
   // When a change is made on any of the input fields, it will automatically
   // update the localStorage values, so they are persisted if the page reloads
-  useEffect(() => {
-    window.localStorage.setItem(
-      "GenInfo",
-      JSON.stringify({
-        name,
-        position,
-        addressCity,
-        addressState,
-        addressZIP,
-        email,
-        phone,
-        website,
-        github,
-        linkedin,
-      })
-    );
-  }, [allStateValues]);
+  // useEffect(() => {
+  //   window.localStorage.setItem("GenInfo", JSON.stringify(values));
+  // }, [values]);
 
-  const ModalEnterPressed = (event) => {
-    if (event.key === "Enter") {
-      displayGeneralInfo(props.onHide, allStateValues);
+  const updateValue = (keyName, event) => {
+    const updatedObj = { ...values };
+    updatedObj[keyName] = event.target.value;
+    setValues(updatedObj);
+  };
+
+  const CommitValues = (e) => {
+    if (e.key === "Enter" || e === "commit") {
+      displayGeneralInfo(props.onHide, values);
+      updateLocalStorage();
     }
   };
 
   return (
-    <div onKeyPress={(event) => ModalEnterPressed(event)}>
+    <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
         {...props}
         aria-labelledby="contained-modal-title-vcenter"
@@ -105,112 +89,98 @@ function ModalGenInfo(props) {
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="John Doe"
-                      className="modalName mb-2"
-                      autoFocus
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                    <Form.Label>Position</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Front-end Developer"
-                      className="modalPosition mb-2"
-                      value={position}
-                      onChange={(e) => setPosition(e.target.value)}
-                    />
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="City"
-                      className="modalAddress mb-2"
-                      value={addressCity}
-                      onChange={(e) => setAddressCity(e.target.value)}
-                    />
-                    <Row>
-                      <Col className="col-6">
-                        <Form.Control
-                          type="text"
-                          placeholder="State"
-                          className="modalAddress mb-2"
-                          value={addressState}
-                          onChange={(e) => setAddressState(e.target.value)}
-                        />
-                      </Col>
-                      <Col className="col-6">
-                        <Form.Control
-                          type="number"
-                          placeholder="ZIP Code"
-                          className="modalAddress mb-2"
-                          value={addressZIP}
-                          onChange={(e) => setAddressZIP(e.target.value)}
-                        />
-                      </Col>
-                    </Row>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="name@email.com"
-                      className="modalEmail mb-2"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <Form.Label>Phone</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="(700)-800-9000"
-                      className="modalPhone mb-2"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
+                    <FloatingLabel label="Full Name">
+                      <Form.Control
+                        type="text"
+                        placeholder="John Doe"
+                        className="modalName mb-2"
+                        autoFocus
+                        value={values.name}
+                        onChange={(e) => updateValue("name", e)}
+                      />
+                    </FloatingLabel>
+                    <FloatingLabel label="Position">
+                      <Form.Control
+                        type="text"
+                        placeholder="Front-end Developer"
+                        className="modalPosition mb-2"
+                        value={values.position}
+                        onChange={(e) => updateValue("position", e)}
+                      />
+                    </FloatingLabel>
+                    <FloatingLabel label="Address">
+                      <Form.Control
+                        type="text"
+                        placeholder="City, State, Country"
+                        className="modalAddress mb-2"
+                        value={values.address}
+                        onChange={(e) => updateValue("address", e)}
+                      />
+                    </FloatingLabel>
+
+                    <FloatingLabel label="Email Address">
+                      <Form.Control
+                        type="email"
+                        placeholder="name@email.com"
+                        className="modalEmail mb-2"
+                        value={values.email}
+                        onChange={(e) => updateValue("email", e)}
+                      />
+                    </FloatingLabel>
+
+                    <FloatingLabel label="Phone Number">
+                      <Form.Control
+                        type="text"
+                        placeholder="(700)-800-9000"
+                        className="modalPhone mb-2"
+                        value={values.phone}
+                        onChange={(e) => updateValue("phone", e)}
+                      />
+                    </FloatingLabel>
                   </Form.Group>
                 </Form>
               </Col>
               <Col xs={6} md={4}>
-                <Form>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>Website</Form.Label>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput1"
+                >
+                  <FloatingLabel label="Portfolio Website">
                     <Form.Control
                       type="text"
                       placeholder="http://myportfolio.com"
                       className="modalWebsite mb-2"
-                      value={website}
-                      onChange={(e) => setWebsite(e.target.value)}
+                      value={values.website}
+                      onChange={(e) => updateValue("website", e)}
                     />
-                    <Form.Label>Github</Form.Label>
+                  </FloatingLabel>
+
+                  <FloatingLabel label="GitHub">
                     <Form.Control
                       type="text"
                       placeholder="http://github.com/username"
                       className="modalGithub mb-2"
-                      value={github}
-                      onChange={(e) => setGithub(e.target.value)}
+                      value={values.github}
+                      onChange={(e) => updateValue("github", e)}
                     />
-                    <Form.Label>LinkedIn</Form.Label>
+                  </FloatingLabel>
+
+                  <FloatingLabel label="LinkedIn">
                     <Form.Control
                       type="text"
                       placeholder="http://linkedin.com/username"
-                      value={linkedin}
-                      onChange={(e) => setLinkedin(e.target.value)}
+                      value={values.linkedin}
+                      onChange={(e) => updateValue("linkedin", e)}
                       className="modalLinkedin mb-2"
                     />
-                  </Form.Group>
-                </Form>
+                  </FloatingLabel>
+                </Form.Group>
               </Col>
             </Row>
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            onClick={() => displayGeneralInfo(props.onHide, allStateValues)}
-          >
-            Submit
-          </Button>
+          <Button onClick={() => CommitValues("commit")}>Submit</Button>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
