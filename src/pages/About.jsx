@@ -5,8 +5,6 @@ import {
   Button,
   Row,
   Col,
-  Form,
-  FormControl,
   Card,
   FloatingLabel,
   Image,
@@ -24,7 +22,7 @@ function About() {
         <Col md={6}>
           <Card>
             <Container className="px-5">
-              <h1 className="my-4">About Website</h1>
+              <h1 className="mt-4">About Website</h1>
               <h5>
                 <b>Mission: </b> To provide a free and convenient way for
                 software engineers to create and download their resume for free.
@@ -35,23 +33,26 @@ function About() {
                 resumes which should be highly customizable.
               </h5>
 
-              <Container className="py-5">
+              <Container className="py-3">
+                <h3 className="mb-4">
+                  Contacts for questions and/or suggestions
+                </h3>
                 <Image
                   src={Kamen}
                   alt="Jane"
                   fluid
                   rounded
-                  width={"300px"}
+                  width={"200px"}
                   className="mb-3"
                 />
-
-                <h2>Kamen Kanchev</h2>
-
-                <p>
-                  I'm passionate about developing responsive web app, which have
-                  real world utility and use.
-                </p>
-                <p>Email: kkanchev94@gmail.com</p>
+                <Row className="justify-content-center">
+                  <Col className="col-auto">
+                    <p>Name: Kamen Kanchev</p>
+                  </Col>
+                  <Col className="col-auto">
+                    <p>Email: kkanchev94@gmail.com</p>
+                  </Col>
+                </Row>
               </Container>
             </Container>
           </Card>

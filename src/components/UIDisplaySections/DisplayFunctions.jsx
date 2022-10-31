@@ -2,7 +2,7 @@
 export const formatDate = (startDate, endDate, disableSeparators) => {
   const formattedDates = [{ date: "" }, { date: "" }];
 
-  if (endDate === "Present") {
+  if (startDate !== "" && endDate === "Present") {
     startDate = startDate.replaceAll("-", " ");
     let newDate = new Date(startDate);
     const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(

@@ -36,7 +36,7 @@ function DisplayWork() {
             <Row
               {...provided.droppableProps}
               ref={provided.innerRef}
-              className="workSection mb-2"
+              className="workSection"
             >
               {dragNDrop.map((job, index) => (
                 <Draggable

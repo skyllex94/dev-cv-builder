@@ -19,19 +19,27 @@ function ModalGenInfo(props) {
     if (data) {
       return data;
     } else {
-      return [valuesInstance];
+      return valuesInstance;
     }
   }
 
   const valuesInstance = {
-    name: "Kamen Kanchev",
-    position: "Front-end Developer",
-    address: "Boston, MA",
-    email: "kkanchev94@gmail.com",
-    phone: "619-817-5266",
-    website: "https://kkanchev.netlify.app",
-    github: "https://github.com/skyllex94",
-    linkedin: "https://www.linkedin.com/in/kamen-kanchev-73a282175",
+    name: "Your Full Name",
+    position: "Desired Position",
+    address: "Boston, MA, 02130",
+    email: "myname@gmail.com",
+    phone: "600-700-8000",
+    website: "https://mywebsite.com",
+    github: "https://github.username.com",
+    linkedin: "https://linkedin.com/in/username",
+    // name: "Kamen Kanchev",
+    // position: "Front-end Developer",
+    // address: "Boston, MA",
+    // email: "kkanchev94@gmail.com",
+    // phone: "619-817-5266",
+    // website: "https://kkanchev.netlify.app",
+    // github: "https://github.com/skyllex94",
+    // linkedin: "https://www.linkedin.com/in/kamen-kanchev-73a282175",
   };
 
   const [values, setValues] = useState(valueFetching);
@@ -71,9 +79,10 @@ function ModalGenInfo(props) {
     <div onKeyPress={(event) => CommitValues(event)}>
       <Modal
         {...props}
-        aria-labelledby="contained-modal-title-vcenter"
+        // aria-labelledby="contained-modal-title-vcenter"
         centered
         size="lg"
+        className="modal"
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">

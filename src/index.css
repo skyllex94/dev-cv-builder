@@ -45,12 +45,29 @@ code {
   font-weight: 700;
   -ms-flex: 0 0 400px;
   flex: 0 0 400px;
+  position: relative;
+  z-index: 200;
 }
 
 .cv-preview {
   min-height: 50vh;
   -ms-flex: 0 0 860px;
   flex: 0 0 860px;
+  font-family: Inter;
+  /* position: relative;
+  z-index: 200; */
+}
+
+/* Cover blanket for instructions, including some for ctrlPanel */
+.dimming-cover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.5;
+  z-index: 100;
 }
 
 /* Options Popover Styling  */
@@ -88,16 +105,18 @@ code {
 
 /* ------------ Control Panel Styling -------------- */
 
-.general-info {
-  font-family: Inter, sans-serif;
-}
-
 .cont-panel-items-styling {
   text-align: left;
   color: black;
   font-weight: 400;
   font-size: 16px;
 }
+
+/* .items-styling {
+  border: #1b1b1b solid 1px;
+  padding: 5px;
+  border-radius: 10px;
+} */
 
 .items-styling:hover {
   color: #626262;
@@ -116,7 +135,7 @@ code {
 }
 
 .textPosition {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 17px;
 }
 
@@ -136,7 +155,7 @@ code {
 }
 
 [class*="section-titles"] {
-  font-weight: 800 !important;
+  font-weight: 900 !important;
   font-size: 15px;
   color: #3c3c3c;
   text-align: left;

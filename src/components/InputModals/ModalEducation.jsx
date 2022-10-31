@@ -10,6 +10,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Context from "../../context/Context";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { updateValuesInLocalStorage } from "../ContPanelSections/ContPanelFunctions";
+import { toast } from "react-toastify";
 
 function ModalEducation(props) {
   const { displayEducation } = useContext(Context);
@@ -45,6 +46,11 @@ function ModalEducation(props) {
 
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
+      // const curr = values[i];
+      // if (curr.startDate === "" || (!curr.ongoing && curr.endDate === "")) {
+      //   toast.error("Please input correct dates for the education");
+      //   return;
+      // }
       displayEducation(values);
       updateValuesInLocalStorage(values, "Education");
       onHide();

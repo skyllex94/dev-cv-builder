@@ -18,35 +18,35 @@ function ModalSkills(props) {
   // Value starter to initialize some begining skills
   const valueInstance = [
     {
-      skill: "Javascript",
+      skill: "",
     },
-    {
-      skill: "React.js",
-    },
-    {
-      skill: "Bootstrap 5",
-    },
-    {
-      skill: "Git",
-    },
-    {
-      skill: "HTML5/CSS3",
-    },
-    {
-      skill: "Heroku",
-    },
-    {
-      skill: "SASS",
-    },
-    {
-      skill: "SQLite",
-    },
-    {
-      skill: "Python",
-    },
-    {
-      skill: "Flask",
-    },
+    // {
+    //   skill: "React.js",
+    // },
+    // {
+    //   skill: "Bootstrap 5",
+    // },
+    // {
+    //   skill: "Git",
+    // },
+    // {
+    //   skill: "HTML5/CSS3",
+    // },
+    // {
+    //   skill: "Heroku",
+    // },
+    // {
+    //   skill: "SASS",
+    // },
+    // {
+    //   skill: "SQLite",
+    // },
+    // {
+    //   skill: "Python",
+    // },
+    // {
+    //   skill: "Flask",
+    // },
   ];
 
   const [skills, setSkills] = useState(retrieveData);

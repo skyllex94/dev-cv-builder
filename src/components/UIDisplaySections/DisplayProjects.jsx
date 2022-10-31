@@ -41,7 +41,7 @@ function DisplayProjects() {
             <Row
               {...provided.droppableProps}
               ref={provided.innerRef}
-              className="projectSection mb-2"
+              className="projectSection" // mb-2
             >
               {dragNDrop.map((project, index) => (
                 <Draggable
@@ -51,7 +51,7 @@ function DisplayProjects() {
                 >
                   {(provided) => (
                     <div
-                      className={index !== 0 ? "ps-0" : "mt-2 ps-0"}
+                      className={index === 0 ? "ps-0" : "mt-2 ps-0"}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
@@ -63,18 +63,22 @@ function DisplayProjects() {
                           </Form.Label>
 
                           <Col className="d-inline col-auto d-flex ">
-                            <Nav.Link
-                              className={"d-flex align-items-center"}
-                              href={project.link}
-                            >
-                              <FiExternalLink className="ms-2 me-1" />
-                            </Nav.Link>
-                            <Nav.Link
-                              className={"d-flex align-items-center"}
-                              href={project.github}
-                            >
-                              <AiFillGithub className="ms-2" />
-                            </Nav.Link>
+                            {project.link !== "" && (
+                              <Nav.Link
+                                className={"d-flex align-items-center"}
+                                href={project.link}
+                              >
+                                <FiExternalLink className="ms-2 me-1" />
+                              </Nav.Link>
+                            )}
+                            {project.github !== "" && (
+                              <Nav.Link
+                                className={"d-flex align-items-center"}
+                                href={project.github}
+                              >
+                                <AiFillGithub className="ms-2" />
+                              </Nav.Link>
+                            )}
                           </Col>
                         </Col>
                         <Col className="d-inline col-auto d-flex  project-period">

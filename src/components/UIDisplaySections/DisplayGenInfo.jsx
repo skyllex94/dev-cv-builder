@@ -9,8 +9,6 @@ import { FiPhone } from "react-icons/fi";
 import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
 import Context from "../../context/Context";
-import { useEffect } from "react";
-import { useState } from "react";
 
 function DisplayGenInfo(props) {
   // Template settings
@@ -22,7 +20,7 @@ function DisplayGenInfo(props) {
     genInfo;
 
   return template === "earth" ? (
-    <Row className={props.name + " text-start"}>
+    <Row className={props.name + " text-start gen-info"}>
       {name && (
         <Col className="col-12 d-flex pt-4">
           <Form.Label className="textName">{name}</Form.Label>
@@ -82,8 +80,8 @@ function DisplayGenInfo(props) {
 
           {linkedin && (
             <Col xs={12}>
-              <AiFillLinkedin />
-              <Form.Label className="ms-1 mb-0 gen-info-style">
+              <AiFillLinkedin className="me-2" />
+              <Form.Label className="mb-0 gen-info-style">
                 {linkedin}
               </Form.Label>
             </Col>

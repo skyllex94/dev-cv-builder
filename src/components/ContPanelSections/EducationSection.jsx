@@ -38,18 +38,29 @@ export default function EducationSection() {
 
   // A simple value instance to be used when adding new values of populating the first value
   const valueInstance = {
-    degree: "Bachelor in Computer Science",
-    university: "Economic University - Varna",
+    degree: "",
+    university: "",
     ongoing: false,
-    startDate: "2014-05-29",
-    endDate: "2019-09-29",
-    location: "Varna, Bulgaria",
+    startDate: "",
+    endDate: "",
+    location: "",
     accomplishments: [
       {
-        message:
-          "- Got a GPA of 3.4 in my stay at the university and took additional courses of statistics",
+        message: "- ",
       },
     ],
+    // degree: "Bachelor in Computer Science",
+    // university: "Economic University - Varna",
+    // ongoing: false,
+    // startDate: "2014-05-29",
+    // endDate: "2019-09-29",
+    // location: "Varna, Bulgaria",
+    // accomplishments: [
+    //   {
+    //     message:
+    //       "- Got a GPA of 3.4 in my stay at the university and took additional courses of statistics",
+    //   },
+    // ],
   };
 
   // Array of all education values that is passed in Context, fetched in localStorage and used to display all the info
@@ -199,7 +210,7 @@ export default function EducationSection() {
                     >
                       {values[index].university
                         ? values[index].university
-                        : "University " + index}
+                        : "University " + (index + 1)}
                     </Form.Label>
                   </Col>
 

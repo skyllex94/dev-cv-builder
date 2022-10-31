@@ -30,7 +30,6 @@ export const CVPreview = React.forwardRef((props, ref) => {
       id: "work",
       content: <DisplayWork />,
     },
-
     {
       id: "education",
       content: <DisplayEducation />,

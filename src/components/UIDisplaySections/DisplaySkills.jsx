@@ -20,7 +20,7 @@ function DisplaySkills() {
           {skills.map((skill, index) => {
             return (
               <Col key={index} className="col-auto mb-2">
-                <div>{skill.skill}</div>
+                <div className="m-0">{skill.skill}</div>
               </Col>
             );
           })}

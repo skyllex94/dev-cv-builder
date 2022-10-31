@@ -42,7 +42,7 @@ function DisplayEducation() {
             <div
               {...provided.droppableProps}
               ref={provided.innerRef}
-              className="educationSection mb-2"
+              className="educationSection"
             >
               {dragNDrop.map((curr, index) => (
                 <Draggable
@@ -52,7 +52,7 @@ function DisplayEducation() {
                 >
                   {(provided) => (
                     <Row
-                      className={index !== 0 ? "ps-0" : "mt-2 ps-0"}
+                      className={index === 0 ? "ps-0" : "mt-2 ps-0"}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}

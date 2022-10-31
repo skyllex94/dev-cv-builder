@@ -38,16 +38,25 @@ export default function CertificationSection() {
 
   // A simple value instance to be used when adding new values of populating the first value
   const valueInstance = {
-    certification: "Harvard CS50 Certification",
-    issuedBy: "EdX Harvard Courses",
-    startDate: "2014-05-29",
-    endDate: "2019-09-29",
+    certification: "",
+    issuedBy: "",
+    startDate: "",
+    endDate: "",
     accomplishments: [
       {
-        message:
-          "- Took the course with a completion rate of less than 2%, and completed it in less than the designated time period.",
+        message: "- ",
       },
     ],
+    // certification: "Harvard CS50 Certification",
+    // issuedBy: "EdX Harvard Courses",
+    // startDate: "2014-05-29",
+    // endDate: "2019-09-29",
+    // accomplishments: [
+    //   {
+    //     message:
+    //       "- Took the course with a completion rate of less than 2%, and completed it in less than the designated time period.",
+    //   },
+    // ],
   };
 
   // Array of all certification values that is passed in Context, fetched in localStorage and used to display all the info
@@ -199,7 +208,7 @@ export default function CertificationSection() {
                     >
                       {values[index].certification
                         ? values[index].certification
-                        : "Certification " + index}
+                        : "Certification " + (index + 1)}
                     </Form.Label>
                   </Col>
 

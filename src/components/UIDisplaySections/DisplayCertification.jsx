@@ -40,7 +40,7 @@ function DisplayCertification() {
             <div
               {...provided.droppableProps}
               ref={provided.innerRef}
-              className="certificationSection mb-2"
+              className="certificationSection" // mb-2
             >
               {dragNDrop.map((curr, index) => (
                 <Draggable

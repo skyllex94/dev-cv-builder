@@ -3,6 +3,7 @@ import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function ContPanelFonts() {
   const location = useLocation();
@@ -10,38 +11,42 @@ function ContPanelFonts() {
 
   const changeFont = (font) => {
     const arrDOMElements = [
-      document.querySelector(".general-info"),
+      document.querySelector(".gen-info"),
       document.querySelector(".summary"),
       document.querySelector(".work"),
       document.querySelector(".skills"),
       document.querySelector(".languages"),
       document.querySelector(".education"),
       document.querySelector(".projects"),
+
       document.querySelector(".contact"),
+      document.querySelector(".certification"),
     ];
 
-    if (font === "Default" && template === "earth") {
-      try {
-        arrDOMElements.forEach((element) => {
-          element.style = { all: "unset" };
-        });
-      } catch {
-        console.log("caught");
-      }
-    } else if (font === "Default" && template === "venus") {
+    // if (font === "Default" && template === "earth") {
+    // try {
+    //   arrDOMElements.forEach((element) => {
+    //     element.style = { all: "unset" };
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    //   toast.error("A problem with inputting the font has occured");
+    // }
+    if (font === "Default" && template === "venus") {
       try {
         arrDOMElements.forEach((element) => {
           element.style = "font-family: Ubuntu, sans-serif";
         });
-      } catch {
-        console.log("caught");
-      }
+      } catch {}
     } else {
       try {
         arrDOMElements.forEach((element) => {
-          element.style = `font-family: ${font};`;
+          // document.querySelector(".cv-preview").style = { all: "unset" };
+          if (element) element.style = `font-family: ${font}`;
         });
-      } catch {}
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -49,7 +54,7 @@ function ContPanelFonts() {
     <div className="cont-panel-items-styling">
       <Row>
         <Form.Label
-          onClick={() => changeFont("Default", template)}
+          onClick={() => changeFont("Inter", template)}
           className="items-styling ms-2 pb-2 "
         >
           Default

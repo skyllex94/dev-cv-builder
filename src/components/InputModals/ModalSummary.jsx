@@ -14,11 +14,8 @@ function ModalSummary(props) {
   const [paragraphs, setParagraphs] = useState([
     {
       paragraph:
-        "Trustworthy, sociable, and willing to go through the hardship of learning any new type of skill set necessary for improved performance and quality standards. Built useful experience in different areas with the main one of them - interest in software engineering. I have been working in the restaurant business as I have obtained my residence in the US, and now ready for a full-scale carrier in programming and computer science.",
-    },
-    {
-      paragraph:
-        "Carrier-switch to Software Engineering officially in 5 months to full-time, currently learning C to understand the lowlevel mechanics of manually creating hash tables, data structures, dynamic memory allocation and freeing, and the infamous pointers.",
+        "Write a brief general description about yourself and your skills & expertise. A small couple-sentence description of experience and strengths goes a long way.",
+      // "Trustworthy, sociable, and willing to go through the hardship of learning any new type of skill set necessary for improved performance and quality standards. Built useful experience in different areas with the main one of them - interest in software engineering. I have been working in the restaurant business as I have obtained my residence in the US, and now ready for a full-scale carrier in programming and computer science.",
     },
   ]);
 
@@ -62,7 +59,7 @@ function ModalSummary(props) {
   };
 
   const removeParagraph = (index) => {
-    if (paragraphs.length > 1 && paragraphs.length === index + 1) {
+    if (paragraphs.length > 1) {
       const values = [...paragraphs];
       values.splice(index, 1);
       setParagraphs(values);
@@ -93,6 +90,7 @@ function ModalSummary(props) {
                           <Form.Group>
                             <Form.Control
                               as="textarea"
+                              autoFocus
                               className="modalSummary mb-2"
                               name="paragraph"
                               value={text.paragraph}

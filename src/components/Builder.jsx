@@ -1,12 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Header from "./Header";
 import ControlPanel from "./ControlPanel";
 import Editor from "./Editor";
-
 import { Col, Row, Container } from "react-bootstrap";
 
 import { useReactToPrint } from "react-to-print";
 import { ContextProvider } from "../context/Context";
+import { toast } from "react-toastify";
 
 function Builder() {
   // Check if user is already logged-in
@@ -19,6 +19,58 @@ function Builder() {
     documentTitle: "Current_CV",
   });
 
+  const contrPanelRef = useRef(null);
+  const cvPreview = useRef(null);
+  const dimmingCoverRef = useRef(null);
+  // useOutsideAlerter(contrPanelRef, dimmingCoverRef);
+
+  const beginInstructions = () => {
+    // Decrale constants of the refs to be focused attention on
+    const cvComponent = cvPreview.current;
+    const ctrlPanelComponent = contrPanelRef.current;
+
+    // Disable all clickable events for the instructions period
+    ctrlPanelComponent.style.pointerEvents = "none";
+
+    // Step 1 Instructions with focus on Control Panel
+    toast.info("1. Click on any section title to open and fill it.", {
+      autoClose: 5500,
+      hideProgressBar: false,
+      pauseOnHover: false,
+      closeOnClick: false,
+    });
+
+    // Step 2 Instructions with focus on CVPreview
+    setTimeout(() => {
+      toast.info(
+        "2. All the information will be shown in the resume preview. Enjoy!",
+        {
+          autoClose: 5000,
+          hideProgressBar: false,
+          pauseOnHover: false,
+          closeOnClick: false,
+        }
+      );
+
+      cvComponent.style.position = "relative";
+      cvComponent.style.zIndex = "200";
+      cvComponent.style.pointerEvents = "none";
+
+      ctrlPanelComponent.style.zIndex = "0";
+      ctrlPanelComponent.style.pointerEvents = "auto";
+      setTimeout(() => {
+        cvComponent.style.pointerEvents = "auto";
+        coverRemoval(dimmingCoverRef);
+      }, 6000);
+    }, 7000);
+  };
+
+  const coverRemoval = (ref) => {
+    const coverRemoval = ref.current;
+    coverRemoval.className = "removeCover";
+  };
+
+  // Heroku and Netlify instructions
   // node --max_old_space_size=1560 node_modules/.bin/ - add when deploying to Heroku to start and build before react-scripts
 
   // "dev": "react-scripts start",
@@ -53,19 +105,35 @@ function Builder() {
   //   ]
   // }
 
+  useEffect(() => {
+    const genInfo = window.localStorage.getItem("GenInfo");
+    const summary = window.localStorage.getItem("Summary");
+    const work = window.localStorage.getItem("Work");
+    const projects = window.localStorage.getItem("Projects");
+    const skills = window.localStorage.getItem("Skills");
+    const languages = window.localStorage.getItem("Languages");
+
+    if (genInfo || summary || work || projects || skills || languages) {
+      coverRemoval(dimmingCoverRef);
+    } else {
+      beginInstructions();
+    }
+  }, []);
+
   return (
     <ContextProvider>
       {data ? <Header username={data.name} /> : <Header />}
       <Container fluid className="p-4 bg-light">
         <Row className="d-flex justify-content-lg-center">
-          <Col className="control-panel">
+          <Col ref={contrPanelRef} className="control-panel" disabled>
             <ControlPanel handlePrint={handlePrint} />
           </Col>
-          <Col className="cv-preview">
+          <Col ref={cvPreview} className="cv-preview">
             <Editor ref={componentRef} />
           </Col>
         </Row>
       </Container>
+      <div ref={dimmingCoverRef} className="dimming-cover" />
     </ContextProvider>
   );
 }

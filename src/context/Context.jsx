@@ -1,13 +1,8 @@
 import { createContext, useState } from "react";
-import { useLocation } from "react-router-dom";
 
 const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
-  // Template Variable
-  const location = useLocation();
-  const { template } = location.state;
-
   // All states for passing all the values for displaying
   const [genInfo, setGenInfo] = useState([]);
   const [numOfJobs, setNumOfJobs] = useState([]);

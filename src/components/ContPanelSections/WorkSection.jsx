@@ -39,22 +39,21 @@ export default function WorkSection() {
   const data = JSON.parse(window.localStorage.getItem("Work"));
 
   const valuesInstance = {
-    company: "DXC Tech",
-    position: "Front-end Dev",
-    startDate: "2019-09-09",
-    endDate: "2020-08-02",
+    company: "",
+    position: "",
+    startDate: "",
+    endDate: "",
     currentJob: false,
-    location: "Sofia, Bulgaria",
+    location: "",
     resp: [
       {
-        message:
-          "- I was responsible for increasing revenue amounts by 2% monthly for a period of half an year with my job title.",
+        message: "- ",
       },
     ],
   };
 
   function valueFetching() {
-    if (data !== null) {
+    if (data) {
       return data;
     } else {
       return [valuesInstance];
@@ -66,7 +65,7 @@ export default function WorkSection() {
 
   // If there's local data, display the content of it as the page loads
   useEffect(() => {
-    if (data !== null) {
+    if (data) {
       displayWork(data);
     }
   }, []);
@@ -201,7 +200,7 @@ export default function WorkSection() {
                     >
                       {values[index].company
                         ? values[index].company
-                        : "Job " + index}
+                        : "Job " + (index + 1)}
                     </Form.Label>
                   </Col>
 

@@ -10,6 +10,7 @@ import { GrClose } from "react-icons/gr";
 
 import Context from "../../context/Context";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 function ModalProjects(props) {
   const { displayProjects } = useContext(Context);
@@ -167,6 +168,7 @@ function ModalProjects(props) {
                                 <Form.Control
                                   type="text"
                                   name="techUsed"
+                                  autoFocus
                                   className={"modalTech" + count}
                                   placeholder="tech"
                                   value={tech.message}

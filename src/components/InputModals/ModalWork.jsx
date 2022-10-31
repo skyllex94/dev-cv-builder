@@ -9,6 +9,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Context from "../../context/Context";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 function ModalWork(props) {
   const { displayWork } = useContext(Context);
@@ -42,6 +43,11 @@ function ModalWork(props) {
   // Commit all values and send them to the Context API to display and store the data
   const CommitValues = (e) => {
     if (e.key === "Enter" || e === "submit") {
+      // const curr = values[i];
+      // if (curr.startDate === "" || (!curr.currentJob && curr.endDate === "")) {
+      //   toast.error("Please input correct dates for the job");
+      //   return;
+      // }
       displayWork(values);
       updateValuesInLocalStorage();
       onHide();
@@ -98,6 +104,7 @@ function ModalWork(props) {
                       <Form.Control
                         type="text"
                         name="company"
+                        formNoValidate
                         className={"mb-2"}
                         placeholder="Microsoft LLC."
                         value={values[i].company}
@@ -138,6 +145,7 @@ function ModalWork(props) {
                           <Form.Control
                             type="date"
                             name="startDate"
+                            required
                             className={"mb-2"}
                             placeholder="02/2022"
                             value={values[i].startDate}

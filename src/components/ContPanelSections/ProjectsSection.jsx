@@ -38,25 +38,41 @@ export default function ProjectsSection() {
 
   // Single values object used to start or add new values to the array
   const valuesForPopulating = {
-    project: "Dev-CV-Builder",
-    link: "https://dev-cv-builder.herokuapp.com",
-    github: "https://github.com/skyllex94/dev-cv-builder",
-    desc: "A React.js based Free CV builder.",
+    project: "",
+    link: "",
+    github: "",
+    desc: "",
     techUsed: [
       {
-        message: "Javascript",
-      },
-      {
-        message: "React.js",
+        message: "",
       },
     ],
-    startDate: "2019-05-29",
-    endDate: "2019-09-29",
+    startDate: "",
+    endDate: "",
     highlights: [
       {
-        message: "- Improved skillset by 200% with this last project I did.",
+        message: "- ",
       },
     ],
+    // project: "Dev-CV-Builder",
+    // link: "https://dev-cv-builder.herokuapp.com",
+    // github: "https://github.com/skyllex94/dev-cv-builder",
+    // desc: "A React.js based Free CV builder.",
+    // techUsed: [
+    //   {
+    //     message: "Javascript",
+    //   },
+    //   {
+    //     message: "React.js",
+    //   },
+    // ],
+    // startDate: "2019-05-29",
+    // endDate: "2019-09-29",
+    // highlights: [
+    //   {
+    //     message: "- Improved skillset by 200% with this last project I did.",
+    //   },
+    // ],
   };
 
   // Fetching values from localStorage if any there, if not default to insert one.
@@ -126,15 +142,17 @@ export default function ProjectsSection() {
 
   // Remove selected last job from modals and values states, and localStorage
   function removeSelectedProject(index) {
-    const updatedModals = [...modals];
-    updatedModals.splice(index, 1);
-    setModals(updatedModals);
+    if (index !== 0) {
+      const updatedModals = [...modals];
+      updatedModals.splice(index, 1);
+      setModals(updatedModals);
 
-    const updatedValues = [...values];
-    updatedValues.splice(index, 1);
-    setValues(updatedValues);
+      const updatedValues = [...values];
+      updatedValues.splice(index, 1);
+      setValues(updatedValues);
 
-    updateDisplayingValues(updatedValues);
+      updateDisplayingValues(updatedValues);
+    }
   }
 
   // Update values state, pass values to Context and update it in localStorage
@@ -206,7 +224,7 @@ export default function ProjectsSection() {
                     >
                       {values[index].project
                         ? values[index].project
-                        : "Project " + index}
+                        : "Project " + (index + 1)}
                     </Form.Label>
                   </Col>
 
