@@ -4,7 +4,7 @@ A React-based web app to create and manage your personal resume and export it in
 
 ## Usage
 
-Link to the web app can be found at (https://dev-cv-builder.netlify.app)[dev-cv-builder.netlify.app].
+Link to the web app can be found at [dev-cv-builder.netlify.app](https://dev-cv-builder.netlify.app).
 
 ## Compatibility
 
@@ -13,12 +13,15 @@ App is created to take in space to properly display all inputted elements. Creat
 ## Navigation
 
 In the landing page you will see an option to start your resume right away or create your account. All of the data will be stored regardless if you create one. All storage data is stored and managed from the LocalStorage.
+
 ![landingPage](/src/img/readme-img/landing.png)
 
 If you choose to create your own account, you will be sent to do so using your own credentials or sign up wt Google account. If you do so, you will be able to choose from the templates available right away.
+
 ![signup](/src/img/readme-img/signup.png)
 
 First-time users will get a small instructions created with react-toastify, refs and CSS styling to give a quick start guide and explanation how to navigate the app and create your resume.
+
 ![instructions](/src/img/readme-img/instructions.png)
 
 ## Functionality
