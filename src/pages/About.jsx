@@ -1,14 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import {
-  Container,
-  Button,
-  Row,
-  Col,
-  Card,
-  FloatingLabel,
-  Image,
-} from "react-bootstrap";
+import { Container, Row, Col, Card, Image } from "react-bootstrap";
 import Kamen from "../img/me.jpg";
 
 function About() {
@@ -37,6 +29,11 @@ function About() {
                 <h3 className="mb-4">
                   Contacts for questions and/or suggestions
                 </h3>
+                <p>
+                  When you build your resume with the web app, please send your
+                  result through the email below, your private info will be
+                  blurred and your resume might go on the front page.
+                </p>
                 <Image
                   src={Kamen}
                   alt="Jane"

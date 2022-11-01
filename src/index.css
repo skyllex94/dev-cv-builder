@@ -60,11 +60,11 @@ code {
 
 /* Cover blanket for instructions, including some for ctrlPanel */
 .dimming-cover {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 100vmax;
   background: black;
   opacity: 0.5;
   z-index: 100;

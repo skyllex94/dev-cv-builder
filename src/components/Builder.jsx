@@ -22,7 +22,6 @@ function Builder() {
   const contrPanelRef = useRef(null);
   const cvPreview = useRef(null);
   const dimmingCoverRef = useRef(null);
-  // useOutsideAlerter(contrPanelRef, dimmingCoverRef);
 
   const beginInstructions = () => {
     // Decrale constants of the refs to be focused attention on
@@ -33,23 +32,14 @@ function Builder() {
     ctrlPanelComponent.style.pointerEvents = "none";
 
     // Step 1 Instructions with focus on Control Panel
-    toast.info("1. Click on any section title to open and fill it.", {
-      autoClose: 5500,
-      hideProgressBar: false,
-      pauseOnHover: false,
-      closeOnClick: false,
-    });
+
+    toastMessage("1. Click on any section title to open and fill it.", 5500);
 
     // Step 2 Instructions with focus on CVPreview
     setTimeout(() => {
-      toast.info(
+      toastMessage(
         "2. All the information will be shown in the resume preview. Enjoy!",
-        {
-          autoClose: 5000,
-          hideProgressBar: false,
-          pauseOnHover: false,
-          closeOnClick: false,
-        }
+        5000
       );
 
       cvComponent.style.position = "relative";
@@ -63,6 +53,16 @@ function Builder() {
         coverRemoval(dimmingCoverRef);
       }, 6000);
     }, 7000);
+  };
+
+  const toastMessage = (message, time) => {
+    toast.info(message, {
+      autoClose: time,
+      hideProgressBar: false,
+      pauseOnHover: false,
+      closeOnClick: false,
+      pauseOnFocusLoss: false,
+    });
   };
 
   const coverRemoval = (ref) => {
