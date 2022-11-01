@@ -60,6 +60,7 @@ code {
 
 /* Cover blanket for instructions, including some for ctrlPanel */
 .dimming-cover {
+  /* use fixed position to cover the entire page */
   position: fixed;
   left: 0;
   top: 0;

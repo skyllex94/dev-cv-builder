@@ -17,6 +17,7 @@
     "firebase": "^9.12.1",
     "html-react-parser": "^3.0.0",
     "jquery": "^3.6.1",
+    "license-generator": "^0.0.13",
     "mdb-react-ui-kit": "^4.2.0",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",

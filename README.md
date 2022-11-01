@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Software Developer Resume/CV Builder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based web app to create and manage your personal resume and export it in a pdf format. Firebase OAuth registration which unlocks more templates when you create an account.
 
-## Available Scripts
+## Usage
 
-In the project directory, you can run:
+Link to the web app can be found at (https://dev-cv-builder.netlify.app)[dev-cv-builder.netlify.app].
 
-### `npm start`
+## Compatibility
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+App is created to take in space to properly display all inputted elements. Create for desktop use and a info message available once it detected a mobile-based device to warn for user experience.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Navigation
 
-### `npm test`
+In the landing page you will see an option to start your resume right away or create your account. All of the data will be stored regardless if you create one. All storage data is stored and managed from the LocalStorage.
+![landingPage](/src/img/readme-img/landing.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If you choose to create your own account, you will be sent to do so using your own credentials or sign up wt Google account. If you do so, you will be able to choose from the templates available right away.
+![signup](/src/img/readme-img/signup.png)
 
-### `npm run build`
+First-time users will get a small instructions created with react-toastify, refs and CSS styling to give a quick start guide and explanation how to navigate the app and create your resume.
+![instructions](/src/img/readme-img/instructions.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Functionality
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The app has an accordion-style Control Panel from which you are 3 portions:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Sections - opening all the diffrent modal to input information for the modal which you want to use. Most sections options side menu with a show/hide option and well as renaming your field option.
+2. Fonts - from here you can change your fonts with multiple diffrent choices ranging from serif to sans-serif, monospace, and cursive font types.
+3. Design - adjustment in the color gamma of the title section can be done from here and is a useful tool to give more personal taste to your resume.
 
-### `npm run eject`
+Each one of the section modals are directly displayed to the CVPreview section after the modal is completed. The preview is stylized so it give a aesthetically pleasant experince and a good-looking resume.
+![cvPreview](/src/img/readme-img/cvpreview.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Exporting
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+All of your data is safe and secure through the local storing and persisting of data. After you are done with your resume you simply click on download resume and export it. Make sure you click on "Safe as a pdf" in order to save it and print it later on, or print it right away id applicable.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Contact
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+For suggestions and improvements, please contact me @kkanchev94@gmail.com
 
-## Learn More
+## License
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The MIT License (MIT)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Copyright (c) 2022 Kamen Kanchev
 
-### Code Splitting
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
