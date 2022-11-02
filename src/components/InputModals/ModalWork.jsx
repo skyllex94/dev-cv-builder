@@ -197,7 +197,7 @@ function ModalWork(props) {
                           <div key={index}>
                             <Row className="mb-2">
                               <Col md={10}>
-                                <FloatingLabel label="Accomplishments and resp">
+                                <FloatingLabel label="Accomplishments and responsibilities">
                                   <Form.Control
                                     type="text"
                                     name="message"
