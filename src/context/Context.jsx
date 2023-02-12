@@ -11,7 +11,7 @@ export const ContextProvider = ({ children }) => {
   const [languages, setLanguages] = useState([]);
   const [education, setEducation] = useState([]);
   const [certification, setCertification] = useState([]);
-
+  const [emptySection, setEmptySection] = useState(false);
   // Renaming state, values to be added if a section title is renamed
   const [name, setName] = useState([]);
 
@@ -72,6 +72,11 @@ export const ContextProvider = ({ children }) => {
   };
 
   // Displaying all inputted info from the education modals
+  const displayEmptySection = (newValue) => {
+    setEmptySection(newValue);
+  };
+
+  // Displaying all inputted info from the education modals
   const displayEducation = (arrOfValues) => {
     setEducation(arrOfValues);
   };
@@ -102,6 +107,7 @@ export const ContextProvider = ({ children }) => {
         education,
         certification,
         name,
+        emptySection,
         displayGeneralInfo,
         displaySummary,
         displayWork,
@@ -110,6 +116,7 @@ export const ContextProvider = ({ children }) => {
         displayProjects,
         displayCertification,
         renameSection,
+        displayEmptySection,
       }}
     >
       {children}

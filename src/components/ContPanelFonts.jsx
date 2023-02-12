@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/esm/Form";
 
 import { useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
 
 function ContPanelFonts() {
   const location = useLocation();
@@ -23,15 +22,6 @@ function ContPanelFonts() {
       document.querySelector(".certification"),
     ];
 
-    // if (font === "Default" && template === "earth") {
-    // try {
-    //   arrDOMElements.forEach((element) => {
-    //     element.style = { all: "unset" };
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    //   toast.error("A problem with inputting the font has occured");
-    // }
     if (font === "Default" && template === "venus") {
       try {
         arrDOMElements.forEach((element) => {

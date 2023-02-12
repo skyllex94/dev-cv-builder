@@ -4,6 +4,7 @@ import Form from "react-bootstrap/esm/Form";
 import Popover from "react-bootstrap/esm/Popover";
 import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 import { SketchPicker } from "react-color";
+import { EmptySection } from "./EmptySection";
 
 function ContPanelDesign() {
   const [color, setColor] = useState({
@@ -35,18 +36,25 @@ function ContPanelDesign() {
   );
 
   return (
-    <Row>
-      <OverlayTrigger
-        trigger="click"
-        rootClose
-        placement="bottom-end"
-        overlay={popover}
-      >
-        <Form.Label className="cont-panel-items-styling items-styling">
-          Change Color of Titles
-        </Form.Label>
-      </OverlayTrigger>
-    </Row>
+    <div className="cont-panel-items-styling">
+      <Row>
+        <div className="text-left">
+          <OverlayTrigger
+            trigger="click"
+            rootClose
+            placement="bottom-end"
+            overlay={popover}
+          >
+            <Form.Label className="cont-panel-items-styling items-styling">
+              Change Color of Titles
+            </Form.Label>
+          </OverlayTrigger>
+        </div>
+      </Row>
+      <Row className="mt-2">
+        <EmptySection />
+      </Row>
+    </div>
   );
 }
 

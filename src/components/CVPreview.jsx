@@ -13,6 +13,7 @@ import DisplayContact from "./UIDisplaySections/DisplayContact";
 import DisplayCertification from "./UIDisplaySections/DisplayCertification";
 
 import { useLocation } from "react-router-dom";
+import DisplayEmptySection from "./UIDisplaySections/DisplayEmptySection";
 
 export const CVPreview = React.forwardRef((props, ref) => {
   // Template Variables
@@ -80,6 +81,10 @@ export const CVPreview = React.forwardRef((props, ref) => {
     {
       id: "skills",
       content: <DisplaySkills />,
+    },
+    {
+      id: "empty",
+      content: <DisplayEmptySection />,
     },
     {
       id: "education",

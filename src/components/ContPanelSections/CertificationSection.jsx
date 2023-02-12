@@ -47,16 +47,6 @@ export default function CertificationSection() {
         message: "- ",
       },
     ],
-    // certification: "Harvard CS50 Certification",
-    // issuedBy: "EdX Harvard Courses",
-    // startDate: "2014-05-29",
-    // endDate: "2019-09-29",
-    // accomplishments: [
-    //   {
-    //     message:
-    //       "- Took the course with a completion rate of less than 2%, and completed it in less than the designated time period.",
-    //   },
-    // ],
   };
 
   // Array of all certification values that is passed in Context, fetched in localStorage and used to display all the info

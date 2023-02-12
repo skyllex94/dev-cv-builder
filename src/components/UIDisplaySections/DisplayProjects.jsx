@@ -86,7 +86,7 @@ function DisplayProjects() {
                         </Col>
                       </Row>
 
-                      <Col className="col-12  verticalLine">
+                      <Col className="col-12 verticalLine">
                         <Col className={"d-flex project-info"}>
                           <div className={"me-2 projectDesc"}>
                             {project.desc}

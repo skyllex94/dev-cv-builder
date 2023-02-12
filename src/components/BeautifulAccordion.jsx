@@ -48,7 +48,7 @@ class AccordionItem extends React.Component {
     } = this;
 
     return (
-      <>
+      <React.Fragment>
         {title === "Sections" ? (
           <div
             {...{
@@ -106,7 +106,7 @@ class AccordionItem extends React.Component {
             </div>
           </div>
         )}
-      </>
+      </React.Fragment>
     );
   }
 }

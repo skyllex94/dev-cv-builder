@@ -107,7 +107,7 @@ code {
 /* ------------ Control Panel Styling -------------- */
 
 .cont-panel-items-styling {
-  text-align: left;
+  text-align: left !important;
   color: black;
   font-weight: 400;
   font-size: 16px;
@@ -217,7 +217,8 @@ code {
 .languagesSection,
 .skillsSection,
 .summarySection,
-.contactSection {
+.contactSection,
+.emptySection {
   transition: 0.25s all ease-in-out;
 }
 
@@ -228,7 +229,8 @@ code {
 .languagesSection:hover,
 .skillsSection:hover,
 .summarySection:hover,
-.contactSection:hover {
+.contactSection:hover,
+.emptySection:hover {
   /* box-sizing: border-box;
   box-shadow: inset 0 0 0 1px #3d3d3d; */
   border-radius: 10px;
@@ -288,6 +290,11 @@ code {
 }
 .accordion-list__item + .accordion-list__item {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.accordion-item__line {
+  cursor: pointer;
 }
 
 .accordion-item--opened .accordion-item__icon {
