@@ -28,7 +28,7 @@ function SignIn() {
     if (data) {
       navigate("/templates");
     }
-  }, []);
+  }, [navigate, data]);
 
   const [formData, setFormData] = useState({
     email: "",

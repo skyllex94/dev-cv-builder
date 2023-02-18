@@ -42,9 +42,9 @@ function Header({ username }) {
               Home
             </Link>
 
-            <a className="px-2" onClick={showTemplates}>
+            <p className="px-2 template-change" onClick={showTemplates}>
               Change Template
-            </a>
+            </p>
 
             <Link to="/about" className="ps-2 pe-4">
               About
