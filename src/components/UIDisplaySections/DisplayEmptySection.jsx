@@ -5,5 +5,5 @@ import Context from "../../context/Context";
 
 export default function DisplayEmptySection() {
   const { emptySection } = useContext(Context);
-  return emptySection && <Row className="emptySection my-4 py-5" />;
+  return emptySection && <Row className="emptySection py-5" />;
 }

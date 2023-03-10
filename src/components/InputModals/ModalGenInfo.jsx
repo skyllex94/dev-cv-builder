@@ -32,14 +32,6 @@ function ModalGenInfo(props) {
     website: "https://mywebsite.com",
     github: "https://github.username.com",
     linkedin: "https://linkedin.com/in/username",
-    // name: "Kamen Kanchev",
-    // position: "Front-end Developer",
-    // address: "Boston, MA",
-    // email: "kkanchev94@gmail.com",
-    // phone: "619-817-5266",
-    // website: "https://kkanchev.netlify.app",
-    // github: "https://github.com/skyllex94",
-    // linkedin: "https://www.linkedin.com/in/kamen-kanchev-73a282175",
   };
 
   const [values, setValues] = useState(valueFetching);

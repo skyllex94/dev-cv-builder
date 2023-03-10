@@ -16,7 +16,7 @@ function Builder() {
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current ?? null,
-    documentTitle: "Current_CV",
+    documentTitle: "Resume",
   });
 
   const contrPanelRef = useRef(null);
@@ -69,41 +69,6 @@ function Builder() {
     const coverRemoval = ref.current;
     coverRemoval.className = "removeCover";
   };
-
-  // Heroku and Netlify instructions
-  // node --max_old_space_size=1560 node_modules/.bin/ - add when deploying to Heroku to start and build before react-scripts
-
-  // "dev": "react-scripts start",
-  // "start": "serve -s build",
-  // "build": "react-scripts build",
-  // "test": "react-scripts test --env=jsdom",
-  // "eject": "react-scripts eject",
-  // "heroku-postbuild": "npm run build"
-
-  // For Netlify Deployment - use the regular dev scripts & remove the the secondary scripts below
-  // 1. Add -
-  // "start": "react-scripts start",
-  //   "build": "react-scripts build",
-  //   "eject": "react-scripts eject"
-  // 2. Remove those -
-  // "eslintConfig": {
-  //   "extends": [
-  //     "react-app",
-  //     "react-app/jest"
-  //   ]
-  // },
-  // "browserslist": {
-  //   "production": [
-  //     ">0.2%",
-  //     "not dead",
-  //     "not op_mini all"
-  //   ],
-  //   "development": [
-  //     "last 1 chrome version",
-  //     "last 1 firefox version",
-  //     "last 1 safari version"
-  //   ]
-  // }
 
   useEffect(() => {
     const genInfo = window.localStorage.getItem("GenInfo");
